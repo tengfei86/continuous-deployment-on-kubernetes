@@ -63,7 +63,7 @@ spec:
         container('gcloud') {
           sh """
           ls . -l
-          cd /go/src/sample-app
+          cd sample-app
           PYTHONUNBUFFERED=1 gcloud builds submit -t ${IMAGE_TAG} . 
           """
         }
