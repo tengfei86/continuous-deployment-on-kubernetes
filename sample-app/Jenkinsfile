@@ -48,7 +48,11 @@ spec:
         container('golang') {
           sh """
             ln -s `pwd` /go/src/sample-app
+            echo "list outer folder"
+            ls . -l 
             cd /go/src/sample-app
+            echo "list /go/src/sample-app"
+            ls . -l
             go test
           """
         }
