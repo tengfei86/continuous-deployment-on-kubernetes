@@ -61,7 +61,7 @@ spec:
     stage('Build and push image with Container Builder') {
 	    steps {
 		    container('gcloud') {
-			    withCredentials([file(credentialsId: 'osdu-upstream', variable: 'GC_KEY')]) {
+			    withCredentials([file(credentialsId: 'jenkins-sa', variable: 'GC_KEY')]) {
 				    sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
 		                    sh("gcloud container clusters get-credentials cluster-1 --zone asia-south1-a --project ${PROJECT}")
 			            sh """
