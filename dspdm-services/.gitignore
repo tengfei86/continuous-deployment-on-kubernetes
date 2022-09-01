@@ -1,0 +1,9 @@
+.idea/
+.settings/
+.project
+target/
+*.iml
+*.log
+*.mdmp
+*.bat
+msp_environment/

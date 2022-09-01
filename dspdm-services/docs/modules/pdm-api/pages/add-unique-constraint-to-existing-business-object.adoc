@@ -1,0 +1,177 @@
+= Add Unique Constraint To Existing Business Object
+
+You can add a unique constraints on the attributes of a business object by sending the following request. Add unique constraint will be equivalent to add a business object unique constraint definition in metadata and add a physical constraint on the child business object. Either you want to add a simple unique constraint or a composite unique constraint the request will be same. In case of composite unique constraint the unique constraint name will be same for more than once instances of the unique constraint business object.
+
+Following are the conditions which should be met by the request to add a unique constraint.
+
+[arabic]
+. Main request will be for `BUS OBJ ATTR UNIQ CONSTRAINTS' business object.
+. You must have data to define BUS OBJ ATTR UNIQ CONSTRAINTS.
+. For simple unique constraint, constraint name is optional but for composite unique constraints constraint name is mandatory.
+. For simple unique constraints you can provide a constraint name otherwise system will generate the constraint name with the pattern of UIX__.
+. If you want to define a composite constraint and you do not provide the constraint name then the constraint name will be generated automatically by system and this all will be considered as a simple unique constraints.
+. In constraint definition you must provide the bo name on which you want to add the unique constraint. It will be the name of an existing business object.
+. In constraint definition you must provide the bo attr name which you want it to be involved in the unique constraint.
+. If it is a composite unique constraint then all the business object attributes involved in this unique constraint definition should belong to same business object. The name of all the attributes in a composite unique constraint must be different from each other.
+. IS_PRIMARY_KEY value should be false for all the attributes involved in a simple unique constraint or a composite unique constraint. It means primary key attributes cannot be the part of any unique constraint.
+. If you try to add a unique constraint on a business object and this business object already has some data and this data does not comply with the new unique constraint definition then you will not be able to add the unique constraint until you fix the data or delete the data otherwise system will throw an error.
+
+== 1. Request URL
+
+/{PDM Server domain}/metadata/write/addUniqueConstraints
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Response Type
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|responseType |blob
+|===
+
+== 4. Request body
+
+[source,json]
+----
+Add Simple Unique Constraint
+
+Example 1 Simple unique constraint with constraint name provided
+
+{
+    "BUS OBJ ATTR UNIQ CONSTRAINTS": {
+        "language": "en",
+        "timezone": "GMT+08:00",
+        "data": [
+            {
+                "CONSTRAINT_NAME": "UIX_{{boName}}_NAME",
+                "BO_NAME": "{{boName}}",
+                "BO_ATTR_NAME": "{{boName}}_NAME"
+            }
+        ]
+    }
+}
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/add-unique-constraint-to-existing-business-object/api-1-add-Simple-unique-constraint-with-constraint-name.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+[source,json]
+----
+Example 2 Simple unique constraint without constraint name
+
+{
+    "BUS OBJ ATTR UNIQ CONSTRAINTS": {
+        "language": "en",
+        "timezone": "GMT+08:00",
+        "data": [
+            {
+                "BO_NAME": "{{boName}}",
+                "BO_ATTR_NAME": "{{boName}}_NAME"
+            }
+        ]
+    }
+}
+----
+
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/add-unique-constraint-to-existing-business-object/api-2-add-Simple-unique-constraint-without-constraint-name.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+[source,json]
+----
+Add Composite unique constraint Request.
+Unique Constraint name must be provided and it should be same for all instances having same Unique Constraint
+{
+    "BUS OBJ ATTR UNIQ CONSTRAINTS": {
+        "language": "en",
+        "timezone": "GMT+08:00",
+        "data": [
+            {
+                "CONSTRAINT_NAME": "UIX_{{boName}}_UWI_START_TIME",
+                "BO_NAME": "{{boName}}",
+                "BO_ATTR_NAME": "UWI"
+            },
+            {
+                "CONSTRAINT_NAME": "UIX_{{boName}}_UWI_START_TIME",
+                "BO_NAME": "{{boName}}",
+                "BO_ATTR_NAME": "START_TIME"
+            }
+        ]
+    }
+}
+----
+
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/add-unique-constraint-to-existing-business-object/api-3-add-Composite-unique-constraint.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+[source,json]
+----
+Add Simple and Composite both Unique Constraints in a single Request.
+
+{
+    "BUS OBJ ATTR UNIQ CONSTRAINTS": {
+        "language": "en",
+        "timezone": "GMT+08:00",
+        "data": [
+            {
+                "CONSTRAINT_NAME": "UIX_{{boName}}_UWI_START_TIME",
+                "BO_NAME": "{{boName}}",
+                "BO_ATTR_NAME": "UWI"
+            },
+            {
+                "CONSTRAINT_NAME": "UIX_{{boName}}_UWI_START_TIME",
+                "BO_NAME": "{{boName}}",
+                "BO_ATTR_NAME": "START_TIME"
+            },
+            {
+                "CONSTRAINT_NAME": "UIX_{{boName}}_NAME",
+                "BO_NAME": "{{boName}}",
+                "BO_ATTR_NAME": "{{boName}}_NAME"
+            }
+        ]
+    }
+}
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/add-unique-constraint-to-existing-business-object/api-4-add-Simple-and-Composite-both-Unique-Constraints.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+== 5. Responses
+
+When response.status = 200, It will response a `application/octet-stream' excel file.
+
+Otherwise, it will response json file, Please see xref:responses.adoc[Responses]

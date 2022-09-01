@@ -1,0 +1,258 @@
+= Export the read data to excel
+
+Export feature extends the ability of exporting the data to excel based on the Common API reading data.
+
+*User can leverage and combine the multiple query criteria to filter out any kind of data as needed, the main query conditions including: _specified select list_, _criteria filters_, _pagination_, _sorting_, _aggregation_, _having filters_, _simple join_, _dynamic join_ etc.*
+
+The main difference is : *Common API* is sending response in *json*, but *Export API* is sending response in *excel*,and it can export up to *50000* records.
+
+Note:: If you want to export records more than 10000 then the records per page in pagination should be in multiple of 10000. For example 20000, 30000 etc.*
+
+== 1. Request URL
+
+/{PDM Server domain}/export
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Response Type
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|responseType |blob
+|===
+
+== 4. Request body
+
+Export API following xref:read-records.adoc#3-request-body[Common API]’s parameters, And the usage is the same.
+
+On this basis, a parameter is added.
+
+[width="100%",cols="18%,4%,9%,69%",options="header",]
+|===
+|Name |Type |Required |Description
+|isUploadNeeded |bool |no |*if* *selectList* or *aggregateSelectList* is provided then only those columns will be exported. *else:*
+|===
+
+=== 4.1 Example
+
+.This example contains all the parameters.
+[example]
+====
+[source,json]
+----
+{
+  "boName": "WELL",
+  "language": "en",
+  "timezone": "GMT+05:00",
+  "joinAlias": "a",
+  "selectList": [
+    "WELL_ID",
+    "WELL_NAME",
+    "AREA_NAME",
+    "UWI"
+  ],
+   "criteriaFilters":[
+      {
+         "boAttrName":"WELL_TYPE",
+         "operator":"EQUALS",
+         "values":[
+            "OIL"
+         ]
+      }
+  ],
+   "pagination":{
+      "recordsPerPage":30,
+      "pages":[
+         1
+      ]
+   },
+  "aggregateSelectList":[
+      {
+         "boAttrName":"WELL_ID",
+         "aggregateFunction":"MAX",
+         "alias":"MAX_WELL_ID"
+      },
+      {
+         "boAttrName":"WELL_ID",
+         "aggregateFunction":"MIN",
+         "alias":"MIN_WELL_ID"
+      }
+   ],
+  "havingFilters":[
+      {
+         "aggregateColumn":{
+            "boAttrName":"ROW_CREATED_DATE",
+            "aggregateFunction":"MAX"
+         },
+         "operator":"LESS_THAN",
+         "values":[
+            "2019-01-01 00:00:00+05:00"
+         ]
+      }
+   ],
+  "simpleJoins": [
+    {
+      "boName": "WELLBORE",
+      "joinType": "INNER",
+      "joinAlias": "b",
+      "selectList": [
+        "WELLBORE_ID",
+        "WELLBORE_NAME"
+      ],
+      "joiningConditions": [
+        {
+          "leftSide": {
+            "joinAlias": "a",
+            "boAttrName": "UWI"
+          },
+          "operator": "EQUALS",
+          "rightSide": {
+            "joinAlias": "b",
+            "boAttrName": "WELL_UWI"
+          }
+        }
+      ]
+    }
+  ],
+   "dynamicJoins":[
+      {
+         "selectList":[
+            "UWI",
+            "max_volume_date"
+         ],
+         "joinType":"INNER",
+         "joinAlias":"c",
+         "dynamicTables":[
+            {
+               "boName":"well vol daily",
+               "selectList":[
+                  "UWI"
+               ],
+               "aggregateSelectList":[
+                  {
+                     "boAttrName":"volume_date",
+                     "aggregateFunction":"MAX",
+                     "alias":"max_volume_date"
+                  }
+               ]
+            }
+         ],
+         "joiningConditions":[
+            {
+               "leftSide":{
+                  "joinAlias":"a",
+                  "boAttrName":"UWI"
+               },
+               "operator":"EQUALS",
+               "rightSide":{
+                  "joinAlias":"c",
+                  "boAttrName":"UWI"
+               }
+            }
+         ],
+         "orderBy":[
+            {
+               "boAttrName":"UWI",
+               "order":"DESC"
+            }
+         ]
+      }
+   ],
+   "orderBy": [
+    {
+      "boAttrName": "UWI",
+      "order": "ASC"
+    },
+    {
+      "boAttrName": "WELL_NAME",
+      "order": "DESC"
+    }
+  ],
+  "prependAlias": false,
+  "showSQLStats":true
+}
+----
+====
+'''
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try simpleJoins export myself</font>
+</summary>
+<iframe src="./_attachments/export/feature-export-simpleJoins.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try dynamicJoins export myself</font>
+</summary>
+<iframe src="./_attachments/export/feature-export-dynamicJoins.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+=== 4.2 How to save response?
+
+==== On the typescript
+
+[source,typescript]
+----
+import { saveAs } from 'file-saver';
+var fileName = "exportName.xlsx";
+saveBlob(responseData, fileName) {
+    var excelBlob = new Blob([responseData], { type: 'application/octet-stream' });
+    saveAs(excelBlob, fileName);
+}
+----
+
+==== On the javascript
+
+[source,javascript]
+----
+var fileName = "exportName.xlsx";
+
+function saveBlob(responseData, fileName) {
+   var excelBlob = new Blob([responseData], { type: 'application/octet-stream' });
+   if (isIE()) {
+      window.navigator.msSaveOrOpenBlob(excelBlob, fileName);
+   } else {
+       var a = document.getElementById("exportbtn");
+       a.href = URL.createObjectURL(excelBlob);
+       a.download = fileName;
+       a.click();
+       a.href = "";
+   }
+}
+
+function isIE() {
+    if (!!window.ActiveXObject || "ActiveXObject" in window) {
+        return true;
+    } else {
+        return false;
+    }
+}
+----
+
+==== On the Postman
+
+____
+Success. Save Response to a file by postman.
+____
+
+image::export-postman.PNG[title="on the postman"]
+
+== 5. Responses
+
+When response.status = 200, It will response a `application/octet-stream' excel file.
+
+Otherwise, it will response json file, Please see xref:responses.adoc[Responses]

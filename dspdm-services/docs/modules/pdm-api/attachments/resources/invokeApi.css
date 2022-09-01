@@ -1,0 +1,42 @@
+#btnInvoke {
+    list-style: none;
+    display: block;
+    clear: none;
+    float: left;
+    height: 31px;
+}
+.title{
+    list-style: none;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    font-size: 1.1em;
+    margin: 0;
+    padding: 0 0 5px;
+    color: #10a54a;
+}
+#reqBody{
+    list-style: none;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #aaa;
+    margin: 0px;
+    width: 574px;
+    height: 278px;
+}
+#resBody{
+    list-style: none;
+    margin: 0;
+    font: inherit;
+    vertical-align: baseline;
+    background-color: #fcf6db;
+    border: 1px solid #e5e0c6;
+    margin-top: 5px;
+    font-family: Anonymous Pro,Menlo,Consolas,Bitstream Vera Sans Mono,Courier New,monospace;
+    padding: 10px;
+    font-size: .9em;
+    width: 574px;
+    height: 250px;
+    max-height: 400px;
+    overflow-y: auto;
+}

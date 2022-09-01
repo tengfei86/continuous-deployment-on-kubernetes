@@ -1,0 +1,17 @@
+= Down Time Data Model
+
+image::Down%20Time%20Event.png[title="Down Time Event ERD"]
+
+== *Down Time Event Tables Description*
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|*Table* |*Description*
+|xref:Data-Dictionary.adoc#prod_down_time_event[PROD DOWN TIME EVENT] |Use this table to track the events at different levels of the operations (well, facility). A downtime event is an event that spans a discrete period that negatively affects the production or processing of hydrocarbon products (e.g., produced oil, processed diesel, etc.) The event information includes a description of the event.
+|xref:Data-Dictionary.adoc#prod_down_time_volume_loss[PROD_DOWN_TIME_VOLUME_LOSS] |An associated record recording deferred volumes due to the event.
+|xref:Data-Dictionary.adoc#r_down_time_reason[R_DOWN_TIME_REASON] |Identifies the ``Why'' condition of the downtime event, i.e., why did it occur? These are the basic reasons for or causes of the event.
+|xref:Data-Dictionary.adoc#r_event_category[R_EVENT_CATEGORY] |Indicates the general type of the event would normally be used and causes down time, such as stimulation, repair, failure etc. `What' caused the down time.
+|xref:Data-Dictionary.adoc#r_event_status[R_EVENT_STATUS] |Specifies the event status, such as is ``suspended'' or ``complete''.
+|xref:Data-Dictionary.adoc#r_estimation_method[R_ESTIMATION_METHOD] |Specifies the estimation methods, such as ``default value, forecast, well test'', etc.
+|xref:Data-Dictionary.adoc#r_downtime_type[R_DOWNTIME_TYPE] |Specifies the loss caused by this event, or the type of the down time event is Planned, Unplanned or External.
+|===

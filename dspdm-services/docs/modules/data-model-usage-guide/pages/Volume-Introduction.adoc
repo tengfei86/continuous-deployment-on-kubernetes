@@ -1,0 +1,9 @@
+= Introduction
+
+Once a well is drilled and completed, fluid production from the well is delivered through various systems, allocated to various production entities, reported to the company and to regulatory agencies, and measured and forecasted. Injected or produced fluids and all data associated with production must be tracked.
+
+Information about production is not just the volumes of oil, gas, water or other fluids obtained over time (day, month, year.) It includes periodic measurement of pressures and fluid composition Where a well or producing area has multiple leases or owners, various fractional interests are applied to the gross volumes.
+
+However, many wells also yield significant volumes of water and other non-hydrocarbon liquids and gases. Also, production operations include the injection of water or other fluid into a reservoir for pressure support or for disposal. As with production, these injected and disposed volumes are captured and reported.
+
+For product volume part, PDM mainly refers to PPDM and PRODML standards, and adhere them to come out the data model design. Meanwhile, PDM read Decision Space Production Allocation as reference also. To clear how to utilize the data model, the detailed introduction is as following. The description refers to PPDM, ProdML, DSPA documentation, to clarify the original idea and to avoid ignoring information.

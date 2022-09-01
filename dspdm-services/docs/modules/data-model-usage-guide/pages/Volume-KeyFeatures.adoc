@@ -1,0 +1,6 @@
+= Key Features
+
+* Obtain the historical production reporting data of different periods.
+* Be able to track the fluids through various delivery systems, including wells, facilities, regulatory agencies etc.
+* Support data versioned by date.
+* The data cannot be overwritten or deleted. The amended data need input amend reason.

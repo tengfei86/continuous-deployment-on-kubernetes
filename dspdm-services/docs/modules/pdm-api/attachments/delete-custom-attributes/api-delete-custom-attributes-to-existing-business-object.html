@@ -1,0 +1,35 @@
+<html>
+
+<head>
+
+</head>
+
+<body style="margin: 0 0 0 0;">
+    <iframe src="../resources/api.html" id="deleteCustomAttribute" width="100%" height="100%" frameborder="0">
+    </iframe>
+    <script>
+        window.onload = function () {
+            let body =
+{
+    "BUSINESS OBJECT ATTR": {
+        "language": "en",
+        "readBack": false,
+        "timezone": "GMT+08:00",
+        "data": [
+            {
+                "BO_NAME": "WELL",
+                "ATTRIBUTE_DISPLAYNAME": "Previous Owner"
+            },
+            {
+                "BO_NAME": "ZONE",
+                "ATTRIBUTE_DISPLAYNAME": "TEST2"
+            }
+        ]
+    }
+}
+    document.getElementById("deleteCustomAttribute").contentWindow.setDeleteCustomAttribute(JSON.stringify(body, null, "    "));
+        }
+    </script>
+</body>
+
+</html>

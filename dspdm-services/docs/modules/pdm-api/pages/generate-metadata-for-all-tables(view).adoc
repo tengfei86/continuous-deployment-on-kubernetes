@@ -1,0 +1,97 @@
+= Generate Metadata for All Tables(View)
+
+If user wants to generate metadata for all of tables of a database in a go, this service can fulfill the purpose. What this service will be doing is reading all of the entities of the given/connected database, sort them in order in such a way that parent metadata should be created before child, and use the existing service ( /metadata/write/generateMetadataForExistingTable) to generate metadata for all of the entities.
+
+The explanation of request packet is as below:
+
+* *databaseName* (_optional_): This param should contain database name that is currently connected to with the service for which we want to generate metadata.
+* *schemaName* (_optional_): This param should contain schema name of the database which we are going to generate metadata. This is an optional parameter and if no value provided, it’s default values are as follows:
+** For SQLServer, its default value is ``__dbo__'' .
+** For PostgreSQL, its default value is ``__public__''.
+* *overwritePolicy* (_mandatory_): This param should contain only following values either _skip_ or _abort_. This will be used to determine what to do if there’s metadata already available for any entity.
+** skip ( will skip if metadata already available of a particular entity)
+** abort (will abort the operation in case of any already available metadata fond for any entity)
+* *tableType* (_mandatory_): This param is used to determine against what type of table, metadata is to be generated. This param should contain only below values and is mandatory.
+** table (for creating metadata of tables only)
+** view (for creating metadata of views only)
+** table_view (for creating metadata for both tables and views)
+* *exclusionList* (_optional_): This param is an optional param and is used to exclude any unwanted table/view while generating metadata for all. Table/view’s entity name should be provided e.g., ``well'', ``well_completion''.
+
+== 1. Request URL
+
+/{PDM Server domain}/metadata/write/generateMetadataForAll
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Request body
+
+[example]
+====
+[source,json]
+----
+{
+    "BUSINESS OBJECT": {
+        "language": "en",
+        "readBack": true,
+        "timezone": "GMT+08:00",
+        "data": [
+            {
+                "databaseName": "dspdm_dev_demo",
+                "schemaName": "public",
+                "overwritePolicy": "skip",
+                "tableType": "table_view",
+                "exclusionList": []
+            }
+        ]
+    }
+}
+----
+====
+'''
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/generate-metadata-for-all-tables(view)/api-generate-metadata-for-all-tables.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+
+== 4. Responses
+
+[example]
+====
+[source,json]
+----
+{
+    "status": {
+        "statusCode": 1,
+        "statusLabel": "Success"
+    },
+    "messages": [
+        {
+            "message": "1 business objects(s) metadata generated successfully.",
+            "status": {
+                "statusCode": 1,
+                "statusLabel": "Success"
+            }
+        }
+    ],
+    "exception": {},
+    "data": {},
+    "version": "0.0.0.0A",
+    "threadName": "**system_52184",
+    "requestTime": "2021-06-01 13:03:56.325 +08:00",
+    "responseTime": "2021-06-01 13:03:57.053 +08:00"
+}
+----
+====

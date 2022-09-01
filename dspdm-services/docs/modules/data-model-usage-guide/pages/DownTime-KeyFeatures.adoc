@@ -1,0 +1,8 @@
+= Key Features
+
+PDM records the down time event information, which is helpful for user to analyze the production loss reason and find opportunity to reduce the expense. The key features of down time event data module include:
+
+* Be able to track the down time events those already happened or scheduled as plan events of an organization.
+* Be able to know what event caused the down time.
+* Be able to record the cause reason of this event.
+* Be able to label the down time is planned, unplanned to help for deep analysis.

@@ -1,0 +1,825 @@
+= Use the Save API to Write Data
+
+API provides rich features, such as: save, read, search with exact match and search with like match,etc.
+
+In this document, let’s see, how to use the save API to write Data.
+
+If in any records to be saved, primary key fields (e.g WELL_ID) exist, then it will be updated otherwise it will be inserted.
+
+The following will take you step by step to use save API.
+
+== 1. Request URL
+
+/{PDM Server domain}/save
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Request bodys
+
+[width="100%",cols="9%,10%,7%,11%,11%,52%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |WELL |Name of business object to be saved.
+|language |string |yes | |en |Language of the success and error messages.
+|readback |bool |no |FALSE |TRUE |Only the ID of the newly inserted record will be brought back.
+|timezone |string |yes | |GMT+05:00 |Timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+|data |object array |no | | |Array/List of records to be saved.
+|UWI |string |yes | |Solrr |UNIQUE WELL IDENTIFIER: A unique name, code or number designated.
+|===
+
+=== All acceptable/possible time formats
+
+____
+All acceptable/possible date only and timestamp and time only formats which can be parsed by the API.
+
+Following is the list of all possible supported parse-able patterns. We start parsing from a more detail pattern and if not matched then we try to match a less detailed pattern till end.
+
+If no match is found then API will throw an error.
+____
+
+[source,java]
+----
+TIME_ONLY_FORMAT("HH:mm:ss")
+TIME_ONLY_FORMAT_WITH_MILLIS("HH:mm:ss.SSS")
+// HYPHEN BASED DATE FORMATS
+DATE_ONLY_FORMAT("yyyy-MM-dd")
+DATETIME_FORMAT_WITHOUT_SECONDS("yyyy-MM-dd'T'HH:mm")
+DATETIME_FORMAT_WITH_T("yyyy-MM-dd'T'HH:mm:ss")
+DATETIME_FORMAT("yyyy-MM-dd HH:mm:ss")
+DATETIME_FORMAT_WITH_TIMEZONE("yyyy-MM-dd HH:mm:ssX")
+TIMESTAMP_FORMAT_WITHOUT_TIMEZONE("yyyy-MM-dd HH:mm:ss.SSS")
+TIMESTAMP_FORMAT_WITH_TIMEZONE("yyyy-MM-dd HH:mm:ss.SSSX")
+TIMESTAMP_ISO_FORMAT_UTC("yyyy-MM-dd'T'HH:mm:ss'Z'")
+TIMESTAMP_ISO_FORMAT_WITH_MILLIS_UTC("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+TIMESTAMP_ISO_FORMAT_WITH_TIMEZONE("yyyy-MM-dd'T'HH:mm:ssX")
+TIMESTAMP_ISO_FORMAT_WITH_TIMEZONE_AND_MILLIS("yyyy-MM-dd'T'HH:mm:ss.SSSX")
+// SLASH BASED DATE FORMATS
+DATE_ONLY_SLASH_FORMAT("yyyy/MM/dd")
+DATETIME_SLASH_FORMAT_WITHOUT_SECONDS("yyyy/MM/dd'T'HH:mm")
+DATETIME_SLASH_FORMAT_WITH_T("yyyy-MM-dd'T'HH:mm:ss")
+DATETIME_SLASH_FORMAT("yyyy/MM/dd HH:mm:ss")
+DATETIME_SLASH_FORMAT_WITH_TIMEZONE("yyyy/MM/dd HH:mm:ssX")
+TIMESTAMP_SLASH_FORMAT_WITHOUT_TIMEZONE("yyy/MM/dd HH:mm:ss.SSS")
+TIMESTAMP_SLASH_FORMAT_WITH_TIMEZONE("yyy/MM/dd HH:mm:ss.SSSX")
+TIMESTAMP_ISO_SLASH_FORMAT_UTC("yyy/MM/dd'T'HH:mm:ss'Z'")
+TIMESTAMP_ISO_SLASH_FORMAT_WITH_MILLIS_UTC("yyy/MM/dd'T'HH:mm:ss.SSS'Z'")
+TIMESTAMP_ISO_SLASH_FORMAT_WITH_TIMEZONE("yyy/MM/dd'T'HH:mm:ssX")
+TIMESTAMP_ISO_SLASH_FORMAT_WITH_TIMEZONE_AND_MILLIS("yyy/MM/dd'T'HH:mm:ss.SSSX")
+----
+
+=== 3.1. Insert new record
+
+____
+Create a new record and save. If the primary key in table does not exist, this record will be inserted in table.
+____
+
+==== a. Example
+
+____
+Insert a new well in table and save. The unique field of well table is UWI, give a UWI data which not exist in table, this record will insert into WELL table, at the same time, automatically generate a new primary key(well id) for this well.
+____
+
+[source,json]
+----
+{
+    "WELL": {
+        "language": "en",
+        "readBack": true,
+        "timezone": "GMT+08:00",
+        "data": [
+            {
+                "WELL_NAME": "Solrr",
+                "UWI": "Solrr",
+                "IS_ACTIVE": true,
+                "OFFSHORE_IND": true
+            }
+        ]
+    }
+}
+----
+'''
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/write-records/api-save-new-data.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+==== Parameters
+
+[width="100%",cols="9%,10%,7%,11%,11%,52%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |WELL |Name of business object to be saved.
+|language |string |yes | |en |Language of the success and error messages.
+|readback |bool |no |FALSE |TRUE |Only the ID of the newly inserted record will be brought back.
+|timezone |string |yes | |GMT+05:00 |Timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+|data |object array |no | | |Array/List of records to be saved.
+|UWI |string |yes | |Solrr |UNIQUE WELL IDENTIFIER: A unique name, code or number designated.
+|===
+
+==== a. Example(Failed)
+
+____
+Re-execute above codes, this will response an error, because the UWI is already existed in WELL table .
+____
+
+[source,json]
+----
+{
+    "WELL": {
+        "language": "en",
+        "readBack": true,
+        "timezone": "GMT+08:00",
+        "data": [
+            {
+                "WELL_NAME": "Solrr",
+                "UWI": "Solrr",
+                "IS_ACTIVE": true,
+                "OFFSHORE_IND": true
+            }
+        ]
+    }
+}
+----
+
+____
+Response error, Cannot perform save operation on business object `WELL'. Value `Solrr' for attribute `UWI' already exists.
+____
+
+[source,json]
+----
+500
+{
+  "status" : {
+    "statusCode" : -2,
+    "statusLabel" : "Error"
+  },
+  "messages" : [ {
+    "message" : "Cannot perform save operation on business object 'WELL'. Value 'Solrr' for attribute 'UWI' already exists",
+    "status" : {
+      "statusCode" : -2,
+      "statusLabel" : "Error"
+    }
+  } ],
+  "exception" : {
+    "message" : "Cannot perform save operation on business object 'WELL'. Value 'Solrr' for attribute 'UWI' already exists",
+    "stackTrace" : "com.lgc.dspdm.core.common.exception.DSPDMException: Cannot perform save operation on business object 'WELL'. Value 'Solrr' for attribute 'UWI' already exists\n\tat com.lgc.dspdm.core.dao.dynamic.businessobject.impl.AbstractDynamicDAOImpl.throwExceptionOnSimpleUniqueConstraintFailure(AbstractDynamicDAOImpl.java:390)\n\tat com.lgc.dspdm.core.dao.dynamic.businessobject.impl.AbstractDynamicDAOImpl.verifySimpleUniqueConstraintForSave(AbstractDynamicDAOImpl.java:174)\n\tat com.lgc.dspdm.core.dao.dynamic.businessobject.impl.AbstractDynamicDAOImpl.verifyUniqueConstraintsForSave(AbstractDynamicDAOImpl.java:145)\n\tat com.lgc.dspdm.core.dao.dynamic.businessobject.impl.AbstractDynamicDAOImpl.performValidationsBeforeSave(AbstractDynamicDAOImpl.java:97)\n\tat com.lgc.dspdm.core.dao.dynamic.businessobject.impl.AbstractDynamicDAOImpl.saveOrUpdate(AbstractDynamicDAOImpl.java:71)\n\tat com.lgc.dspdm.core.dao.dynamic.businessobject.DynamicDAO.saveOrUpdate(DynamicDAO.java:185)\n\tat com.lgc.dspdm.repo.delegate.common.write.BusinessObjectWriteDelegateImpl.saveOrUpdate(BusinessObjectWriteDelegateImpl.java:53)\n\tat com.lgc.dspdm.repo.delegate.common.write.BusinessObjectWriteDelegate.saveOrUpdate(BusinessObjectWriteDelegate.java:38)\n\tat com.lgc.dspdm.service.common.dynamic.write.DynamicWriteService.saveOrUpdate(DynamicWriteService.java:34)\n\tat dspdm.msp.mainservice.mainserviceImpl.saveOrUpdate(mainserviceImpl.java:404)\n\tat jdk.internal.reflect.GeneratedMethodAccessor189.invoke(Unknown Source)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\n\tat org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:76)\n\tat org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:148)\n\tat org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:191)\n\tat org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$ResponseOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:200)\n\tat org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:103)\n\tat org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:493)\n\tat org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:415)\n\tat org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:104)\n\tat org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:277)\n\tat org.glassfish.jersey.internal.Errors$1.call(Errors.java:272)\n\tat org.glassfish.jersey.internal.Errors$1.call(Errors.java:268)\n\tat org.glassfish.jersey.internal.Errors.process(Errors.java:316)\n\tat org.glassfish.jersey.internal.Errors.process(Errors.java:298)\n\tat org.glassfish.jersey.internal.Errors.process(Errors.java:268)\n\tat org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:289)\n\tat org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:256)\n\tat org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:703)\n\tat org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:377)\n\tat org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:224)\n\tat org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:593)\n\tat org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:573)\n\tat java.base/java.lang.Thread.run(Thread.java:834)\n"
+  },
+  "data" : { },
+  "version" : "0.0.0.0A",
+  "threadName" : "**unknown_ 4382",
+  "requestTime" : "2020-06-22 16:33:28.020 +08:00",
+  "responseTime" : "2020-06-22 16:33:28.026 +08:00"
+}
+----
+'''
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/write-records/api-save-new-data.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+==== Parameters
+
+[width="100%",cols="9%,10%,7%,11%,11%,52%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |WELL |Name of business object to be saved.
+|language |string |yes | |en |Language of the success and error messages.
+|readback |bool |no |FALSE |TRUE |Only the ID of the newly inserted record will be brought back.
+|timezone |string |yes | |GMT+05:00 |Timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+|data |object array |no | | |Array/List of records to be saved.
+|UWI |string |yes | |Solrr |UNIQUE WELL IDENTIFIER: A unique name, code or number designated.
+|===
+
+==== b. Example
+
+____
+For example, WELL TEST table have primary key is WELL_TEST_ID, give the WELL_TEST_ID value which is not exist in table, this record will insert into WELL TEST table.
+____
+
+[source,json]
+----
+{
+  "WELL TEST": {
+    "readBack": false,
+    "data": [
+      {
+        "type": "WELL TEST",
+        "id": 1,
+        "WELL_TEST_ID": 1,
+        "WELL_ID": 27,
+        "UWI": "HAL-TW00001-PDM4",
+        "START_TIME": "2020-03-12T00:00:00+05:00",
+        "START_TIME_TZ": "273",
+        "END_TIME": "2020-04-01T00:00:00+05:00",
+        "END_TIME_TZ": "UTC+0:00",
+        "DOWNHOLE_GAUGE_MD": 7306,
+        "DOWNHOLE_GAUGE_MD_OUOM": "ft",
+        "R_WELL_TEST_TYPE_ID": 1,
+        "WELL_TEST_TYPE": "Flow Test",
+        "IS_ACTIVE": true,
+        "REMARK": "",
+        "ROW_CHANGED_BY": "",
+        "ROW_CREATED_BY": "",
+        "PRIMENG_CHECKBOX_ID": 1,
+        "DOWNHOLE_GAUGE_MDVALUECHANGED": false,
+        "DOWNHOLE_GAUGE_MDERROR_COUNT": 0
+      }
+    ],
+    "language": "en",
+    "timezone": "GMT+05:00"
+  }
+}
+----
+
+[source,json]
+----
+200
+{
+  "status" : {
+    "statusCode" : 1,
+    "statusLabel" : "Success"
+  },
+  "messages" : [ {
+    "message" : "1 record(s) updated successfully.",
+    "status" : {
+      "statusCode" : 1,
+      "statusLabel" : "Success"
+    }
+  } ],
+  "exception" : { },
+  "data" : { },
+  "version" : "0.0.0.0A",
+  "threadName" : "**unknown_87316",
+  "requestTime" : "2020-06-22 13:59:03.475 +05:00",
+  "responseTime" : "2020-06-22 13:59:03.575 +05:00"
+}
+----
+'''
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/write-records/api-save-new-data2.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+==== Parameters
+
+[width="100%",cols="9%,10%,6%,11%,13%,51%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |WELL TEST |Name of business object to be saved.
+|language |string |yes | |en |Language of the success and error messages.
+|readback |bool |no |FALSE |TRUE |Only the ID of the newly inserted record will be brought back.
+|timezone |string |yes | |GMT+05:00 |Timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+|data |object array |no | | |Array/List of records to be saved.
+|UWI |string |yes | |HAL-TW00001-PDM1 |UNIQUE WELL IDENTIFIER: A unique name, code or number designated.
+|===
+
+==== b. Example(Failed)
+
+____
+WELL TEST have the primary key is WELL_TEST_ID, because this value is exist in table, so, we want to insert a record, not to update a record. we give a new WELL_TEST_ID. But WELL TEST table have the unique keys are UWI and START TIME.
+
+This example want to insert a new record to WELL TEST. But only give one unique key, the other one is null, so, this will be response error.
+____
+
+[source,json]
+----
+{
+  "WELL TEST": {
+    "readBack": false,
+    "data": [
+      {
+        "type": "WELL TEST",
+        "id": 1,
+        "WELL_TEST_ID": 2,
+        "WELL_ID": 27,
+        "UWI": "HAL-TW00001-PDM",
+        "START_TIME": "",
+        "START_TIME_TZ": "273",
+        "END_TIME": "2020-04-01T00:00:00+05:00",
+        "END_TIME_TZ": "UTC+0:00",
+        "DOWNHOLE_GAUGE_MD": 7306,
+        "DOWNHOLE_GAUGE_MD_OUOM": "ft",
+        "R_WELL_TEST_TYPE_ID": 1,
+        "WELL_TEST_TYPE": "Flow Test",
+        "IS_ACTIVE": true,
+        "REMARK": "",
+        "ROW_CHANGED_BY": "",
+        "ROW_CREATED_BY": ""
+      }
+    ],
+    "language": "en",
+    "timezone": "GMT+05:00"
+  }
+}
+
+----
+
+____
+Response error, because one of the unique key is null.
+____
+
+[source,json]
+----
+500
+{
+  "status" : {
+    "statusCode" : -2,
+    "statusLabel" : "Error"
+  },
+  "messages" : [ {
+    "message" : "Unable to parse the date is null",
+    "status" : {
+      "statusCode" : -2,
+      "statusLabel" : "Error"
+    }
+  } ],
+  "exception" : {
+    "message" : "Unable to parse the date is null",
+    "stackTrace" : "com.lgc.dspdm.core.common.exception.DSPDMException: Unable to parse the date is null\n\tat com.lgc.dspdm.core.common.util.DateTimeUtils.parse(DateTimeUtils.java:178)\n\tat com.lgc.dspdm.core.common.util.MetadataUtils.convertValueToJavaDataTypeFromString(MetadataUtils.java:61)\n\tat dspdm.msp.mainservice.utils.DTOHelper.validateAndConvertDataType(DTOHelper.java:160)\n\tat dspdm.msp.mainservice.utils.DTOHelper.buildDynamicDTOFromMap(DTOHelper.java:128)\n\tat dspdm.msp.mainservice.utils.DTOHelper.buildBONameAndBOListMapFromRequestJSON(DTOHelper.java:85)\n\tat dspdm.msp.mainservice.mainserviceImpl.saveOrUpdate(mainserviceImpl.java:402)\n\tat jdk.internal.reflect.GeneratedMethodAccessor189.invoke(Unknown Source)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\n\tat org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:76)\n\tat org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:148)\n\tat org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:191)\n\tat org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$ResponseOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:200)\n\tat org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:103)\n\tat org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:493)\n\tat org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:415)\n\tat org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:104)\n\tat org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:277)\n\tat org.glassfish.jersey.internal.Errors$1.call(Errors.java:272)\n\tat org.glassfish.jersey.internal.Errors$1.call(Errors.java:268)\n\tat org.glassfish.jersey.internal.Errors.process(Errors.java:316)\n\tat org.glassfish.jersey.internal.Errors.process(Errors.java:298)\n\tat org.glassfish.jersey.internal.Errors.process(Errors.java:268)\n\tat org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:289)\n\tat org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:256)\n\tat org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:703)\n\tat org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:377)\n\tat org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:224)\n\tat org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:593)\n\tat org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:573)\n\tat java.base/java.lang.Thread.run(Thread.java:834)\n"
+  },
+  "data" : { },
+  "version" : "0.0.0.0A",
+  "threadName" : "**unknown_90219",
+  "requestTime" : "2020-06-23 07:11:10.385 +05:00",
+  "responseTime" : "2020-06-23 07:11:10.386 +05:00"
+}
+----
+
+==== Parameters
+
+[width="100%",cols="9%,10%,6%,11%,13%,51%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |WELL TEST |Name of business object to be saved.
+|language |string |yes | |en |Language of the success and error messages.
+|readback |bool |no |FALSE |TRUE |Only the ID of the newly inserted record will be brought back.
+|timezone |string |yes | |GMT+05:00 |Timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+|data |object array |no | | |Array/List of records to be saved.
+|UWI |string |yes | |HAL-TW00001-PDM1 |UNIQUE WELL IDENTIFIER: A unique name, code or number designated.
+|===
+
+=== 3.2. Update data
+
+____
+Update data to table. If in any records to be saved, primary key fields (e.g WELL_ID) exist, then it will be updated otherwise it will be inserted.
+____
+
+==== Example
+
+____
+Update data to WELL TEST table. This example want to update a record to WELL_TEST_ID is 1. The WELL_TEST_ID have existed in the table.
+____
+
+[source,json]
+----
+{
+    "WELL TEST": {
+        "readBack": false,
+        "data": [
+            {
+                "type": "WELL TEST",
+                "id": 1,
+                "WELL_TEST_ID": 1,
+                "WELL_ID": 27,
+                "UWI": "HAL-TW00001-PDM",
+                "START_TIME": "2020-03-22T00:00:00+05:00",
+                "START_TIME_TZ": "273",
+                "END_TIME": "2020-04-01T00:00:00+05:00",
+                "END_TIME_TZ": "UTC+0:00",
+                "DOWNHOLE_GAUGE_MD": 7307,
+                "DOWNHOLE_GAUGE_MD_OUOM": "ft",
+                "R_WELL_TEST_TYPE_ID": 1,
+                "WELL_TEST_TYPE": "Flow Test",
+                "IS_ACTIVE": true,
+                "REMARK": "",
+                "ROW_CHANGED_BY": "",
+                "ROW_CREATED_BY": "",
+            }
+        ],
+        "language": "en",
+        "timezone": "GMT+05:00"
+    }
+}
+----
+'''
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/write-records/api-save-update.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+==== Parameters
+
+[width="100%",cols="9%,10%,6%,11%,13%,51%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |WELL TEST |Name of business object to be saved.
+|language |string |yes | |en |Language of the success and error messages.
+|readback |bool |no |FALSE |TRUE |Only the ID of the newly inserted record will be brought back.
+|timezone |string |yes | |GMT+05:00 |Timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+|data |object array |no | | |Array/List of records to be saved.
+|UWI |string |yes | |HAL-TW00001-PDM1 |UNIQUE WELL IDENTIFIER: A unique name, code or number designated.
+|===
+
+==== a. Example(Failed)
+
+____
+This example want to update a record to table, but update executed but no records updated, because the data already exists in this WELL_ID value .
+____
+
+[source,json]
+----
+{
+  "WELL": {
+    "language": "en",
+    "timezone": "GMT+05:00",
+    "readBack": false,
+    "clientTimezone": "GMT+08:00",
+    "data": [
+      {
+        "type": "WELL",
+        "id": 10843,
+        "WELL_ID": 10843,
+        "UWI": "UWI2020040804",
+        "WELL_NAME": "WELL20200408041",
+        "AREA_ID": 264,
+        "AREA_NAME": "Spring City",
+        "FIELD_ID": 258,
+        "FIELD_NAME": "HAL-Texas West Field",
+        "OFFSHORE_IND": false,
+        "IS_ACTIVE": true,
+        "WELL_OWNER": "Ting Li",
+        "SPUD_DATE": "1994-01-14T00:00:00+05:00",
+        "SPUD_DATE_TZ": "UTC+0:00",
+        "R_TIMEZONE_ID": 273,
+        "COMPLETION_DATE": "1994-04-14T00:00:00+05:00",
+        "PRODUCTION_START_DATE": "1994-05-14T00:00:00+05:00",
+        "X_COORDINATE": -103.4816,
+        "Y_COORDINATE": 40.4309,
+        "CRS_ID": 258,
+        "CRS_NAME": "WGS 84",
+        "PRODUCTION_METHOD_ID": 259,
+        "PRODUCTION_METHOD": "ESP",
+        "WELL_TYPE_ID": 258,
+        "WELL_TYPE": "OIL",
+        "CURRENT_STATUS_ID": 258,
+        "R_WELL_STATUS_NAME": "Active",
+        "DEEPEST_DEPTH": 6693,
+        "DEEPEST_DEPTH_OUOM": "ft",
+        "ROW_CHANGED_BY": "admin",
+        "ROW_CHANGED_DATE": "2020-04-08T07:50:50+05:00",
+        "ROW_CREATED_BY": "admin",
+        "ROW_CREATED_DATE": "2020-04-08T07:50:50+05:00"
+      }
+    ]
+  }
+}
+----
+'''
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/write-records/api-save-update-failed1.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+==== Parameters
+
+[width="100%",cols="9%,10%,7%,11%,11%,52%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |WELL |Name of business object to be saved.
+|language |string |yes | |en |Language of the success and error messages.
+|readback |bool |no |FALSE |FALSE |Only the ID of the newly inserted record will be brought back.
+|timezone |string |yes | |GMT+08:00 |Timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+|data |object array |no | | |Array/List of records to be saved.
+|UWI |string |yes | |UWI2020040804 |UNIQUE WELL IDENTIFIER: A unique name, code or number designated.
+|===
+
+==== b. Example(Failed)
+
+____
+If the foreign key value is not exist in table, API will response this error, please save the value first, then update data to it.
+____
+
+[source,json]
+----
+{
+  "WELL": {
+    "language": "en",
+    "timezone": "GMT+05:00",
+    "readBack": false,
+    "clientTimezone": "GMT+08:00",
+    "data": [
+      {
+        "type": "WELL",
+        "id": 10843,
+        "WELL_ID": 108431,
+        "UWI": "UWI2020040804",
+        "WELL_NAME": "WELL2020040804",
+        "AREA_ID": 264,
+        "AREA_NAME": "Spring City",
+        "FIELD_ID": 258,
+        "FIELD_NAME": "HAL-Texas West Field",
+        "OFFSHORE_IND": false,
+        "IS_ACTIVE": true,
+        "WELL_OWNER": "Ting Li",
+        "SPUD_DATE": "1994-01-14T00:00:00+05:00",
+        "SPUD_DATE_TZ": "UTC+0:00",
+        "R_TIMEZONE_ID": 273,
+        "COMPLETION_DATE": "1994-04-14T00:00:00+05:00",
+        "PRODUCTION_START_DATE": "1994-05-14T00:00:00+05:00",
+        "X_COORDINATE": -103.4816,
+        "Y_COORDINATE": 40.4309,
+        "CRS_ID": 258,
+        "CRS_NAME": "WGS 84",
+        "PRODUCTION_METHOD_ID": 259,
+        "PRODUCTION_METHOD": "ESP",
+        "WELL_TYPE_ID": 258,
+        "WELL_TYPE": "OIL",
+        "CURRENT_STATUS_ID": 258,
+        "R_WELL_STATUS_NAME": "Active",
+        "DEEPEST_DEPTH": 6693,
+        "DEEPEST_DEPTH_OUOM": "ft",
+        "ROW_CHANGED_BY": "admin",
+        "ROW_CHANGED_DATE": "2020-04-08T07:50:50+05:00",
+        "ROW_CREATED_BY": "admin",
+        "ROW_CREATED_DATE": "2020-04-08T07:50:50+05:00"
+      }
+    ]
+  }
+}
+----
+
+[source,json]
+----
+200
+{
+  "status" : {
+    "statusCode" : 0,
+    "statusLabel" : "Info"
+  },
+  "messages" : [ {
+    "message" : "Update executed but no records updated. Please make sure primary key values exist.",
+    "status" : {
+      "statusCode" : 0,
+      "statusLabel" : "Info"
+    }
+  } ],
+  "exception" : { },
+  "data" : { },
+  "version" : "0.0.0.0A",
+  "threadName" : "**unknown_89745",
+  "requestTime" : "2020-06-23 07:34:41.746 +05:00",
+  "responseTime" : "2020-06-23 07:34:41.756 +05:00"
+}
+----
+
+==== Parameters
+
+[width="100%",cols="9%,10%,7%,11%,11%,52%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |WELL |Name of business object to be saved.
+|language |string |yes | |en |Language of the success and error messages.
+|readback |bool |no |FALSE |FALSE |Only the ID of the newly inserted record will be brought back.
+|timezone |string |yes | |GMT+08:00 |Timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+|data |object array |no | | |Array/List of records to be saved.
+|UWI |string |yes | |UWI2020040804 |UNIQUE WELL IDENTIFIER: A unique name, code or number designated.
+|===
+
+== 4.How to check mandatory and primary key
+
+If you don’t conform which field is mandatory and/or primary key, use following JSON code to check in table.
+
+If the attribute of fields in table is mandatory, when new record insert, all the mandatory fields must be given.
+
+If in any records to be saved, primary key fields (e.g WELL_ID) exist, then it will be updated otherwise it will be inserted.
+
+=== 4.1 Example for check mandatory
+
+Check the attribute of field in table whether it is mandatory.
+
+[source,json]
+----
+{
+   "boName":"BUSINESS OBJECT ATTR",
+   "language":"en",
+   "timezone":"GMT+08:00",
+   "selectList":[
+      "BO_ATTR_NAME",
+      "IS_MANDATORY",
+      "IS_PRIMARY_KEY"
+   ],
+   "criteriaFilters":[
+      {
+         "boAttrName":"BO_NAME",
+         "operator":"EQUALS",
+         "values":[
+            "WELL"
+         ]
+      },
+      {
+         "boAttrName":"IS_MANDATORY",
+         "operator":"EQUALS",
+         "values":[
+            "true"
+         ]
+      }
+   ],
+   "orderBy":[
+      {
+         "boAttrName":"business_object_attr_id",
+         "order":"ASC"
+      }
+   ],
+   "readAllRecords":true
+}
+----
+
+Response the following result.
+
+[source,json]
+----
+200
+{
+  "status" : {
+    "statusCode" : 1,
+    "statusLabel" : "Success"
+  },
+  "messages" : [ ],
+  "exception" : { },
+  "data" : {
+    "BUSINESS OBJECT ATTR" : {
+      "totalRecords" : 2,
+      "list" : [ {
+        "type" : "BUSINESS OBJECT ATTR",
+        "BO_ATTR_NAME" : "WELL_ID",
+        "IS_MANDATORY" : true,
+        "IS_PRIMARY_KEY" : true
+      }, {
+        "type" : "BUSINESS OBJECT ATTR",
+        "BO_ATTR_NAME" : "UWI",
+        "IS_MANDATORY" : true,
+        "IS_PRIMARY_KEY" : false
+      } ]
+    }
+  },
+  "version" : "0.0.0.0A",
+  "threadName" : "**unknown_76054",
+  "requestTime" : "2020-06-30 13:51:37.001 +08:00",
+  "responseTime" : "2020-06-30 13:51:37.005 +08:00"
+}
+----
+
+'''
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/write-records/api-common-mandatory.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+==== Parameters
+
+[width="100%",cols="13%,7%,4%,7%,33%,36%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |BUSINESS OBJECT ATTR |Name of business object to be saved.
+|language |string |yes | |en |Language of the success and error messages.
+|timezone |string |yes | |GMT+08:00 |timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+|selectList |object array |no | |BO_ATTR_NAME, IS_MANDATORY, IS_PRIMARY_KEY |Optional and default is the selectList or * means all the columns defined in metadata will be selected.
+|criteriaFilters |object array |no | | |Where conditions if multiple criteria are provided they will be concatenated with AND SQL operator operator key and value both are case sensitive.
+|boAttrName |string |yes | |BO_NAME |· Values for keys boAttrName are case insensitive · Values for key boAttrName are also pre-defined in metadata table BUSINESS_OBJECT_ATTR
+|operator |string |no | |EQUALS |Operator key and value both are case sensitive SUPPORTED OPERATORS are as follows: EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN, GREATER_OR_EQUALS, LESS_OR_EQUALS, BETWEEN, NOT_BETWEEN, IN, NOT_IN, LIKE, NOT_LIKE, ILIKE, NOT_ILIKE, JSONB_FIND_EXACT, JSONB_FIND_LIKE, JSONB_DOT, JSONB_DOT_FOR_TEXT
+|values |string |no | |TRUE |value for boAttrName
+|orderBy |object array |no | |ASC |boAttrName is pre-defined in metadata table BUSINESS_OBJECT_ATTR. Order contains ASC/DESC, and default to ASC.
+|readAllRecords |bool |no |FALSE |false |If set to true then you will be able to read 10000 records at max in one query.
+|===
+
+=== 4.2 Example for check primary key
+
+Check the attribute of field in table whether it is primary key.
+
+[source,json]
+----
+{
+   "boName":"BUSINESS OBJECT ATTR",
+   "language":"en",
+   "timezone":"GMT+08:00",
+   "selectList":[
+      "BO_ATTR_NAME",
+      "IS_MANDATORY",
+      "IS_PRIMARY_KEY"
+   ],
+   "criteriaFilters":[
+      {
+         "boAttrName":"BO_NAME",
+         "operator":"EQUALS",
+         "values":[
+            "WELL"
+         ]
+      },
+      {
+         "boAttrName":"IS_PRIMARY_KEY",
+         "operator":"EQUALS",
+         "values":[
+            "true"
+         ]
+      }
+   ],
+   "orderBy":[
+      {
+         "boAttrName":"business_object_attr_id",
+         "order":"ASC"
+      }
+   ],
+   "readAllRecords":true
+}
+----
+
+Response the following result.
+
+[source,json]
+----
+200
+{
+  "status" : {
+    "statusCode" : 1,
+    "statusLabel" : "Success"
+  },
+  "messages" : [ ],
+  "exception" : { },
+  "data" : {
+    "BUSINESS OBJECT ATTR" : {
+      "totalRecords" : 1,
+      "list" : [ {
+        "type" : "BUSINESS OBJECT ATTR",
+        "BO_ATTR_NAME" : "WELL_ID",
+        "IS_MANDATORY" : true,
+        "IS_PRIMARY_KEY" : true
+      } ]
+    }
+  },
+  "version" : "0.0.0.0A",
+  "threadName" : "**unknown_ 5126",
+  "requestTime" : "2020-06-30 14:22:26.248 +08:00",
+  "responseTime" : "2020-06-30 14:22:26.251 +08:00"
+}
+----
+
+'''
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/write-records/api-common-primarykey.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+==== Parameters
+
+[width="100%",cols="13%,7%,4%,7%,33%,36%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |BUSINESS OBJECT ATTR |Name of business object to be saved.
+|language |string |yes | |en |Language of the success and error messages.
+|timezone |string |yes | |GMT+08:00 |timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+|selectList |object array |no | |BO_ATTR_NAME, IS_MANDATORY, IS_PRIMARY_KEY |Optional and default is the selectList or * means all the columns defined in metadata will be selected.
+|criteriaFilters |object array |no | | |Where conditions if multiple criteria are provided they will be concatenated with AND SQL operator operator key and value both are case sensitive.
+|boAttrName |string |yes | |BO_NAME |· Values for keys boAttrName are case insensitive · Values for key boAttrName are also pre-defined in metadata table BUSINESS_OBJECT_ATTR
+|operator |string |no | |EQUALS |Operator key and value both are case sensitive SUPPORTED OPERATORS are as follows: EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN, GREATER_OR_EQUALS, LESS_OR_EQUALS, BETWEEN, NOT_BETWEEN, IN, NOT_IN, LIKE, NOT_LIKE, ILIKE, NOT_ILIKE, JSONB_FIND_EXACT, JSONB_FIND_LIKE, JSONB_DOT, JSONB_DOT_FOR_TEXT
+|values |string |no | |TRUE |value for boAttrName
+|orderBy |object array |no | |ASC |boAttrName is pre-defined in metadata table BUSINESS_OBJECT_ATTR. Order contains ASC/DESC, and default to ASC.
+|readAllRecords |bool |no |FALSE |false |If set to true then you will be able to read 10000 records at max in one query.
+|===
+
+== 5. Responses
+
+Please see xref:responses.adoc[Responses]

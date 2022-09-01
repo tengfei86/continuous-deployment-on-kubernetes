@@ -1,0 +1,9 @@
+= Key Features
+
+PDM data model definition has aligned with ProdML data transfer standard. It will be easy for user to storage in or transfer out flow model data between PDM data model to ProdML files. If you want to get more information, please refer to http://www.energistics.org/energyml/data/prodmlv2
+
+The key features of flow model definition aims to provide user:
+
+* A clear and easy structure to define a flow model with multiple networks, which will represent the actual fluid flow.
+* Easy to transfer data between PDM and ProdML.
+* A flow model can be versioned by date.

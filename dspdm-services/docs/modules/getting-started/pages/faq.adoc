@@ -1,0 +1,66 @@
+= Frequently Asked Questions (FAQ)
+
+[qanda]
+What is DecisionSpace® 365 Production Data Management?::
+
+DecisionSpace® 365 Production Data Management lays the foundation for your oilfield to be data-driven. Answer new challenges, get ahead new uncertainties, and unleash the new generation’s potential. This is the production data management solution to help you thrive in the digital era.
+
+* *ONE TRUTH* – connect and integrate different databases, applications, and domains.
+* *EXTEND & SCALE* – Extensible, scalable, and adaptable to growing data volumes and new data types/sources
+* *ADOPT FAST* – Application design that is fast to deploy, easy to maintain, and intuitive to operate
+* *DO MORE* – Services to automate, customize, and simplify data management tasks
+* *LEARN DEEP* - Calculation engines that can support deep learning, big data analytics, and machine learning.
+
+How many types of data tables does it have right now?::
++
+--
+There are five types of data in this database.
+
+* *Master Data*
++
+Master data includes entities that are either static and/or rarely change over the life or the field. It includes:
+
+** Area
+** Field
+** Pool/Reservoir
+** Formation
+** Zone
+** Platform
+** Well, Wellbore, and Well Completion
+** Well Tubular
+** Network
+** Pipeline
+** Facilities
+** Equipment, including well equipment (tubular, pumps)
+** Business Associate
+
+* *Operational Data*
++
+Operational data includes data that regularly and frequently change such as:
++
+** Production and injection volumes – daily and monthly
+** Well Test Data
+** Well Production Aggregate
+** Well Activities – workover, recompletion, re-entry, etc.
+** Well History-Well status history and production method history
++
+* *Reference Data*
++
+Reference data are data that define the set of permissible values to be used by other data fields. Reference data gain in value when they are widely reused and widely referenced. Typically, they do not change overly much in terms of definition, apart from occasional.
++
+* *Real-time Data*
++
+Real-time data consists of information delivered immediately after collection with little to no delay.
++
+It can be primary data such as pressure and temperature, or calculated data such as flow rate.
++
+* *Models*
++
+Models are the representation of a physical object, such as reservoir or rock/fluid properties (PVT).
++
+In PDM365, we plan to store Nexus network model, Nexus reservoir model and PVT model, indexed by scenario.
+--
++
+Does PDM allow users to define new field?::
+
+​ Yes, it allow users to add new field what they want, at the same time, give the field format.

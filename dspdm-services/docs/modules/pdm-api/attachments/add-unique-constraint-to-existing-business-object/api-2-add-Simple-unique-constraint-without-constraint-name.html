@@ -1,0 +1,30 @@
+<html>
+
+<head>
+
+</head>
+
+<body style="margin: 0 0 0 0;">
+    <iframe src="../resources/api.html" id="addUniqueConstraint" width="100%" height="100%" frameborder="0">
+    </iframe>
+    <script>
+        window.onload = function () {
+            let body =
+{
+    "BUS OBJ ATTR UNIQ CONSTRAINTS": {
+        "language": "en",
+        "timezone": "GMT+08:00",
+        "data": [
+            {
+                "BO_NAME": "WELL_TEST_CHILD",
+                "BO_ATTR_NAME": "WELL_TEST_NAME"
+            }
+        ]
+    }
+} 
+            document.getElementById("addUniqueConstraint").contentWindow.setaddUniqueConstraintParams(JSON.stringify(body, null, "    "));
+        }
+    </script>
+</body>
+
+</html>

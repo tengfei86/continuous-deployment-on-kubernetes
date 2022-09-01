@@ -1,0 +1,500 @@
+= Unit Conversion
+
+DSPDM is supporting unit conversion in both UI and API since 12.0.02. This article will walk you through the primary parts on how to use it.
+
+NOTE:: At present version, the unit can be set on columns level other than rows level. It might not meet the requirement of separating unit settings on different entities against same model.
+
+
+== Additional Illustration
+
+== Metadata
+
+There are a few attributes extended in metadata, which determine the default unit for each attribute in system. All the pre-defined models have been configured in metadata relevantly. For more detail, please refer to
+
+MetaData
+
+=== Template
+
+*Template* give users a way to define a set of unit metrics used for specific purposes or UI rendering. With a template defined, you can use a template id to refer a set of settings you refer to.
+
+=== User settings
+
+User settings is the detailed user defined unit working along with template. Latter section will address the detail.
+
+'''''
+
+== Unit Conversion
+
+Unit conversion API supports convert a single or batch of values to targeting values.
+
+=== Request URL
+
+/{PDM Server}/secure/unit/convert
+
+*HTTP Method：* POST
+
+=== Request Headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|Authorization |xref:authentication.adoc[Get token]
+|===
+
+=== Request Body
+
+[width="100%",cols="13%,5%,7%,12%,6%,57%",options="header",]
+|===
+|Name |Type |Required |Default value |Example |Description
+|sourceUnit |String |yes |n/a | |sourceUnit, targetUnit and values which are a pair of parameters. sourceUnit illustrate the unit of values
+|targetUnit |String |yes |n/a | |targetUnit specify the unit that you want to convert to
+|values |Array |yes |n/a | |the original values
+|===
+
+=== Request Example
+
+[source,json]
+----
+[
+    {
+        "sourceUnit":"ft",
+        "targetUnit": "in",
+        "values": [
+        100,
+        200
+        ]
+    },
+    {
+        "sourceUnit": "ft",
+        "targetUnit": "m",
+        "values": [
+        300,
+        400
+        ]
+    }
+]
+----
+
+=== Response Body
+
+[cols=",,",options="header",]
+|===
+|Name |Example |Description
+|values | |The original values
+|results | |The converted values
+|resultCode | |Refer to the result code
+|===
+
+=== Response body example
+
+[source,json]
+----
+{
+    "status": {
+        "statusCode": 1,
+        "statusLabel": "Success"
+    },
+    "messages": [],
+    "exception": {},
+    "data": {
+        "unitconvert": {
+            "totalRecords": 2,
+            "list": [
+                {
+                    "values": [
+                        100.0,
+                        200.0
+                    ],
+                    "results": [
+                        1200.0,
+                        2400.0
+                    ],
+                    "sourceUnit": "ft",
+                    "targetUnit": "in",
+                    "resultCode": 1,
+                    "resultMessage": "Unit convert successful!"
+                },
+                {
+                    "values": [
+                        300.0,
+                        400.0
+                    ],
+                    "results": [
+                        91.44,
+                        121.92
+                    ],
+                    "sourceUnit": "ft",
+                    "targetUnit": "m",
+                    "resultCode": 1,
+                    "resultMessage": "Unit convert successful!"
+                }
+            ]
+        }
+    },
+    "version": "0.0.0.0A",
+    "threadName": "buffalo_21870",
+    "requestTime": "2021-07-26 03:48:02.164 Z",
+    "responseTime": "2021-07-26 03:48:02.255 Z"
+}
+----
+
++
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it my self </font>
+</summary>
+<iframe src="./_attachments/unit-conversion/unit-convert.html" width="600px" height="620px"> </iframe>
+</details>
+++++
+
+'''''
+
+== Save with Unit Conversion
+
+Save API has enhanced with unit setting, a new parameter is introduced in this API since V12.0.02. dspdmUnits is unit setting arrays, it can be used to specify the units of the storing data. Without specific specifying, the data will be stored directly into database without unit conversion.
+
+=== Request URL
+
+/{PDM Server domain}/secure/save
+
+*HTTP Method：* POST
+
+=== Request Headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|Authorization |xref:authentication.adoc[Get token]
+|===
+
+=== Request Body
+
+[width="100%",cols="8%,3%,5%,8%,38%,38%",options="header",]
+|===
+|Name |Type |Required |Default value |Example |Description
+|dspdmUnits |array |no |n/a |dspdmUnits:[ ``boAttrName'':``X_COORDINATE'',``sourceUnit'':``rad''] |It is an array of attribute name and corresponding unit setting, you can use it to specify the unit of the attributes.
+|boAttrName |string |no |n/a |``X_COORDINATE'' |Attribute name specified to do unit conversion
+|sourceUnit |string |no |n/a |``rad'' |At tribute’s unit,it illustrate the unit what current attribute has.
+| | | | | |
+|===
+
+=== Response Body
+
+Please refer to the SAVE API
+
++
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it my self </font>
+</summary>
+<iframe src="./_attachments/unit-conversion/unit-save-enhance.html" width="600px" height="620px"> </iframe>
+</details>
+++++
+
+'''''
+
+== Create unit template
+
+Instead of specifying the target unit every time on every attributes, you can create you own unit template, with the customized template creation, you can use a template_id to apply the unit conversion policy upon all values.
+
+The template creation is supported in *save* API. It is quite similar with a model creation.
+
+=== Request URL
+
+/{PDM Server domain}/secure/save
+
+*HTTP Method：* POST
+
+=== Request Headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|Authorization |xref:authentication.adoc[Get token]
+|===
+
+=== Request Body
+
+[width="100%",cols="14%,3%,4%,7%,36%,36%",options="header",]
+|===
+|Name |Type |Required |Default value |Example |Description
+|unit templates |Object |Yes |n/a |``unit templates'': \{ ``language'': ``en'', ``timezone'': ``GMT+05:00'', ``readBack'': false, ``data'': [ \{ ``unit_template_name'': ``template1'', ``is_default'': true } ] } |Unit template object that contains basic object information. The detailed unit specification will be maintained by another entity (unit template detail).
+|language |string |yes | |en |Language of the success and error messages.
+|timezone |string |yes | |GMT+05:00 |Timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+|readback |bool |no |FALSE |TRUE |Only the ID of the newly inserted record will be brought back.
+|unit_template_name |string |yes | |``test_company_metrics'' |The name of template
+|is_default |true |yes | |true |If it is true, it will be used as long as no template_id specified in a query call.
+|===
+
++
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it my self </font>
+</summary>
+<iframe src="./_attachments/unit-conversion/unit-template-creation.html" width="600px" height="620px"> </iframe>
+</details>
+
+++++
+
+'''''
+
+== Create Unit Template Details
+
+It is a pair with above _template_ API. The detailed unit definition of attributes can be defined with this API. It also leveraged from the inherent _save_ API.
+
+=== Request URL
+
+/{PDM Server domain}/secure/save
+
+*HTTP Method：* POST
+
+=== Request Headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|Authorization |xref:authentication.adoc[Get token]
+|===
+
+=== Request Body
+
+[width="100%",cols="21%,4%,6%,16%,5%,48%",options="header",]
+|===
+|Name |Type |Required |Default value |Example |Description
+| |String |Yes |unit template details | |Template detail BO Name
+|unit_template_id |Number |No |N/A | |Like the principal of saving entities, update and insert will be switched based on this id is set or not.
+|business_object_attr_id |Number |Yes |N/A | |the attribute id defined in meta data, to find out what it should be, please refer to the meta data article.
+|user_unit |String |Yes |NA | |The target unit
+|===
+
++
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it my self </font>
+</summary>
+<iframe src="./_attachments/unit-conversion/unit-template-detail-creation.html" width="600px" height="620px"> </iframe>
+</details>
+++++
+
+'''''
+
+== Template Apply
+
+Once the unit template and related attributes have been defined, a simple template can be refered instead of a set of units specified each API calls. This is about how to bind a user with a unit templated. It is also leveraged from the inherent _save_ API
+
+=== Request URL
+
+/{PDM Server domain}/secure/save
+
+*HTTP Method：* POST
+
+=== Request Headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|Authorization |xref:authentication.adoc[Get token]
+|===
+
+=== Request Body
+
+[width="100%",cols="20%,6%,8%,29%,7%,30%",options="header",]
+|===
+|Name |Type |Required |Default value |Example |Description
+| |String |Yes |user current unit templates | |
+|user_name |String |Yes | | |User name who will be banded
+|unit_template_id |Number |Yes | | |template id
+|===
+
+=== Request Example
+
+[source,json]
+----
+{
+  "user current unit templates": {
+    "language": "en",
+    "timezone": "GMT+05:00",
+    "readBack": false,
+    "data": [
+      {
+        "user_name": "admin",
+        "unit_template_id": 1
+      }
+    ]
+  }
+}
+----
+
+'''''
+
+== Query
+
+Query data has enhanced with the unit settings, you are able to get the corresponding data with specified unit. A new parameter userPolicy is introduced in the primitive common API.
+
+=== Request URL
+
+/{PDM Server domain}/secure/common
+
+*HTTP Method：* GET
+
+=== Request Headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|Authorization |xref:authentication.adoc[Get token]
+|===
+
+=== Request Body
+
+[width="100%",cols="8%,3%,5%,8%,38%,38%",options="header",]
+|===
+|Name |Type |Required |Default value |Example |Description
+|userPolicy |Array |No |n/a |``__unitPolicy__'':``custom'',``dspdmUnits'':[``boAttrName'': ``X_COORDINATE'',``targetUnit'':``rad''] |*userPolicy* determine which unit system the query will apply to, there are three options and here is their description:``system'': There will no conversion occur, all data will be returned directly from storage, the unit is equivalent to the ones defined in metadata. ``user'': ``User'' means a series of user defined unit will be used to do the conversion. Which can be set in UI or set with API. The unit will be inherited in sequence of user unit settings, user current unit templates, unit template (is_default=true) and metadata ``custom'': ``custom'' means the targeting units will be set within the request containing in the parameter dspdmUnits. Will no conversion if no dspdmUnits parameters followed.
+| | | | | |
+| | | | | |
+|===
+
+'''''
+
+== Get Convertible Units
+
+Get the convertible units that can be converted to.
+
+=== Request URL
+
+/{PDM Server domain}/secure/unit/canConversionUnits?unitName=\{Source unit}&unitTypeName=\{source unit type}
+
+*HTTP Method：* GET
+
+=== Request Headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|Authorization |xref:authentication.adoc[Get token]
+|===
+
+=== Request Body
+
+[width="100%",cols="23%,7%,9%,15%,13%,33%",options="header",]
+|===
+|Name |Type |Required |Default value |Example |Description
+|\{Source Unit} |String |Yes |NA |e.g. ft |the source unit name
+|\{Source Type Name} |String |No | |e.g. length |the unit type of source unit
+| | | | | |
+|===
+
+=== Request Example
+
+....
+https://tiger4.dazlmkengdev01.landmarksoftware.cloud/services/qa-dspdmservice/msp/unit/canConversionUnits?unitName=ft&unitTypeName=length
+....
+
+=== Response Example
+
+[source, json]
+----
+{
+    "status": {
+        "statusCode": 1,
+        "statusLabel": "Success"
+    },
+    "messages": [],
+    "exception": {},
+    "data": {
+        "canConversionUnits": {
+            "totalRecords": 41,
+            "list": [
+                {
+                    "source": "OpenWorks",
+                    "remark": null,
+                    "unitId": 1139,
+                    "baseUnitTypeId": 43,
+                    "unitName": "1896India ft",
+                    "unitLabel": "1896India ft",
+                    "toBaseA": 0.0,
+                    "toBaseB": 0.304799735,
+                    "toBaseC": 1.0,
+                    "toBaseD": 0.0
+                },
+                {
+                    "source": "OpenWorks",
+                    "remark": null,
+                    "unitId": 1140,
+                    "baseUnitTypeId": 43,
+                    "unitName": "1959 ft",
+                    "unitLabel": "1959 ft",
+                    "toBaseA": 0.0,
+                    "toBaseB": 0.3048,
+                    "toBaseC": 1.0,
+                    "toBaseD": 0.0
+                }
+              ]
+              ]}}}
+----
+
+=== Response Body
+
+[width="100%",cols="19%,81%",options="header",]
+|===
+|Name |Description
+|source |source of the unit, now there are two type of sources, openWorks and PDM
+|remark |unit of description or remark
+|unit id |
+|baseUnitTypeId |Unit type id
+|unitName |Name of convertible unit
+|unitLabel |Label of convertible unit
+|===
+
+[width="9%",cols="<100%",options="header",]
+|===
+|## Get Available Units by Unit Type
+|## Add Unit Alias
+|#### Request URL \{PDM Server domain}/secure/unit/\{Unit}/\{Unit Alias}
+|*HTTP Method：* POST
+|#### Request Headers | Name | Value | |————–|——————| | Content-Type | application/json | | Authorization | link:../authentication[Get token] |
+|#### Request Example
+|| Name | Type | Required | Default value | Example | Description | | ———- | —— | ——– | ————- | ——— | ———– | | Unit | String | Yes | NA | e.g. ft | | | Unit Alias | String | Yes | NA | e.g. foot | | | | | | | | |
+|===
+
+== Delete Unit Alias
+
+=== Request URL
+
+/{PDM Server domain}/secure/unit/\{Unit}/\{Unit Alias}
+
+*HTTP Method：* DELETE
+
+=== Request Headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|Authorization |xref:authentication.adoc[Get token]
+|===
+
+=== Request Example
+
+Refer to the above API
+
+[appendix]
+==== Result code
+
+[cols=",",options="header",]
+|===
+|Code |Description
+|1 |Successfully Converted
+|-1 |The source unit is invalid
+|-2 |The target unit is invalid
+|-3 |Both source unit and target unit are invalid
+|-4 |The source unit and target unit are not in same unit category
+|===

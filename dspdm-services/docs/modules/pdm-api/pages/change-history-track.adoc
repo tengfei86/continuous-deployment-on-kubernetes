@@ -1,0 +1,94 @@
+= Change History Tracking
+
+Change history tracking feature is an added functionality to the existing services that can cause change to the existing records/metadata. Following are the features that are amended.
+
+* Save
+* Simple Import
+* Bulk Import
+* Delete
+
+The following attributes are being tracked for any change in the Database.
+
+* *Who* is the user who performed the operation.
+* *What* operation is performed by the user.
+* *When* the operation is performed by the user.
+* *How many* rows have been effected in result of the performed operation.
+* What was the *old* *value*.
+* What is the *new* *value*.
+* What is the *Business Object Name*.
+* What is the *Attribute Name* that is being updated or inserted.
+
+There are in total of 3 tables that holds/tracks the change history.
+
+[arabic]
+. r_business_object_opr
+. user_performed_opr
+. bus_obj_attr_change_history
+
+IMPORTANT:: r_business_object_opr is a system table and this is read only.
+
+* The below services can be used to get the supported business object operation against which the history has been tracked. (save, simple import, bulk import etc.).
+
+POST /common
+
+[source,json]
+----
+{
+    "boName": "R BUSINESS OBJECT OPR",
+    "language": "en",
+    "timezone": "GMT+08:00",
+    "readAllRecords": true
+}
+----
+
+* The below services can be used to get all of the user operation performed.
+
+[source,json]
+----
+{
+    "boName": "USER PERFORMED OPR",
+    "language": "en",
+    "timezone": "GMT+08:00",
+    "readAllRecords": true
+}
+----
+
+* The below service can be used to get change history to the attribute level. Like it will be giving the changed rows along with its boName, attribute name, old and changed value.
+
+[source,json]
+----
+{
+    "boName": "BUS OBJ ATTR CHANGE HISTORY",
+    "language": "en",
+    "timezone": "GMT+08:00",
+    "readAllRecords": true
+}
+----
+
+Following are the attribute/details that are being saved as in history
+
+* *Save*
+
+​ All newly created attributes are being tracked.
+
+* *Update*
+
+​ All updated attributes are being tracked along with its both old value and new value.
+
+* *Simple Import*
+
+​ Save/Update is called in import as well so it is handled as per the operation like for save, all newly created attributes are
+
+​ saved and in case of update, both old and new values are being tracked.
+
+* *Bulk Import [IMPORTANT]*
+
+​ In bulk import, there’s a change in request packet. This service is expecting an addition key ``operationName'':``bulk_import''
+
+​ in the request packet to identify the operation.
+
+​ Following the above, the track change history is handling the way either this is save or update.
+
+* *Delete*
+
+​ In this operation, all not null values that are being deleted are tracked with the old value.

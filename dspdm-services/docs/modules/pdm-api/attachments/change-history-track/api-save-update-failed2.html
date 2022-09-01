@@ -1,0 +1,63 @@
+<html>
+
+<head>
+
+</head>
+
+<body style="margin: 0 0 0 0;">
+    <iframe src="../resources/api.html" id="commonAPI" width="100%" height="100%" frameborder="0">
+    </iframe>
+    <script>
+        window.onload = function () {
+            let body =
+            {
+                "WELL": {
+                    "language": "en",
+                    "timezone": "GMT+05:00",
+                    "readBack": false,
+                    "clientTimezone": "GMT+08:00",
+                    "data": [
+                        {
+                            "type": "WELL",
+                            "id": 10843,
+                            "WELL_ID": 10843,
+                            "UWI": "UWI2020040804",
+                            "WELL_NAME": "WELL2020040804",
+                            "AREA_ID": 264,
+                            "AREA_NAME": "Spring City",
+                            "FIELD_ID": 258,
+                            "FIELD_NAME": "HAL-Texas West Field",
+                            "OFFSHORE_IND": false,
+                            "IS_ACTIVE": true,
+                            "WELL_OWNER": "Ting Li",
+                            "SPUD_DATE": "1994-01-14T00:00:00+05:00",
+                            "SPUD_DATE_TZ": "UTC+0:00",
+                            "R_TIMEZONE_ID": 273,
+                            "COMPLETION_DATE": "1994-04-14T00:00:00+05:00",
+                            "PRODUCTION_START_DATE": "1994-05-14T00:00:00+05:00",
+                            "X_COORDINATE": -103.4816,
+                            "Y_COORDINATE": 40.4309,
+                            "CRS_ID": 258,
+                            "CRS_NAME": "WGS 84",
+                            "PRODUCTION_METHOD_ID": 259,
+                            "PRODUCTION_METHOD": "ESP",
+                            "WELL_TYPE_ID": 258,
+                            "WELL_TYPE": "OIL",
+                            "CURRENT_STATUS_ID": 258,
+                            "R_WELL_STATUS_NAME": "Active",
+                            "DEEPEST_DEPTH": 6693,
+                            "DEEPEST_DEPTH_OUOM": "ft",
+                            "ROW_CHANGED_BY": "admin",
+                            "ROW_CHANGED_DATE": "2020-04-08T07:50:50+05:00",
+                            "ROW_CREATED_BY": "admin",
+                            "ROW_CREATED_DATE": "2020-04-08T07:50:50+05:00"
+                        }
+                    ]
+                }
+            }
+            document.getElementById("commonAPI").contentWindow.setSaveParams(JSON.stringify(body, null, "    "));
+        }
+    </script>
+</body>
+
+</html>

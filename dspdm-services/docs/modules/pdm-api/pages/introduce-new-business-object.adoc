@@ -1,0 +1,125 @@
+= Introduce New Business Object
+
+You can easily introduce entirely a new business object in the system by sending a post request as below. This will create a physical table in the database and it will also create its metadata as per its structure.
+
+Following are the conditions which should be met to introduce a new business object.
+
+[arabic]
+. As you are going to introduce a new business object in the system therefore the main request will be of type BUSINESS OBJECT.
+. Attribute BO_NAME has the value \{\{boName}}. \{\{boName}} is the placeholder for the new business object name which is going to be added to the system. The value can have space in it. This should be unique in the system. Although this field is case insensitive but it is preferred that you define it all letters with upper case.
+. BO_DISPLAY_NAME is the display name of the business object and can be in any case but should be used in camel case.
+. Value of the attribute ENTITY will be the name of the physical table in database and it should not have space in it and must meet all the criteria to create a table in database. It should also be unique and should be in upper case letters.
+. BO_DESC is the description field for this new business object. You can have some intro about this business object its purpose and its usages etc.
+. KEY_SEQ_NAME is the name of the database primary key generation sequence to be created along with this new business object table. This name should be unique in the system. As the standard you can prefix the table name with the SEQ_ to assign a sequence name. Whenever a new instance of this business object will be created then the new primary key will be generated using this sequence number next value call.
+. All Boolean fields are mandatory.
+. BUSINESS OBJECT ATTR contains attribute metadata.
+. There must be exactly one attribute with the primary key flag with value true and with data type integer.
+. All other attributes should have value for IS_PRIMARY_KEY to false.
+. Each attribute must have a unique sequence number starting from one.
+
+== 1. Request URL
+
+/{PDM Server domain}/metadata/write/introduceNewBusinessObjects
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Response Type
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|responseType |blob
+|===
+
+== 4. Request body
+
+[source,json]
+----
+
+ {
+    "BUSINESS OBJECT": {
+        "language": "en",
+        "timezone": "GMT+08:00",
+        "data": [
+            {
+                "BO_NAME": "{{boName}}",
+                "BO_DISPLAY_NAME": "{{boName}}",
+                "ENTITY": "{{boName}}",
+                "BO_DESC": "{{boName}}",
+                "KEY_SEQ_NAME": "SEQ_{{boName}}",
+                "IS_MASTER_DATA": true,
+                "IS_OPERATIONAL_TABLE": false,
+                "IS_RESULT_TABLE": false,
+                "IS_METADATA_TABLE": false,
+                "IS_REFERENCE_TABLE": false,
+                "IS_ACTIVE": true,
+                "children": {
+                    "BUSINESS OBJECT ATTR": {
+                        "language": "en",
+                        "timezone": "GMT+08:00",
+                        "data": [
+                            {
+                                "BO_ATTR_NAME": "{{boName}}_ID",
+                                "ATTRIBUTE": "{{boName}}_ID",
+                                "ATTRIBUTE_DISPLAYNAME": "{{boName}} ID",
+                                "ATTRIBUTE_DATATYPE": "integer",
+                                "SEQUENCE_NUM": 1,
+                                "IS_MANDATORY": true,
+                                "IS_PARTITIONED": false,
+                                "IS_UPLOAD_NEEDED": false,
+                                "IS_HIDDEN": true,
+                                "IS_REFERENCE_IND": false,
+                                "IS_UNIQUE": true,
+                                "IS_PRIMARY_KEY": true,
+                                "IS_ACTIVE": true,
+                                "IS_SORTABLE": true,
+                                "IS_INTERNAL": true
+                            },
+                            {
+                                "BO_ATTR_NAME": "{{boName}}_NAME",
+                                "ATTRIBUTE": "{{boName}}_NAME",
+                                "ATTRIBUTE_DISPLAYNAME": "{{boName}} Name",
+                                "ATTRIBUTE_DATATYPE": "Character Varying(50)",
+                                "SEQUENCE_NUM": 2,
+                                "IS_MANDATORY": true,
+                                "IS_PARTITIONED": false,
+                                "IS_UPLOAD_NEEDED": true,
+                                "IS_HIDDEN": false,
+                                "IS_REFERENCE_IND": false,
+                                "IS_UNIQUE": true,
+                                "IS_PRIMARY_KEY": false,
+                                "IS_ACTIVE": true,
+                                "IS_SORTABLE": true,
+                                "IS_INTERNAL": false
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/introduce-new-business-object/api-introduce-new-business-object.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+== 5. Responses
+
+When response.status = 200, It will response a `application/octet-stream' excel file.
+
+Otherwise, it will response json file, Please see xref:responses.adoc[Responses]

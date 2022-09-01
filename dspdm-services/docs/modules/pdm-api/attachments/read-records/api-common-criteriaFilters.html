@@ -1,0 +1,58 @@
+<html>
+
+<head>
+
+</head>
+
+<body style="margin: 0 0 0 0;">
+    <iframe src="../resources/api.html" id="commonAPI" width="100%" height="100%" frameborder="0">
+    </iframe>
+    <script>
+        window.onload = function () {
+            let body =
+            {
+                "boName": "WELL",
+                "language": "en",
+                "timezone": "GMT+05:00",
+                "criteriaFilters": [
+                    {
+                        "boAttrName": "WELL_TYPE",
+                        "operator": "EQUALS",
+                        "values": [
+                            "OIL"
+                        ]
+                    },
+                    {
+                        "boAttrName": "WELL_NAME",
+                        "operator": "LIKE",
+                        "values": [
+                            "CN"
+                        ]
+                    },
+                    {
+                        "boAttrName": "AREA_ID",
+                        "operator": "IN",
+                        "values": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5
+                        ]
+                    },
+                    {
+                        "boAttrName": "WELL_ID",
+                        "operator": "BETWEEN",
+                        "values": [
+                            1,
+                            10000
+                        ]
+                    }
+                ]
+            }
+            document.getElementById("commonAPI").contentWindow.setCommonParams(JSON.stringify(body, null, "    "));
+        }
+    </script>
+</body>
+
+</html>

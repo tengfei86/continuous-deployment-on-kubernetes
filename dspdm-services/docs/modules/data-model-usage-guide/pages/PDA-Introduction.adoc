@@ -1,0 +1,13 @@
+= Introduction
+
+For production decline analysis part, PDM mainly refers to PPDM standards, read Aries application to refer more data utilization use cases and comes out the design.
+
+As with any commodity being extracted from a container, the rate at which it comes out diminishes as it is being consumed. With oil and gas, this is usually because it is reservoir pressure which forces fluid to move from the reservoir to the wellbore, and as the fluid is produced the reservoir pressure is diminished.
+
+Decline analysis is a way of statistically analyzing production volumes which decrease with time and cumulative production under consistent operating practices, to arrive at a forecast which continues along this established trend to predict future performance. Eventually the forecasted production rate falls below a minimum threshold, and the well is assumed to be abandoned.
+
+This technique is usually considered the least ambiguous method of calculating remaining reserves, so long as a reasonable trend can be established, as it does not rely on assumptions about the reservoir itself. The production volumes required for the analysis are usually readily available from independent data vendors, based on volumes reported to regulatory agencies. It is therefore the easiest analysis to perform on a well or field in which you do not have access to propriety information.
+
+The decline curve analysis method by Arps (1945) has been a popular method for forecasting Estimated Ultimate Recovery (EUR) and reserves.
+
+In recent years, there are developed methods, such as Power Law Exponential Decline (PLE), Stretched Exponential Decline Model (SEPD) and Duong Model can predict future production rates for shale gas wells under transient flow.

@@ -1,0 +1,9 @@
+= Introduction
+
+image::Introduction.png[title="Flow model"]
+
+​ Image is from PetroWiki https://petrowiki.spe.org/
+
+Once oil and gas are located and well is successfully drilled and completed, the product must be transported to a facility where it can be produced or treated, stored, processed, refined, or transferred for eventual sale.
+
+The flow model is used to describe the flow connections for the product be transported from well to a facility, or facility to facility.

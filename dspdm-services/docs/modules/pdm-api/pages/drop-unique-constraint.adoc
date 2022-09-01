@@ -1,0 +1,96 @@
+= Drop Unique Constraint
+
+You can drop a unique constraint along with its unique constraint metadata and physical unique constraint from the system by sending the following request. Drop unique constraint will be equivalent to delete a unique constraint definition. Either you want to drop a simple unique constraint or a composite unique constraint the request will be same. Once you drop a unique constraint then you cannot recover it again but you can create it again with the add unique constraint request.
+
+Following are the conditions which should be met by the request to drop the unique constraint.
+
+[arabic]
+. Main request will be for `BUS OBJ ATTR UNIQ CONSTRAINTS' business object.
+. You can drop a unique constraint only by constraint name.
+. This constraint name must exist in the database and in the metadata.
+. For composite unique constraint you only need to specify the constraint name one and all the unique constraint metadata records for this composite unique constraint will be deleted together using a single request.
+. If the given unique constraint name does not exist then the response will be an error.
+. Constraint name is the database physical constraint name which can be seen from the database browser as well.
+. If the physical constraint does not exist in database then database will throw an error.
+
+== 1. Request URL
+
+/{PDM Server domain}/metadata/write/dropUniqueConstraints
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Response Type
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|responseType |blob
+|===
+
+== 4. Request body
+
+[source,json]
+----
+Drop Simple Unique Constraint Using Constraint Name Request
+
+{
+    "BUS OBJ ATTR UNIQ CONSTRAINTS": {
+        "language": "en",
+        "timezone": "GMT+08:00",
+        "data": [
+            {
+                "CONSTRAINT_NAME": "UNIQUE_{{boName}}_NAME"
+            }
+        ]
+    }
+}
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/drop-unique-constraint/api-1-drop-simple-unique-constraint.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+[source,json]
+----
+Drop Composite Unique Constraint Using Constraint Name Request
+
+{
+    "BUS OBJ ATTR UNIQ CONSTRAINTS": {
+        "language": "en",
+        "timezone": "GMT+08:00",
+        "data": [
+            {
+                "CONSTRAINT_NAME": "UNIQUE_{{boName}}_UWI_START_TIME"
+            }
+        ]
+    }
+}
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/drop-unique-constraint/api-2-drop-composite-unique-constraint.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+== 5. Responses
+
+When response.status = 200, It will response a `application/octet-stream' excel file.
+
+Otherwise, it will response json file, Please see xref:responses.adoc[Responses]

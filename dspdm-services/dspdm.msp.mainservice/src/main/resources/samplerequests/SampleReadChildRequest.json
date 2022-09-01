@@ -1,0 +1,22 @@
+{
+  "boName": "WELLBORE",
+  "language": "en",
+  "timezone": "GMT+05:00",
+  "readFirst": false,
+  "showSQLStats": true,
+  "readParentBO": [
+    "WELL"
+  ],
+  "readChildBO": [
+    {
+      "boName": "WELL COMPLETION",
+      "language": "en",
+      "timezone": "GMT+05:00",
+      "readFirst": false,
+      "showSQLStats": true,
+      "readParentBO": [
+        "WELLBORE"
+      ]
+    }
+  ]
+}

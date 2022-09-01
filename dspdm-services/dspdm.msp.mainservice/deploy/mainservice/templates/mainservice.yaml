@@ -1,0 +1,85 @@
+#This file has been generated using phoenix MSP version 3.0
+
+{{- if and (contains "web-app" .Values.app_type) (eq .Values.global.env.production true) }} 
+# disable authentication will be used id app_type is web-app and env is production
+{{ include "phoenix.disableauthentication" .}}
+---
+{{- end }}
+{{/*
+# This feature not available for relase-2.0. Work in Progress. 
+# Should not uncomment this block.
+---
+{{ include "phoenix.authorization" . }}
+*/}}
+{{/*
+# Uncomment this block to create a configmap from literal (key value pairs)
+# In Values.yaml,uncomment nodes under 'configmap.env' , remove {} and you can modfiy/add/delete provided key value pairs there.
+---
+{{ include "phoenix.configmapfromliteral" . }}
+*/}}
+
+{{/*
+# Uncomment below block to create a configmap from file (to load all config files to configmap)
+# copy your config files to config folder of this chart.
+# In Values.yaml, uncomment nodes under 'configmap.file', remove {} and should provide path and mountpath values.
+---
+{{ include "phoenix.configmapfromfile" . }}
+*/}}
+
+{{/*
+# Uncomment below block to create a secret from literal (key value pairs)
+# In values.yaml, uncomment nodes under 'secret.env', remove {} and you can modfiy/add/delete provided key value pairs there.
+---
+{{ include "phoenix.secretfromliteral" . }}
+*/}}
+
+{{/*
+# Uncomment below block to create a secret from file (to load files which contain username & password details to secret)
+# In Values.yaml, uncomment nodes under 'secret.file', remove {} and should provide path, mountpath and other values.
+---
+{{ include "phoenix.secretfromfile" . }}
+*/}}
+
+{{/*
+# Uncomment below block to create a efs volume
+# In Values.yaml, uncomment nodes under 'fileStorage', remove {} and should provide storage and mountpath values.
+---
+{{ include "phoenix.filestorageclaim" . }}
+*/}}
+
+{{/*
+# Uncomment below block to create a ebs volume
+# In Values.yaml, uncomment nodes under 'blockStorage', remove {} and should provide storage and mountpath values.
+---
+{{ include "phoenix.blockstorageclaim" . }}
+*/}}
+---
+{{ include "phoenix.service" . }}
+---
+{{ include "phoenix.deployment" . }}
+---
+{{ include "phoenix.virtualservice" . }}
+
+{{/*
+# Uncomment below block to create a servicemonitor resource.
+# In values.yaml, remove {} after servicemonitor and uncomment it's child nodes and provide values
+# Your service should implement a metrics endpointt
+---
+{{ include "phoenix.servicemonitor" . }}
+*/}}
+
+{{- if and (contains "web-app" .Values.app_type) (.Values.schema_image) }}
+# preinstallhook - to register keycloak client for your webapp
+---
+{{ include "phoenix.pre-install-job" . }}
+{{/*
+---
+# postinstallhook: provided and can be implemented for their webapp
+# uncomment if required to implemnet this hook 
+{{ include "phoenix.post-install-job" . }}
+*/}}
+# postdeletehook - to delete keycloak client for your webapp
+---
+{{ include "phoenix.post-delete-job" . }}
+{{- end }}
+

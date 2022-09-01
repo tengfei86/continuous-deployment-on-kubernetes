@@ -1,0 +1,374 @@
+= DecisionSpace® 365 Production Data Management
+
+*Your data-driven oilfield starts here.*
+
+DecisionSpace® 365 Production Data Management(short for PDM) lays the foundation for your oilfield to be data-driven. Answer new challenges, get ahead new uncertainties, and unleash the new generation’s potential. This is the production data management solution to help you thrive in the digital era.
+
+* *ONE TRUTH* – connect and integrate different databases, applications, and domains.
+* *EXTEND & SCALE* – Extensible, scalable, and adaptable to growing data volumes and new data types/sources.
+* *ADOPT FAST* – Application design that is fast to deploy, easy to maintain, and intuitive to operate.
+* *DO MORE* – Services to automate, customize, and simplify data management tasks.
+* *LEARN DEEP* - Calculation engines that can support deep learning, big data analytics, and machine learning.
+
+== Login
+
+Welcome to DecisionSpace® 365 Production Data Management!
+
+Now, let’s go to the PDM for your data management.
+
+This is the login page below, it is simple and easy to understand. Please enter your username and password, click *Sign in*, you will access to PDM page.
+
+image::login.PNG[title="Login"]
+
+For new users, we prepared a series brief learning to PDM. In this interface, you can select *Explore* or *Show tutorials*. If you are a experienced user, you can click *don’t show again* or close button to stop this dialogue box.
+
+image::login2.PNG[title="Home page"]
+
+*Explore*
+
+If you want a quick understand of what PDM can do, please select *Explore*.
+
+This will show some main features you may need to know in PDM, click left and right arrow to turn page one by one.
+
+image::Explore.PNG[title="Explore"]
+
+*Show tutorials*
+
+This will take you to Video Central of Halliburton, to show PDM learning videos.
+
+image::tutorials.PNG[tutorials]
+
+When you logged in PDM main page, on the left, you can start your data management.
+
+Let’s view them one by one.
+
+image::leftwf.PNG[title="Left Menu"]
+
+== Home
+
+The home page of PDM is used to facilitate navigation to other pages on the site by providing links of commonly used functionalities, and provide search box, along with filter conditions, which help user to quickly get and navigate the wells those user wants to monitor or analyze.
+
+The below image shows the home page. From this page, we can divide home page for four parts. They are Search engine, Links of functionalities, What’s new, Video Tutorials.
+
+Let’s go to following page for every part details.
+
+image:home%20full%20page.png[title="Home Page"]
+
+=== *Search engine*
+
+Users can locate content in search box for specific words,phrases or number, and find out the records they needed.
+
+*Find table name Data*
+
+This provides for selecting table name user want to search. In MVP 1.0 version, only well table is supported.
+
+image::search%20engine.PNG[title="search engine"]
+
+Click on the ``**Well**'', the pop out page shows the tables you can search.
+
+When you select a table name, the filter conditions will change according to the table.
+
+image::change%20search%20entity.PNG[title="change search entity"]
+
+More filters
+
+If the home page filter conditions not satisfy your search requirement, please click on the more filters, this will take you go to table page, you will see all filter conditions on the left, enter your filter, click *apply*, the result will show on the grid.
+
+image::search%20more.PNG[title="search more"]
+
+Show results on map
+
+This checkbox is used to show search results on GIS map.
+
+Search
+
+When you complete your settings, click *Search*, you will see the result.
+
+Let’s enter string ``opt'' for well table for example,
+
+Click Search and select check box ``Show results on map'', the following image show what you want.
+
+image::show%20well%20on%20map.PNG[title="show well on map"]
+
+=== Links of functionalities
+
+This part designed to put user commonly used functionalities. In this version, we put import data page and Jupyter for example.
+
+Through the links, user can enter into import data page and Jupyter page directly.
+
+Import Data
+
+Import Data used to provide a quickly button to import data into table.
+
+Click on *Go to Import*, the page will guide you to bulk import interface.
+
+image::import-home.PNG[title="import data"]
+
+In the bulk import interface, user can import data to multi-table.
+
+image::bulk%20import.PNG[title="bulk import"]
+
+Explore data with Jupyter Notebook
+
+This page used to provide a quickly button to Jupyter.
+
+Click on *Go to Jupyter*, the page will guide you to Jupyter interface.
+
+image::juypter-home.PNG[title="juypter home"]
+
+The Jupyter is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations and narrative text. Uses include: data cleaning and transformation, numerical simulation, statistical modeling, data visualization, machine learning, and much more.
+
+The purpose of Jupyter put here, we will provide user Be able to use PDM data in Jupyter, advanced queries, data analysis and so on.
+
+image::jupyter1.PNG[title="jupyter"]
+
+=== What’s new
+
+Provide user a brief list of new features and enhanced functionalities.
+
+Click *Read the full changelog*, link to MK document and get more information in details.
+
+image::what's%20new-home.PNG[title="what’s new-home"]
+
+=== Video Tutorials
+
+The video tutorials to assist users in learning how to use PDM product.
+
+You can select video on the list to play videos.
+
+image::video-home.PNG[title="video"]
+
+== Master Data
+
+Master data includes entities that are either static and/or rarely change over the life or the field. It includes:
+
+* Area
+* Field
+* Pool/Reservoir
+* Formation
+* Zone
+* Platform
+* Well, Wellbore, and Well Completion
+* Well Tubular
+* Network
+* Pipeline
+* Facilities
+* Equipment, including well equipment (tubular, pumps)
+* Business Associate
+
+While well and completions may change after workover, pumps may be switched, and network may be expanded, the frequency of the changes are nowhere near daily or monthly. The latter is categorized into operational data.
+
+Right now, the PDM have created 25 master tables. Expanding is in progress.
+
+[width="100%",cols="24%,76%",options="header",]
+|===
+|Table Name |Description
+|AREA |AREA: Describes geographic areas, such as country, province, district etc.
+|ASSET |ASSET:
+|BUSINESS_ASSOCIATE |BUSINESS ASSOCIATE: The Business Associate table serves as a validation/lookup table associating the code values for each business associate with their full name and information about company partners and other parties with whom business is conducted (e.g., oil companies, applicants, owners, contractors, operators, original operators, previous operators, etc.).
+|EQUIPMENT |EQUIPMENT: Use this table to describe pieces of equipment that are real. May be any kind of equipment, microscopes, gauges etc.
+|FACILITY |FACILITY: A collection of surface equipment and meters which facilitate the production, injection or disposition of products. This equipment supports any operation in the processing, development and transportation of products, such as pipeline, tank, battery etc.
+|FACILITY_EQUIPMENT |FACILITY EQUIPMENT: Generally, a facility is usually considered to be an object that exists somewhere on the earth (or under or over). In most systems, these facilities are given identifiers that indicate a PLACE on a network, and not a specific piece of equipment. This table can be used to keep track of which equipment is occupying that facility place at a given time. A single facility can thus be associated with many physical pieces of equipment over its life span.
+|FIELD |FIELD: A geographical area defined for administrative and legal purposes. The field name refers to the surface area, although at times it may refer to both the surface and the underground productive zones. In the United States a field is often an area consisting of a single reservoir or multiple reservoirs all grouped on, or related to, the same individual geological structural feature and/or stratigraphic condition. Fields are usually defined at a province/state level but possibly are done at the district level.
+|FORMATION |FORMATION: Represents a specific layer of reservoir rock through which fluids flow from a reservoir into a string of production tubing. This table can be used to prorate production from a production string back to individual formations.
+|NETWORK |NETWORK: A network system that conveys the individual-well production or that of a group of wells to a central system or terminal location.
+|NETWORK_NODE |NETWORK NODE: Network nodes are the physical pieces that make up the network. They usually include any device than both receives and then output the production.
+|NODE |NODE: This table is used to record the nodes information of networks, each record of the node will associate an entity (An entity could be a well, facility, equipment or a network)
+|PIPELINE |PIPELINE: A collection of information of pipelines. Oil pipelines are made from steel or plastic tubes which are usually buried. The oil is moved through the pipelines by pump stations along the pipeline. Natural gas (and similar gaseous fuels) are pressurized into liquids know as Natural Gas Liquids（NGLs).
+|PIPELINE_SEGMENT |PIPELINE SEGMENT: A collection of information of pipeline segments. A segment is defined as a section of pipeline within the pipeline system. A pipeline system is made up of one or more segments of pipeline or a group of pipelines.
+|PLATFORM |PLATFORM: An oil platform, offshore platform, or offshore drilling rig is a large structure with facilities for well drilling to explore, extract, store, and process petroleum and natural gas which lies in rock formations beneath the seabed. Many oil platforms will also contain facilities to accommodate their workforce. Once the exploratory drilling phase is over and geologists have determined that a petroleum reservoir is worth the massive expense, oil companies prepare to establish an offshore production platform. In this table, the production platform or pad is suggested.
+|SCENARIO |SCENARIO: A intelligible description of a possible situation, which is based on a complex series of influence factors
+|WELL |WELL: A well is the location on the surface of the earth or sea bed where the drill bit is planned to penetrate or does penetrate the earth to establish or rework a well. The well will be the same with `Well Origin' in PPDM.
+|WELL_COMPLETION |WELL COMPLETION: The Well Completion table identifies the completion activity in the wellbore. Since a wellbore may have multiple completions, the completion observation number uniquely identifies each occurrence.
+|WELL_DIR_SRVY |WELL DIRECTIONAL SURVEY: The Well Directional Survey table contains header information about directional surveys which have been performed on a wellbore. This downhole survey charts the degree of departure of the wellbore from vertical and the direction of departure. Since many directional surveys can be conducted on a wellbore, the survey number is included as part of the primary key to uniquely identify the survey.
+|WELL_EQUIPMENT |WELL EQUIPMENT: A collection of the equipment that installed at the well.
+|WELL_PERFORATION |WELL PERFORATION: The Well Perforations table contains detailed perforation activity performed on a well. This is the puncturing of a casing or liner which allows passage of fluid. A well completion may contain many well perforations.
+|WELL_TUBING_TALLY |WELL TUBING TALLY: A list containing details of tubulars that have been prepared for running, or that have been retrieved from the wellbore. Each tubing joint is numbered and the corresponding length and other pertinent details noted alongside.
+|WELL_TUBULAR |WELL TUBULAR: The Well Tubular table contains information on the tubulars for the well. The tubulars can be tubing, casing or liners which are run into the well. A tubing string is a continuous length of pipe used to connect the producing interval in the well to the flow line at the surface. A casing string is a continuous length of pipe used to protect the walls of the well and to assist in interval isolation when completing the well. The table identifies each tubular string used in a single drilling phase of the well. Liners are used to prevent sand from entering the wellbore.
+|WELL_ZONE |WELL ZONE: The WELL ZONE table contains the name of a zone described in a wellbore.
+|WELLBORE |WELLBORE: A Wellbore is a path of drilled footage, from Well Origin (top/start) to a terminating point (bottom/end).
+|ZONE |ZONE: The ZONE table contains the name of a zone described in a field or reservoir. A zone may be a regular or irregular belt, layer, band, or strip of earth materials disposed horizontally, vertically, concentrically or otherwise, and characterized as distinct from surrounding parts by some particular property or content.
+|===
+
+You can see master data structure in this page.
+
+xref:data-footprint:master-data.adoc[Master Data]
+
+
+image::master%20data.PNG[title="master data"]
+
+== Operational Data
+
+Operational data includes data that regularly and frequently change such as:
+
+* Production data
+* Well Activities – workover, recompletion, re-entry, etc.
+* Well History-Well status history and production method history.
+
+Production data is the key information that production engineers use as the basis for analysis, evaluation and optimization. It is the foundation data. Engineers needed to observe the production trend periodically, to better understand the reservoir flow character, and also to find the problems and opportunities to improve the ultimate recovery.
+
+Right now, the PDM have created 11 operational data tables. Expanding is in progress.
+
+[width="100%",cols="29%,71%",options="header",]
+|===
+|Table Name |Description
+|WELL_ACTIVITY |WELL ACTIVITY: Use this table to track all activities and events in a well or well bore, including daily operations, downtime, production, operational or milestone events. Time and depth of the activity may be tracked.
+|WELL_PROD_AGGREGATE |WELL PRODUCTION AGGREGATE: The production aggregate from real time data or other sources.
+|WELL_PROD_CYCLE |WELL CYCLE PRODUCTION: The Cycle production for the CSS(Cycle Steam Stimulation) wells and CWI(Cycle Water Injection) Wells.
+|WELL_PROD_METHOD_HISTORY |WELL PRODUCTION METHOD HISTORY: Contains an historical account of the production method of the well.
+|WELL_STATUS_HISTORY |WELL STATUS HISTORY: Contains an historical account of the status of the well.
+|WELL_TEST |WELL TEST: The Well Test table contains descriptive information concerning a test date ,test type, and other general data. These tests are used as an evaluation tool to help determine the potential of the reservoir or well.
+|WELL_TEST_FLOW |WELL TEST FLOW: The Well Test Flow table provides information about the flow of material recovered at the surface. It also describes pressure associated with surface recoveries during each well test period.
+|WELL_TEST_PUMP |WELL TEST PUMP: The Well test pump table provides information about the measurement of the pump, such as intake pressure/temperature, discharge pressure/temperature etc..
+|WELL_VOL_DAILY |WELL VOL DAILY: The periodically measured data, including production, injection, and pressure, temperature etc..
+|WELL_VOL_DAILY_PLAN |WELL VOL DAILY PLAN: The production targets of the wells.
+|WELL_VOL_MONTHLY |WELL VOL MONTHLY: The statistical data monthly , including average production, injection, average, maximum and minimum pressure, temperature etc..
+|===
+
+You can see operational data structure in this page.
+
+xref:data-footprint:operational-data.adoc[Operational Data]
+
+image::operational%20data.PNG[title="operational data"]
+
+== Reference Data
+
+Reference data are data that define the set of permissible values to be used by other data fields. Reference data gain in value when they are widely reused and widely referenced. Typically, they do not change overly much in terms of definition, apart from occasional.
+
+Right now, the PDM have created 55 reference data tables. Expanding data is in progress.
+
+[width="100%",cols="28%,72%",options="header",]
+|===
+|Table Name |Description
+|R_PERFORATION_METHOD |REFERENCE PERFORATION METHOD: Code identifying the type of opening the fluid entered through into the tubing (e.g., perforation, open hole, combination, etc.).
+|R_PERFORATION_TYPE |REFERENCE PERFORATION TYPE: A reference table identifying the type of perforation method. For example bullet, jet or combination.
+|R_ASSET_TYPE |REFERENCE ASSET TYPE: The type of the asset.
+|R_FLUID_TYPE |REFERENCE FLUID TYPE: A reference table identifying the type of fluids or substances produced by a well or used for various operations. For example oil, gas, mud or water.
+|R_EQUIPMENT_CATALOGUE |REFERENCE EQUIPMENT CATALOGUE: Use this table to list and describe the kinds of equipment that you need.
+|R_EQUIPMENT_TYPE |REFERENCE EQUIPMENT TYPE: Use this table to list the types of equipment
+|R_EQUIPMENT_SUB_TYPE |REFERENCE EQUIPMENT SUB TYPE: Use this table to list the sub types of equipment
+|R_EQUIPMENT_SPEC |REFERENCE EQUIPMENT SPECIFICATION: Use this table to record all the specifications measured for equipment.
+|R_DATA_TYPE |REFERENCE DATA TYPE: Use this table to record data type that PDM application supports.
+|R_FACILITY_TYPE |REFERENCE FACILITY TYPE: A reference table identifying the codes classifying the facility according to its physical equipment or principal service performed. The facility type should be unique in this table.
+|R_EQUIP_INSTALL_LOC |REFERENCE EQUIPMENT INSTALLATION TYPE: Indicates where this type of equipment would normally be used, such as on the drilling assembly, in the well bore, on well site, on rig, in processing facility.
+|CARTOREFERENCESYSTEM |COORDINATE REFERENCE SYSTEM: a coordinate reference system (CRS) refers to the way in which spatial data that represent the earth’s surface (which is round / 3 dimensional) are flattened so that you can ``Draw'' them on a 2-dimensional surface. For example WGS 84, UTM.
+|R_AREA_LEVEL |REFERENCE AREA LEVEL: A reference table identifying the level of area such as area, organization, province, country, state, etc.
+|R_BA_TYPE |REFERENCE BUSINESS ASSOCIATE TYPE: The type of business associate. Usual reference values include COMPANY, PERSON, REGULATORY, SOCIETY, ASSOCIATION. Use the BA CATEGORY to further categories this information.
+|R_ANALYZIS_PROPERTY |
+|R_BA_CATEGORY |REFERENCE BUSINESS ASSOCIATE CATEGORY: The category that the business associate is in. For a company, may be legal company, sole proprietorship, corporation etc.
+|R_AREA_BASIN |
+|R_ACTIVITY_TYPE |REFERENCE ACTIVITY Type: A reference table identifying the type of activity that caused the movement of fluids to occur such as production, injection, flaring, sales, etc.
+|R_BIT_TYPE |
+|R_DOWNTIME_TYPE |REFERENCE WELL DOWNTIME TYPE: The type of downtime experienced during a well operation or event. Downtime types may include downtime, constrained production, deferred production. Added to allow some granularity of describing downtime events without having to overload the event type table.
+|R_COMPLETION_TYPE |REFERENCE COMPLETION TYPE: The type or method of well completion. For example perforation, open hole, gravel pack or combination.
+|R_COUPLING_TYPE |REFERENCE COUPLING TYPE: A short length of pipe used to connect two joints of casing. A casing coupling has internal threads (female threadform) machined to match the external threads (male threadform) of the long joints of casing. The two joints of casingare threaded into opposite ends of the casing coupling. Synonyms: casing collar (Schlumberger Oilfield Glossary).
+|R_EVENT_CATEGORY |REFERENCE EVENT CATEGORY: Indicates where this type of event category would normally be used, such as acid, fracture, Change pump, well maintenance etc. And if there are sub type needed, such as acid fracture, which belongs to fracture, the r_event_sub_category table can be used.
+|R_EVENT_SUB_CATEGORY |REFERENCE EVENT SUB CATEGORY: Indicates where this type of sub event category would normally be used, such as acid fracture, which belongs to fracture.
+|R_FAILURE_REASON |
+|R_FAILURE_TYPE |
+|R_GROUP_CATEGORY |
+|R_FIELD_TYPE |REFERENCE FIELD TYPE: A reference table identifying the type of field. For example regulatory or locally assigned.
+|R_MENU_LIST |
+|R_MEASUREMENT_GROUP |
+|R_NETWORK_TYPE |REFERENCE NETWORK TYPE: The network types. And the network type should be unique in this table.
+|R_NODE_TYPE |REFERENCE NODE TYPE: The network types. And the network type should be unique in this table.
+|R_NORTH_TYPE |REFERENCE NORTH TYPE: The North reference used to define AZIMUTH angular measurement values stored in WELL_DIR_SRVY_STATION for this Directional Survey (UWI, SURVEY_ID, SOURCE). For example, True North, Grid North, Magnetic North, etc.
+|R_PERMISSION_TYPE |
+|R_PIPELINE_TYPE |REFERENCE PIPELINE TYPE: A reference table identifying the codes classifying the pipeline. The pipeline type should be unique in this table.
+|R_PIPELINE_MATERIAL |REFERENCE PIPELINE MATERIAL: The material that a pipeline is constructed from, such as 24 pound steel etc.
+|R_PIPELINE_SEGMENT_TYPE |REFERENCE PIPELINE SEGMENT TYPE: The type of the pipe in this section. The types can be Line Pipe, Choke, Coated, Flexible, Fitting etc.
+|R_PLATFORM_TYPE |REFERENCE PLATFORM TYPE: This reference table describes a type of drilling platform or pad. For example, fixed platform, compliant tower, tension leg, or onshore pad.
+|R_POOL_STATUS |REFERENCE POOL STATUS: A reference table identifying the operational or legal status of the pool.
+|R_POOL_TYPE |REFERENCE POOL TYPE: A reference table identifying the type of pool.
+|R_FILE_GROUP_SOURCE |
+|R_PRODUCT_CLASS |
+|R_PRODUCTION_METHOD |REFERENCE PRODUCTION METHOD: This reference table identifies the method of production. For example swabbing, flowing, pumping or gas lift.
+|R_SOURCE |REFERENCE SOURCE: A reference table identifying the individual, company, state or government agency that provided information. For example Digitech, Dwights, PetroData, Petroleum Information or API.
+|R_TIMEZONE |REFERENCE TIMEZONE: a valid list of time zones.
+|R_WELL_CLASS |REFERENCE WELL CLASS: This reference table describes the classification of a well. This may include, but is not restricted to the Lahee classification scheme. For example development, new field wildcat or outpost.
+|R_WELL_LEVEL_TYPE |REFERENCE WELL LEVEL TYPE: Indicates which well component this row describes, as outlined in www.WhatIsAWell.org. Values may include WELL, WELL ORIGIN, WELLBORE, WELLBORE SEGMENT, WELLBORE COMPLETION or WELLBORE CONTACT INTERVAL
+|R_WELL_STATUS |REFERENCE WELL STATUS: This reference table defines the status of the well.
+|R_WELL_DATUM_TYPE |REFERENCE WELL DATUM TYPE: A reference table identifying the type of point or horizontal surface used as an elevation reference for measurements in a well. Examples: Kelly bushing, ground, sea level
+|R_WELL_TEST_TYPE |REFERENCE WELL TEST TYPE: Identifies the general type of test used to evaluate the potential of the well. For example, Flow Test, Drill Stem Tests (DST), Repeat Formation Tests (RFT), Initial Potential(IP).
+|R_TUBULAR_TYPE |REFERENCE TUBULAR TYPE: The particular type of tubular. For example, Conductor, Surface Casing, Intermediate Casing, Production Casing, Tubing, Liner etc.
+|R_WELL_TYPE |REFERENCE WELL TYPE: This reference table describes the types of a well. This may include, but is not restricted to the types of a well commonly based on Ministry of Natural Resource and Forestry, such as OIL, Natural Gas, Oil and gas well, Injection, Historical Injection, Natural gas storage, Disposal.
+|R_ENTITY_TYPE |ENTITY TYPE REFERENCE: The entity type that is described of this row. Such as Well, Field, Area, Facility, Equipment that is commonly defined as entity in oil and gas industry.
+|R_SCENARIO_TYPE |SCENARIO TYPE REFERENCE: The type that is used to describe the type.Such as Base Scenario, Alternate Scenario.
+|R PERIOD TYPE |
+|===
+
+You can see reference data structure in this page.
+
+xref:data-footprint:reference-data.adoc[Reference Data]
+
+image::reference%20data.PNG[title="reference data"]
+
+== Area/Organization Data
+
+The first part of this page shows a tree of area hierarchy, which describes geographic areas, such as country, province, district, etc. The data from master data of Area.
+
+The second part of this page shows a tree of organization hierarchy, which describes organizations in oil/gas field. The data from business associate.
+
+image::organization%20data.PNG[title="organization data"]
+
+== Jupyter
+
+The Jupyter is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations and narrative text. Uses include: data cleaning and transformation, numerical simulation, statistical modeling, data visualization, machine learning, and much more.
+
+The purpose of Jupyter put here, we will provide user Be able to use PDM data in Jupyter, advanced queries, data analysis and so on.
+
+image::jupyter.PNG[title="jupyter"]
+
+== Admin Panel
+
+PDM user need to create by admin, so,only admin can see this page.
+
+Admin add new user on the lest page showing below. Enter the Username, click *Add User*, the page will take you to set password and role for this user.
+
+image::admin%20panel.PNG[title="admin panel"]
+
+Select the user we just created, on the right of this page, admin will set password and role for this user.
+
+The roles have different level permissions to data operations.
+
+PDM has four default roles:
+
+*Admin:* Admin can change settings for other users, add user, delete user. Only admin can assign roles/permissions, also create customized roles/permissions and assign it to users.
+
+Admin has full permissions to data management. The data management include data operations: Such as Delete, Import, Bulk Import, Add, Modify, Save….
+
+Admin has full permissions to access all pages.
+
+*Data Manager:* Can not make change for other users. This role has complete data management and page access.
+
+*Data Operator:* Can not make change for other users. This role has complete data management.
+
+*Member:* Can not make change for other users. This role can only owns review and search, basic access data, cannot change data.
+
+image:add%20new%20user.PNG[title="Add new user"]
+
+== Give feedback
+
+If you have questions, suggestions, please click *Give feedback* on the top of the page, the product owner will see your feedback and email address, and give you response.
+
+image::feedback.PNG[title="feedback"]
+
+== Log out
+
+If you want to quit or switch to another user name, please click on the *Log out* on the right-top page.
+
+== Favorites
+
+This used to give a short cut to save your commonly visited pages. Click on the pentagram before favorites, this page can be accessed by drop down list in favorites.
+
+== Recents
+
+This used to record your recently visited pages. Click on the *Recents*, in drop down list, you can access the page.
+
+== Settings
+
+PDM API service has integrated DSIS unit service, whenever importing data into database, or change unit in the user interface, PDM API service will do the unit conversion for user.
+
+There are two sets of global unit system, they are US Oil Field and SPE Preferred Metric.
+
+image::set.PNG[title="setting"]

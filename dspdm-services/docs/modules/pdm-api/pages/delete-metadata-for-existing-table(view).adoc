@@ -1,0 +1,86 @@
+= Delete Metadata for existing Table(View)
+
+You can delete reverse engineered metadata from the system by sending the following request. This will delete business object definition along with its related resources (like its children, relationship etc).
+
+Once you delete the metadata, then you cannot recover it.
+
+Following are the conditions which should be met to delete the metadata.
+
+[arabic]
+. As you are going to drop a business object (delete the metadata) from the system therefore the main request will be of type BUSINESS OBJECT.
+. Attribute BO_NAME has the value \{\{boName}}. \{\{boName}} is the placeholder for the existing business object name which is going to be dropped from the system.
+
+== 1. Request URL
+
+/{PDM Server domain}link:/metadata/write/DeleteMeta
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Request body
+
+[example]
+====
+[source,json]
+----
+{
+    "BUSINESS OBJECT": {
+        "language": "en",
+        "readBack": true,
+        "timezone": "GMT+08:00",
+        "showSQLStats": true,
+        "data": [
+            {
+                "BO_NAME": "{{boName}}"
+            }
+        ]
+    }
+}
+----
+====
+'''
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="_attachments/delete-metadata-for-existing-table(view)/api-delete-metadata.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+== 4. Responses
+
+[example]
+====
+[source,json]
+----
+{
+    "status": {
+        "statusCode": 1,
+        "statusLabel": "Success"
+    },
+    "messages": [
+        {
+            "message": "1 business objects(s) metadata deleted successfully.",
+            "status": {
+                "statusCode": 1,
+                "statusLabel": "Success"
+            }
+        }
+    ],
+    "exception": {},
+    "data": {},
+    "version": "0.0.0.0A",
+    "threadName": "**system_52184",
+    "requestTime": "2021-06-01 13:03:56.325 +08:00",
+    "responseTime": "2021-06-01 13:03:57.053 +08:00"
+}
+----
+====

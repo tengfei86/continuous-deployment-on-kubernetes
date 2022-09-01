@@ -1,0 +1,34 @@
+<html>
+
+<head>
+
+</head>
+
+<body style="margin: 0 0 0 0;">
+    <iframe src="../resources/api.html" id="generateMetadata" width="100%" height="100%" frameborder="0">
+    </iframe>
+    <script>
+        window.onload = function () {
+            let body =
+{
+    "BUSINESS OBJECT": {
+        "language": "en",
+        "readBack": true,
+        "timezone": "GMT+08:00",
+        "showSQLStats": true,
+        "data": [
+            {
+                "BO_NAME": "WELL COPY",
+                "BO_DISPLAY_NAME": "Well Copy",
+                "ENTITY": "WELL_COPY",
+                "BO_DESC": "Copy of WELL"
+            }
+        ]
+    }
+} 
+    document.getElementById("generateMetadata").contentWindow.setGenerateMetadata(JSON.stringify(body, null, "    "));
+        }
+    </script>
+</body>
+
+</html>

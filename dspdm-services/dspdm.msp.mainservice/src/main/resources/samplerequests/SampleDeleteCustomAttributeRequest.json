@@ -1,0 +1,13 @@
+{
+  "BUSINESS OBJECT ATTR": {
+    "language": "en",
+    "readBack": false,
+    "timezone": "GMT+08:00",
+    "data": [
+      {
+        "BO_NAME" : "WELL",
+        "BO_ATTR_NAME" : "TEST"
+      }
+    ]
+  }
+}

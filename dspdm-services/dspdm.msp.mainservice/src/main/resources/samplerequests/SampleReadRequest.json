@@ -1,0 +1,217 @@
+// Comments: Following is the json read post request body. These are in form of key value pairs.
+// All keys are case sensitive and fixed.
+// Values for keys has specific format
+// language is required and it is case sensitive and only en value is supported for now
+// timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+// Values for keys boName and boAttrName are case insensitive
+// Values for key boName are pre-defined in metadata table BUSINESS_OBJECT
+// Values for key boAttrName are also pre-defined in metadata table BUSINESS_OBJECT_ATTR
+// Normally criteria filters with IN and NOT_IN operator cannot have more than 256 values.
+// This limit of 256 values at max is imposed by SQL databases itself.
+// But API supports more than 256 values for maximum one criteria filter at the main business object level.
+// Simple join and dynamic join criteria filters can have only 256 values at max when they use IN or NOT_IN operators.
+// API will throw an error if you provide more than one criteria filter having more than 256 values with IN or NOT_IN operators
+{
+  "boName": "AREA TYPE",
+  // required
+  "language": "en",
+  // required
+  "timezone": "GMT+05:00",
+  // required 
+  // unit conversion unitPolicy has three options: 
+  "unitPolicy":"custom",
+  //1.system: get the source units from business_object_attr table unit field, there is no unit conversion. 
+  //2.user: 
+  //  2.1 get the source units from business_object_attr table unit field,
+  //  2.2 get the target units 
+  //	  2.2.1 from user_unit_settings  
+  //      2.2.2 if 2.2.2 can't get units , then from unit_template_details associates user_current_unit_templates
+  //	  2.2.3 if 2.2.3 can't get units , then from unit_template_details associates unit_template_templates where is_default is true 
+  // 	  2.2.4 if 2.2.3 can't get units , target units return null ,there is no unit conversion .
+  //3.custom: 
+  //  3.1 get the source units come from business_object_attribute table unit field . 
+  //  3.2 get the target units come from dspdmUnits node
+  //when unitPolicy is custom , the dspdmUnits are the target units by fields.
+  "dspdmUnits":[ 
+    { 
+      "boAttrName":"{bo_attr_name}", 
+      //corresponds to a field in thisself selectList that contains unit 
+      "targetUnit":"{unit}" 
+      //target unit
+    } 
+  ],    
+  "selectList": [
+    // optional and default is * means all the columns defined in metadata will be selected
+    "ENTITY",
+    "BO_NAME",
+    "ENTITY_DISPLAY_NAME"
+  ],
+  "aggregateSelectList": [
+    {
+      // optional and default is the selectList or * means all the columns defined in metadata will be selected
+      // you can use aggregate function MIN, MAX, SUM, AVG and Count to read the data
+      // Note : If you use aggregateSelectList and not using selectList then only aggregateSelectList columns
+      // will be selected and no select * will be applied anywhere.
+      // Note : If you use aggregateSelectList along with the selectList then all the columns of the selectList
+      // will automatically be added to the SQL Group By clause by the service and result will be a group by result on on aggregate columns
+      "boAttrName": "WELL_ID", // mandatory
+      "aggregateFunction": "MAX", // mandatory
+      "alias": "MAX_WELL_ID" // mandatory and will be used to get back the value from the response
+    },
+    {
+      "boAttrName": "WELL_ID",
+      "aggregateFunction": "MIN",
+      "alias": "MIN_WELL_ID"
+    }
+  ],
+  "criteriaFilters": [
+    // optional and if multiple criteria are provided they will be concatenated with AND SQL operator
+    // operator key and value both are case sensitive
+    // SUPPORTED OPERATORS are as follows
+    // EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN, GREATER_OR_EQUALS, LESS_OR_EQUALS, BETWEEN, NOT_BETWEEN, IN, NOT_IN, LIKE, NOT_LIKE, ILIKE, NOT_ILIKE, JSONB_FIND_EXACT, JSONB_FIND_LIKE, JSONB_DOT, JSONB_DOT_FOR_TEXT
+    {
+      "boAttrName": "IS_REFERENCE_IND",
+      "operator": "EQUALS",
+      "values": [
+        "Y"
+      ]
+    },
+    {
+      "boAttrName": "UWI",
+      "operator": "LIKE",
+      "values": [
+        "UWI-12345"
+      ]
+    },
+    {
+      "boAttrName": "WELL_ID",
+      "operator": "IN",
+      "values": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "boAttrName": "WELL ID",
+      "operator": "BETWEEN",
+      "values": [
+        21,
+        29
+      ]
+    }
+  ],
+  "havingFilters": [
+    // optional and if multiple having criteria are provided they will be concatenated  with AND SQL operator
+    // Having filters are apllied to the grouped data after grouping on the data has been done
+    // whereas normal criteria filters work before grouping and they work on the raw data and become part of where clause
+    // Having filters should only be used to do some filtering on the basis of some aggregate functions.
+    // If you do not have to use any aggregate function in having filter then please use criteria filter
+    // operator key and value both are case sensitive
+    // SUPPORTED aggregateFunction are MIN, MAX, SUM, AVG, COUNT
+    // SUPPORTED OPERATORS are as follows
+    // EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN, GREATER_OR_EQUALS, LESS_OR_EQUALS, BETWEEN, NOT_BETWEEN, IN, NOT_IN, LIKE, NOT_LIKE, ILIKE, NOT_ILIKE
+    {
+      "aggregateColumn": {
+        "boAttrName": "WELL_ID", // mandatory
+        "aggregateFunction": "MAX" // mandatory
+      },
+      "operator": "LESS_THAN", // mandatory
+      "values": [ // mandatory
+        "2000"
+      ]
+    },
+    {
+      "aggregateColumn": {
+        "boAttrName": "WELL_ID",
+        "aggregateFunction": "MIN"
+      },
+      "operator": "GREATER_THAN",
+      "values": [
+        "1000"
+      ]
+    }
+  ],
+  "orderBy": [
+    // optional
+    {
+      "boAttrName": "UWI",
+      "order": "ASC"
+      // optional and default to ASC
+    },
+    {
+      "boAttrName": "SPUD DATE",
+      "order": "DESC"
+      // optional and default to ASC
+    }
+  ],
+  "pagination": {
+    "recordsPerPage": 30,
+    // optional and defualt to 500
+    "pages": [
+      1,
+      2
+    ]
+    // optional and defualt to 1
+  },
+  "readBack": "true",
+  // optional and defualts to false. It will tell the service to read back the updated/inserted records and provide it back in same call
+  "readUnique": "true",
+  // optional and defaults to false. If set to true and the database has more than one record then service will throw error
+  "readFirst": "true",
+  // optional and defaults to false. If set to true then exactly one record will be read. Can have zero records found
+  "readMetadata": "false",
+  // optional and defaults to false. If set to true then response will include the metadata for the given BO_NAME only
+  "readMetadataConstraints": "false",
+  // optional and defaults to false. If set to true then response will include the metadata unique constraints for the given BO_NAME only
+  "readReferenceData": "false",
+  // optional and defaults to false. If set to true then response will include the total records count for the given BO Name and filters
+  "readRecordsCount": "false",
+  // optional and defaults to false. If set to true then distinct will be applied to the SQL SELECT LIST and also to the count if selected
+  "readWithDistinct": "false",
+  // optional and defaults to false. If set to true then you will be able to read 10000 records at max in one query.
+  "readAllRecords": "false",
+  // Optional and defaults to null. If set to true then only uploadAttributes required.
+  "isUploadNeeded": "null",
+  // optional and defaults to null. If provided an array of BO names then it will read the parent records along with the child record inside child for which the parent BO name is provided
+  "readParentBO": [
+    "R WELL LEVEL TYPE",
+    "R WELL STATUS",
+    "FIELD"
+  ],
+  // optional and defaults to null. If provided an array of BOQuery then it will read the child records along with the parent record
+  "readChildBO": [
+    {
+      "boName": "WELLBORE",
+      "language": "en",
+      "timezone": "GMT+05:00",
+      "pagination": {
+        "recordsPerPage": 30,
+        "pages": [
+          1
+        ]
+      }
+    }
+  ],
+  // optional and defaults to false. If set to true then the printed json response will include the properties having null values.(keep true on parse/bulk parse Api)
+  "writeNullValues": false,
+  // showSQLStats is optional and defaults to false. If set to true then the printed json response will include the list of sql statements executed for this request along with the count and time taken
+  "showSQLStats": true,
+  // collectSQLScript is optional and defaults to 0(zero). Possible values are from zero to eleven. No means no sql script to collect and 11 mains all sql script to collect in response.
+  // Following are the possible values
+  // 0: No SQL Script At All (Default))
+  //   1: COUNT Only)
+  // 2: SELECT ONLY)
+  // 3: SELECT and COUNT)
+  // 4: INSERT Only)
+  // 5: UPDATE Only)
+  // 6: DELETE Only)
+  // 7: INSERT and UPDATE Only)
+  // 8: ALL DML Operations Only)
+  // 9: ALL DDL Operations Only)
+  // 10: ALL DDL and DML Operations Only)
+  // 11: ALL SQL Operations)
+  "collectSQLScript": 11
+}

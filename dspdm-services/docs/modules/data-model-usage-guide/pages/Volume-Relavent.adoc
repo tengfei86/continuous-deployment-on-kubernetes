@@ -1,0 +1,149 @@
+= Volume Relevant
+
+== Reporting Entity
+
+A reporting entity refers to a physical, organizational, or geographic ``thing'' that production data is reported against. In PDM, the reporting entity includes field, formation, zone, well, wellbore, completion, and facility.
+
+image::Reporting%20Entity.png[title="Reporting Entity"]
+
+A reporting entity takes on the identity of an object whose full description is stored elsewhere in the model. For example, when the associated object ID is a well ID, and the reporting entity kind is well, the well description data can be found in well table.
+
+== Reporting Period
+
+There is information/report that is collected/calculated periodically or continuously by field operators, automated systems, or engineers. A volume report need show the inventory changes for fluids and volumes in a month or other period.
+
+The period kind maybe day, month, year, year to date, month to date etc.
+
+== Product Volume Flow Kind
+
+In general, the fluids are produced, processed, consumed, sold, disposed, or distributed.
+
+There are several flow kinds needs to support, such as
+
+* Production
+
+** Production
+** Injection
+
+* Inventory
+
+** Opening Inventory
+** Closing Inventory
+** Production Dispositions
+** Flared
+** Sold
+** Used on-site
+** Vented
+** Disposal
+** Lost or stolen
+** Fuel
+** Buyback-fuel
+** Other
+
+* Movement in or out of an asset
+
+** Terminal Lifting
+** Transfer
+
+* Deferred Production
+
+== Product Fluid Kind
+
+Product is such as oil, water, or gas which has their properties. There are product fluid or service fluid two categories. Both of them have their subordinate kind, which is an enumerated list of common fluid types, e.g., ``Oil-gross'' or ``dry gas'' for product fluid, and e.g., ``emulsifier'' or ``methanol'' for service fluid. Whenever the volume is reported, the fluid kind should be specified as a necessary element.
+
+Examples:
+
+* Product fluid
+
+** Condensate
+** Gas-dry
+** Gas-rich
+** Gas-wet
+** Oil-gross
+** Oil-net
+** Oil and gas
+** ……
+
+Service fluid
+
+* Diesel
+* Emulsifier
+* Hydraulic control fluid
+* Polymer
+* Scale inhibitor
+* ……
+
+== Quantity Method
+
+There are volumes based on different methods, such as allowable volume, forecast data, estimated data, measured data or other types of volumetric data. Differentiating the types of method is indicated by quantity method.
+
+Examples:
+
+* Allocated
+* Allowed
+* Estimated
+* Target
+* Measured
+* Budget
+* Constraint
+* Forecast
+* ……
+
+Ø *Allowed Volume*
+
+Allowed Volume is the maximum volume allowed for the primary product during the reporting period. The government regulatory may assign a maximum allowable production rate or monthly volume to a well or a production string. This ``allowable'' volume is calculated to prevent damage to the reservoir and/or to ensure fair treatment of all well owners in a pool or field.
+
+Ø *Allocation Volume*
+
+Some jurisdictions (e.g., Texas) do not require volume reporting for each well or completion interval, if there are multiple wells in a lease. The production from several wells is measured and reported at the entry into a battery, storage facility or pipeline (surface commingling) without measurement of the separate streams. The aggerate volume may be reported on several levels, such as production platform, lease, unit or field.
+
+Where volumes are only available as aggregates, allocation is a process to estimate and assign appropriate values to each contributing entity.
+
+== Amend Sequence Number
+
+All the historical data must be retained. User should never overwrite or delete previously reported production volumes. All changes are recorded as amendments with associated date and descriptive information.
+
+Amend Sequence Number is mandatory in Product_Volume_Summary table, to ensure that amended volumes are captured as new data and do not overwrite the existing data. An amend reason to explain why the volume was amended. The reasons (e.g., Calibration, Volume balancing, Calculation error) are entered in ``R_Amend_Reason'' reference table.
+
+Even if the amendment fixes a data entry error, you must create a new row of data. Never overwrite a volume!
+
+== Temperature and Pressure
+
+For volume, density and flowrate, the pressure and temperature conditions have a profound impact on the value of the measurement. Users can choose the datum pressure and temperature from a list of standards organization’s reference conditions, also, the condition is extensible, allowing for local measurement condition standards to be used.
+
+For example:
+
+* 60°F(15.56°C), 1atm(14.696psi), this standard is almost universally used in the oil and gas industry.
+* Gas companies in Europe, Australia and South America use 15°C (59°F) and 101.325 KPa (14.696 psi) as standard gas temperatures and pressures.
+
+​ ——From https://baike.baidu.com/
+
+== Scenario
+
+A scenario describes a possible future. Scenario analysis is the process of estimating the expected value after a given period, assuming specific changes in the values of key factors take place. Business can use scenario analysis to analyze the potential financial outcomes of certain decisions.
+
+Besides the historical volume, the possible volume of the future can be stored in ``Product_Volume_Summary'', and through ``Scenario_id'' to get the scenario information.
+
+== Disposition Category
+
+Disposition categories define how each disposition behaves regarding theoretical and allocated production calculation and recalculation. There is a fixed list of disposition categories, with each category subtracting(negative), adding(positive) or remaining neutral towards production.
+
+* *Positive Category*
+
+Such as disposal, fuel, sales, shrinkage, these dispositions deal with situations where a volume leaves the system, as such when calculating the production, these volumes have to be accounted for by adding them to production.
+
+* *Negative Category*
+
+Such as transfer in, gas lift, production, these deal with situations where volume is introduced into the system, since these volumes do not originate at the wells/completions, they have to be discounted when recalculating production after allocations.
+
+* *Neutral Category*
+
+In System Transfer: Has a positive and negative side and is not used in the recalculation of production.
+
+Gas Lift-Recycled: This is meant for 1 to 1 gas lift cases where a well produces the gas which is then used for the gas lift process. As such this is also neutral since no additional volumes have to be accounted for.
+
+Inventory: Added to both recalculated and theoretical production, but the inventory for the prior day/month is subtracted from both theoretical and allocated production.
+
+== Allocation Factors
+
+The allocation process is based on volume measurements, well tests, fluid sample analysis and ownership share. This factor describes the fraction of fluid in the source flow that is allocated to this product stream. The factors are recorded in RPEN_ALLOCATION_FACTOR table, showing each ``from'' RPEN and ``to'' RPEN and the allocation factor used in each calculation.

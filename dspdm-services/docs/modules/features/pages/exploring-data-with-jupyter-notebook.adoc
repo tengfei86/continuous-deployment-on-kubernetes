@@ -1,0 +1,309 @@
+= Exploring Data With Jupyter Notebook
+
+== JupyterHub Server Setup
+
+== Prerequisites
+
+Before installing JupyterHub, you will need:
+
+* a Linux/Unix based system
+* https://www.python.org/downloads/[Python] 3.5 or greater. An understanding of using https://pip.pypa.io/en/stable/[`pip`] or https://conda.io/docs/get-started.html[`conda`] for installing Python packages is helpful.
+* https://www.npmjs.com/[nodejs/npm]. https://docs.npmjs.com/getting-started/installing-node[Install nodejs/npm], using your operating system’s package manager.
+** If you are using *`conda`*, the nodejs and npm dependencies will be installed for you by conda.
+** If you are using *`pip`*, install a recent version of https://docs.npmjs.com/getting-started/installing-node[nodejs/npm]. For example, install it on Linux (Debian/Ubuntu) using:
+
+[source,bash]
+----
+    sudo apt-get install npm nodejs-legacy
+----
+
+[source,bash]
+----
+The `nodejs-legacy` package installs the `node` executable and is currently
+required for npm to work on Debian/Ubuntu.
+----
+
+* TLS certificate and key for HTTPS communication
+* Domain name
+
+== Installation
+
+JupyterHub can be installed with `pip` (and the proxy with `npm`) or `conda`:
+
+*pip, npm:*
+
+[source,bash]
+----
+python3 -m pip install jupyterhub
+npm install -g configurable-http-proxy
+python3 -m pip install notebook  # needed if running the notebook servers locally
+----
+
+*conda* (one command installs jupyterhub and proxy):
+
+[source,bash]
+----
+conda install -c conda-forge jupyterhub  # installs jupyterhub and proxy
+conda install notebook  # needed if running the notebook servers locally
+----
+
+Test your installation. If installed, these commands should return the packages’ help contents:
+
+[source,bash]
+----
+jupyterhub -h
+configurable-http-proxy -h
+----
+
+== Start the Hub server
+
+To start the Hub server, run the command:
+
+[source,bash]
+----
+jupyterhub
+----
+
+....
+Visit `https://localhost:8000` in your browser, and sign in with your unix
+credentials.
+
+To **allow multiple users to sign in** to the Hub server, you must start
+`jupyterhub` as a *privileged user*, such as root:
+
+​```bash
+sudo jupyterhub
+....
+
+== Configuration
+
+On startup, JupyterHub will look by default for a configuration file, `jupyterhub_config.py`, in the current working directory.
+
+To generate a default config file, `jupyterhub_config.py`:
+
+[source,bash]
+----
+jupyterhub --generate-config
+----
+
+This default `jupyterhub_config.py` file contains comments and guidance for all configuration variables and their default values. We recommend storing configuration files in the standard UNIX filesystem location, i.e. `/etc/jupyterhub`.
+
+== Start with a specific config file
+
+You can load a specific config file and start JupyterHub using:
+
+[source,bash]
+----
+jupyterhub -f /path/to/jupyterhub_config.py
+----
+
+....
+If you have stored your configuration file in the recommended UNIX filesystem
+location, `/etc/jupyterhub`, the following command will start JupyterHub using
+the configuration file:
+
+​```bash
+jupyterhub -f /etc/jupyterhub/jupyterhub_config.py
+....
+
+== Create PyPi package for PDM365
+
+Follow official pypi guide, https://packaging.python.org/tutorials/packaging-projects/[link]
+
+== PDM365 Python demo explained
+
+I have uploaded demo pypi to our git repository [link](## JupyterHub Server Setup
+
+== Prerequisites
+
+Before installing JupyterHub, you will need:
+
+* a Linux/Unix based system
+* https://www.python.org/downloads/[Python] 3.5 or greater. An understanding of using https://pip.pypa.io/en/stable/[`pip`] or https://conda.io/docs/get-started.html[`conda`] for installing Python packages is helpful.
+* https://www.npmjs.com/[nodejs/npm]. https://docs.npmjs.com/getting-started/installing-node[Install nodejs/npm], using your operating system’s package manager.
+** If you are using *`conda`*, the nodejs and npm dependencies will be installed for you by conda.
+** If you are using *`pip`*, install a recent version of https://docs.npmjs.com/getting-started/installing-node[nodejs/npm]. For example, install it on Linux (Debian/Ubuntu) using:
+
+[source,bash]
+----
+    sudo apt-get install npm nodejs-legacy
+----
+
+....
+The `nodejs-legacy` package installs the `node` executable and is currently
+required for npm to work on Debian/Ubuntu.
+....
+
+* TLS certificate and key for HTTPS communication
+* Domain name
+
+== Installation
+
+JupyterHub can be installed with `pip` (and the proxy with `npm`) or `conda`:
+
+*pip, npm:*
+
+[source,bash]
+----
+python3 -m pip install jupyterhub
+npm install -g configurable-http-proxy
+python3 -m pip install notebook  # needed if running the notebook servers locally
+----
+
+*conda* (one command installs jupyterhub and proxy):
+
+[source,bash]
+----
+conda install -c conda-forge jupyterhub  # installs jupyterhub and proxy
+conda install notebook  # needed if running the notebook servers locally
+----
+
+Test your installation. If installed, these commands should return the packages’ help contents:
+
+[source,bash]
+----
+jupyterhub -h
+configurable-http-proxy -h
+----
+
+=== Start the Hub server
+
+To start the Hub server, run the command:
+
+[source,bash]
+----
+jupyterhub
+----
+
+....
+Visit `https://localhost:8000` in your browser, and sign in with your unix
+credentials.
+
+To **allow multiple users to sign in** to the Hub server, you must start
+`jupyterhub` as a *privileged user*, such as root:
+
+​```bash
+sudo jupyterhub
+....
+
+== Configuration
+
+On startup, JupyterHub will look by default for a configuration file, `jupyterhub_config.py`, in the current working directory.
+
+To generate a default config file, `jupyterhub_config.py`:
+
+[source,bash]
+----
+jupyterhub --generate-config
+----
+
+This default `jupyterhub_config.py` file contains comments and guidance for all configuration variables and their default values. We recommend storing configuration files in the standard UNIX filesystem location, i.e. `/etc/jupyterhub`.
+
+== Start with a specific config file
+
+You can load a specific config file and start JupyterHub using:
+
+[source,bash]
+----
+jupyterhub -f /path/to/jupyterhub_config.py
+----
+
+....
+If you have stored your configuration file in the recommended UNIX filesystem
+location, `/etc/jupyterhub`, the following command will start JupyterHub using
+the configuration file:
+
+​```bash
+jupyterhub -f /etc/jupyterhub/jupyterhub_config.py
+....
+
+== Create PyPi package for PDM365
+
+Follow official pypi guide, here is https://git.openearth.community/dspdm/pydspdm[link]
+
+API part:
+
+[source,python]
+----
+import requests
+import json
+
+// not relevent here
+def main():
+    """Entry point for the application script"""
+    print("Call your main application code here")
+
+// this will called requests package to send a POST request to our PDM365 service and get data
+def getData(boname,headers,data):
+    url = "http://10.134.192.116:8081/dspdm/rest/common/"
+    response = requests.request("POST", url,headers= headers, json=data)
+    return json.loads(response.text)["data"][boname]["list"]
+----
+
+Utility part:
+
+[source,python]
+----
+// not relevent here
+def main():
+    """Entry point for the application script"""
+    print("Call your main application code here")
+
+// basic function to calculater well count for specific condition
+def filterWellEqual(well,filter,condition):
+    output_well = [x for x in well if (filter in x and x[filter] == condition )]
+    # count all well retrieved from API
+    print("total well count:" , len(well))
+    # count well which is actived
+    print("filtered well count:" , len(output_well))
+    return output_well
+----
+
+=== Usage:
+
+to use this package, first you need to use Jupyter’s *magic* word
+
+[source,python]
+----
+import sys
+!{sys.executable} -m pip install pydspdm --upgrade
+----
+
+this will install pydspdm package from pypi repository, you may need restart your Jupyter service to get the package worked.
+
+[source,python]
+----
+// import API
+import dspdmapi as api
+print("package loaded")
+// call getData function with POST parameter
+well = api.getData("WELL",{"content-type":"application/json","accept": "application/json"},{"boName": "WELL",
+  "language": "en","timezone":"GMT+08:00","readAllRecords":"true"})
+// print result
+print(str(len(well))+" entries has been read")
+----
+
+code above should how to use demo API to get data. It uses REST API, so you can read the documentation for front-end developer for reference.
+
+[source,python]
+----
+import dspdmutil
+print("package loaded")
+output_well = dspdmutil.filterWellEqual(well,"R_WELL_STATUS_NAME", "Active")
+----
+
+this code will calculate well count which ``R_WELL_STATUS_NAME'' was set to ``Active''
+
+[source,python]
+----
+import matplotlib.pyplot as plt
+labels = 'active', 'nonactive'
+sizes = [len(output_well), (len(well)-len(output_well))]
+explode = (0, 0.1)  # only "explode" the 2nd slice (i.e. 'Hogs')
+fig1, ax1 = plt.subplots()
+ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',shadow=True, startangle=90)
+ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+plt.show()
+----
+
+this part show how to call matplotlib to visualize your result , for more information you should visit official document https://matplotlib.org/3.1.1/tutorials/introductory/usage.html[here]

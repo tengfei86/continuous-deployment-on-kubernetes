@@ -1,0 +1,27 @@
+{
+  "name": "DSPDM-docs",
+  "version": "1.0",
+  "description": "Production Data Management Documentation",
+  "scripts": {
+    "build:local": "dotenv -- antora --generator --stacktrace antora-site-generator-lunr ./sre-doc-local.yml",
+    "build:remote": "dotenv -- antora --generator antora-site-generator-lunr --fetch ./sre-doc-remote.yml",
+    "start": "http-server \"build/site\" -o -c-1"
+  },
+  "keywords": [
+    "antora",
+    "asciidoc"
+  ],
+  "author": "PDM Team",
+  "license": "ISC",
+  "dependencies": {
+    "@antora/cli": "^2.3.0",
+    "@antora/site-generator-default": "^2.3.0",
+    "@webframework/docs-ui-oec": "^1.5.1",
+    "antora-site-generator-lunr": "^0.5.0",
+    "asciidoctor": "^2.1.1",
+    "asciidoctor-kroki": "^0.7.0",
+    "dotenv-cli": "^3.2.0",
+    "http-server": "^0.12.3",
+    "mkdirp": "^1.0.4"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "WELL": {
+    "language": "en",
+    "timezone": "GMT+08:00",
+    "readBack": true,
+    "unitRow": 2,
+    "offset": 0,
+    "limit": 5,
+    "dspdmUnits": [
+      {
+        "boAttrName": "DEEPEST_DEPTH",
+        "targetUnit": "ft"
+      },
+      {
+        "boAttrName": "X_COORDINATE",
+        "targetUnit": "dega"
+      },
+      {
+        "boAttrName": "Y_COORDINATE",
+        "targetUnit": "dega"
+      }
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+= Drop Existing Business Object
+
+You can drop a business object along with its all business object data, metadata, physical table and its sequence from the system by sending the following request. Drop business object will be equivalent to delete a business object definition along with its related resources.
+
+Once you drop an existing business object then you cannot recover its data, metadata and its physical table structure.
+
+Following are the conditions which should be met to introduce a new business object.
+
+[arabic]
+. As you are going to drop a business object from the system therefore the main request will be of type BUSINESS OBJECT.
+. Attribute BO_NAME has the value \{\{boName}}. \{\{boName}} is the placeholder for the existing business object name which is going to be dropped from the system.
+
+== 1. Request URL
+
+/{PDM Server domain}/metadata/write/dropBusinessObjects
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Response Type
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|responseType |blob
+|===
+
+== 4. Request Body
+
+[source,json]
+----
+
+ {
+    "BUSINESS OBJECT": {
+        "language": "en",
+        "readBack": false,
+        "timezone": "GMT+08:00",
+        "showSQLStats": true,
+        "data": [
+            {
+                "BO_NAME": "{{boName}}"
+            }
+        ]
+    }
+}
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/drop-existing-business-object/api-drop-existing-business-object.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+== 5. Responses
+
+When response.status = 200, It will response a `application/octet-stream' excel file.
+
+Otherwise, it will response json file, Please see xref:responses.adoc[Responses]

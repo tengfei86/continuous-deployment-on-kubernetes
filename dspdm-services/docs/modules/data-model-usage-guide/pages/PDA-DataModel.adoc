@@ -1,0 +1,24 @@
+= PDA Data Model
+
+== Decline Analysis ERD
+
+image::Decline%20Analysis.png[title="Decline Analysis ERD"]
+
+== Decline Analysis Tables Description
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|*Table* |*Description*
+|xref:Data-Dictionary.adoc#prod_decline_forecast[PROD_DECLINE_FORECAST] |This table contains the information of an entire forecast. such as what entity forecast for, a well, pool, zone, or completion. what scenario it is belonging to, and what method is used. Effective/Expiry date for each forecast to clarify when this forecast is valid, and not valid.
+|xref:Data-Dictionary.adoc#prod_decline_segment[PROD_DECLINE_SEGMENT] |This table holds the individual segment parameter sets, along with the summary data for each segment.
+|xref:Data-Dictionary.adoc#prod_decline_method_parm[PROD_DECLINE_METHOD_PARM] |Use this table to capture the parameter settings for specific forecast segment.
+|xref:Data-Dictionary.adoc#r_decline_method[R_DECLINE_METHOD] |The method of decline curve analysis that is used in decline curve forecast. Such as Arps, Duong, SEPD, Power Law, Modified Arps, Customized.
+|xref:Data-Dictionary.adoc#r_decline_curve_type[R_DECLINE_CURVE_TYPE] |The type of decline curve that is used in decline curve forecast calculations such as exponential, harmonic, hyperbolic, linear, etc.
+|xref:Data-Dictionary.adoc#r_decline_type[R_DECLINE_TYPE] |The type of decline that is used in decline curve forecast calculations such as nominal or effective percentage.
+|xref:Data-Dictionary.adoc#r_ratio_curve_type[R_RATIO_CURVE_TYPE] |The type of ratio curve that is used in decline curve forecast calculations such as linear, semi-log, log-log, etc.
+|xref:Data-Dictionary.adoc#r_ratio_fluid_type[R_RATIO_FLUID_TYPE] |The type of ratio fluid that is used in decline curve forecast calculations for GOR, YIELD, etc.
+|xref:Data-Dictionary.adoc#r_decline_parm[R_DECLINE_PARM] |Use this table to capture the parameters for any decline analysis method. This table may list a variety of parameter settings for each method, an actual analysis study method will use multiple parameters.
+|xref:Data-Dictionary.adoc#prod_decline_forecast_class[PROD_DECLINE_FORECAST_CLASS] |This table contains classification information for forecast, such as status and authorized state.
+|xref:Data-Dictionary.adoc#r_forecast_class[R_FORECAST_CLASS] |These classes may define the lifecycles states of the forecast (proposed, current, deprecated), the authorized state of the forecast (official, unofficial), the intent of the forecast (2005 budget, project proposal etc.) as well as other classification schemes.
+|xref:Data-Dictionary.adoc#r_forecast_class_type[R_FORECAST_CLASS_TYPE] |This table defines the classification schemes that can be defined for and applied to forecasts.
+|===

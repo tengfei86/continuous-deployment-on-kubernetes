@@ -1,0 +1,34 @@
+{
+  "WELL": {
+    "language": "en",
+    "timezone": "GMT+08:00",
+    "readBack": true,
+    "showSQLStats": true,
+    "offset": 2,
+    "limit": 10,
+    "writeNullValues": false,
+    "joinAlias": "a",
+    "simpleJoins": [
+      {
+        "joinAlias": "b",
+        "joinType": "INNER",
+        "boName": "WELLBORE"
+      }
+    ],
+    "unitRow": 2,
+    "dspdmUnits": [
+      {
+        "boAttrName": "DEEPEST_DEPTH",
+        "targetUnit": "m"
+      },
+      {
+        "boAttrName": "X_COORDINATE",
+        "targetUnit": "dega"
+      },
+      {
+        "boAttrName": "drill_td",
+        "targetUnit": "ft"
+      }
+    ]
+  }
+}

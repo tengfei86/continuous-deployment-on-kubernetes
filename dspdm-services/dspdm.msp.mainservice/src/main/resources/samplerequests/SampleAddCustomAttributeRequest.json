@@ -1,0 +1,15 @@
+{
+  "BUSINESS OBJECT ATTR": {
+    "language": "en",
+    "readBack": true,
+    "timezone": "GMT+08:00",
+    "data": [
+      {
+        "BO_NAME" : "WELL",
+        "ATTRIBUTE_DISPLAYNAME" : "TEST",
+        "ATTRIBUTE_DATATYPE" : "character varying(50)",
+        "UNIT_ATTRIBUTE_DISPLAYNAME" : "TEST_UNIT"
+      }
+    ]
+  }
+}

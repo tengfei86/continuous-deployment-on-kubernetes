@@ -1,0 +1,13 @@
+= Introduction
+
+A ``well test'' is simply a period of time during which the production of the well is measured, either at the well head with portable well test equipment, or in a production facility.
+
+Most well tests consist of changing the rate and observing the change in pressure caused by this change in rate. To perform a well test successfully one must be able to measure the time, the rate, the pressure, and control the rate.
+
+The well itself will need to be tested, both as it is brought into production and regularly throughout its life. Accurate testing and competent reading of the results can help improve efficiency and provide vital information for managing your operation. Each test is used for a specific purpose (ex: production allocation). From https://greasebook.com/blog/testing-wells-oil-gas-production/
+
+In PDM’s latest data base, the production flow well tests (production flow test and injection flow test) are included. These tests carry attributes related to test validation for production allocation. These are expected not to have transient test data but only to report steady state flow conditions.
+
+In a production flow test, the well is flowed through a test separator or a multiphase flow meter. An average measured rate is reported along with wellhead and bottom hole pressure values. In theory, flow stability and pseudo-steady state should be achieved during this flow test.
+
+The production flow test is used to determine the normal daily production of a well. It is run periodically, and record is kept tracking the amount over a long term.

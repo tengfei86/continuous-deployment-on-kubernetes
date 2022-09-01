@@ -1,0 +1,121 @@
+= Search Data for All Business object
+
+API provides search features, include search with exact match and search with like match.
+
+== 1. Request URL
+
+/{PDM Server domain}/searchAll
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Request body
+
+=== 3.1 Parameters
+
+[width="100%",cols="13%,9%,5%,9%,22%,42%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |WELL/SEARCH_JSONB |Name of business object to be saved.
+|language |string |yes | |en |Language of the success and error messages.
+|timezone |string |yes | |GMT+05:00 |Timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+|criteriaFilters |object array |no | | |Where conditions
+|boAttrName |string |yes | |WELL_ID |· Values for keys boAttrName are case insensitive · Values for key boAttrName are also pre-defined in metadata table BUSINESS_OBJECT_ATTR
+|orderBy |object array |no | |DESC |
+|readAllRecords |bool |no |FALSE |TRUE |If set to true then you will be able to read 10000 records at max in one query.
+|operator |string |yes | |JSONB_FIND_EXACT/JSONB_FIND_LIKE |Use JSONB_FIND_EXACT for exact search and JSONB_FIND_LIKE for like search
+|SEARCH_JSONB |object array |yes | | |The actual well data without keys. This should have Json array which contains well entries. (This is for searching the particular data for given business object).
+|===
+
+=== 3.2 All acceptable/possible time formats
+
+____
+All acceptable/possible date only and timestamp and time only formats which can be parsed by the API.
+
+Following is the list of all possible supported parse-able patterns. We start parsing from a more detail pattern and if not matched then we try to match a less detailed pattern till end.
+
+If no match is found then API will throw an error.
+____
+
+[source,java]
+----
+TIME_ONLY_FORMAT("HH:mm:ss")
+TIME_ONLY_FORMAT_WITH_MILLIS("HH:mm:ss.SSS")
+// HYPHEN BASED DATE FORMATS
+DATE_ONLY_FORMAT("yyyy-MM-dd")
+DATETIME_FORMAT_WITHOUT_SECONDS("yyyy-MM-dd'T'HH:mm")
+DATETIME_FORMAT_WITH_T("yyyy-MM-dd'T'HH:mm:ss")
+DATETIME_FORMAT("yyyy-MM-dd HH:mm:ss")
+DATETIME_FORMAT_WITH_TIMEZONE("yyyy-MM-dd HH:mm:ssX")
+TIMESTAMP_FORMAT_WITHOUT_TIMEZONE("yyyy-MM-dd HH:mm:ss.SSS")
+TIMESTAMP_FORMAT_WITH_TIMEZONE("yyyy-MM-dd HH:mm:ss.SSSX")
+TIMESTAMP_ISO_FORMAT_UTC("yyyy-MM-dd'T'HH:mm:ss'Z'")
+TIMESTAMP_ISO_FORMAT_WITH_MILLIS_UTC("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+TIMESTAMP_ISO_FORMAT_WITH_TIMEZONE("yyyy-MM-dd'T'HH:mm:ssX")
+TIMESTAMP_ISO_FORMAT_WITH_TIMEZONE_AND_MILLIS("yyyy-MM-dd'T'HH:mm:ss.SSSX")
+// SLASH BASED DATE FORMATS
+DATE_ONLY_SLASH_FORMAT("yyyy/MM/dd")
+DATETIME_SLASH_FORMAT_WITHOUT_SECONDS("yyyy/MM/dd'T'HH:mm")
+DATETIME_SLASH_FORMAT_WITH_T("yyyy-MM-dd'T'HH:mm:ss")
+DATETIME_SLASH_FORMAT("yyyy/MM/dd HH:mm:ss")
+DATETIME_SLASH_FORMAT_WITH_TIMEZONE("yyyy/MM/dd HH:mm:ssX")
+TIMESTAMP_SLASH_FORMAT_WITHOUT_TIMEZONE("yyy/MM/dd HH:mm:ss.SSS")
+TIMESTAMP_SLASH_FORMAT_WITH_TIMEZONE("yyy/MM/dd HH:mm:ss.SSSX")
+TIMESTAMP_ISO_SLASH_FORMAT_UTC("yyy/MM/dd'T'HH:mm:ss'Z'")
+TIMESTAMP_ISO_SLASH_FORMAT_WITH_MILLIS_UTC("yyy/MM/dd'T'HH:mm:ss.SSS'Z'")
+TIMESTAMP_ISO_SLASH_FORMAT_WITH_TIMEZONE("yyy/MM/dd'T'HH:mm:ssX")
+TIMESTAMP_ISO_SLASH_FORMAT_WITH_TIMEZONE_AND_MILLIS("yyy/MM/dd'T'HH:mm:ss.SSSX")
+----
+
+=== 3.3 Request Examples
+
+____
+In this request, keyword is being searched in all business objects without mentioning any column name to where we need to filter these criteria.
+____
+
+[source,json]
+----
+{
+    "language": "en",
+    "timezone": "GMT+08:00",
+    "writeNullValues": false,
+    "criteriaFilters": [
+        {
+            "boAttrName": "SEARCH_JSONB",
+            "operator": "JSONB_FIND_EXACT",
+            "values": [
+                {{KEYWORD}}
+            ]
+        }
+    ]
+}
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself for Exact match criteria</font>
+</summary>
+<iframe src="./_attachments/search-all-business-objects/api-search-all-business-object-exact.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself for Like match criteria</font>
+</summary>
+<iframe src="./_attachments/search-all-business-objects/api-search-all-business-object-like.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+== 4. Responses
+
+Please see xref:responses.adoc[Responses]

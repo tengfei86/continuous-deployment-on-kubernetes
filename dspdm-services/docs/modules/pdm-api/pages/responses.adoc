@@ -1,0 +1,106 @@
+= Responses
+
+== Parameters
+
+[width="100%",cols="46%,9%,45%",options="header",]
+|===
+|Name |Type |Description
+|*status* |object |_mandatory even in success case and it is a global status code_
+| |int |please see link:#Codes[*Codes*]
+| |string |please see link:#Codes[*Codes*]
+|*messages* |object array |_mandatory with at least one message even for success. It can have multiple messages including error/info/success etc_
+| |string |
+| |object |
+| |int |please see link:#Codes[*Codes*]
+| |string |please see link:#Codes[*Codes*]
+|*data* |object |return datas
+| |int |_only invoked and comes if count end point is used for request to call the service_
+| |string |_optional and mandatory for success read case_
+| |int |_total number of records in the database table according to the given filters criteria_
+| |object array |_list of 30 (at max) objects where 30 is the page size given in request_
+|*exception* |object |exception information
+| |string |_optional_
+| |object array |_technical exception stack trace and not to display to user just for dev/admin_
+|*version* |string |API version
+|*threadName* |string |thread name
+|*requestTime* |string |API request time
+|*responseTime* |string |API response time
+|===
+
+== [#Codes]#Codes#
+
+[cols=",,",options="header",]
+|===
+|HTTP Code |statusCode |description
+|200 |*0* |*INFO*
+|200 |*1* |*SUCCESS*
+|200 |*2* |*PARTIAL_SUCCESS*
+|500 |*-1* |*WARNING*
+|500 |*-2* |*ERROR*
+|500 |*-3* |*FATAL*
+|500 |*-4* |*SESSION_TIMEOUT*
+|===
+
+.200 OK Response:
+[example]
+====
+[source,json]
+----
+{
+  "status": {
+    "statusCode": 1,
+    "statusLabel": "Success"
+  },
+  "messages": [],
+  "exception": {},
+  "data": {
+    "well": {
+      "totalRecords": 20,
+      "list": [
+        ...
+      ]
+    }
+  },
+  "version": "0.0.0.0A",
+  "threadName": "**unknown_98969",
+  "requestTime": "2020-06-05 08:20:54.511 +05:00",
+  "responseTime": "2020-06-05 08:20:54.530 +05:00"
+}
+----
+====
+
+.500 Internal Server Error Response sample
+[example]
+====
+[source,json]
+----
+{
+  "status": {
+    "statusCode": -2,
+    "statusLabel": "Error"
+  },
+  "messages": [
+    {
+      "message": "Business Object 'hello' is unknown.",
+      "status": {
+        "statusCode": -2,
+        "statusLabel": "Error"
+      }
+    }
+  ],
+  "exception": {
+    "message": "Business Object 'hello' is unknown.",
+    "stackTrace": "com.lgc.dspdm.core.common.exception.DSPDMException: Business Object 'hello' is unknown..."
+  },
+  "data": {},
+  "version": "0.0.0.0A",
+  "threadName": "**unknown_44362",
+  "requestTime": "2020-06-05 10:03:21.302 +05:00",
+  "responseTime": "2020-06-05 10:03:21.304 +05:00"
+}
+----
+====
+
+=== 400 Bad Request
+
+When request is not forwarded to API, server will thrown this code, and it will throw a specific exception.

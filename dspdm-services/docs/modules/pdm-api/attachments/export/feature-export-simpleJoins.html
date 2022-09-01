@@ -1,0 +1,105 @@
+<html>
+
+<head>
+
+</head>
+
+<body style="margin: 0 0 0 0;">
+	<iframe src="../resources/api.html" id="commonAPI" width="100%" height="100%" frameborder="0">
+	</iframe>
+	<script>
+		window.onload = function () {
+			let body =
+			{
+				"boName": "WELL",
+				"language": "en",
+				"timezone": "GMT+05:00",
+				"joinAlias": "a",
+				"selectList": [
+					"WELL_ID",
+					"WELL_NAME",
+					"AREA_NAME",
+					"UWI"
+				],
+				"criteriaFilters": [
+					{
+						"boAttrName": "WELL_TYPE",
+						"operator": "NOT_EQUALS",
+						"values": [
+							"OIL"
+						]
+					}
+				],
+				"pagination": {
+					"recordsPerPage": 30,
+					"pages": [
+						1
+					]
+				},
+				"aggregateSelectList": [
+					{
+						"boAttrName": "WELL_ID",
+						"aggregateFunction": "MAX",
+						"alias": "MAX_WELL_ID"
+					},
+					{
+						"boAttrName": "WELL_ID",
+						"aggregateFunction": "MIN",
+						"alias": "MIN_WELL_ID"
+					}
+				],
+				"havingFilters": [
+					{
+						"aggregateColumn": {
+							"boAttrName": "SPUD_DATE",
+							"aggregateFunction": "MAX"
+						},
+						"operator": "LESS_THAN",
+						"values": [
+							"2019-01-01 00:00:00+05:00"
+						]
+					}
+				],
+				"simpleJoins": [
+					{
+						"boName": "WELLBORE",
+						"joinType": "INNER",
+						"joinAlias": "b",
+						"selectList": [
+							"WELLBORE_ID",
+							"WELLBORE_NAME"
+						],
+						"joiningConditions": [
+							{
+								"leftSide": {
+									"joinAlias": "a",
+									"boAttrName": "UWI"
+								},
+								"operator": "EQUALS",
+								"rightSide": {
+									"joinAlias": "b",
+									"boAttrName": "WELL_UWI"
+								}
+							}
+						]
+					}
+				],
+				"orderBy": [
+					{
+						"boAttrName": "UWI",
+						"order": "ASC"
+					},
+					{
+						"boAttrName": "WELL_NAME",
+						"order": "DESC"
+					}
+				],
+				"prependAlias": false,
+				"showSQLStats": true
+			}
+			document.getElementById("commonAPI").contentWindow.setExportParams(JSON.stringify(body, null, "    "));
+		}
+	</script>
+</body>
+
+</html>

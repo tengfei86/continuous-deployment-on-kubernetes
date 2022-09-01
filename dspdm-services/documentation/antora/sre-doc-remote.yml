@@ -1,0 +1,16 @@
+site:
+  title: Production Data Management Documentation
+  url: https://dspdm.pages.openearth.community/pdm-public-doc/
+  start_page: DSPDM::index.adoc
+content:
+  sources:
+  - url: https://pdm-public-doc-token:KomHzM4LApD6kgx1bjwm@git.openearth.community/dspdm/pdm-public-doc.git
+    start_path: docs
+    branches: [V13.x,release/osdu1.0.00]
+    start_page: DSPDM::index.adoc
+ui:
+  bundle:
+    url: node_modules/@webframework/docs-ui-oec/build/ui-bundle.zip
+    snapshot: true
+runtime:
+   cache_dir: ./antora-resource/cache/

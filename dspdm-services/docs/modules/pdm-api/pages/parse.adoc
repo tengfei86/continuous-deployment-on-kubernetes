@@ -1,0 +1,145 @@
+= Parse Data From Upload File
+
+The following will take you step by step to use Parse API.
+
+== 1. Request URL
+
+/{PDM Server domain}/parse
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |form-data
+|===
+
+== 3. Request body
+
+[width="100%",cols="12%,9%,7%,17%,55%",options="header",]
+|===
+|Key |Type |Required |Example value |Description
+|uploadedFile |Excel File |yes |WELL VOL DAILY.xlsx |uploadedFile is pre-defined in metadata table *BUSINESS_OBJECT* and case insensitive
+|params |Json File |yes |import.json |*language* is required and it is case sensitive and only *en* value is supported for now
+|===
+
+=== a. uploadedFile
+
+[width="100%",cols="19%,9%,16%,<56%",options="header",]
+|===
+|Name |Required |Example value |Description
+|Excel sheet name |yes |WELL VOL DAILY |sheet name corresponds to a table name
+|Columns |yes |UWI |each column corresponds to a field of table
+|Rows |yes |OPT-1-205 |first row corresponds field name, the other data
+|===
+
+Example: link:../features/_attachments/WELL%20VOL%20DAILY.xlsx[WELL VOL DAILY.xlsx]
+
+=== b. params json
+
+[width="100%",cols="10%,5%,7%,11%,14%,53%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |``WELL VOL DAILY'' |*boName* is pre-defined in metadata table *BUSINESS_OBJECT* and case insensitive.
+|language |string |yes | |``en'' |*language* is case sensitive and only *en* value is supported for now.
+|timezone |string |yes | |``GMT+08:00'' |*timezone* is case sensitive. Timezone value only supports specific format *GMT+xx:xx*, **GMT.
+|readback |bool |no |false |TRUE |Tell the service to return the data in same request.
+|offset |number |no |0 | |*offset* is based index of first record to be read.
+|limit |number |no |100 |10000 |*limit* is the total number of records to be read for a particular Business Object.
+|dspdmUnits |array |no | | |*dspdmUnits* list target unit for some of attribute
+|===
+
+link:../features/_attachments/params.json[Download params.json]
+
+image::bulk-import-postman.PNG[title="Bulk import in postman"]
+
+=== c. Result
+
+[source,json]
+----
+{
+  "status": {
+    "statusCode": 1,
+    "statusLabel": "Success"
+  },
+  "messages": [],
+  "exception": {},
+  "data": {
+    "WELL VOL DAILY": {
+      "totalRecords": 2,
+      "parsedValues": {
+        "totalRecords": 1,
+        "list": [
+          {
+            "type": "WELL VOL DAILY",
+            "id": 13,
+            "PDEN_WELL_VOLUME_DAILY_ID": 13,
+            "WELL_ID": 10500,
+            "UWI": "OPT-1-207",
+            "VOLUME_DATE": "2008-04-06T00:00:00+08:00",
+            "ACTIVE_IND": true
+          }
+        ]
+      },
+      "oldValues": {
+        "totalRecords": 1,
+        "list": [
+          {
+            "type": "WELL VOL DAILY",
+            "id": 13,
+            "PDEN_WELL_VOLUME_DAILY_ID": 13,
+            "WELL_ID": 10500,
+            "UWI": "OPT-1-207",
+            ...
+          }
+        ]
+      },
+      "invalidValues": {
+        "totalRecords": 1,
+        "list": [
+          {
+            "type": "WELL VOL DAILY",
+            "id": null,
+            "PDEN_WELL_VOLUME_DAILY_ID": null,
+            "WELL_ID": 10500,
+            "UWI": "OPT-1-307",
+            "VOLUME_DATE": "2008-04-06T00:00:00+08:00",
+            "ACTIVE_IND": true,
+            "messages": [
+              {
+                "boName": "WELL VOL DAILY",
+                "boAttrName": "UWI, VOLUME_DATE",
+                "boAttrDisplayName": "UWI, VOLUME_DATE",
+                "rowNumber": 3,
+                "message": "Unable to find a business object of type 'WELL VOL DAILY' with unique column name(s) 'UWI, VOLUME_DATE' and unique value(s) 'OPT-1-307, 2008-04-06 00:00:00.0' found at row index '3'",
+                "value": "OPT-1-307, 2008-04-06 00:00:00.0"
+              }
+            ],
+            "UWI, VOLUME_DATE": "OPT-1-307, 2008-04-06 00:00:00.0"
+          }
+        ]
+      }
+    }
+  },
+  "version": "0.0.0.0A",
+  "threadName": "**unknown_84591",
+  "requestTime": "2020-08-24 13:43:13.163 +08:00",
+  "responseTime": "2020-08-24 13:43:13.546 +08:00"
+
+----
+
+== 4. Response
+
+Please see xref:responses.adoc[Responses]
+
+[width="100%",cols="27%,69%,4%",options="header",]
+|===
+|Name |Description |
+|parsedValues |insert legitimate records from excel into parsedValues |
+|oldValues |All the oldValues are either common with pareseValues or invalidValues. |
+|invalidValues |Records that meet one of the following criteria are inserted into invalidValues* The value type of the cell is not valid* The value of the cell is null ,but its IS_MANDATORY of the BUSINESS_OBJECT_ATTR table is true* The types of excel cell are different from the types of database field* The length of excel cell data exceeds the limit of database field length* If the record has a parent record (Or reference data record) and parent record id is not found then this record will also be marked as invalid record. In other words if the foreign key value is not recognized from the name. |
+|bo totalRecords |parsedValues totalRecords + invalidValues totalRecords |
+|oldValues totalRecords |oldValues from paresdValues + oldValues from invalidValues |
+|===

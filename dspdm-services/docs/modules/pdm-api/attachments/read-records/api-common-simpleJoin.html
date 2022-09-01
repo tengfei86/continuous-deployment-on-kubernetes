@@ -1,0 +1,55 @@
+<html>
+
+<head>
+
+</head>
+
+<body style="margin: 0 0 0 0;">
+    <iframe src="../resources/api.html" id="commonAPI" width="100%" height="100%" frameborder="0">
+    </iframe>
+    <script>
+        window.onload = function () {
+            let body =
+            {
+                "boName": "WELL",
+                "language": "en",
+                "timezone": "GMT+05:00",
+                "joinAlias": "a",
+                "selectList": [
+                    "WELL_ID",
+                    "WELL_NAME",
+                    "AREA_NAME",
+                    "UWI"
+                ],
+                "simpleJoins": [
+                    {
+                        "boName": "WELLBORE",
+                        "joinType": "INNER",
+                        "joinAlias": "b",
+                        "selectList": [
+                            "WELLBORE_ID",
+                            "WELLBORE_NAME"
+                        ],
+                        "joiningConditions": [
+                            {
+                                "leftSide": {
+                                    "joinAlias": "a",
+                                    "boAttrName": "UWI"
+                                },
+                                "operator": "EQUALS",
+                                "rightSide": {
+                                    "joinAlias": "b",
+                                    "boAttrName": "WELL_UWI"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "showSQLStats": true
+            }
+            document.getElementById("commonAPI").contentWindow.setCommonParams(JSON.stringify(body, null, "    "));
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<html>
+
+<head>
+
+</head>
+
+<body style="margin: 0 0 0 0;">
+    <iframe src="../resources/api.html" id="dropRelationships" width="100%" height="100%" frameborder="0">
+    </iframe>
+    <script>
+        window.onload = function () {
+            let body =
+{
+    "BUS OBJ RELATIONSHIP": {
+        "language": "en",
+        "readBack": true,
+        "timezone": "GMT+08:00",
+        "showSQLStats": true,
+        "data": [
+            {
+                "BUS_OBJ_RELATIONSHIP_NAME": "FK_{{boName2}}_{{boName1}}_NAME"
+            }
+        ]
+    }
+} 
+            document.getElementById("dropRelationships").contentWindow.setDropRelationshipsParams(JSON.stringify(body, null, "    "));
+        }
+    </script>
+</body>
+
+</html>

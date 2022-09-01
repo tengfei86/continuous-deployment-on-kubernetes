@@ -1,0 +1,100 @@
+= Drop Relationship
+
+You can drop a business object relationship along with its relationship metadata and physical referential integrity constraint from the system by sending the following request. Drop relationship will be equivalent to delete a business object relationship definition. Either you want to drop a simple relationship or a composite relationship the request will be same. Once you drop a relationship then you cannot recover it again.
+
+Following are the conditions which should be met by the request to drop the relationship.
+
+[arabic]
+. Main request will be for `BUS OBJ RELATIONSHIP' business object.
+. You can drop the relationship either by relationship name or by constraint name.
+. If you provide both then the relationship name will take precedence over constraint name.
+. If you provide relationship name then this relationship name must exist in the database.
+. If you provide constraint name then this constraint name must exist in the database.
+. For composite relationship you only need to specify the relationship name and all the relationship metadata records for this composite relationship will be deleted together using a single request.
+. If the given relationship name or constraint name does not exist then the response will be an error.
+
+== 1. Request URL
+
+/{PDM Server domain}/metadata/write/dropRelationships
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Response Type
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|responseType |blob
+|===
+
+== 4. Request body
+
+[source,json]
+----
+Drop Business Object Relationship Using Relationship Name Request
+
+{
+    "BUS OBJ RELATIONSHIP": {
+        "language": "en",
+        "readBack": true,
+        "timezone": "GMT+08:00",
+        "showSQLStats": true,
+        "data": [
+            {
+                "BUS_OBJ_RELATIONSHIP_NAME": "FK_{{boName2}}_{{boName1}}_NAME"
+            }
+        ]
+    }
+}
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/Drop-relationship/api-1-drop-relationship-using-relationship-name.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+[source,json]
+----
+Drop Business Object Relationship Using Constraint Name Request
+
+{
+    "BUS OBJ RELATIONSHIP": {
+        "language": "en",
+        "readBack": true,
+        "timezone": "GMT+08:00",
+        "showSQLStats": true,
+        "data": [
+            {
+                "CONSTRAINT_NAME": "FK_{{boName2}}_{{boName1}}_NAME"
+            }
+        ]
+    }
+}
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/Drop-relationship/api-2-drop-relationship-using-constraint-name.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+== 5. Responses
+
+When response.status = 200, It will response a `application/octet-stream' excel file.
+
+Otherwise, it will response json file, Please see xref:responses.adoc[Responses]

@@ -1,0 +1,21 @@
+= Hierarchy ERD
+
+image::Hierarchy.png[title="Hierarchy ERD"]
+
+== Hierarchy Tables Description
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|*Table* |*Description*
+|xref:Data-Dictionary.adoc#hierarchy[HIERARCHY] |This table record hierarchy name defined for a specific hierarchy
+|xref:Data-Dictionary.adoc#hierarchy_desc[HIERARCHY_DESC] |This table defines specific levels of a hierarchy. For example, a hierarchy may use countries, provinces. This table does not describe a specific instance of a hierarchy but what level type is used.
+|xref:Data-Dictionary.adoc#hierarchy_level[HIERARCHY_LEVEL] |This table places specific instances at a specific level of a hierarchy. Note that more than one object may exist at any given level.
+|xref:Data-Dictionary.adoc#hierarchy_template[HIERARCHY_TEMPLATE] |This table is used to record hierarchy structure name used for assign hierarchy.
+|xref:Data-Dictionary.adoc#hierarchy_template_desc[HIERARCHY_TEMPLATE_DESC] |This table defines specific levels of a hierarchy template. For example, a hierarchy may use countries, provinces. This table does not describe a specific instance of a hierarchy but will be used as a template for creating new valid hierarchies.
+|xref:Data-Dictionary.adoc#org_unit[ORG_UNIT] |Record the geographical area and organizational unit.
+|xref:Data-Dictionary.adoc#r_org_unit_type[R_ORG_UNIT_TYPE] |The reference type of organization unit. For example: country, province, state, or company.
+|xref:Data-Dictionary.adoc#field_org_unit[FIELD_ORG_UNIT] |This table is used to record the field historical relationship with org units.
+|xref:Data-Dictionary.adoc#well_org_unit[WELL_ORG_UNIT] |This table is used to record the well historical relationship with org units.
+|xref:Data-Dictionary.adoc#facility_org_unit[FACILITY_ORG_UNIT] |This table is used to record the facility historical relationship with org units.
+|xref:Data-Dictionary.adoc#r_org_unit_category[R_ORG_UNIT_CATEGORY] |The reference of unit category, such as area unit or business unit.
+|===

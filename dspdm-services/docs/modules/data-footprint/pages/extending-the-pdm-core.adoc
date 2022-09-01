@@ -1,0 +1,357 @@
+= Database
+
+Version
+
+* PostgreSQL: 10 and above
+* SQL Server: 2014 and above
+
+Database Description
+
+Currently, DSPDM uses three databases:
+
+[arabic]
+. DSPDM: Manage Metadata
+. DSPDM_FILE: Manage files and results
+. DSPDM_SEARCH: Manage search
+
+Metadata DataBase
+
+* DSPDM
+
+== Data Table
+
+* Operate the database: DSPDM
+
+*Metadata Table Description*
+
+Currently, the DSPDM metadata table:
+
+* Sort by operation
+
+business_object: BO information record
+
+[cols=",,",options="header",]
+|===
+|entity_name |attribute_name |attribute_type
+|BUSINESS_OBJECT |BUSINESS_OBJECT_ID |integer
+|BUSINESS_OBJECT |BO_DISPLAY_NAME |character varying(50)
+|BUSINESS_OBJECT |BO_NAME |character varying(50)
+|BUSINESS_OBJECT |ENTITY |character varying(30)
+|BUSINESS_OBJECT |SCHEMA_NAME |character varying(50)
+|BUSINESS_OBJECT |IS_ACTIVE |boolean
+|BUSINESS_OBJECT |IS_MASTER_DATA |boolean
+|BUSINESS_OBJECT |BO_DESC |character varying(2000)
+|BUSINESS_OBJECT |IS_METADATA_TABLE |boolean
+|BUSINESS_OBJECT |IS_REFERENCE_TABLE |boolean
+|BUSINESS_OBJECT |KEY_SEQ_NAME |character varying(50)
+|BUSINESS_OBJECT |ROW_CREATED_BY |character varying(30)
+|BUSINESS_OBJECT |ROW_CREATED_DATE |timestamp
+|BUSINESS_OBJECT |ROW_CHANGED_DATE |timestamp
+|BUSINESS_OBJECT |ROW_CHANGED_BY |character varying(30)
+|===
+
+business_object_attr: BO attribute information record
+
+[width="100%",cols="32%,34%,34%",options="header",]
+|===
+|entity_name |attribute_name |attribute_type
+|BUSINESS_OBJECT_ATTR |BUSINESS_OBJECT_ATTR_ID |integer
+|BUSINESS_OBJECT_ATTR |ENTITY |character varying(30)
+|BUSINESS_OBJECT_ATTR |BO_NAME |character varying(50)
+|BUSINESS_OBJECT_ATTR |BO_ATTR_NAME |character varying(50)
+|BUSINESS_OBJECT_ATTR |RELATED_BO_ATTR_NAME |character varying(50)
+|BUSINESS_OBJECT_ATTR |BO_DISPLAY_NAME |character varying(50)
+|BUSINESS_OBJECT_ATTR |ATTRIBUTE |character varying(30)
+|BUSINESS_OBJECT_ATTR |ATTRIBUTE_DISPLAYNAME |character varying(30)
+|BUSINESS_OBJECT_ATTR |ATTRIBUTE_DATATYPE |character varying(150)
+|BUSINESS_OBJECT_ATTR |ATTRIBUTE_DEFAULT |character varying(100)
+|BUSINESS_OBJECT_ATTR |CONTROL_TYPE |character varying(50)
+|BUSINESS_OBJECT_ATTR |REFERENCE_BO_NAME |character varying(50)
+|BUSINESS_OBJECT_ATTR |REFERENCE_BO_ATTR_VALUE |character varying(50)
+|BUSINESS_OBJECT_ATTR |REFERENCE_BO_ATTR_LABEL |character varying(50)
+|BUSINESS_OBJECT_ATTR |SEQUENCE_NUM |integer
+|BUSINESS_OBJECT_ATTR |IS_MANDATORY |boolean
+|BUSINESS_OBJECT_ATTR |ATTRIBUTE_LABEL |character varying(100)
+|BUSINESS_OBJECT_ATTR |IS_PARTITIONED |boolean
+|BUSINESS_OBJECT_ATTR |HISTORY_ATTRIBUTE |character varying(50)
+|BUSINESS_OBJECT_ATTR |HISTORY_TABLE |character varying(50)
+|BUSINESS_OBJECT_ATTR |IS_UPLOAD_NEEDED |boolean
+|BUSINESS_OBJECT_ATTR |IS_HIDDEN |boolean
+|BUSINESS_OBJECT_ATTR |IS_REFERENCE_IND |boolean
+|BUSINESS_OBJECT_ATTR |IS_PRIMARY_KEY |boolean
+|BUSINESS_OBJECT_ATTR |IS_ACTIVE |boolean
+|BUSINESS_OBJECT_ATTR |ATTRIBUTE_FONT |character varying(50)
+|BUSINESS_OBJECT_ATTR |ATTRIBUTE_FONTSIZE |integer
+|BUSINESS_OBJECT_ATTR |IS_SORTABLE |boolean
+|BUSINESS_OBJECT_ATTR |ATTRIBUTE_DESC |character varying(500)
+|BUSINESS_OBJECT_ATTR |SCHEMA_NAME |character varying(50)
+|BUSINESS_OBJECT_ATTR |IS_INTERNAL |boolean
+|BUSINESS_OBJECT_ATTR |IS_READ_ONLY |boolean
+|BUSINESS_OBJECT_ATTR |IS_CUSTOM_ATTRIBUTE |boolean
+|BUSINESS_OBJECT_ATTR |HAS_UNIT |boolean
+|BUSINESS_OBJECT_ATTR |IS_UNIT_ATTRIBUTE |boolean
+|BUSINESS_OBJECT_ATTR |UNIT |character varying(60)
+|===
+
+bus_obj_relationship: BO relationship information record
+
+[width="100%",cols="30%,38%,32%",options="header",]
+|===
+|entity_name |attribute_name |attribute_type
+|BUS_OBJ_RELATIONSHIP |BUS_OBJ_RELATIONSHIP_ID |integer
+|BUS_OBJ_RELATIONSHIP |BUS_OBJ_RELATIONSHIP_NAME |character varying(100)
+|BUS_OBJ_RELATIONSHIP |CHILD_BO_NAME |character varying(50)
+|BUS_OBJ_RELATIONSHIP |CHILD_BO_ATTR_NAME |character varying(50)
+|BUS_OBJ_RELATIONSHIP |PARENT_BO_NAME |character varying(50)
+|BUS_OBJ_RELATIONSHIP |PARENT_BO_ATTR_NAME |character varying(50)
+|BUS_OBJ_RELATIONSHIP |IS_PRIMARY_KEY_RELATIONSHIP |boolean
+|BUS_OBJ_RELATIONSHIP |CONSTRAINT_NAME |character varying(50)
+|===
+
+bus_obj_attr_uniq_constraints: BO constraint information record
+
+[width="100%",cols="39%,33%,28%",options="header",]
+|===
+|entity_name |attribute_name |attribute_type
+|BUS_OBJ_ATTR_UNIQ_CONSTRAINTS |BUS_OBJ_ATTR_UNIQ_CONS_ID |integer
+|BUS_OBJ_ATTR_UNIQ_CONSTRAINTS |CONSTRAINT_NAME |character varying(50)
+|BUS_OBJ_ATTR_UNIQ_CONSTRAINTS |BO_NAME |character varying(50)
+|BUS_OBJ_ATTR_UNIQ_CONSTRAINTS |BO_ATTR_NAME |character varying(50)
+|BUS_OBJ_ATTR_UNIQ_CONSTRAINTS |ENTITY |character varying(30)
+|BUS_OBJ_ATTR_UNIQ_CONSTRAINTS |ATTRIBUTE |character varying(30)
+|BUS_OBJ_ATTR_UNIQ_CONSTRAINTS |IS_ACTIVE |boolean
+|BUS_OBJ_ATTR_UNIQ_CONSTRAINTS |VERIFY |boolean
+|===
+
+business_object_group: BO group information record
+
+[width="100%",cols="33%,36%,31%",options="header",]
+|===
+|entity_name |attribute_name |attribute_type
+|BUSINESS_OBJECT_GROUP |BUSINESS_OBJECT_GROUP_ID |integer
+|BUSINESS_OBJECT_GROUP |DISPLAY_NAME |character varying(50)
+|BUSINESS_OBJECT_GROUP |R_GROUP_CATEGORY_ID |integer
+|BUSINESS_OBJECT_GROUP |GROUP_CATEGORY_NAME |character varying(50)
+|BUSINESS_OBJECT_GROUP |BUSINESS_OBJECT_ID |integer
+|BUSINESS_OBJECT_GROUP |BO_NAME |character varying(50)
+|BUSINESS_OBJECT_GROUP |IS_ACTIVE |boolean
+|BUSINESS_OBJECT_GROUP |ROW_CHANGED_BY |character varying(30)
+|BUSINESS_OBJECT_GROUP |ROW_CHANGED_DATE |timestamp
+|BUSINESS_OBJECT_GROUP |ROW_CREATED_BY |character varying(30)
+|BUSINESS_OBJECT_GROUP |ROW_CREATED_DATE |timestamp
+|BUSINESS_OBJECT_GROUP |SEQUENCE_NUM |integer
+|===
+
+*Append New Table*
+
+Sort by operation
+
+1.Create a physical table，for example
+
+[source,sql]
+----
+CREATE TABLE public.eam (
+    "attribute" varchar(30) NULL,
+    entity varchar(30) NULL,
+    is_mandatory bool NOT NULL DEFAULT true,
+    CONSTRAINT ck_eam_is_mandatory CHECK (((is_mandatory = true) OR (is_mandatory = false)))
+);
+----
+
+2.Add business_object table data, for example
+
+[source,sql]
+----
+insert into business_object
+(bo_display_name,bo_name,entity,schema_name,is_active,bo_desc,is_metadata_table,is_reference_table,key_seq_name,is_master_data, row_created_by, row_created_date)
+values('AREA','AREA','AREA','',true,'AREA: Describes geographic areas, such as country, province, district etc.',true,false,'seq_area',True,'cs',now()::timestamp);
+----
+
+3.Add business_object_attr table data, for example
+
+[source,sql]
+----
+insert into public.business_object_attr
+(entity, "attribute", attribute_displayname, attribute_datatype, attribute_default, control_type, bo_name, bo_attr_name, bo_display_name
+, reference_bo_name, reference_bo_attr_value, reference_bo_attr_label, sequence_num, is_mandatory, attribute_label, is_partitioned
+, history_attribute, history_table, is_upload_needed, is_hidden, is_reference_ind, is_primary_key, is_active, attribute_font
+, attribute_fontsize, is_sortable, attribute_desc, is_internal, is_read_only, schema_name, is_custom_attribute, has_unit, is_unit_attribute)
+values('AREA', 'SOURCE_NAME', 'Source Name', 'character varying(50)', '', 'input', 'AREA', 'SOURCE_NAME','AREA', null, null, null, 16, False, '', False, '', '', True, False, False, False, False, True, '', 0, True, 'From Which source data is being Displaed, comes from R_Source Table', False, False, '', False, False, False);
+----
+
+4.Add bus_obj_relationship table data, for example
+
+[source,sql]
+----
+insert into bus_obj_relationship(bus_obj_relationship_name, child_bo_name, child_bo_attr_name, parent_bo_name, parent_bo_attr_name, is_primary_key_relationship)
+    values ('AREA_RELATIONSHIP_R_AREA_LEVEL_NAME', 'AREA', 'R_AREA_LEVEL_NAME', 'R AREA LEVEL', 'DISPLAY_NAME', false);
+----
+
+5.Add bus_obj_attr_uniq_constraints table data, for example
+
+[source,sql]
+----
+insert into bus_obj_attr_uniq_constraints
+(entity, constraint_name, attribute, bo_name, bo_attr_name, is_active)
+values('AREA','ui_area','DISPLAY_NAME','AREA','DISPLAY_NAME',true);
+----
+
+6.Add business_object_group table data, for example
+
+[source,sql]
+----
+insert into business_object_group
+(display_name, r_group_category_id, group_category_name, business_object_id, bo_name, is_active, row_created_by, row_created_date, sequence_num)
+values('AREA',(select r_group_category_id from r_group_category where group_category_name = 'ASSET'),'ASSET'
+,(select business_object_id from public.business_object where bo_name = 'AREA'),'AREA',true,'cs',now()::timestamp,1);
+----
+
+*Refresh the DSPDM service*
+
+https://distplat3.landmarksoftware.io/services/dspdmservice/msp/secure/config/refreshMetadata[Call
+DSPDM service]
+
+== Unique Constraints In Detail
+
+=== *Introduction*
+
+Application supports unique constraints to be defined on a business
+object that a particular attribute or a set of attributes must have
+unique values in a business object data store. To accomplish this
+feature application has a metadata table in database with name
+BUS_OBJ_ATTR_UNIQ_CONSTRAINTS.
+
+=== *Unique Constraints Usage in Application*
+
+1.Verify Data before Save/Update
+
+These unique constraints allow application to check whether the data
+which is going to be saved or updated into the system already exists or
+already have a conflict with the existing data. This allows application
+to detect any data related issue in earlier stages before going to the
+physical database to insert or update.
+
+2.Import or Parse Process
+
+These unique constraints play an important role in import process. If
+you use import feature then you will notice that when importing data
+from excel file that excel file will not have any column or values for
+id column either primary key id columns or foreign key id columns. When
+you import the records from excel file then the application tries to
+identify that the records being imported already exist in the system
+data store or not. It means that the records in excel file are candidate
+for INSERT or candidate for UPDATE. This decision is made on the basis
+of unique constraints. The process to identify that this record is old
+or new is called name to id conversion process. If a business object has
+more than one unique constraints then first simple unique constraint
+whose attribute exists in excel file as a column will be used in name to
+id conversion process. If a business object does not have a unique
+constraint defined for it then whenever you import its data from an
+excel file then its records will always be considered as new records.
+
+=== *BUS_OBJ_ATTR_UNIQ_CONSTRAINTS*
+
+This is business object attribute unique constraints table.
+
+* You must put an entry into this table if you want to apply unique
+constraints to any business object. +
+* You can apply as many unique constraints on a business object as much
+you want there is no limit on it. +
+* If a unique constraint is defined on a single attribute then it is
+called simple unique constraint.
+* A simple unique constraint will have exactly one row in this unique
+constraint table.
+* If a unique constraint is defined on more than one attribute then it
+is call composite unique constraint.
+* A composite unique constraint will have the same number of rows in the
+unique constraints metadata table as many number of attributes it
+involves.
+* If you define a composite unique constraint which involves two
+attribute to be unique together then there will be exactly two rows in
+this table with the same unique constraint name but with different
+attribute names.
+* Each constraint either simple or composite will have a unique
+constraint name.
+* Rows in the unique constraint table which belongs to a particular
+unique constraint (either simple or composite) will have the same unique
+constraint name.
+* You can set the VERIFY flag to true in the definition of a unique
+constraint if you want application to verify the data of the business
+object before save or update.
+* One unique constraint can only be applied to the attributes of a
+business object. Unique constraint cannot involve attributes of
+different business objects or multiple business objects cannot have a
+combine unique constraint.
+
+*Table Structure*
+
+image::../images/clip_image001.png[img]
+
+=== Column Details
+
+[arabic]
+. *BUS_OBJ_ATTR_UNIQ_CONS_ID* (Primary Key Auto generated via sequence)
+. *CONSTRAINT_NAME* (Mandatory name of the constraint. If two rows have
+same constraint name then it means this is a composite unique
+constraint)
+. *BO_NAME* (Mandatory business object name to which this constraint
+belongs. It is a foreign key from BUSINESS_OBJECT_ATTR table)
+. *BO_ATTR_NAME* (Mandatory business object attribute involved in this
+unique constraint. It is a foreign key from BUSINESS_OBJECT_ATTR table)
+. *ENTITY* (Optional database table name against business object
+involved in this unique constraint. It is a foreign key from
+BUSINESS_OBJECT_ATTR table. It is here so that it can be used in
+physical database level validations.)
+. *ATTRIBUTE* (Optional database column name against entity and business
+object involved in this unique constraint. It is a foreign key from
+BUSINESS_OBJECT_ATTR table. It is here so that it can be used in
+physical database level validations.)
+. *IS_ACTIVE* (Mandatory flag about the state of this constraint. Is it
+active or not. This flag is working as active or inactive but it is not
+related to delete as we are using physical delete policy.)
+. *VERIFY* (Mandatory flag to tell the application that this constraint
+should be verified or not before writing the data to this business
+object.)
+
+=== *Examples or Sample Data in Unique Constraint Table*
+
+*Simple Unique Constraints*
+
+*Example 1*: In the following example business object Area has two
+unique constraints defined in it. Both are simple unique constraints
+because their constraint name is different. These two constraints tells
+us that AREA_NAME should be unique in the business object AREA and
+DISPLAY_NAME should also be unique in the business object AREA. Both
+constraints are independent to each other.
+
+image::../images/clip_image002.png[img]
+
+*Example 2*: In the following example business object WELL has only one
+constraint and that is a simple unique constraint on the attribute UWI.
+
+image::../images/clip_image003.png[img]
+
+==
+
+=== *Composite Unique Constraints*
+
+*Example 1*: In the following example you can see that all three rows
+have same value in column constraint name. It means that they all are
+part of a composite unique constraint. This is a composite unique
+constraint which means that all the three columns in the constraint will
+have unique value in combination. Individually each attribute UWI,
+START_TIME or FLOW_PERIOD can have duplicate values but no two rows in
+the business object WELL TEST PUMP will have same values for these three
+attributes.
+
+image::../images/clip_image004.png[img]
+
+*Example 2*: In the following example you can see that both rows have
+same value in column constraint name. It means that both are part of a
+composite unique constraint. This is a composite unique constraint which
+means that all columns in the constraint will have unique value in
+combination. Individually each attribute UWI or START_TIME can have
+duplicate values but no two rows in the business object WELL TEST will
+have same values for these two attributes.
+
+image::../images/clip_image005.png[img]

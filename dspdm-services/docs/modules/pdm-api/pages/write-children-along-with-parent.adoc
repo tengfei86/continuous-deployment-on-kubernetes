@@ -1,0 +1,570 @@
+= Write Children Along With Parent
+
+API provides save function, In this document, let’s see, how to use the save API to write Children Along With Parent Data.
+
+Child records can be inserted or updated along with their parent records.
+
+If nothing is changed in the record after reading it from data store then save will not have any effect and records will be ignored from update.
+
+*How we define parent and children?*
+
+This parent child save/update works on the basis of metadata defined in the relationship table. If the parent and child business objects to be saved are not related to each other then the API will throw an exception that no relationship is found.
+
+We can find the relationship in BUS OBJ RELATIONSHIP table, at part 4, has the method to read this table.
+
+By default we can save up to six maximum level of hierarchy of parent, child, grandchild and grand grandchild records. If we send a request which have more than six levels deep records the API will throw an error. This maximum six level are configurable at application level.
+
+*When and how Write Children Along With Parent?*
+
+If some attributes are missing in an insert json request for a particular record then null value will be inserted for them if it is a new record.
+
+In case of update if some attributes are missing in request then they will have no effect and they will be ignored from update.
+
+If you want to update an existing value with a null value then you must specify that attribute in json request with a value null.
+
+Values which are changed only those will be sent to the data store for update.
+
+== 1. Request URL
+
+/{PDM Server domain}/save
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Request bodys
+
+[width="100%",cols="8%,8%,5%,8%,31%,40%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |WELL,WELL TEST, WELL TEST PUMP,WELL TEST FLOW |BoName is pre-defined in metadata table BUSINESS_OBJECT and case insensitive
+|language |string |yes | |en |Language is required and it is case sensitive and only en value is supported for now
+|timezone |string |yes | |GMT+05:00 |Timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+|readback |bool |no |FALSE |TRUE |Optional and defaults to false to tell the service to return the updated/inserted data in same request
+|data |object array |yes | | |Array/List of records to save
+|children |object array |yes | |WELL TEST, WELL TEST PUMP,WELL TEST FLOW |List of children objects to be saved/updated in same request
+|===
+
+=== All acceptable/possible time formats
+
+____
+All acceptable/possible date only and timestamp and time only formats which can be parsed by the API.
+
+Following is the list of all possible supported parse-able patterns. We start parsing from a more detail pattern and if not matched then we try to match a less detailed pattern till end.
+
+If no match is found then API will throw an error.
+____
+
+[source,java]
+----
+TIME_ONLY_FORMAT("HH:mm:ss")
+TIME_ONLY_FORMAT_WITH_MILLIS("HH:mm:ss.SSS")
+// HYPHEN BASED DATE FORMATS
+DATE_ONLY_FORMAT("yyyy-MM-dd")
+DATETIME_FORMAT_WITHOUT_SECONDS("yyyy-MM-dd'T'HH:mm")
+DATETIME_FORMAT_WITH_T("yyyy-MM-dd'T'HH:mm:ss")
+DATETIME_FORMAT("yyyy-MM-dd HH:mm:ss")
+DATETIME_FORMAT_WITH_TIMEZONE("yyyy-MM-dd HH:mm:ssX")
+TIMESTAMP_FORMAT_WITHOUT_TIMEZONE("yyyy-MM-dd HH:mm:ss.SSS")
+TIMESTAMP_FORMAT_WITH_TIMEZONE("yyyy-MM-dd HH:mm:ss.SSSX")
+TIMESTAMP_ISO_FORMAT_UTC("yyyy-MM-dd'T'HH:mm:ss'Z'")
+TIMESTAMP_ISO_FORMAT_WITH_MILLIS_UTC("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+TIMESTAMP_ISO_FORMAT_WITH_TIMEZONE("yyyy-MM-dd'T'HH:mm:ssX")
+TIMESTAMP_ISO_FORMAT_WITH_TIMEZONE_AND_MILLIS("yyyy-MM-dd'T'HH:mm:ss.SSSX")
+// SLASH BASED DATE FORMATS
+DATE_ONLY_SLASH_FORMAT("yyyy/MM/dd")
+DATETIME_SLASH_FORMAT_WITHOUT_SECONDS("yyyy/MM/dd'T'HH:mm")
+DATETIME_SLASH_FORMAT_WITH_T("yyyy-MM-dd'T'HH:mm:ss")
+DATETIME_SLASH_FORMAT("yyyy/MM/dd HH:mm:ss")
+DATETIME_SLASH_FORMAT_WITH_TIMEZONE("yyyy/MM/dd HH:mm:ssX")
+TIMESTAMP_SLASH_FORMAT_WITHOUT_TIMEZONE("yyy/MM/dd HH:mm:ss.SSS")
+TIMESTAMP_SLASH_FORMAT_WITH_TIMEZONE("yyy/MM/dd HH:mm:ss.SSSX")
+TIMESTAMP_ISO_SLASH_FORMAT_UTC("yyy/MM/dd'T'HH:mm:ss'Z'")
+TIMESTAMP_ISO_SLASH_FORMAT_WITH_MILLIS_UTC("yyy/MM/dd'T'HH:mm:ss.SSS'Z'")
+TIMESTAMP_ISO_SLASH_FORMAT_WITH_TIMEZONE("yyy/MM/dd'T'HH:mm:ssX")
+TIMESTAMP_ISO_SLASH_FORMAT_WITH_TIMEZONE_AND_MILLIS("yyy/MM/dd'T'HH:mm:ss.SSSX")
+----
+
+We can use this API for three conditions.
+
+=== 3.1 Save all levels records together
+
+When saving parent, child and grandchild all three records together then those records which already have primary key values those will be updated and remaining will be inserted. If all three records are new then all of them will be inserted and all those attributes of child which have defined relationship with parent will have the updated value for parent data.
+
+In case of either update or insert if the child record is part of the request, then all the attributes of parent record which are defined in the relationship table with the relationship to the child record, then all those attributes will be properly populated with the values taken from parent record and propagated to the child record.
+
+If the child record already have some values for the foreign key attributes then those will be overridden with the latest values. This auto propagation of values from parent to child will work if both of the following conditions are met.
+
+[arabic]
+. Both parent and child record are in same request.
+. A relationship is defined in the relationship table with the business object of parent record and child record.
+
+==== Example
+
+____
+In the example, we want to insert a new well in the WELL table, at the same time, save the WELL TEST data for this well, WELL TEST is the child of WELL. WELL ID will transmit from WELL to WELL TEST.
+
+The WELL TEST PUMP, WELL TEST FLOW will receive the WELL ID from its parent table WELL TEST, and save this well record into WELL TEST PUMP and WELL TEST FLOW table.
+
+In this example, the WELL ID default data is null, so this means create a new well record for the three levels.
+
+If you want to update one record for the three levels, give the WELL ID and WELL UWI data.
+____
+
+[source,json]
+----
+{
+    "WELL": {
+        "language": "en",
+        "timezone": "GMT+05:00",
+        "readBack": true,
+        "data": [
+            {
+                "type": "WELL",
+                "id": null,
+                "WELL_ID": null,
+                "UWI": "HAL-0930-test",
+                "OFFSHORE_IND": true,
+                "IS_ACTIVE": true,
+                "WELL_NAME": "test",
+                "AREA_ID": 3,
+                "AREA_NAME": "Alaska",
+                "FIELD_ID": 12,
+                "FIELD_NAME": "HAL-Texas West Field",
+                "children": {
+                    "WELL TEST": {
+                        "language": "en",
+                        "timezone": "GMT+05:00",
+                        "readBack": true,
+                        "data": [
+                            {
+                                "type": "WELL TEST",
+                                "id": null,
+                                "WELL_TEST_ID": null,
+                                "WELL_ID": null,
+                                "UWI": null,
+                                "START_TIME": "2020-09-18",
+                                "DOWNHOLE_GAUGE_MD": 1000,
+                                "END_TIME": "2020-09-18",
+                                "children": {
+                                    "WELL TEST PUMP": {
+                                        "language": "en",
+                                        "timezone": "GMT+05:00",
+                                        "readBack": true,
+                                        "data": [
+                                            {
+                                                "type": "WELL TEST PUMP",
+                                                "isInserted": true,
+                                                "id": null,
+                                                "WELL_TEST_PUMP_ID": null,
+                                                "WELL_TEST_ID": 6,
+                                                "UWI": null,
+                                                "START_TIME": "2020-09-20",
+                                                "FLOW_PERIOD": 3,
+                                                "IS_ACTIVE": true
+                                            }
+                                        ]
+                                    },
+                                    "WELL TEST FLOW": {
+                                        "language": "en",
+                                        "timezone": "GMT+05:00",
+                                        "readBack": true,
+                                        "data": [
+                                            {
+                                                "type": "WELL TEST FLOW",
+                                                "id": null,
+                                                "WELL_TEST_FLOW_ID": null,
+                                                "WELL_TEST_ID": 6,
+                                                "UWI": null,
+                                                "START_TIME": "2020-09-21",
+                                                "FLOW_PERIOD": 3
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}
+----
+
+'''
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="_attachments/write-children-along-with-parent/api-write-with-children1.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+=== Parameters
+
+[width="100%",cols="8%,8%,5%,8%,31%,40%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |WELL,WELL TEST, WELL TEST PUMP,WELL TEST FLOW |BoName is pre-defined in metadata table BUSINESS_OBJECT and case insensitive
+|language |string |yes | |en |Language is required and it is case sensitive and only en value is supported for now
+|timezone |string |yes | |GMT+05:00 |Timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+|readback |bool |no |FALSE |TRUE |Optional and defaults to false to tell the service to return the updated/inserted data in same request
+|data |object array |yes | | |Array/List of records to save
+|children |object array |yes | |WELL TEST, WELL TEST PUMP,WELL TEST FLOW |List of children objects to be saved/updated in same request.
+|===
+
+=== 3.2. Change parent with old children
+
+If the child record was already having a parent record in the data store and now we send a new request with a new parent and same old child record then this child record will be detached from the old parent record and it will become the child of new parent record.
+
+If we update the unique key values or primary key values of a parent record and we want that this change should also be propagated till child records in data store then before sending request to update parent we should read all the Children and we should send a single request of same parent and child.
+
+Child records will be orphan records if we update only parent records without reading and updating the child records along with their parents.
+
+==== Example
+
+____
+WELLBORE is the parent of WELL COMPLETION. This example change WELLBORE ID in WELLBORE table, the children in WELL COMPLETION will have new parent ID from WELLBORE.
+
+In this example, we will change WELLBORE UWI from WELLBORE0915 to WELLBORE09100, at the same time, the WELLBORE_ID change from 10580 to a new one.
+
+WELL COMPLETION is the child of WELLBORE, so it will inherit WELLBORE UWI and ID from its parent, and the old value will be discarded.
+____
+
+[source,json]
+----
+{
+    "WELLBORE": {
+        "language": "en",
+        "timezone": "GMT+05:00",
+        "readBack": true,
+        "data": [
+            {
+                "type": "WELLBORE",
+                "id": null,
+                "WELLBORE_ID": null,
+                "WELL_ID": 11673,
+                "WELL_UWI": "HAL-0929-test",
+                "WELLBORE_UWI": "WELLBORE09100",
+                "WELLBORE_NAME": "WELLBORE_NAME_09100",
+                "WELLBORE_NUMBER": "0",
+                "X_COORDINATE": -89.948900000,
+                "Y_COORDINATE": 44.469200000,
+                "children": {
+                    "WELL COMPLETION": {
+                        "language": "en",
+                        "timezone": "GMT+05:00",
+                        "readBack": true,
+                        "data": [
+                            {
+                                "type": "WELL COMPLETION",
+                                "id": null,
+                                "WELL_COMPLETION_ID": null,
+                                "WELLBORE_ID": 10580,
+                                "WELLBORE_UWI": "WELLBORE0915",
+                                "COMPLETION_DATE": "2020-09-21",
+                                "COMPLETION_OBS_NO": 3,
+                                "IS_ACTIVE": true
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}
+----
+
+The response is here, it successfully transmits new WELLBORE UWI and WELLBORE ID to its child.
+
+[source,json]
+----
+{
+    "status": {
+        "statusCode": 1,
+        "statusLabel": "Success"
+    },
+    "messages": [
+        {
+            "message": "2 record(s) inserted successfully.",
+            "status": {
+                "statusCode": 1,
+                "statusLabel": "Success"
+            }
+        }
+    ],
+    "exception": {},
+    "data": {
+        "WELLBORE": [
+            {
+                "type": "WELLBORE",
+                "id": 10587,
+                "isInserted": true,
+                "WELLBORE_ID": 10587,
+                "WELL_ID": 11673,
+                "WELL_UWI": "HAL-0929-test",
+                "WELLBORE_UWI": "WELLBORE09100",
+                "WELLBORE_NAME": "WELLBORE_NAME_0990",
+                "WELLBORE_NUMBER": "0",
+                "X_COORDINATE": -89.9489,
+                "Y_COORDINATE": 44.4692,
+                "ROW_CHANGED_BY": "admin",
+                "ROW_CHANGED_DATE": "2020-09-28T06:44:15+05:00",
+                "ROW_CREATED_BY": "admin",
+                "ROW_CREATED_DATE": "2020-09-28T06:44:15+05:00",
+                "children": {
+                    "WELL COMPLETION": [
+                        {
+                            "type": "WELL COMPLETION",
+                            "id": 21160,
+                            "isInserted": true,
+                            "WELL_COMPLETION_ID": 21160,
+                            "WELLBORE_ID": 10587,
+                            "WELLBORE_UWI": "WELLBORE09100",
+                            "COMPLETION_DATE": "2020-09-21",
+                            "COMPLETION_OBS_NO": 3,
+                            "IS_ACTIVE": true,
+                            "ROW_CHANGED_BY": "admin",
+                            "ROW_CHANGED_DATE": "2020-09-28T06:44:16+05:00",
+                            "ROW_CREATED_BY": "admin",
+                            "ROW_CREATED_DATE": "2020-09-28T06:44:16+05:00"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "version": "0.0.0.0A",
+    "threadName": "admin_40858",
+    "requestTime": "2020-09-28 11:44:15.135 +05:00",
+    "responseTime": "2020-09-28 11:44:17.918 +05:00"
+}
+----
+'''
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="_attachments/write-children-along-with-parent/api-write-with-children2.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+=== Parameters
+
+[width="99%",cols="8%,10%,6%,10%,19%,47%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |WELLBORE,WELL COMPLETION |BoName is pre-defined in metadata table BUSINESS_OBJECT and case insensitive
+|language |string |yes | |en |Language is required and it is case sensitive and only en value is supported for now
+|timezone |string |yes | |GMT+05:00 |Timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+|readback |bool |no |FALSE |TRUE |Optional and defaults to false to tell the service to return the updated/inserted data in same request
+|data |object array |yes | | |Array/List of records to save
+|children |object array |yes | |WELL COMPLETION |List of children objects to be saved/updated in same request
+|===
+
+=== 3.3. Create a new child with old parent
+
+If the parent record add a new child, we should send a request to create a child, parent ID transmits to the child.
+
+==== Example
+
+____
+WELLBORE is the parent of WELL COMPLETION. This example create new record in WELL COMPLETION table, WELLBORE ID in WELLBORE table will give the new record with WELLBORE ID from parent WELLBORE.
+
+In this example, I add ``COMPLETION_DATE'': ``2020-09-30'' to WELL COMPLETION table as a new child.
+____
+
+[source,json]
+----
+{
+    "WELLBORE": {
+        "language": "en",
+        "timezone": "GMT+05:00",
+        "readBack": true,
+        "data": [
+            {
+                "type": "WELLBORE",
+                "id": 10587,
+                "WELLBORE_ID": 10587,
+                "WELL_ID": 11673,
+                "WELL_UWI": "HAL-0929-test",
+                "WELLBORE_UWI": "WELLBORE09100",
+                "WELLBORE_NAME": "WELLBORE_NAME_0990",
+                "WELLBORE_NUMBER": "0",
+                "X_COORDINATE": -89.948900000,
+                "Y_COORDINATE": 44.469200000,
+                "children": {
+                    "WELL COMPLETION": {
+                        "language": "en",
+                        "timezone": "GMT+05:00",
+                        "readBack": true,
+                        "data": [
+                            {
+                                "type": "WELL COMPLETION",
+                                "id": null,
+                                "WELL_COMPLETION_ID": null,
+                                "WELLBORE_ID": 10587,
+                                "WELLBORE_UWI": "WELLBORE09100",
+                                "COMPLETION_DATE": "2020-09-30",
+                                "COMPLETION_OBS_NO": 6,
+                                "IS_ACTIVE": true
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}
+----
+
+The response is here, it successfully adds one record in WELL COMPLETION, propagate existing WELLBORE UWI and WELLBORE ID to this child.
+
+[source,json]
+----
+{
+    "status": {
+        "statusCode": 1,
+        "statusLabel": "Success"
+    },
+    "messages": [
+        {
+            "message": "1 record(s) inserted successfully.",
+            "status": {
+                "statusCode": 1,
+                "statusLabel": "Success"
+            }
+        },
+        {
+            "message": "1 record(s) ignored from update due to no change detected in data.",
+            "status": {
+                "statusCode": 1,
+                "statusLabel": "Success"
+            }
+        }
+    ],
+    "exception": {},
+    "data": {
+        "WELLBORE": [
+            {
+                "type": "WELLBORE",
+                "id": 10587,
+                "WELLBORE_ID": 10587,
+                "WELL_ID": 11673,
+                "WELL_UWI": "HAL-0929-test",
+                "WELLBORE_UWI": "WELLBORE09100",
+                "WELLBORE_NAME": "WELLBORE_NAME_0990",
+                "WELLBORE_NUMBER": "0",
+                "X_COORDINATE": -89.9489,
+                "Y_COORDINATE": 44.4692,
+                "children": {
+                    "WELL COMPLETION": [
+                        {
+                            "type": "WELL COMPLETION",
+                            "id": 21161,
+                            "isInserted": true,
+                            "WELL_COMPLETION_ID": 21161,
+                            "WELLBORE_ID": 10587,
+                            "WELLBORE_UWI": "WELLBORE09100",
+                            "COMPLETION_DATE": "2020-09-30",
+                            "COMPLETION_OBS_NO": 6,
+                            "IS_ACTIVE": true,
+                            "ROW_CHANGED_BY": "admin",
+                            "ROW_CHANGED_DATE": "2020-09-28T07:36:42+05:00",
+                            "ROW_CREATED_BY": "admin",
+                            "ROW_CREATED_DATE": "2020-09-28T07:36:42+05:00"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "version": "0.0.0.0A",
+    "threadName": "admin_44647",
+    "requestTime": "2020-09-28 12:36:42.374 +05:00",
+    "responseTime": "2020-09-28 12:36:42.550 +05:00"
+}
+----
+
+'''
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="_attachments/write-children-along-with-parent/api-write-with-children3.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+==== Parameters
+
+[width="99%",cols="8%,10%,6%,10%,19%,47%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |WELLBORE,WELL COMPLETION |BoName is pre-defined in metadata table BUSINESS_OBJECT and case insensitive
+|language |string |yes | |en |Language is required and it is case sensitive and only en value is supported for now
+|timezone |string |yes | |GMT+05:00 |Timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+|readback |bool |no |FALSE |TRUE |Optional and defaults to false to tell the service to return the updated/inserted data in same request
+|data |object array |yes | | |Array/List of records to save
+|children |object array |yes | |WELL COMPLETION |List of children objects to be saved/updated in same request
+|===
+
+== 4. Get parent and child relationship
+
+If you not sure about which child is for a parent, please go to BUS OBJ RELATIONSHIP to find the answer .
+
+[source,json]
+----
+{
+    "boName": "BUS OBJ RELATIONSHIP",
+    "language": "en",
+    "timezone": "GMT+05:00",
+    "criteriaFilters" : [
+       {
+           "boAttrName" : "parent_bo_name",
+           "operator" : "EQUALS",
+           "values" : ["WELL"]
+       },
+       {
+           "boAttrName" : "child_bo_name",
+           "operator" : "EQUALS",
+           "values" : ["WELLBORE"]
+       }
+    ]
+}
+----
+
+'''
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="_attachments/write-children-along-with-parent/api-common-basic.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+=== Parameters
+
+[width="100%",cols="13%,10%,6%,10%,15%,46%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |BUS OBJ RELATIONSHIP |BoName is pre-defined in metadata table BUSINESS_OBJECT and case insensitive
+|language |string |yes | |en |Language is required and it is case sensitive and only en value is supported for now
+|timezone |string |yes | |GMT+05:00 |Timezone is required and it is case sensitive. Timezone value only supports specific format GMT+xx:xx, GMT-xx:xx
+|criteriaFilters |object array |no | | |Where conditions
+|===
+
+​
+
+== 5. Responses
+
+Please see xref:responses.adoc[Responses]

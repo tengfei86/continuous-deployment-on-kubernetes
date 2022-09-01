@@ -1,0 +1,37 @@
+*DecisionSpace® 365 Production Data Management*
+
+== Your data-driven oilfield starts here.
+
+DecisionSpace® 365 Production Data Management lays the foundation for your oilfield to be data-driven. Answer new challenges, get ahead new uncertainties, and unleash the new generation’s potential. This is the production data management solution to help you thrive in the digital era.
+
+* *ONE TRUTH* – connect and integrate different databases, applications, and domains.
+* *EXTEND & SCALE* – Extensible, scalable, and adaptable to growing data volumes and new data types/sources
+* *ADOPT FAST* – Application design that is fast to deploy, easy to maintain, and intuitive to operate
+* *DO MORE* – Services to automate, customize, and simplify data management tasks
+* *LEARN DEEP* - Calculation engines that can support deep learning, big data analytics, and machine learning
+
+== What problems does it solve?
+
+=== (Internal) supporting Landmark projects
+
+Untangling and hooking databases consume months of lead time in projects, slowing them down and adding costs. DecisionSpace® 365 Production Data Management should simplify the data management phase, so we can deliver value faster and improve project’s profitability.
+
+=== Crew change
+
+Senior engineers are exiting at a rapid pace, Millennials are moving to decision-making roles, and Gen-Z are entering the workforce. This transition creates new expectations of technology adoption. DecisionSpace® 365 Production Data Management should:
+
+* Be easy & fast to deploy and maintain
+* Have minimal learning curve, so the new ``crews'' can get up to speed quickly
+* Harness modern tech stack, while still allow connections to legacy systems that the new crew inherit.
+
+=== New data types and sources
+
+DecisionSpace® 365 Production Data Management should be able to streamline data injection/consumption of high-frequency data, data-as-a-service apps, new types of modeling (e.g. frac interference, cube development) and new types of analysis (i.e. data science, analytics)
+
+=== Getting ahead of uncertainties
+
+Assets are suffering from growing complexity and frequent internal/external changes. DecisionSpace® 365 Production Data Management should support surveillance technologies that can help assets make decisions in anticipation to upcoming changes. The surveillance layer taps insights and connects the dots between internal, external, and cross-domain data.
+
+=== Doing more with less
+
+Market pressure has forced assets to lose most of its workforce – people left are doing 2x to 3x responsibilities while constantly firefighting new problems. DSPDM should allow assets to manage their production data with less resources – by providing automation, increasing transparency, and simplifying data management tasks.

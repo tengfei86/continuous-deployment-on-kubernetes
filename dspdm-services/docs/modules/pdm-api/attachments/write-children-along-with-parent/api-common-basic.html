@@ -1,0 +1,36 @@
+<html>
+
+<head>
+
+</head>
+
+<body style="margin: 0 0 0 0;">
+    <iframe src="../resources/api.html" id="commonAPI" width="100%" height="100%" frameborder="0">
+    </iframe>
+    <script>
+        window.onload = function () {
+            let body =
+            {
+    "boName": "BUS OBJ RELATIONSHIP",
+    "language": "en",
+    "timezone": "GMT+05:00",
+    "criteriaFilters" : [
+       {
+           "boAttrName" : "parent_bo_name",
+           "operator" : "EQUALS",
+           "values" : ["WELL"]
+       },
+       {
+           "boAttrName" : "child_bo_name",
+           "operator" : "EQUALS",
+           "values" : ["WELLBORE"]
+       }
+    ]
+}
+
+            document.getElementById("commonAPI").contentWindow.setCommonParams(JSON.stringify(body, null, "    "));
+        }
+    </script>
+</body>
+
+</html>

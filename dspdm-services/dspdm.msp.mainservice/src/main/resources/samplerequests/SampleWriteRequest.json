@@ -1,0 +1,57 @@
+{
+  "WELL": { // mandatory BO NAME
+    "language": "en", // mandatory and must be provided for the proper response messages
+    "readBack": true, // optional and defaults to false to tell the service to return the updated/inserted data in same request
+    "timezone": "GMT+08:00", // mandatory and must be provided
+    "data": [ // Array/List of records to save
+      {
+        "WELL ID": 1, // primary key of the object. If primary key is there in place then it will be an update call otherwise it will be an insert call
+        "CURRENT OPERATOR": "admin", // any field/property of the current business object to be saved
+        "ROW CREATED BY": "admin",
+        "ROW CREATED DATE": "2019-08-07 06:05:30",
+        "IS ACTIVE": true,
+        "ASSIGNED FIELD": "Q203",
+        "COMPLETION DATE": "2019-08-07 06:05:30",
+        "R WELL STATUS ID": 1,
+        "R AREA TYPE ID": 1,
+        "UWI": "1M2", // unqiue key to be read from metadata and to be matched for non-existence only in case it is a save request 
+        "TENANT ID": -1,
+        "AREA ID": 1,
+        "CURRENT STATUS DATE": "2019-08-07 06:05:30",
+        "ROW CHANGED DATE": "2019-08-07 06:05:30",
+        "REGULATORY AGENCY": "203-a",
+        "CURRENT CLASS": "21",
+        "SPUD DATE": "2019-08-07 06:05:30",
+        "R WELL LEVEL TYPE ID": 1,
+        "WELL NAME": "Q203",
+        "WELL NUM": "21",
+        "SURF LATITUDE": 68.6199,
+        "SURF LONGITUDE": 36.0173,
+        "ROW CHANGED BY": "admin",
+        "children": {
+          // list of children objects to be saved/updated in same request
+          "WELL_CHILD_1": { // mandatory BO NAME
+            "language": "en", // mandatory and must be provided for the proper response messages
+            "readBack": true, // optional and defaults to false to tell the service to return the updated/inserted data in same request
+            "timezone": "GMT+08:00", // mandatory and must be provided
+            "data": [
+              // Array/List of records to save
+              {
+              }
+            ]
+          },
+          "WELL_CHILD_2": { // mandatory BO NAME
+            "language": "en", // mandatory and must be provided for the proper response messages
+            "readBack": true, // optional and defaults to false to tell the service to return the updated/inserted data in same request
+            "timezone": "GMT+08:00", // mandatory and must be provided
+            "data": [
+              // Array/List of records to save
+              {
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

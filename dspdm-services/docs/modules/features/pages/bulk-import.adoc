@@ -1,0 +1,229 @@
+= Bulk-import data from excel
+
+*Features provide more extends API, such as: import, export, bulk, etc.*
+
+Bulk-import feature extends the ability of importing the data from excel based on the Save API.
+
+The following will take you step by step to use bulk-import feature.
+
+== 1. Request URL
+
+https://distplat3.landmarksoftware.io/services/dspdmservice/msp/secure/bulk[bulk-import]
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Request bodys
+
+[width="100%",cols="14%,3%,7%,18%,58%",options="header",]
+|===
+|Name |Type |Required |Example value |Description
+|uploadedFile |File |yes |WELL VOL DAILY.xlsx |uploadedFile is pre-defined in metadata table *BUSINESS_OBJECT* and case insensitive
+|params |File |yes |import.json |*language* is required and it is case sensitive and only *en* value is supported for now
+|===
+
+=== a. uploadedFile excel
+
+[width="100%",cols="19%,9%,16%,<56%",options="header",]
+|===
+|Name |Required |Example value |Description
+|Excel sheet name |yes |WELL VOL DAILY |sheet name corresponds to a table name
+|Columns |yes |UWI |each column corresponds to a field of table
+|Rows |yes |OPT-1-205 |first row corresponds field name, the other data
+|===
+
+=== b. params json
+
+[width="100%",cols="9%,5%,7%,11%,14%,54%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |``WELL VOL DAILY'' |*boName* is pre-defined in metadata table *BUSINESS_OBJECT* and case insensitive
+|language |string |yes | |``en'' |*language* is required and it is case sensitive and only *en* value is supported for now
+|timezone |string |yes | |``GMT+05:00'' |*timezone* is required and it is case sensitive. Timezone value only supports specific format *GMT+xx:xx*, **GMT
+|readback |bool |no |false |TRUE |optional and defaults to false to tell the service to return the updated/inserted data in same request
+|offset |number |no |1 |1 |*offset* is based index of first record to be read
+|limit |number |no |100 |10000 |*limit* is the total number of records to be read for a particular bo
+|===
+
+=== c. Example
+
+xref:attachment:WELL%20VOL%20DAILY.xlsx[WELL VOL DAILY.xlsx]
+
+file:///D:/DSPDM/MkDocs/prdm-documents/docs/docs/features/bulk-import/import.json[import.json]
+
+image::bulk-import-postman.PNG[title="Bulk Import"]
+
+=== d. Result
+
+____
+Success. Save data from the excel.
+____
+
+[source,json]
+----
+{
+  "status": {
+    "statusCode": 1,
+    "statusLabel": "Success"
+  },
+  "messages": [],
+  "exception": {},
+  "data": {
+    "WELL VOL DAILY": {
+      "totalRecords": 2,
+      "parsedValues": {
+        "totalRecords": 1,
+        "list": [
+          {
+            "type": "WELL VOL DAILY",
+            "id": 13,
+            "PDEN_WELL_VOLUME_DAILY_ID": 13,
+            "WELL_ID": 10500,
+            "UWI": "OPT-1-207",
+            "VOLUME_DATE": "2008-04-06T00:00:00+08:00",
+            "ACTIVE_IND": true
+          }
+        ]
+      },
+      "oldValues": {
+        "totalRecords": 1,
+        "list": [
+          {
+            "type": "WELL VOL DAILY",
+            "id": 13,
+            "PDEN_WELL_VOLUME_DAILY_ID": 13,
+            "WELL_ID": 10500,
+            "UWI": "OPT-1-207",
+            "VOLUME_DATE": "2008-04-06T00:00:00+08:00",
+            "ACTIVE_IND": true,
+            "HOURS_ON": 24,
+            "OIL_VOLUME": null,
+            "OIL_VOLUME_OUOM": "null",
+            "OIL_QUALITY": null,
+            "OIL_QUALITY_OUOM": "stb(60F)",
+            "GAS_VOLUME": null,
+            "GAS_VOLUME_OUOM": "null",
+            "GAS_QUALITY": null,
+            "GAS_QUALITY_OUOM": "null",
+            "GAS_ENERGY": null,
+            "GAS_ENERGY_OUOM": "null",
+            "BOE_VOLUME": null,
+            "BOE_VOLUME_OUOM": "null",
+            "WATER_VOLUME": null,
+            "WATER_VOLUME_OUOM": "null",
+            "LIQUID_VOLUME": null,
+            "LIQUID_VOLUME_OUOM": "null",
+            "CONDENSATE_VOLUME": null,
+            "CONDENSATE_VOLUME_OUOM": "null",
+            "CO2_VOLUME": null,
+            "CO2_VOLUME_OUOM": "null",
+            "NITROGEN_VOLUME": null,
+            "NITROGEN_VOLUME_OUOM": "null",
+            "NGL_VOLUME": null,
+            "NGL_VOLUME_OUOM": "null",
+            "SULPHUR_VOLUME": null,
+            "SULPHUR_VOLUME_OUOM": "null",
+            "INJECTION_CYCLE": 0,
+            "INJ_WATER_VOLUME": 4882.47,
+            "INJ_WATER_VOLUME_OUOM": "stb(60F)",
+            "INJ_OIL_VOLUME": null,
+            "INJ_OIL_VOLUME_OUOM": "null",
+            "INJ_GAS_VOLUME": null,
+            "INJ_GAS_VOLUME_OUOM": "null",
+            "INJ_CO2_VOLUME": null,
+            "INJ_CO2_VOLUME_OUOM": "null",
+            "INJ_STEAM_VOLUME": null,
+            "INJ_STEAM_VOLUME_OUOM": "null",
+            "INJ_POLYMER_VOLUME": null,
+            "INJ_POLYMER_VOLUME_OUOM": "null",
+            "TUBING_PRESS": 1450.38,
+            "TUBING_PRESS_OUOM": "psi",
+            "CASING_PRESS": null,
+            "CASING_PRESS_OUOM": "null",
+            "BH_PRESS": null,
+            "BH_PRESS_OUOM": "null",
+            "FL_PRESS": null,
+            "FL_PRESS_OUOM": "null",
+            "SEP_PRESS": null,
+            "SEP_PRESS_OUOM": "null",
+            "INJECTION_PRESS": 3553.42,
+            "INJECTION_PRESS_OUOM": "psi",
+            "WH_TEMP": null,
+            "WH_TEMP_OUOM": "null",
+            "BH_TEMP": null,
+            "BH_TEMP_OUOM": "null",
+            "FL_TEMP": null,
+            "FL_TEMP_OUOM": "null",
+            "SEP_TEMP": null,
+            "SEP_TEMP_OUOM": "null",
+            "INJ_WH_STEAM_PRESS": null,
+            "INJ_WH_STEAM_PRESS_OUOM": "null",
+            "INJ_WH_STEAM_TEMP": null,
+            "INJ_WH_STEAM_TEMP_OUOM": "null",
+            "INJ_WH_STEAM_DRY": null,
+            "INJ_WH_STEAM_DRY_OUOM": "null",
+            "WATER_CUT_PERCENT": null,
+            "GAS_OIL_RATIO": null,
+            "GAS_OIL_RATIO_OUOM": "null",
+            "ROW_CHANGED_BY": "Admin",
+            "ROW_CHANGED_DATE": "2020-02-13T00:00:00+08:00",
+            "ROW_CREATED_BY": "Admin",
+            "ROW_CREATED_DATE": "2018-02-13T00:00:00+08:00"
+          }
+        ]
+      },
+      "invalidValues": {
+        "totalRecords": 1,
+        "list": [
+          {
+            "type": "WELL VOL DAILY",
+            "id": null,
+            "PDEN_WELL_VOLUME_DAILY_ID": null,
+            "WELL_ID": 10500,
+            "UWI": "OPT-1-307",
+            "VOLUME_DATE": "2008-04-06T00:00:00+08:00",
+            "ACTIVE_IND": true,
+            "messages": [
+              {
+                "boName": "WELL VOL DAILY",
+                "boAttrName": "UWI, VOLUME_DATE",
+                "boAttrDisplayName": "UWI, VOLUME_DATE",
+                "rowNumber": 3,
+                "message": "Unable to find a business object of type 'WELL VOL DAILY' with unique column name(s) 'UWI, VOLUME_DATE' and unique value(s) 'OPT-1-307, 2008-04-06 00:00:00.0' found at row index '3'",
+                "value": "OPT-1-307, 2008-04-06 00:00:00.0"
+              }
+            ],
+            "UWI, VOLUME_DATE": "OPT-1-307, 2008-04-06 00:00:00.0"
+          }
+        ]
+      }
+    }
+  },
+  "version": "0.0.0.0A",
+  "threadName": "**unknown_84591",
+  "requestTime": "2020-08-24 13:43:13.163 +08:00",
+  "responseTime": "2020-08-24 13:43:13.546 +08:00"
+}
+----
+
+== 4. Responses
+
+Please see xref:pdm-api:responses.adoc[Responses]
+
+
+[width="100%",cols="27%,69%,4%",options="header",]
+|===
+|Name |Description |
+|parsedValues |Insert legitimate records from excel into parsedValues. |
+|oldValues |1.1 use the excel sheet name as the BO_NAME of the BUS_OBJ_ATTR_UNIQ_CONSTRAINTS table to find the unique constraint column(s).1.2 find the values of the unique constraint column(s) from excel, and insert the corresponding records from the database into oldValues based on the valuesAll the oldValues are either common with pareseValues or invalidValues. |
+|invalidValues |records that meet one of the following criteira are inserted into invalidValues1.1 the value type of the cell is not valid1.2 the value of the cell is null ,but its IS_MANDATORY of the BUSINESS_OBJECT_ATTR table is true1.3 the types of excel cell are different from the types of database field1.4 the length of excel cell data exceeds the limit of database field length1.5 If the record has a parent record (Or reference data record) and parent record id is not found then this record will also be marked as invalid record. In other words if the foreign key value is not recognized from the name. |
+|bo totalRecords |parsedValues totalRecords + invalidValues totalRecords |
+|oldValues totalRecords |oldValues from paresdValues + oldValues from invalidValues |
+|===

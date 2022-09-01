@@ -1,0 +1,34 @@
+<html>
+
+<head>
+
+</head>
+
+<body style="margin: 0 0 0 0;">
+    <iframe src="../resources/api.html" id="updateCustomAttribute" width="100%" height="100%" frameborder="0">
+    </iframe>
+    <script>
+        window.onload = function () {
+            let body =
+{
+    "BUSINESS OBJECT": {
+        "language": "en",
+        "readBack": true,
+        "timezone": "GMT+08:00",
+        "showSQLStats": true,
+        "data": [
+            {
+                "BO_NAME": "WELL TEST",
+                "BO_ATTR_NAME": "TEST",
+                "ATTRIBUTE_DISPLAYNAME": "Test",
+                "ATTRIBUTE_DTATYPE": "character varying(100)"
+            }
+        ]
+    }
+}
+    document.getElementById("updateCustomAttribute").contentWindow.setUpdateCustomAttribute(JSON.stringify(body, null, "    "));
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+= Business Roles
+
+Petroleum engineers design and manage fluid flow from the reservoir and its handling at the surface. Information is collected periodically or continuously by field operators or automated systems. Engineers specify and analyze the required periodic tests for flow rate, pressure and composition.
+
+Reservoir engineers, with input from geoscientists, calculate reserves and use models for forecast future production rates and volumes. The models, updated throughout the life of the pool or field, are the basis for economic analysis and for designing the production facilities. Actual production is tracked against forecasts for specific classes of reserves (proven, probable, etc.)
+
+Production accountants track the fluids through various delivery systems, including tanks, batteries, facilities, pipelines, and tankers. They calculate volumes and prepare the necessary reports, partner payments and royalties. In some cases, they ``back allocate'' the commingled volumes to the relevant reservoirs and wells. Regulatory agencies may require reporting of production grouped or allocated at different points of the delivery system. Many commercial sources (data vendors) of production information only have access to these aggregate levels. Versions of production data from different sources may exist and vary over time.
+
+Government regulators authorize and monitor the production operations. They ensure compliance to regulations and leases, effective management of the resource, and payment of taxes and royalties.
+
+Data managers and analysts receive, validate, store, and distribute data about wells.

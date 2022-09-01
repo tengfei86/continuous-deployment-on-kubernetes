@@ -1,0 +1,39 @@
+<html>
+
+<head>
+
+</head>
+
+<body style="margin: 0 0 0 0;">
+    <iframe src="../resources/api.html" id="searchAPI" width="100%" height="100%" frameborder="0">
+    </iframe>
+    <script>
+        window.onload = function () {
+            let body =
+            {
+                "boName": "WELL",
+                "language": "en",
+                "timezone": "GMT+05:00",
+                "readAllRecords": true,
+                "criteriaFilters": [
+                    {
+                        "boAttrName": "SEARCH_JSONB",
+                        "operator": "JSONB_FIND_LIKE",
+                        "values": [
+                            "sol"
+                        ]
+                    }
+                ],
+                "orderBy": [
+                    {
+                        "boAttrName": "WELL_ID",
+                        "order": "DESC"
+                    }
+                ]
+            }
+            document.getElementById("searchAPI").contentWindow.setSearchParams(JSON.stringify(body, null, "    "));
+        }
+    </script>
+</body>
+
+</html>

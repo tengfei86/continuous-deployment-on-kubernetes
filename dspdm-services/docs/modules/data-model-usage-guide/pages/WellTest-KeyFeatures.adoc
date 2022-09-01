@@ -1,0 +1,6 @@
+= Key Features
+
+* Be able to track the data record of the flow test under stable state.
+* The production flow test includes production test and injection test. Meanwhile the measurement under stable state of a multi-rate test can be record.
+* The production flow test data have the validation for production allocation.
+* The allocation factors of different product for wellbore or well completion can be tracked and versioned by date.

@@ -1,0 +1,35 @@
+= Fluid Analysis Data Model
+
+== Fluid Analysis ERD
+
+=== Fluid Sample ERD
+
+image::Fluid%20Sample.png[title="Fluid Sample ERD"]
+
+=== Fluid Analysis Sample ERD
+
+image::Fluid%20Analysis%20Sample.png[title="Fluid Analysis Sample ERD"]
+
+=== Fluid Analysis ERD
+
+image::Fluid%20Analysis.png[title="Fluid Analysis ERD"]
+
+== Fluid Analysis Tables Description
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|*Table* |*Description*
+|xref:Data-Dictionary.adoc#fluid_sample[FLUID_SAMPLE] |The sample table is used to store the physical properties and the most primary information about the sample. Such as sample acquisition date time, method, depth etc.
+|xref:Data-Dictionary.adoc#fluid_sample_detail[FLUID_SAMPLE_DETAIL] |This table is used to record the value that maybe measured in a sample acquisition activity. For example, in a bottom hole sampling, the separator temp/press maybe captured together.
+|xref:Data-Dictionary.adoc#r_fluid_sample_method[R_FLUID_SAMPLE_METHOD] |This table lists the fluid sample method, separator sampling, RFT sampling, Separator sampling, Wellhead sampling, Facility sampling.
+|xref:Data-Dictionary.adoc#fluid_analysis_sample[FLUID_ANALYSIS_SAMPLE] |This table lists the samples that are used in an analysis. In some cases, a single sample will be used, but in others new samples may be input or created at various stages of the study. The sample needs validation before the experiments.
+|xref:Data-Dictionary.adoc#fluid_analysis[FLUID_ANALYSIS] |Use this table to keep track of the details about an analysis project, such as who did the analysis, when it was done and so on. An analysis may include information from one or many analysis steps.
+|xref:Data-Dictionary.adoc#fluid_analysis_step[FLUID_ANALYSIS_STEP] |For one fluid analysis, it usually involves a series of tests performed on a fluid in order to determine the fluids properties. An individual step during a fluid analysis is used to measure properties of a fluid in one Pressure and Temperature condition. The pressure and/or temperature may change from one step to another.
+|xref:Data-Dictionary.adoc#fluid_analysis_property_summary[FLUID_ANALYSIS_PROPERTY_SUMMARY] |This table contains the fluid properties summary measurement, such as density, viscosity, gravity, compressibility, GOR etc. parameter under reservoir or surface condition. Fluid property reference will provide kinds of analysis parameters.
+|xref:Data-Dictionary.adoc#fluid_saturation_pressure[FLUID_SATURATION_PRESSURE] |This table contains the saturation pressure information. It can be saturation pressure of reservoir temperature, or bubble/dew point curve of different temperatures.
+|xref:Data-Dictionary.adoc#fluid_composition_analysis[FLUID_COMPOSITION_ANALYSIS] |FLUID COMPOSITION ANALYSIS: This table contains the measured component of the product.
+|xref:Data-Dictionary.adoc#fluid_res_surf_vol_relation[FLUID_RES_SURF_VOL_RELATION] |This table is used to record the important parameters that relate the surface volumes to reservoir volumes, such as formation volume factor etc.
+|xref:Data-Dictionary.adoc#r_fluid_property[R_FLUID_PROPERTY] |This table list the fluid property tested in fluid analysis experiments, such as compressibility, density, heat content, formation volume factor etc.
+|xref:Data-Dictionary.adoc#r_saturation_point_type[R_SATURATION_POINT_TYPE] |This table Specifies the kinds of saturation points. Such as bubble point, dew point, critical point.
+|xref:Data-Dictionary.adoc#r_fluid_component[R_FLUID_COMPONENT] |This table is used to specify all kinds of components.
+|===

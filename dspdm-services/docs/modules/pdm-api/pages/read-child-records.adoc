@@ -1,0 +1,1128 @@
+= Read the data
+
+*Common API is the core API provided by PDM, it brings rich functionalities to meet a variety of requirements of data persistence and queries*
+
+*User can leverage and combine the multiple query criteria to filter out any kind of data as needed, the main query conditions including: _specified select list_, _criteria filters_, _pagination_, _sorting_, _aggregation_, _having filters_, _simple join_, _dynamic join_ etc.*
+
+The following sections will lead you fully understand the API step by step.
+
+== 1. Request URL
+
+\{PDM Server domain}/common
+
+*HTTP Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+=== 3. Request body
+
+[width="99%",cols="7%,2%,4%,29%,29%,29%",options="header",]
+|===
+|Name |Type |Required |Default value |Example |Description
+|boName |string |yes | |``WELL'' |*boName* is the model name pre-defined in metadata table *BUSINESS_OBJECT* and case insensitive
+|language |string |yes | |``en'' |*language* is required and it is case sensitive, only *en* value is supported for now
+|timezone |string |yes | |``GMT+05:00'' |*timezone* is required and it is case sensitive. Timezone value should follow the standard of GMT, e.g. *GMT+xx:xx*, *GMT-xx:xx*
+|selectList |string array |no |* | |optional and default value is *, which means all the attributes will be read out.
+|showSQLStats |bool |no |false |true |A flag indicate if you need a basic quota of query efficiency, If it is true, a *standard SQL, executionCount, totalTimeInMillis* will be returned.
+|criteriaFilters |object array |no | | |*Where conditions*
+|pagination |object |no | | |*Two parameters involved:*
+|orderBy |object array |no | | |*Sorting*
+|aggregateSelectList |object array |no | | |*Aggregate conditions*
+|havingFilters |object array |no | | |
+|readUnique |bool |no |false |``true'' |_If it is true but the database has more than one record then the API will response with error message_
+|readFirst |bool |no |false |``true'' |_If set to true then exactly one record will be read. Can have zero records found_
+|readMetadata |bool |no |false |``false'' |*The model’s metadata(*``BUSINESS OBJECT ATTR''*) will be returned If it is true, *metadata* is the definition of the model
+|readMetadataConstraints |bool |no |false |``false'' |The model’s unique constraints(*``BUS OBJ ATTR UNIQ CONSTRAINTS''*) will be returned if it is true
+|readReferenceData |bool |no |false |``false'' |_if set to true need set *readMetadata* to *true*, and response will include the referencedata(*``REFERENCE_DATA''*) for the given BO_NAME only. _
+|readRecordsCount |bool |no |false |``false'' |_If set to true then response will include the total records count for the given BO Name and filters_
+|readWithDistinct |bool |no |false |``false'' |_If set to true then distinct will be applied to the SQL SELECT LIST and also to the count if selected_
+|readAllRecords |bool |no |false |``false'' |_If set to true then you will be able to read 10000 records at max in one query._
+|joinAlias |string |no | |``a'' |
+|simpleJoins |object array |no | | |
+|dynamicJoins |object array |no | | |
+|prependAlias |bool |no |false |false |It will have effect only with the simple joins. If it is set to true then join alias will be prefixed to all attributes with one underscore in between. It is useful to identify an attribute when more than one attribute from different business objects have same name.
+|showSQLStats |bool |no |false |false |_If set to true then the printed json response will include the list of sql statements executed for this request along with the count and time taken_
+|collectSQLScript |integer |no |0 |1 |If this attribute is provided in the request and its value is between 1 and 11 inclusive then the response will include all the* _sql_ _scripts executed by the system. Possible values are from zero to eleven. No means no_ _sql_ _script to collect and 11 mains all_ _sql_ _script to collect in response._ Following are the possible values* _// 0: No SQL Script At All (Default)_ _// 1: COUNT Only_ _// 2: SELECT ONLY_ _// 3: SELECT and COUNT_ _// 4: INSERT Only_ _// 5: UPDATE Only_ _// 6: DELETE Only_ _// 7: INSERT and UPDATE Only_ _// 8: ALL DML Operations Only_ _// 9: ALL DDL Operations Only_ _// 10: ALL DDL and DML Operations Only_
+|===
+
+=== Pay more attention
+
+* All keys are case sensitive
+* Values for keys boName and boAttrName are case insensitive.
+* Some keys have a predefined format for their values like language, timezone, date time, etc.
+
+=== All acceptable/possible time formats
+
+____
+All acceptable/possible date only and timestamp and time only formats which can be parsed by the API.
+
+Following is the list of all possible supported parse-able patterns. We start parsing from a more detail pattern and if not matched then we try to match a less detailed pattern till end.
+
+If no match is found then API will throw an error.
+____
+
+[source,java]
+----
+TIME_ONLY_FORMAT("HH:mm:ss")
+TIME_ONLY_FORMAT_WITH_MILLIS("HH:mm:ss.SSS")
+// HYPHEN BASED DATE FORMATS
+DATE_ONLY_FORMAT("yyyy-MM-dd")
+DATETIME_FORMAT_WITHOUT_SECONDS("yyyy-MM-dd'T'HH:mm")
+DATETIME_FORMAT_WITH_T("yyyy-MM-dd'T'HH:mm:ss")
+DATETIME_FORMAT("yyyy-MM-dd HH:mm:ss")
+DATETIME_FORMAT_WITH_TIMEZONE("yyyy-MM-dd HH:mm:ssX")
+TIMESTAMP_FORMAT_WITHOUT_TIMEZONE("yyyy-MM-dd HH:mm:ss.SSS")
+TIMESTAMP_FORMAT_WITH_TIMEZONE("yyyy-MM-dd HH:mm:ss.SSSX")
+TIMESTAMP_ISO_FORMAT_UTC("yyyy-MM-dd'T'HH:mm:ss'Z'")
+TIMESTAMP_ISO_FORMAT_WITH_MILLIS_UTC("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+TIMESTAMP_ISO_FORMAT_WITH_TIMEZONE("yyyy-MM-dd'T'HH:mm:ssX")
+TIMESTAMP_ISO_FORMAT_WITH_TIMEZONE_AND_MILLIS("yyyy-MM-dd'T'HH:mm:ss.SSSX")
+// SLASH BASED DATE FORMATS
+DATE_ONLY_SLASH_FORMAT("yyyy/MM/dd")
+DATETIME_SLASH_FORMAT_WITHOUT_SECONDS("yyyy/MM/dd'T'HH:mm")
+DATETIME_SLASH_FORMAT_WITH_T("yyyy-MM-dd'T'HH:mm:ss")
+DATETIME_SLASH_FORMAT("yyyy/MM/dd HH:mm:ss")
+DATETIME_SLASH_FORMAT_WITH_TIMEZONE("yyyy/MM/dd HH:mm:ssX")
+TIMESTAMP_SLASH_FORMAT_WITHOUT_TIMEZONE("yyy/MM/dd HH:mm:ss.SSS")
+TIMESTAMP_SLASH_FORMAT_WITH_TIMEZONE("yyy/MM/dd HH:mm:ss.SSSX")
+TIMESTAMP_ISO_SLASH_FORMAT_UTC("yyy/MM/dd'T'HH:mm:ss'Z'")
+TIMESTAMP_ISO_SLASH_FORMAT_WITH_MILLIS_UTC("yyy/MM/dd'T'HH:mm:ss.SSS'Z'")
+TIMESTAMP_ISO_SLASH_FORMAT_WITH_TIMEZONE("yyy/MM/dd'T'HH:mm:ssX")
+TIMESTAMP_ISO_SLASH_FORMAT_WITH_TIMEZONE_AND_MILLIS("yyy/MM/dd'T'HH:mm:ss.SSSX")
+----
+
+=== 3.1. Required and basic
+
+____
+Query the specified table.
+____
+
+==== Example
+
+____
+Query the well data. (The default is to query the first page)
+____
+
+[source,json]
+----
+{
+    "boName": "WELL",
+    "language": "en",
+    "timezone": "GMT+05:00"
+}
+----
+
+____
+The final executed SQL:
+____
+
+[source,sql]
+----
+SELECT * FROM WELL
+FETCH NEXT (20) ROWS ONLY
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/read-records/api-common-basic.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+==== Parameters
+
+[width="100%",cols="9%,6%,9%,60%,8%,8%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boName |string |yes | |``WELL'' |*boName* is pre-defined in metadata table *BUSINESS_OBJECT* and case insensitive. link:#GetAllBoName[*Get all boName*]
+|language |string |yes | |``en'' |*language* is required and it is case sensitive and only *en* value is supported for now
+|timezone |string |yes | |``GMT+05:00'' |*timezone* is required and it is case sensitive. Timezone value only supports specific format *GMT+xx:xx*, *GMT-xx:xx*
+|===
+
+==== [#GetAllBoName]#Get all boName#
+
+____
+You can copy the following json as body to get all boName. Specific parameters will be explained later.
+____
+
+[source,json]
+----
+{
+   "boName":"BUSINESS OBJECT",
+   "language":"en",
+   "timezone":"GMT+08:00",
+   "selectList":[
+      "BO_NAME"
+   ],
+   "orderBy":[
+      {
+         "boAttrName":"business_object_id",
+         "order":"ASC"
+      }
+   ],
+   "readAllRecords":true
+}
+----
+
+==== [#GetBoAttrNameByBoName]#Get boAttrName by boName#
+
+____
+You can copy the following json(replace *values* to specific boName) as body to get boAttrName by boName. Specific parameters will be explained later.
+____
+
+[source,json]
+----
+{
+   "boName":"BUSINESS OBJECT ATTR",
+   "language":"en",
+   "timezone":"GMT+08:00",
+   "selectList":[
+      "BO_ATTR_NAME"
+   ],
+   "criteriaFilters":[
+      {
+         "boAttrName":"BO_NAME",
+         "operator":"EQUALS",
+         "values":[
+            "WELL"
+         ]
+      }
+   ],
+   "orderBy":[
+      {
+         "boAttrName":"business_object_attr_id",
+         "order":"ASC"
+      }
+   ],
+   "readAllRecords":true
+}
+----
+
+=== 3.2. selectList
+
+____
+Return data from a column list.
+____
+
+==== Example
+
+____
+Query the well data. (The default is to query the first page) Only query columns: ``WELL_NAME'',``AREA_NAME'', and return the SQL statement.
+____
+
+[source,json]
+----
+{
+   "boName":"WELL",
+   "language":"en",
+   "timezone":"GMT+05:00",
+   "selectList":[
+      "WELL_NAME",
+      "AREA_NAME"
+   ],
+   "showSQLStats":true
+}
+----
+
+____
+The final executed SQL:
+____
+
+[source,sql]
+----
+SELECT WELL_NAME, AREA_NAME FROM WELL
+FETCH NEXT (20) ROWS ONLY
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/read-records/api-common-selectList.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+==== Parameters
+
+[width="100%",cols="7%,5%,4%,28%,28%,28%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|selectList |string array |no |* | |optional and default is * means all the columns defined in metadata will be selected.
+|showSQLStats |bool |no |false |true |If true, query *sql, executionCount, totalTimeInMillis* will be returned.
+|===
+
+=== 3.3. criteriaFilters
+
+____
+Where condition
+____
+
+==== Example
+
+____
+Query the well data. (The default is to query the first page) Query WELL_TYPE=``OIL'' and WELL_NAME like ``CN'' and AREA_ID in(1,2,3,4,5) and WELL_ID between(1,10000)
+____
+
+[source,json]
+----
+{
+   "boName":"WELL",
+   "language":"en",
+   "timezone":"GMT+05:00",
+   "criteriaFilters":[
+      {
+         "boAttrName":"WELL_TYPE",
+         "operator":"EQUALS",
+         "values":[
+            "OIL"
+         ]
+      },
+      {
+         "boAttrName":"WELL_NAME",
+         "operator":"LIKE",
+         "values":[
+            "CN"
+         ]
+      },
+      {
+         "boAttrName":"AREA_ID",
+         "operator":"IN",
+         "values":[
+            1,
+            2,
+            3,
+            4,
+            5
+         ]
+      },
+      {
+         "boAttrName":"WELL_ID",
+         "operator":"BETWEEN",
+         "values":[
+            1,
+            10000
+         ]
+      }
+   ]
+}
+----
+
+____
+The final executed SQL:
+____
+
+[source,sql]
+----
+SELECT * FROM WELL
+WHERE (WELL_TYPE = 'OIL')
+    AND (WELL_NAME LIKE '%CN%')
+    AND (AREA_ID IN (1, 2, 3, 4, 5))
+    AND (WELL_ID BETWEEN 1 AND 10000)
+FETCH NEXT (20) ROWS ONLY
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/read-records/api-common-criteriaFilters.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+==== Parameters
+
+[width="100%",cols="10%,5%,4%,27%,27%,27%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|criteriaFilters |object array |no | | |*Where conditions*
+|===
+
+==== [#criteriaFilters.Parameters]#criteriaFilters.Parameters#
+
+[width="100%",cols="12%,5%,7%,11%,11%,54%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boAttrName |string |yes | |``UWI'' |*boAttrName* is pre-defined in metadata table *BUSINESS_OBJECT_ATTR* and case insensitive. link:#GetBoAttrNameByBoName[*Get boAttrName by boName*]
+|operator |string |yes | |LIKE |SQL operator, SUPPORTED OPERATORS please see link:#criteriaFilters.Operators[*criteriaFilters.Operators*]
+|values |array |yes | |[``UWI-12345''] |key *values* is an array of values
+|===
+
+==== [#criteriaFilters.Operators]#criteriaFilters.Operators#
+
+____
+All Operators are case sensitive
+____
+
+[cols=",",options="header",]
+|===
+|Name |Description
+|EQUALS |=
+|NOT_EQUALS |!=
+|GREATER_THAN |>
+|LESS_THAN |<
+|GREATER_OR_EQUALS |>=
+|LESS_OR_EQUALS |<=
+|BETWEEN |between
+|NOT_BETWEEN |not between
+|IN |in
+|NOT_IN |not in
+|LIKE |like
+|NOT_LIKE |not like
+|===
+
+_Note_: Following operators are Postgres Only. VDB connection will not support these and will throw error incase we use them over VDB or on some other databases. JSONB operators are being used in full text search only for now.
+
+[cols=",",options="header",]
+|===
+|Name |Description
+|ILIKE |ilike
+|NOT_ILIKE |not ilike
+|JSONB_FIND_EXACT |jsonb find exact
+|JSONB_FIND_LIKE |jsonb find like
+|JSONB_DOT |jsonb dot
+|JSONB_DOT_FOR_TEXT |jsonb dot for text
+|===
+
+=== 3.4. pagination
+
+____
+Query the data for the specified page
+____
+
+==== Example
+
+____
+Query the well data on the second page and per page displays 30.
+____
+
+[source,json]
+----
+{
+   "boName":"WELL",
+   "language":"en",
+   "timezone":"GMT+05:00",
+   "pagination":{
+      "recordsPerPage":30,
+      "pages":[
+         2
+      ]
+   }
+}
+----
+
+____
+The final executed SQL:
+____
+
+[source,sql]
+----
+SELECT * FROM WELL
+OFFSET (30) ROWS
+FETCH NEXT (30) ROWS ONLY
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/read-records/api-common-pagination.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+==== Parameters
+
+[width="100%",cols="7%,2%,4%,29%,29%,29%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|pagination |object |no | | |
+|===
+
+=== 3.5. orderBy
+
+____
+Order condition
+____
+
+==== Example
+
+____
+Query the well data and sort by ``UWI'' ascending and ``WELL_NAME'' Descending.
+____
+
+[source,json]
+----
+{
+   "boName":"WELL",
+   "language":"en",
+   "timezone":"GMT+05:00",
+   "orderBy": [
+    {
+      "boAttrName": "UWI",
+      "order": "ASC"
+    },
+    {
+      "boAttrName": "WELL_NAME",
+      "order": "DESC"
+    }
+  ]
+}
+----
+
+____
+The final executed SQL:
+____
+
+[source,sql]
+----
+SELECT * FROM WELL
+ORDER BY UWI ASC, WELL_NAME DESC
+FETCH NEXT (20) ROWS ONLY
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/read-records/api-common-orderBy.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+==== Parameters
+
+[width="100%",cols="6%,6%,4%,28%,28%,28%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|orderBy |object array |no | | |
+|===
+
+=== 3.6. aggregateSelectList
+
+____
+Aggregate conditions
+____
+
+==== Example
+
+____
+Example1: Aggregate Max WELL_ID and Min WELL_ID
+____
+
+[source,json]
+----
+{
+   "boName":"WELL",
+   "language":"en",
+   "timezone":"GMT+05:00",
+   "aggregateSelectList":[
+      {
+         "boAttrName":"WELL_ID",
+         "aggregateFunction":"MAX",
+         "alias":"MAX_WELL_ID"
+      },
+      {
+         "boAttrName":"WELL_ID",
+         "aggregateFunction":"MIN",
+         "alias":"MIN_WELL_ID"
+      }
+   ]
+}
+----
+
+____
+The final executed SQL of Example1:
+____
+
+[source,sql]
+----
+SELECT MAX(WELL_ID) as MAX_WELL_ID, MIN(WELL_ID) as MIN_WELL_ID FROM WELL
+FETCH NEXT (20) ROWS ONLY
+----
+
+____
+Example2: Query WELL_NAME,AREA_NAME and Aggregate Max WELL_ID and Min WELL_ID
+____
+
+[source,json]
+----
+{
+   "boName":"WELL",
+   "language":"en",
+   "timezone":"GMT+05:00",
+   "selectList":[
+      "WELL_NAME",
+      "AREA_NAME"
+   ],
+   "aggregateSelectList":[
+      {
+         "boAttrName":"WELL_ID",
+         "aggregateFunction":"MAX",
+         "alias":"MAX_WELL_ID"
+      },
+      {
+         "boAttrName":"WELL_ID",
+         "aggregateFunction":"MIN",
+         "alias":"MIN_WELL_ID"
+      }
+   ]
+}
+----
+
+____
+The final executed SQL of Example2:
+____
+
+[source,sql]
+----
+SELECT WELL_NAME, AREA_NAME, MAX(WELL_ID) as MAX_WELL_ID,
+MIN(WELL_ID) as MIN_WELL_ID FROM WELL
+GROUP BY WELL_NAME, AREA_NAME
+FETCH NEXT (20) ROWS ONLY
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/read-records/api-common-aggregateSelectList.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+==== Parameters
+
+[width="99%",cols="10%,5%,4%,27%,27%,27%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|aggregateSelectList |object array |no | | |*Aggregate conditions*
+|===
+
+=== [#aggregateSelectList.Parameters]#aggregateSelectList.Parameters#
+
+[width="100%",cols="16%,5%,6%,11%,11%,51%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|boAttrName |string |yes | |``WELL_ID'' |*boAttrName* is pre-defined in metadata table *BUSINESS_OBJECT_ATTR* and case insensitive. link:#GetBoAttrNameByBoName[*Get boAttrName by boName*]
+|aggregateFunction |string |yes | |``MAX'' |support *MIN*, *MAX*, *SUM*, *AVG* and *Count*
+|alias |string |yes | |``MAX_WELL_ID'' |will be used to get back the value from the response
+|===
+
+=== 3.7. havingFilters
+
+____
+Having condition
+____
+
+==== Example
+
+____
+Example: Read Max of VOLUME_DATE For All Wells Which Were Created Before 2019 And Their BOE_VOLUME Is Not NULL
+____
+
+[source,json]
+----
+{
+   "boName":"WELL VOL DAILY",
+   "language":"en",
+   "timezone":"GMT+05:00",
+   "selectList":[
+      "UWI"
+   ],
+   "aggregateSelectList":[
+      {
+         "boAttrName":"VOLUME_DATE",
+         "aggregateFunction":"MAX",
+         "alias":"MAX_VOLUME_DATE"
+      }
+   ],
+   "criteriaFilters":[
+      {
+         "boAttrName":"BOE_VOLUME",
+         "operator":"NOT_EQUALS",
+         "values":[
+            null
+         ]
+      }
+   ],
+   "havingFilters":[
+      {
+         "aggregateColumn":{
+            "boAttrName":"ROW_CREATED_DATE",
+            "aggregateFunction":"MAX"
+         },
+         "operator":"LESS_THAN",
+         "values":[
+            "2019-01-01 00:00:00+05:00"
+         ]
+      }
+   ]
+}
+----
+
+____
+The final executed SQL of Example1:
+____
+
+[source,sql]
+----
+SELECT UWI, MAX(VOLUME_DATE) as MAX_VOLUME_DATE FROM WELL_VOL_DAILY
+WHERE (BOE_VOLUME IS NOT NULL)
+GROUP BY UWI
+HAVING (MAX(ROW_CREATED_DATE) < '2019-01-01 00:00:00+05:00')
+FETCH NEXT (20) ROWS ONLY
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/read-records/api-common-havingFilters.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+==== Parameters
+
+[width="100%",cols="14%,10%,6%,10%,10%,50%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|havingFilters |object array |no | | |
+|===
+
+==== [#havingFilters.Parameters]#havingFilters.Parameters#
+
+[width="100%",cols="16%,9%,6%,10%,10%,49%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|aggregateColumn |object |yes | | |
+|operator |string |yes | |``LESS_THAN'' |supported please see link:#havingFilters.Operators[*havingFilters.Operators*]
+|values |object array |yes | | |key *values* is an array of values
+|===
+
+==== [#havingFilters.Operators]#havingFilters.Operators#
+
+____
+All Operators are case sensitive
+____
+
+[cols=",",options="header",]
+|===
+|Name |Description
+|EQUALS |=
+|NOT_EQUALS |!=
+|GREATER_THAN |>
+|LESS_THAN |<
+|GREATER_OR_EQUALS |>=
+|LESS_OR_EQUALS |<=
+|BETWEEN |between
+|NOT_BETWEEN |not between
+|IN |in
+|NOT_IN |not in
+|LIKE |like
+|NOT_LIKE |not like
+|ILIKE |ilike
+|NOT_ILIKE |not ilike
+|===
+
+=== 3.8. read options
+
+____
+Various read options
+____
+
+==== Parameters
+
+[width="100%",cols="22%,3%,6%,10%,10%,49%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|readUnique |bool |no |false |``true'' |_If set to true and the database has more than one record then service will throw error_
+|readFirst |bool |no |false |``true'' |_If set to true then exactly one record will be read. Can have zero records found_
+|readMetadata |bool |no |false |``false'' |_If set to true then response will include the metadata(*``BUSINESS OBJECT ATTR''*) for the given BO_NAME only_
+|readMetadataConstraints |bool |no |false |``false'' |_If set to true then response will include the metadata unique constraints(*``BUS OBJ ATTR UNIQ CONSTRAINTS''*) for the given BO_NAME only_
+|readReferenceData |bool |no |false |``false'' |_if set to true need set *readMetadata* to *true*, and response will include the referencedata(*``REFERENCE_DATA''*) for the given BO_NAME only. _
+|readRecordsCount |bool |no |false |``false'' |_If set to true then response will include the total records count for the given BO Name and filters_
+|readWithDistinct |bool |no |false |``false'' |_If set to true then distinct will be applied to the SQL SELECT LIST and also to the count if selected_
+|readAllRecords |bool |no |false |``false'' |_If set to true then you will be able to read 10000 records at max in one query._
+|===
+
+=== 3.9. simple join
+
+____
+Joins are a useful and powerful feature of relational databases. It allows us to read data from more than one table using a single SQL statement. When the join sql statement is executed each row of one table is mapped to all the rows of the other table. This mapping rows of one table to another table is call cross product. The resultant table of cross product can be of high volume which can be decreased by using join conditions and where clause filters. Simple join are those where the table structure of the joined table already exists.
+____
+
+==== Example
+
+____
+Example1: WELL and WELLBORE simple join.
+____
+
+[source,json]
+----
+{
+  "boName": "WELL",
+  "language": "en",
+  "timezone": "GMT+05:00",
+  "joinAlias": "a",
+  "selectList": [
+    "WELL_ID",
+    "WELL_NAME",
+    "AREA_NAME",
+    "UWI"
+  ],
+  "simpleJoins": [
+    {
+      "boName": "WELLBORE",
+      "joinType": "INNER",
+      "joinAlias": "b",
+      "selectList": [
+        "WELLBORE_ID",
+        "WELLBORE_NAME"
+      ],
+      "joiningConditions": [
+        {
+          "leftSide": {
+            "joinAlias": "a",
+            "boAttrName": "UWI"
+          },
+          "operator": "EQUALS",
+          "rightSide": {
+            "joinAlias": "b",
+            "boAttrName": "WELL_UWI"
+          }
+        }
+      ]
+    }
+  ],
+  "prependAlias": false,
+  "showSQLStats":true
+}
+----
+
+____
+The final executed SQL of Example1:
+____
+
+[source,sql]
+----
+SELECT a.WELL_ID, a.WELL_NAME, a.AREA_NAME, a.UWI,
+b.WELLBORE_ID, b.WELLBORE_NAME
+FROM WELL AS a  INNER JOIN WELLBORE AS b
+ON a.UWI = b.WELL_UWI
+FETCH NEXT (20) ROWS ONLY
+----
+
+____
+Example2: More joins and more combination conditions.
+____
+
+[source,json]
+----
+{
+  "boName": "WELL",
+  "language": "en",
+  "timezone": "GMT+05:00",
+  "joinAlias": "a",
+  "selectList": [
+    "WELL_ID",
+    "WELL_NAME",
+    "AREA_NAME",
+    "UWI"
+  ],
+  "criteriaFilters": [
+    {
+      "boAttrName": "WELL_NAME",
+      "operator": "LIKE",
+      "values": [
+        "P"
+      ]
+    }
+  ],
+  "pagination": {
+    "recordsPerPage": 30,
+    "pages": [
+      1
+    ]
+  },
+  "simpleJoins": [
+    {
+      "boName": "WELLBORE",
+      "joinType": "INNER",
+      "joinAlias": "b",
+      "selectList": [
+        "WELLBORE_ID",
+        "WELLBORE_NAME"
+      ],
+      "joiningConditions": [
+        {
+          "leftSide": {
+            "joinAlias": "a",
+            "boAttrName": "UWI"
+          },
+          "operator": "EQUALS",
+          "rightSide": {
+            "joinAlias": "b",
+            "boAttrName": "WELL_UWI"
+          }
+        }
+      ],
+      "criteriaFilters": [
+        {
+          "boAttrName": "WELL_UWI",
+          "operator": "LIKE",
+          "values": [
+            "P"
+          ]
+        }
+      ],
+      "orderBy": [
+        {
+          "boAttrName": "WELL_UWI",
+          "order": "DESC"
+        }
+      ]
+    },
+    {
+      "boName": "well vol daily",
+      "joinType": "INNER",
+      "joinAlias": "c",
+      "joiningConditions": [
+        {
+          "leftSide": {
+            "joinAlias": "a",
+            "boAttrName": "UWI"
+          },
+          "operator": "EQUALS",
+          "rightSide": {
+            "joinAlias": "c",
+            "boAttrName": "UWI"
+          }
+        }
+      ]
+    }
+  ],
+  "prependAlias": false,
+  "showSQLStats":true
+}
+----
+
+____
+The final executed SQL of Example2:
+____
+
+[source,sql]
+----
+SELECT a.WELL_ID, a.WELL_NAME, a.AREA_NAME, a.UWI,
+b.WELLBORE_ID, b.WELLBORE_NAME
+FROM WELL AS a
+INNER JOIN WELLBORE AS b ON a.UWI = b.WELL_UWI
+INNER JOIN WELL_VOL_DAILY AS c ON a.UWI = c.UWI
+WHERE (CAST(a.WELL_NAME AS VARCHAR) LIKE '%P%')
+    AND (CAST(b.WELL_UWI AS VARCHAR) LIKE '%P%')
+ORDER BY b.WELL_UWI DESC
+FETCH NEXT (30) ROWS ONLY
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/read-records/api-common-simpleJoin.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+==== Parameters
+
+[width="99%",cols="10%,5%,4%,27%,27%,27%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|*joinAlias* |string |no | |``a'' |
+|*simpleJoins* |object array |no | | |
+|*prependAlias* |bool |no |false |false |It will have effect only with the simple or dynamic joins. If it is set to true then join alias will be prefixed to all attributes with one underscore in between. It is useful to identify an attribute when more than one attribute from different business objects have same name.
+|===
+
+==== [#simpleJoins.Parameters]#simpleJoins.Parameters#
+
+____
+*selectList*, *aggregateSelectList*, *criteriaFilters*, *havingFilters* and *orderBy* can be used with simple join objects. Their effect will be on the whole result data.
+____
+
+____
+But *pagination* cannot be used with simple joins objects.
+____
+
+[width="100%",cols="18%,9%,6%,10%,10%,47%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|*boName* |string |yes | |``WELL'' |Bo Name is the name of business object to be joined. If it is same as the parent boName then it will be self-join. link:#GetAllBoName[*Get all boName*]
+|*joinType* |string |yes | |``LEFT'' |Join type is the type of join and it is case sensitive. Possible values are *INNER*, *LEFT*, *RIGHT* and *FULL*.
+|*joinAlias* |string |no | |``b'' |Join Alias is same as defined above but it will be defined here for the join table.
+|*joiningConditions* |object array |yes | | |
+|===
+
+=== 3.10. dynamic join
+
+____
+Joins are a useful and powerful feature of relational databases. It allows us to read data from more than one table using a single SQL statement. When the join sql statement is executed each row of one table is mapped to all the rows of the other table. This mapping rows of one table to another table is call cross product. The resultant table of cross product can be of high volume which can be decreased by using join conditions and where clause filters. In dynamic joins the joined table is created by a nested SQL statement.
+____
+
+==== Example
+
+____
+Query table WELL_VOL_DAILY each UWI maximum date’s volume.
+____
+
+[source,json]
+----
+{
+   "boName":"well vol daily",
+   "language":"en",
+   "timezone":"GMT+05:00",
+   "joinAlias":"a",
+   "readAllRecords":true,
+   "selectList":[
+      "UWI",
+      "boe_volume"
+   ],
+   "dynamicJoins":[
+      {
+         "selectList":[
+            "UWI",
+            "max_volume_date"
+         ],
+         "joinType":"INNER",
+         "joinAlias":"b",
+         "dynamicTables":[
+            {
+               "boName":"well vol daily",
+               "selectList":[
+                  "UWI"
+               ],
+               "aggregateSelectList":[
+                  {
+                     "boAttrName":"volume_date",
+                     "aggregateFunction":"MAX",
+                     "alias":"max_volume_date"
+                  }
+               ]
+            }
+         ],
+         "joiningConditions":[
+            {
+               "leftSide":{
+                  "joinAlias":"a",
+                  "boAttrName":"UWI"
+               },
+               "operator":"EQUALS",
+               "rightSide":{
+                  "joinAlias":"b",
+                  "boAttrName":"UWI"
+               }
+            },
+            {
+               "leftSide":{
+                  "joinAlias":"a",
+                  "boAttrName":"volume_date"
+               },
+               "operator":"EQUALS",
+               "rightSide":{
+                  "joinAlias":"b",
+                  "boAttrName":"max_volume_date"
+               }
+            }
+         ],
+         "orderBy":[
+            {
+               "boAttrName":"UWI",
+               "order":"DESC"
+            }
+         ]
+      }
+   ],
+   "showSQLStats":"true"
+}
+----
+
+____
+The final executed SQL of Example:
+____
+
+[source,sql]
+----
+SELECT a.UWI, a.BOE_VOLUME,
+b.UWI, b.max_volume_date
+FROM WELL_VOL_DAILY AS a
+INNER JOIN (SELECT UWI, MAX(VOLUME_DATE) AS "max_volume_date"
+    FROM WELL_VOL_DAILY GROUP BY UWI) AS b
+ON a.UWI = b.UWI AND a.VOLUME_DATE = b.max_volume_date
+ORDER BY b.UWI desc
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/read-records/api-common-dynamicJoin.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+==== Parameters
+
+[width="100%",cols="9%,6%,9%,60%,8%,8%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|dynamicJoins |object array |no | | |
+|===
+
+==== [#dynamicJoins.Parameters]#dynamicJoins.Parameters#
+
+____
+*selectList*, *aggregateSelectList*, *criteriaFilters*, *havingFilters* and *orderBy* can be used with dynamic join objects. Their effect will be on the whole result data.
+____
+
+____
+But *pagination* cannot be used with dynamic joins objects.
+____
+
+[width="100%",cols="18%,9%,6%,10%,10%,47%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|*joinType* |string |yes | |``LEFT'' |Join type is the type of join and it is case sensitive. Possible values are *INNER*, *LEFT*, *RIGHT* and *FULL*.
+|*joinAlias* |string |yes | |``b'' |Join Alias is same as defined above but it will be defined here for the join table.
+|*dynamicTables* |object array |yes | | |
+|*joiningConditions* |object array |yes | | |
+|===
+
+==== [#dynamicTables.Parameters]#dynamicTables.Parameters#
+
+____
+*selectList*, *aggregateSelectList*, *criteriaFilters*, *havingFilters* and *orderBy* can be used with dynamicTables objects. Their effect will be on the whole result data.
+
+But *pagination* cannot be used with dynamic joins objects.
+____
+
+[width="100%",cols="18%,9%,6%,10%,10%,47%",options="header",]
+|===
+|Name |Type |Required |Default value |Example value |Description
+|*boName* |string |yes | |``WELL'' |Bo Name is the name of business object to be read. link:#GetAllBoName[*Get all boName*]
+|*joinType* |string |no | |``LEFT'' |
+|*joinAlias* |string |no | |``b'' |Join Alias is same as defined above but it will be defined here for the dynamic table.
+|*joiningConditions* |object array |no | | |
+|===
+
+== 4. Responses
+
+Please see xref:responses.adoc[Responses]

@@ -1,0 +1,66 @@
+= API Introduction
+
+PDM365 services provide the rest service interface to communicate with the PDM365 data store. These services provide both read and write functionalities and for most of the time the request and response format is in the form of a JSON request. These services are built on the basis of metadata driven architecture.
+
+== Metadata Driven Architecture
+
+There are some terms that are used in metadata driven architecture.
+
+== Business Object
+
+PDM365 services are dynamic in nature. They do not deal with database directly rather they deal in business objects. A business object is a logical structure built over the physical database table. A business can be composed of multiple physical database tables and a physical database table can be composed of multiple business objects. Business Objects are like a database view but actually it is not a view. It is a logical layer written over the database layer.
+
+== Business Object Structure
+
+Structure of Business Objects is stored in metadata tables. Metadata tables are the physical tables in the database which have fixed structure and they contain the information about the other physical non-metadata tables in the database. An entry in this metadata table contains the business object name and the corresponding physical database tables name and the user friendly name for this business object. This metadata table also contains the information about the columns of a particular business object or a physical table. It is not necessary to map all the columns of a physical table to a business object as business object attributes.
+
+== How it works?
+
+When a read or write request comes from the client apps for any particular business object then first services look up for the metadata of that business object in its cache. If metadata is found then the physical table of that Business object is directly accessed to fulfill the request. If metadata is not found then first the metadata is read then the actual physical table is read. Any number of Business objects can be added to the system without recompiling and redeploying the services.
+
+== Steps to add a new Business Object
+
+A new business object can be added to the system any time without any start/stop and recompile/deploy operation. One a business object is added to the system then it can be used right away. Following are the steps to add a new business object.
+
+[arabic]
+. Define Physical Table in the underlying database
+. Create a Teiid VDB for the newly created table for business object to be created.
+. Create metadata in the metadata tables for the newly created table. These metadata tables are
++
+
+[cols="<,<",options="header",]
+|===
+|metadata table |Required
+|BUSINESS_OBJECT |Mandatory
+|BUSINESS_OBJECT_GROUP |Mandatory
+|BUSINESS_OBJECT_ATTR |Mandatory
+|BUS_OBJ_ATTR_UNIQ_CONSTRAINTS |Optional
+|BUS_OBJ_RELATIONSHIP |Optional
+|===
+
+
+. Refresh metadata by invoking the service to refresh metadata.
+
+. Invoke services to read and write the data for the new business object.
+
+== Metadata Tables In Brief
+
+=== BUSINESS_OBJECT
+
+The BUSINESS_OBJECT table contains high level information about a business object such as business object name, physical database table name, business object display name and some flags that is it a metadata business object or a reference business object. It also contains the database physical sequence name for the primary key auto generation.
+
+=== BUSINESS_OBJECT_GROUP
+
+The BUSINESS_OBJECT_GROUP table contains the information that a particular business object belongs to which R_GROUP_CATEGORY. There is multiple groups of business objects and the business objects in a group are related to each other.
+
+=== BUSINESS_OBJECT_ATTR
+
+BUSINESS_OBJECT_ATTR metadata table contains the information about the attributes or physical columns of a business object. This attributes could be anything for example name, id, number, start date etc.
+
+=== BUS_OBJ_ATTR_UNIQ_CONSTRAINTS
+
+This is business object attribute unique constraints table. You must put an entry to this table if you want to apply unique constraints to any business object.
+
+=== BUS_OBJ_RELATIONSHIP
+
+This is business object relationship table. It defines the relationship between business objects. If you want to save or read the parent and child records together in a single request automatically then you must define the relationships in this table.

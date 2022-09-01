@@ -1,0 +1,86 @@
+= Delete Metadata for All Tables(View)
+
+If user wants to delete metadata for all of tables of a database in a go, this service can fulfill the purpose. What this service will be doing is reading all of the entities of the connected database, sort them in order in such a way that child’s metadata should be delete before parent, and use the existing service ( /metadata/write/deleteMetadata) to delete metadata for all of the entities.
+
+The explanation of request packet is as below:
+
+*tableType* (_mandatory_): This param is used to determine against what type of table, metadata is to be deleted. This param should contain only below values and is mandatory.
+
+* table (for deleting metadata of tables only)
+* view (for deleting metadata of views only)
+* table_view (for deleting metadata for both tables and views)
+
+== 1. Request URL
+
+/{PDM Server domain}link:/metadata/write/DeleteMetaForAll
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Request body
+
+[example]
+====
+[source,json]
+----
+{
+    "BUSINESS OBJECT": {
+        "language": "en",
+        "readBack": true,
+        "timezone": "GMT+08:00",
+        "data": [
+            {
+                "tableType": "table_view"
+            }
+        ]
+    }
+}
+----
+====
+'''
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/delete-metadata-for-all-tables(view)/api-delete-metadata-for-all.html" width="600px" height="620px">
+</iframe>/
+</details>
+++++
+
+
+== 4. Responses
+
+[example]
+====
+[source,json]
+----
+{
+    "status": {
+        "statusCode": 1,
+        "statusLabel": "Success"
+    },
+    "messages": [
+        {
+            "message": "1 business objects(s) metadata deleted successfully.",
+            "status": {
+                "statusCode": 1,
+                "statusLabel": "Success"
+            }
+        }
+    ],
+    "exception": {},
+    "data": {},
+    "version": "0.0.0.0A",
+    "threadName": "**system_52184",
+    "requestTime": "2021-06-01 13:03:56.325 +08:00",
+    "responseTime": "2021-06-01 13:03:57.053 +08:00"
+}
+----
+====

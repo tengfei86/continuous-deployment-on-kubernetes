@@ -1,0 +1,28 @@
+<html>
+
+<head>
+
+</head>
+
+<body style="margin: 0 0 0 0;">
+    <iframe src="../resources/api.html" id="commonAPI" width="100%" height="100%" frameborder="0">
+    </iframe>
+    <script>
+        window.onload = function () {
+
+        let grantType    = "password";
+        let clientId     = "Dspdm_Services";
+        let clientSecret = "12830fdd-b5c9-49af-a8ec-aa320fbc00f9";
+        let kc_username = "buffalo";
+        let kc_password = "3AOti5DAcRfPwo8m";
+            let body = "grant_type=" + grantType
+                        + "&client_id=" + clientId
+                        + "&client_secret=" + clientSecret
+                        + "&username=" + kc_username
+                        + "&password=" + kc_password;
+            document.getElementById("commonAPI").contentWindow.setGetTokenParams(body, null, "    ");
+        }
+    </script>
+</body>
+
+</html>

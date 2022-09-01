@@ -1,0 +1,85 @@
+<html>
+
+<head>
+
+</head>
+
+<body style="margin: 0 0 0 0;">
+   <iframe src="../resources/api.html" id="commonAPI" width="100%" height="100%" frameborder="0">
+   </iframe>
+   <script>
+      window.onload = function () {
+         let body =
+         {
+            "boName": "well vol daily",
+            "language": "en",
+            "timezone": "GMT+05:00",
+            "joinAlias": "a",
+            "readAllRecords": true,
+            "selectList": [
+               "UWI",
+               "boe_volume"
+            ],
+            "dynamicJoins": [
+               {
+                  "selectList": [
+                     "UWI",
+                     "max_volume_date"
+                  ],
+                  "joinType": "INNER",
+                  "joinAlias": "b",
+                  "dynamicTables": [
+                     {
+                        "boName": "well vol daily",
+                        "selectList": [
+                           "UWI"
+                        ],
+                        "aggregateSelectList": [
+                           {
+                              "boAttrName": "volume_date",
+                              "aggregateFunction": "MAX",
+                              "alias": "max_volume_date"
+                           }
+                        ]
+                     }
+                  ],
+                  "joiningConditions": [
+                     {
+                        "leftSide": {
+                           "joinAlias": "a",
+                           "boAttrName": "UWI"
+                        },
+                        "operator": "EQUALS",
+                        "rightSide": {
+                           "joinAlias": "b",
+                           "boAttrName": "UWI"
+                        }
+                     },
+                     {
+                        "leftSide": {
+                           "joinAlias": "a",
+                           "boAttrName": "volume_date"
+                        },
+                        "operator": "EQUALS",
+                        "rightSide": {
+                           "joinAlias": "b",
+                           "boAttrName": "max_volume_date"
+                        }
+                     }
+                  ],
+                  "orderBy": [
+                     {
+                        "boAttrName": "UWI",
+                        "order": "DESC"
+                     }
+                  ]
+               }
+            ],
+            "showSQLStats": "true"
+         }
+         document.getElementById("commonAPI").contentWindow.setCommonParams(JSON.stringify(body, null, "    "));
+      }
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,223 @@
+= Entities Definition
+
+== Organization Unit
+
+Organization Unit: Describes geographic areas, such as country, province, district etc. and the business unit, such as company, partners, and other parties.
+
+image::Organization-Unit.png[title="Organization Unit"]
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|*Table* |*Description*
+|xref:Data-Dictionary.adoc#org_unit[ORG_UNIT] |The table is used to record the geographic and organizational area, such as country, state, province, company, 3rd partners instance etc.
+|xref:Data-Dictionary.adoc#r_org_unit_type[R_ORG_UNIT_TYPE] |The reference type of organization unit. For example: country, state, province, company, 3rd partners.
+|xref:Data-Dictionary.adoc#r_org_unit_category[R_ORG_UNIT_CATEGORY] |The reference type of organization unit. For example: Area Unit, Business Unit.
+|xref:Data-Dictionary.adoc#field_org_unit[FIELD_ORG_UNIT] |This table is used to record the field historical relationship with org units.
+|xref:Data-Dictionary.adoc#facility_org_unit[FACILITY_ORG_UNIT] |This table is used to record the facility historical relationship with org units.
+|xref:Data-Dictionary.adoc#well_org_unit[WELL_ORG_UNIT] |This table is used to record the well historical relationship with org units.
+|===
+
+
+
+Field: A field is an area consisting of a single reservoir or multiple reservoirs all grouped on, or related to.
+
+image::Field.png[title="Field"]
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|*Table* |*Description*
+|xref:Data-Dictionary.adoc#org_unit[ORG_UNIT] |The table is used to record the geographic and organizational area, such as country, state, province, company, 3rd partners instance etc.
+|xref:Data-Dictionary.adoc#field[FIELD] |A geographical area defined for administrative and legal purposes. The field name refers to the surface area, although at times it may refer to both the surface and the underground productive zones.
+|xref:Data-Dictionary.adoc#field_org_unit[FIELD_ORG_UNIT] |This table is used to record the field historical relationship with org units.
+|xref:Data-Dictionary.adoc#r_field_type[R_FIELD_TYPE] |A reference table identifying the type of field. For example, regulatory or locally assigned.
+|xref:Data-Dictionary.adoc#cartoreferencesystem[CARTOREFERENCESYSTEM] |A coordinate reference system (CRS) refers to the way in which spatial data that represent the earth s surface (which is round / 3 dimensional) are flattened so that you can draw them on a 2-dimensional surface. For example, WGS 84, UTM.
+|xref:Data-Dictionary.adoc#pool[POOL] |POOL/RESERVOIR: Represents a reservoir or a group of small tracts of land. Pool can have relationship with field.
+|xref:Data-Dictionary.adoc#well[WELL] |Well is drilled for a field. Well can have relationship with field.
+|xref:Data-Dictionary.adoc#field_component[FIELD_COMPONENT] |This table is used to capture the components of field.
+|===
+
+== Formation
+
+Formation: A body of rock, of significant and distinctive occurrence, distinguished from adjacent rock bodies on the basis of any one or more primary properties or attributes that rocks possess, such as mineral or fossil assemblages lithologic characteristics, environment and other natural occurrences. (In PPDM is Strat Unit)
+
+== Reservoir
+
+Reservoir: Defined as a storage space for fluids, reservoirs hold water or gas and hydrocarbons. (In PPDM Pool is used to represent reservoir.)
+
+image::Pool.png[title="Pool"]
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|*Table* |*Description*
+|xref:Data-Dictionary.adoc#pool[POOL] |POOL/RESERVOIR: Represents a reservoir or a group of small tracts of land brought together for the granting of a well permit under applicable spacing rules.
+|xref:Data-Dictionary.adoc#r_pool_status[R_POOL_STATUS] |A reference table identifying the operational or legal status of the pool.
+|xref:Data-Dictionary.adoc#r_pool_type[R_POOL_TYPE] |A reference table identifying the type of pool.
+|xref:Data-Dictionary.adoc#pool_component[POOL_COMPONENT] |This table is used to capture the components of pool.
+|xref:Data-Dictionary.adoc#well_pool[WELL_POOL] |The pools intersected by one well.
+|xref:Data-Dictionary.adoc#zone[ZONE] |Pool/Reservoir includes multiple zones.
+|===
+
+== Zone
+
+Zone: A zone may be a regular or irregular belt, layer, band, or strip of earth materials disposed horizontally, vertically, concentrically, or otherwise, and characterized as distinct from.
+
+image::zone.png[title="Zone"]
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|*Table* |*Description*
+|xref:Data-Dictionary.adoc#zone[ZONE] |The ZONE table contains the name of a zone described in a field or reservoir. A zone may be a regular or irregular belt, layer.
+|xref:Data-Dictionary.adoc#pool[POOL] |POOL/RESERVOIR: Represents a reservoir or a group of small tracts of land brought together for the granting of a well permit under applicable spacing rules.
+|xref:Data-Dictionary.adoc#well_zone[WELL_ZONE] |This table records the zone information a wellbore intersecting. Such as top/bottom depth, porosity etc.
+|xref:Data-Dictionary.adoc#well_completion[WELL_COMPLETION] |The Well Completion table identifies the completion activity in the wellbore. A completion interval should relate to a production zone.
+|xref:Data-Dictionary.adoc#well_perforation[WELL_PERFORATION] |The Well Perforations table contains detailed intervals of completion. A perforation interval can relate to a production zone.
+|===
+
+== Well
+
+Well: A well is an excavation or structure created in the ground by digging, driving, or drilling to access liquid resources.
+
+image::well.png[title="Well"]
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|*Table* |*Description*
+|xref:Data-Dictionary.adoc#well[WELL] |WELL: A well is the location on the surface of the earth or sea bed where the drill bit is planned to penetrate or does penetrate the earth to establish or rework a well.
+|xref:Data-Dictionary.adoc#wellbore[WELLBORE] |WELLBORE: A Wellbore is a path of drilled footage, from Well Origin (top/start) to a terminating point (bottom/end).
+|xref:Data-Dictionary.adoc#field[FIELD] |The well is drilled for which field.
+|xref:Data-Dictionary.adoc#well_pool[WELL_POOL] |The pools intersected by one well.
+|xref:Data-Dictionary.adoc#well_org_unit[WELL_ORG_UNIT] |This table is used to record the well historical relationship with org units.
+|xref:Data-Dictionary.adoc#well_status[WELL_STATUS] |This table defines the status history of the well.
+|xref:Data-Dictionary.adoc#well_prod_method_history[WELL_PROD_METHOD_HISTORY] |Contains an historical account of the production method of the well.
+|xref:Data-Dictionary.adoc#r_well_class[R_WELL_CLASS] |This reference table describes the classification of a well. This may include but is not restricted to the Lahee classification scheme.
+|xref:Data-Dictionary.adoc#r_plot_symbol[R_PLOT_SYMBOL] |This reference table describes the icons used for different wells.
+|xref:Data-Dictionary.adoc#r_well_datum_type[R_WELL_DATUM_TYPE] |A reference table identifying the type of point or horizontal surface used as an elevation reference for measurements in a well. Examples: Kelly bushing, ground, sea level.
+|xref:Data-Dictionary.adoc#r_timezone[R_TIMEZONE] |A valid list of time zones.
+|xref:Data-Dictionary.adoc#cartoreferencesystem[CARTOREFERENCESYSTEM] |Coordinate reference system (CRS).
+|xref:Data-Dictionary.adoc#r_production_method[R_PRODUCTION_METHOD] |This reference table identifies the method of production.
+|===
+
+== Wellbore
+
+Wellbore: A Wellbore is a path of drilled footage, from top/start to a terminating point (bottom/end).
+
+image::wellbore.png[title="Wellbore"]
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|*Table* |*Description*
+|xref:Data-Dictionary.adoc#wellbore[WELLBORE] |WELLBORE: A Wellbore is a path of drilled footage, from Well Origin (top/start) to a terminating point (bottom/end).
+|xref:Data-Dictionary.adoc#well[WELL] |The wellbore is for which well
+|xref:Data-Dictionary.adoc#r_plot_symbol[R_PLOT_SYMBOL] |The binary data reference to represent an icon or picture of this wellbore.
+|xref:Data-Dictionary.adoc#r_well_datum_type[R_WELL_DATUM_TYPE] |A reference table identifying the type of point or horizontal surface used as an elevation reference for measurements in a well. Examples: Kelly bushing, ground, sea level.
+|xref:Data-Dictionary.adoc#r_timezone[R_TIMEZONE] |A valid list of time zones.
+|xref:Data-Dictionary.adoc#cartoreferencesystem[CARTOREFERENCESYSTEM] |Coordinate reference system (CRS).
+|xref:Data-Dictionary.adoc#well_dir_srvy[WELL_DIR_SRVY] |The Well Directional Survey table contains header information about directional surveys which have been performed on a wellbore. This downhole survey charts the degree of departure of the wellbore from vertical and the direction of departure. Since many directional surveys can be conducted on a wellbore, the survey number is included as part of the primary key to uniquely identify the survey.
+|===
+
+== Completion
+
+Completion: Downhole completion, it refers to the portion of the well across the production or injection zone. One completion is a set of perforations.
+
+image::Completion.png[title="Completion"]
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|*Table* |*Description*
+|xref:Data-Dictionary.adoc#well_completion[WELL_COMPLETION] |The Well Completion table identifies the completion activity in the wellbore.
+|xref:Data-Dictionary.adoc#wellbore[WELLBORE] |The completion is for which wellbore
+|xref:Data-Dictionary.adoc#r_completion_type[R_COMPLETION_TYPE] |The type or method of well completion.
+|xref:Data-Dictionary.adoc#zone[ZONE] |The completion interval is for which zone.
+|===
+
+== Perforation
+
+Perforation: A perforation refers to a hole punched in the casing or liner of a well to connect it to the reservoir. Creating a channel between the pay zone and the wellbore to cause oil and gas to flow to the wellbore easily.
+
+image::perforation.png[title="Perforation"]
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|*Table* |*Description*
+|xref:Data-Dictionary.adoc#well_perforation[WELL_PERFORATION] |The Well Perforations table contains detailed perforation activity performed on a well.
+|xref:Data-Dictionary.adoc#well_completion[WELL_COMPLETION] |The perforation is for which completion interval.
+|xref:Data-Dictionary.adoc#r_perforation_type[R_PERFORATION_TYPE] |A reference table identifying the type of perforation method. For example bullet, jet or combination.
+|xref:Data-Dictionary.adoc#r_perforation_method[R_PERFORATION_METHOD] |Code identifying the type of opening the fluid entered through into the tubing (e.g., perforation, open hole, combination, etc.).
+|xref:Data-Dictionary.adoc#zone[ZONE] |The perforation interval is for which zone.
+|===
+
+== Well Tubular
+
+Well Tubular: The Well Tubular table contains information on the tubulars for the well. The tubulars can be tubing, casing or liners which are run into the well.
+
+image::Well%20Tubular.png[title="Well Tubular"]
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|*Table* |*Description*
+|xref:Data-Dictionary.adoc#well_tubular[WELL_TUBULAR] |The Well Tubular table contains information on the tubulars for the well.
+|xref:Data-Dictionary.adoc#wellbore[WELLBORE] |The well tubular is installed in which wellbore.
+|xref:Data-Dictionary.adoc#well_tubing_tally[WELL_TUBING_TALLY] |A list containing details of tubulars that have been prepared for running, or that have been retrieved from the wellbore.
+|xref:Data-Dictionary.adoc#r_coupling_type[R_COUPLING_TYPE] |A short length of pipe used to connect two joints of casing.
+|xref:Data-Dictionary.adoc#r_tubular_type[R_TUBULAR_TYPE] |The particular type of tubular.
+|===
+
+== Facility
+
+Facility: A collection of surface equipment and meters which facilitate the production, injection or disposition of products
+
+image::Facility.png[title="Facility"]
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|*Table* |*Description*
+|xref:Data-Dictionary.adoc#facility[FACILITY] |A collection of surface equipment and meters which facilitate the production, injection or disposition of products.
+|xref:Data-Dictionary.adoc#r_facility_type[R_FACILITY_TYPE] |A reference table identifying the codes classifying the facility according to its physical equipment or principal service performed.
+|xref:Data-Dictionary.adoc#cartoreferencesystem[CARTOREFERENCESYSTEM] |Coordinate reference system (CRS).
+|xref:Data-Dictionary.adoc#r_data_access_category[R_DATA_ACCESS_CATEGORY] |The data access category.
+|xref:Data-Dictionary.adoc#facility_field[FACILITY_FIELD] |Cross reference table indicating which fields a facility is associated with.
+|xref:Data-Dictionary.adoc#facility_org_unit[FACILITY_ORG_UNIT] |Record the facility historical relationship with org units
+|===
+
+== Equipment
+
+Equipment: Pieces of equipment that are real. May be any kind of equipment, such as meters, gauges, pump motor etc.
+
+image::Equipment.png[title="Equipment"]
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|*Table* |*Description*
+|xref:Data-Dictionary.adoc#equipment[EQUIPMENT] |Use this table to describe pieces of equipment that are real.
+|xref:Data-Dictionary.adoc#facility_equipment[FACILITY_EQUIPMENT] |This table can be used to keep track of which equipment is occupying that facility.
+|xref:Data-Dictionary.adoc#well_equipment[WELL_EQUIPMENT] |This table can be used to keep track of which equipment is occupying that wellbore.
+|xref:Data-Dictionary.adoc#r_equipment_type[R_EQUIPMENT_TYPE] |Use this table to list the types of equipment
+|xref:Data-Dictionary.adoc#r_equipment_sub_type[R_EQUIPMENT_SUB_TYPE] |Use this table to list the sub types of equipment
+|xref:Data-Dictionary.adoc#alarm_settings[ALARM_SETTINGS] |Which equipment is related to alarm setting.
+|xref:Data-Dictionary.adoc#equipment_measurement_tags[EQUIPMENT_MEASUREMENT_TAGS] |This table is used to clarify which tag is associated with which equipment measurement.
+|xref:Data-Dictionary.adoc#prod_down_time_event[PROD_DOWN_TIME_EVENT] |Which equipment is related to a down time event.
+|===
+
+== Flow Model
+
+Flow Model: The flow model is used to describe the flow connections for the product be transported to a facility where it can be produced/treated, stored, processed, refined, or transferred for eventual sale.
+Below is showing a core structure of the flow model, which is made up of model,network,unit, port and connected node. More detailed information please refer to Flow Model chapter.xref:FlowModel-Introduction.adoc[FlowModel Introduction]
+
+image::Flow%20Model.png[title="Flow Model"]
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|*Table* |*Description*
+|xref:Data-Dictionary.adoc#flow_model[FLOW_MODEL] |The non-contextual content of a product flow model data object. Model is a collection of networks.
+|xref:Data-Dictionary.adoc#reporting_entity[REPORTING_ENTITY] |Identifies a entity this flow model represents for.
+|xref:Data-Dictionary.adoc#reporting_facility[REPORTING_FACILITY] |Identifies a facility or a well instance.
+|xref:Data-Dictionary.adoc#r_reporting_facility_kind[R_REPORTING_FACILITY_KIND] |Identifies type is facility or well.
+|xref:Data-Dictionary.adoc#flow_model_context_facility[FLOW_MODEL_CONTEXT_FACILITY] |Identifies the context facilities of the model.
+|xref:Data-Dictionary.adoc#flow_model_external_connect[FLOW_MODEL_EXTERNAL_CONNECT] |Defines the external port in another Product Flow Model to which an external port in this model is connected.
+|xref:Data-Dictionary.adoc#network[NETWORK] |The network represents the internal behavior of the model or a unit in another network and is a collection of connected units.
+|xref:Data-Dictionary.adoc#scenario[SCENARIO] |Specify the scenario of the network.
+|xref:Data-Dictionary.adoc#flow_unit[FLOW_UNIT] |A flow unit is essentially a black box that can represent anything.
+|xref:Data-Dictionary.adoc#flow_port[FLOW_PORT] |Ports allow flow in or out of a unit.
+|xref:Data-Dictionary.adoc#r_direction_type[R_DIRECTION_TYPE] |To specify Port direction is flowing in or out of a unit.
+|xref:Data-Dictionary.adoc#flow_connected_node[FLOW_CONNECTED_NODE] |Flow connected nodes are used to connect ports.
+|===

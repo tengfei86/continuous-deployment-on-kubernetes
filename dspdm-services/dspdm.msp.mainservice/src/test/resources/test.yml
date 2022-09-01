@@ -1,0 +1,16 @@
+version: '2'
+services:
+  mainservice:
+    image: ${docker.imageName}
+#    environment:
+#      - MSDP_JAVA_OPTIONS=-Xmx125m -Xdebug -agentlib:jdwp=transport=dt_socket,address=9999,server=y,suspend=n
+#      - MSDP_LOG_LEVEL=INFO
+    ports: 
+      - 8080
+#      - 9999:9999
+#    healthcheck:
+#      test: ["CMD-SHELL", "[ $$(curl -s -o /dev/null -w \"%{http_code}\" localhost:8080/msp/home/health) -eq 200 ]"]
+#      interval: 5s
+#      retries: 15
+#      timeout: 20s
+

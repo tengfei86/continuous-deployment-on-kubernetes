@@ -1,0 +1,63 @@
+= Fluid Analysis Relevant
+
+image::Process.png[title="Fluid Analysis Workflow"]
+
+Commonly, we can divide one complete PVT analysis to 3 parts.
+
+* Fluid Sample: Receive samples from a suitable place, represent the initial reservoir condition.
+* Fluid Analysis Sample: The samples used in the fluid analysis. When some samples are entered into the lab, the samples are transferred from one cylinder to another cylinder, recombination to one sample and need to be validated. One fluid analysis will use one or multiple samples.
+* Fluid Analysis and its output results: A set of laboratory procedures performed to identify the physical properties of fluid samples.
+
+== Fluid Samples and Sample Acquisition
+
+Samples of the reservoir fluid are usually collected at an early stage in the well’s producing life and dispatched to a laboratory for the PVT analysis. The objectives of sampling are to receive samples from a suitable place in the production wells or surface facilities. The samples should represent the system in the reservoir under its initial conditions in order to determine its type, volumetric and phase behavior, and its composition. PVT analysis results are needed for geological and reservoir engineering evaluation and forecasting, as well as for laboratory studies concerning enhanced oil recovery (EOR).
+
+Oil and gas samples are taken to evaluate the properties of produced fluids at reservoir conditions. Fluid samples can be taken from reservoirs, production strings, facilities (such as separators and tanks), and at the point of sale. They can also be acquired via a well test, or via a fluid analysis activity.
+
+Fluid sample acquisition is the activity of obtaining a fluid sample. A fluid sample acquisition can be performed at different locations in the field, at different facilities, using different methods, and for several different reasons.
+
+== Fluid Analysis Sample
+
+The samples that are used in an analysis. In some cases, a single sample will be used, but in others new samples may be input or created at various stages of the study. Each individual step in a study is made with one sample only.
+
+* *Transfer*
+
+Often it is important to record the handling of the fluid sample before its analysis. When the samples enter the Lab, the transfer temperature, transfer pressure, transfer date, and volume is often record.
+
+* *Sample Processing*
+
+Fluid sample processing involves either splitting a fluid sample into different samples or recombining various samples into one sample. Fluid samples are typically recombined in order to simulate the original reservoir fluid.
+
+* *Sample Integrity Check*
+
+When the sample arrive at the PVT laboratory the samples must be checked for quality and possible leak. It is important to establish which samples should be used for the PVT study. So, the integrity checks, such as opening and closing pressure may also be recorded for each transfer.
+
+== Fluid Analysis
+
+Fluid analysis is a set of laboratory procedures performed to identify the physical properties of fluid samples. Fluid analysis can be simple or very specialized and involve sophisticated laboratory equipment. It is important to perform fluid analysis to understand or predict the behavior of produced hydrocarbons as they travel from the reservoir, up the tubing, through surface separators, and finally into pipelines.
+
+== Fluid Analysis Steps
+
+For one fluid analysis, it usually involves a series of tests performed on a fluid in order to determine the fluids properties. An individual step during a fluid analysis is used to measure properties of a fluid in one Pressure and Temperature condition. The pressure and/or temperature may change from one step to another.
+
+== Fluid Analysis Output Result
+
+* *Summary of fluid properties*
+
+Once we have a sample of reservoir fluid, either directly or by recombination, we need to do reservoir fluid measurement. There are mainly 6 fluid properties measured, oil density, gas density, solution GOR, bubble point pressure, formation volume factor and viscosity under reservoir condition and surface condition. Besides these, other properties such as heat content, Enthalpy etc. can be measured for different use cases.
+
+* *Compositional Analysis*
+
+Compositional analysis of the reservoir sample, a key component of PVT analysis, has several applications in reservoir and production engineering. The most important is to establish how much gasoline, kerosene, fuel oil, heavy oil and bitumen will come from refining a barrel of cure, which determines the crude’s market value.
+
+* *Saturation Pressure*
+
+The bubble point is crucial for understanding how hydrocarbons behave in the reservoir and indicates the probable drive mechanisms. For example, if the reservoir pressure is initially at the bubble point, a gas cap almost certainly exists that will expand, pushing oil toward the well and increasing recovery.
+
+* *Phase Diagram*
+
+Test bubble point and dew point under different temperature, project the bubble point curve, dew point curve onto a pressure-temperature graph, to understand the behavior of a reservoir fluid.
+
+* *Reservoir-to-Surface Volume Relations*
+
+Besides the bubble point, there are three important parameters that relate the surface volumes to reservoir volumes and help determine the amount of hydrocarbons in place. These parameters are oil and gas formation volume factors, Bo and Bg, and the solution gas-oil ration Rs.

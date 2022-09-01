@@ -1,0 +1,3322 @@
+= Reference Data
+
+Reference data are data that define the set of permissible values to be
+used by other data fields. Reference data gain in value when they are
+widely reused and widely referenced. Typically, they do not change
+overly much in terms of definition, apart from occasional.
+
+== Carto Reference System
+
+*Table Name: carto_reference_system*
+
+COORDINATE REFERENCE SYSTEM: a coordinate reference system (CRS) refers
+to the way in which spatial data that represent the earth’s surface
+(which is round / 3 dimensional) are flattened so that you can ``Draw''
+them on a 2-dimensional surface. For example WGS 84, UTM.
+
+[width="100%",cols="16%,13%,19%,52%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|CRS_ID |CRS ID |integer |CRS ID: An auto generated database id and is
+the primary key for this row.
+
+|CRS_NAME |CRS Name |character varying(50) |CRS NAME: for example WGS
+84, UTM
+
+|CRS_TYPE |CRS Type |character varying(50) |CRS TYPE: In general CRS can
+be divided into projected coordinate reference systems (also called
+Cartesian or rectangular coordinate reference systems) and geographic
+coordinate reference systems.
+
+|GEODETIC_SO URCE |Geodetic Source |character varying(50) |
+
+|PROJECTION_ TYPE |Projection Type |character varying(50) |
+
+|ROW_CHANG ED_BY |Row Changed By |character varying(100) |ROW CHANGED
+BY: Application login id of the user who last changed the row
+
+|ROW_CHANG ED_DATE |Row Changed Date |timestamp |ROW CHANGED DATE:
+System date of the last time the row was changed.
+
+|ROW_CREATE D_BY |Row Created By |character varying(100) |ROW CREATED
+BY: System user who created this row of data.
+
+|ROW_CREATE D_DATE |Row Created Date |timestamp |ROW CREATED DATE: Date
+that the row was created on
+|===
+
+== R_Activity_Type
+
+*Table Name: r_activity_type*
+
+REFERENCE ACTIVITY Type: A reference table identifying the type of
+activity that caused the movement of fluids to occur such as production,
+injection, flaring, sales, etc.
+
+[width="100%",cols="18%,13%,19%,50%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_ACTIVITY_TYPE_ID |Activity Type ID |integer |R ACTIVITY TYPE ID: The
+identifier to as the primary key for this row.
+
+|ACTIVITY_TYPE |Activity Type |character varying(40) |ACTIVITY TYPE: The
+type of activity, such as production, injection, flaring, sales,
+stimulation, intervention, maintenance etc.
+
+|IS_ACTIVE |Is Active |boolean |ACTIVE INDICATOR: A Y/N flag indicating
+whether this row of data is currently either active / valid (TRUE) or
+inactive / invalid (FALSE).
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|ROW_CHANGED_ BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_ DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_B Y |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_ DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Area_Level
+
+*Table Name: r_area_level*
+
+R AREA LEVEL: A reference table identifying the level of area such as
+area, organization, province, country, state, etc.
+
+[width="100%",cols="17%,14%,19%,50%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_AREA_LEVEL_I D |Area Level ID |integer |AREA LEVEL ID: The identifier
+to as the primary key for this row.
+
+|DISPLAY_NAME |Name |character varying(100) |DISPLAY NAME: The level of
+the area, such as country, state, district etc.
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|ABBREVIATION |Abbreviation |character varying(15) |ABBREVIATION:
+Abbreviation used for reference type or code.
+
+|COLOR_CODE |Color Code |character varying(15) |
+
+|GROUP_LEVEL_I D |Group Level |integer |
+
+|REMARKS |Remarks |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|IS_ACTIVE |Is Active |boolean |ACTIVE INDICATOR: A Y or N flag
+indicating whether this row of data is currently either active/valid (Y)
+or inactive/invalid (N).
+
+|EFFECTIVE_DATE |Effective Date |timestamp |EFFECTIVE DATE: The date
+that the data in this row first came into effect.
+
+|EXPIRY_DATE |Expiry Date |timestamp |EXPIRY DATE: The date that the
+data in this row was no longer active or in effect.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_ DATE |Created Date |timestamp |ROW CREATED BY: System user
+who created this row of data.
+
+|ROW_CREATED_ BY |Created By |character varying(100) |ROW CREATED DATE:
+Date that the row was created on.
+
+|SOURCE_NAME |Source |character varying(50) |SOURCE NAME: The
+individual, company, state, or government agency designated as the
+source of information for this row.
+
+|R_AREA_LEVEL_ NAME |R Area Level Name |character varying(50)
+|AREA_LEVEL_NAME: The level name of the area.
+|===
+
+== R_Area_Type
+
+*Table Name: r_area_type*
+
+R AREA TYPE: A reference table identifying the level of area such as
+area, organization, province, country, state, etc.
+
+[width="99%",cols="16%,10%,19%,52%,3%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Description |
+|R_AREA_TYPE_ID |Area Type ID |int |AREA TYPE ID: Unique identifier for
+the type of area, such as country, state, AOI etc. |
+
+|AREA_TYPE |Area Type |varchar(30) |AREA TYPE: The type of area
+described, such as country, province, basin, project, business area etc.
+|
+
+|LONG_NAME |Long Name |varchar(255) |LONG NAME: Common long name given
+to reference type or code. |
+
+|SHORT_NAME |Short Name |varchar(30) |SHORT NAME: Common short name
+given to reference type or code. |
+
+|REMARKS |Remarks |varchar(2000) |AREA TYPE DESCRIPTION of the type of
+geographic area |
+
+|IS_ACTIVE |Is Active |bit |ACTIVE INDICATOR: A Y/N flag indicating
+whether this row of data is currently either active / valid (Y) or
+inactive / invalid (N). |
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row. |
+
+|ROW_CHANGED_DATE |Changed Date |datetime |ROW CHANGED DATE: System date
+of the last time the row was changed. |
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data. |
+
+|ROW_CREATED_DATE |Created Date |datetime |ROW CREATED DATE: Date that
+the row was created on. |
+|===
+
+== R_Alarm_Color
+
+*Table Name: r-alarm_color*
+
+R ALARM COLOR: The alarm color set in the interface of alarm settings.
+
+[width="100%",cols="16%,12%,19%,53%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Description
+|R_ALARM_COLOR_ID |Alarm Color ID |int |R ALARM COLOR ID: The identifier
+of the alarm color.
+
+|COLOR_CODE |Color Code |varchar(15) |ALARM COLOR: The alarm color set
+in the interface of alarm settings.
+
+|REMARK |Remark |varchar(2000) |REMARK: Narrative remarks about this row
+of data.
+
+|IS_ACTIVE |Is Active |bit |ACTIVE INDICATOR: A Y/N flag indicating
+whether this row of data is currently either active / valid (TRUE) or
+inactive / invalid (FALSE).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |datetime |ROW CHANGED DATE: System date
+of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DATE |Created Date |datetime |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Alarm_Level
+
+*Table Name: r_alarm_level*
+
+R ALARM LEVEL: The alarm level set in the interface of alarm settings,
+can set High, Medium, Low level for a alarm.
+
+[width="100%",cols="16%,12%,18%,51%,3%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Description |
+|R_ALARM_LEVEL_ID |Alarm Level ID |int |R ALARM LEVEL ID: The identifier
+of the level. |
+
+|ALARM_LEVEL |Alarm Level |varchar(40) |ALARM LEVEL: The alarm level set
+in the interface of alarm settings. |
+
+|REMARK |Remark |varchar(2000) |REMARK: Narrative remarks about this row
+of data. |
+
+|IS_ACTIVE |Is Active |bit |ACTIVE INDICATOR: A Y/N flag indicating
+whether this row of data is currently either active / valid (TRUE) or
+inactive / invalid (FALSE). |
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row. |
+
+|ROW_CHANGED_DATE |Changed Date |datetime |ROW CHANGED DATE: System date
+of the last time the row was changed. |
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data. |
+
+|ROW_CREATED_DATE |Created Date |datetime |ROW CREATED DATE: Date that
+the row was created on. |
+|===
+
+== R_Alarm_Status
+
+*Table Name: r_alarm_status*
+
+R ALARM STATUS: The alarm status like open, in review, closed.
+
+[width="100%",cols="16%,13%,19%,52%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Description
+|R_ALARM_STATUS_ID |Alarm Status ID |int |R ALARM STATUS ID: The
+identifier of the alarm status, like open, in review, closed.
+
+|ALARM_STATUS |Alarm Status |varchar(40) |ALARM STATUS: The alarm status
+like open, in review, closed.
+
+|REMARK |Remark |varchar(2000) |REMARK: Narrative remarks about this row
+of data.
+
+|IS_ACTIVE |Is Active |bit |ACTIVE INDICATOR: A Y/N flag indicating
+whether this row of data is currently either active / valid (TRUE) or
+inactive / invalid (FALSE).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |datetime |ROW CHANGED DATE: System date
+of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DATE |Created Date |datetime |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Alarm_Type
+
+*Table Name: r_alarm_type*
+
+R ALARM TYPE: The alarm type set in the interface of alarm settings, can
+set value or percentage, or both.
+
+[width="100%",cols="16%,11%,19%,54%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Description
+|R_ALARM_TYPE_ID |Alarm Type ID |int |R ALARM TYPE ID: The identifier of
+the alarm type.
+
+|ALARM_TYPE |Alarm Type |varchar(40) |ALARM TYPE: The alarm type set in
+the interface of alarm settings.
+
+|REMARK |Remark |varchar(2000) |REMARK: Narrative remarks about this row
+of data.
+
+|IS_ACTIVE |Is Active |bit |ACTIVE INDICATOR: A Y/N flag indicating
+whether this row of data is currently either active / valid (TRUE) or
+inactive / invalid (FALSE).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |datetime |ROW CHANGED DATE: System date
+of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DATE |Created Date |datetime |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Favorite_Function
+
+*Table Name: r_favorite_function*
+
+R FAVORITE FUNCTION: This table record user favorite items belong to
+which function.
+
+[width="100%",cols="18%,18%,17%,47%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Description
+|R_FAVORITE_FUNCTION_ID |R Favorite Function ID |int |R FAVORITE
+FUNCTION ID: The identifier of the user favorite function.
+
+|FUNCTION_NAME |Function Name |varchar(255) |FAVORITE FUNCTION NAME: The
+user favorite function name.
+
+|REMARKS |Remarks |varchar(2000) |REMARK: Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |bit |ACTIVE INDICATOR: A True/False flag
+indicating whether this row of data is currently either active / valid
+(True) or inactive / invalid (False).
+
+|ROW_CREATED_BY |Row Created By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CREATED_DATE |Row Created Date |datetime |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CHANGED_DATE |Row Changed Date |datetime |ROW CREATED BY: System
+user who created this row of data.
+
+|ROW_CHANGED_BY |Row Changed By |character varying(100) |ROW CREATED
+DATE: Date that the row was created on.
+|===
+
+== R_BA_Category
+
+*Table Name: r_ba_category*
+
+REFERENCE BUSINESS ASSOCIATE CATEGORY: The category that the business
+associate is in. For a company, may be legal company, sole
+proprietorship, corporation, etc.
+
+[width="100%",cols="15%,13%,20%,52%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_BA_CATEGORY_ID |BA Category ID |integer |BA CATEGORY ID: The auto
+generated database id for this row.
+
+|BA_CATEGORY |BA Category |character varying(50) |BA CATEGORY: The
+category that the business associate is in. For a company, may be legal
+company, sole proprietorship, corporation etc
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|ABBREVIATION |Abbreviation |character varying(15) |ABBREVIATION:
+Abbreviation used for reference type or code.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|IS_ACTIVE |Is Active |Boolean |ACTIVE INDICATOR: A flag indicating
+whether this row of data is currently either active / valid (TRUE) or
+inactive / invalid (FALSE).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_BA_Type
+
+*Table Name: r_ba_type*
+
+REFERENCE BUSINESS ASSOCIATE TYPE: The type of business associate. Usual
+reference values include COMPANY, PERSON, REGULATORY , SOCIETY,
+ASSOCIATION. Use the BA CATEGORY to further categories this information.
+
+[width="100%",cols="17%,13%,19%,51%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_BA_TYPE_ID |BA Type ID |integer |BA TYPE ID: The auto generated
+database id for this row.
+
+|BA_TYPE |BA Type |character varying(50) |BA TYPE: The type of business
+associate. Usual reference values include COMPANY, PERSON, REGULATORY,
+SOCIETY, ASSOCIATION. Use the BA CATEGOY to further categories this
+information.
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|ABBREVIATIO N |Abbreviation on |character varying(15) |ABBREVIATION:
+Abbreviation used for reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|IS_ACTIVE |Is Active |Boolean |ACTIVE INDICATOR: A flag indicating
+whether this row of data is currently either active / valid (TRUE) or
+inactive / invalid (FALSE).
+
+|ROW_CHANG ED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANG ED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATE D_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATE D_DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Completion_Type
+
+*Table Name: r_completion_type*
+
+REFERENCE COMPLETION TYPE: The type or method of well completion. For
+example perforation, open hole, gravel pack or combination.
+
+[width="100%",cols="19%,14%,18%,49%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_COMPLETION_TY PE_ID |Completion Type ID |integer |COMPLETION TYPE ID:
+The identifier to as the primary key for this row.
+
+|COMPLETION_TYPE |Completion Type |character varying(40) |COMPLETION
+TYPE: The type or method of well completion. For example perforation,
+open hole, gravel pack or combination.
+
+|IS_ACTIVE |Is Active |boolean |ACTIVE INDICATOR: A Y/N flag indicating
+whether this row of data is currently either active / valid (Y) or
+inactive / invalid (N).
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: The commonly
+used long name of the completion type.
+
+|SHORT_NAME |Short Name |character varying(255) |SHORT NAME: The
+commonly used short name of the completion type.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DA TE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DA TE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Perforation_Type
+
+*Table Name: r_perforation_type*
+
+REFERENCE PERFORATION TYPE: A reference table identifying the type of
+perforation method. For example bullet, jet or combination.
+
+[width="100%",cols="18%,15%,19%,48%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Description
+|R_PERFORATION_TYPE_ID |Perforation Type ID |integer |PERFORATION TYPE
+ID: The identifier to as the primary key for this row.
+
+|PERFORATION_TYPE |Perforation Type |character varying(50) |PERFORATION
+TYPE: Display name given to reference type or code.
+
+|IS_ACTIVE |Is Active |boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |Narrative remarks about this
+row of data.
+
+|ROW_CHANGED_BY |Row Changed By |character varying(100) |Application
+login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Row Changed Date |timestamp |System date of the last
+time the row was changed.
+
+|ROW_CREATED_BY |Row Created By |character varying(100) |System user who
+created this row of data.
+
+|ROW_CREATED_DATE |Row Created Date |timestamp |Date that the row was
+created on.
+|===
+
+== R_Perforation_Method
+
+*Table Name: r_perforation_method*
+
+REFERENCE PERFORATION METHOD: Code identifying the type of opening the
+fluid entered through into the tubing (e.g., perforation, open hole,
+combination, etc.).
+
+[width="100%",cols="20%,16%,18%,46%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Description
+|R_PERFORATION_METHOD_ID |Perforation Method ID |integer |PERFORATION
+METHOD ID: The identifier to as the primary key for this row.
+
+|PERFORATION_METHOD |Perforation Method |character varying(50)
+|PERFORATION METHOD: Display name given to reference type or code.
+
+|IS_ACTIVE |Is Active |boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |Narrative remarks about this
+row of data.
+
+|ROW_CHANGED_BY |Row Changed By |character varying(100) |Application
+login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Row Changed Date |timestamp |System date of the last
+time the row was changed.
+
+|ROW_CREATED_BY |Row Created By |character varying(100) |System user who
+created this row of data.
+
+|ROW_CREATED_DATE |Row Created Date |timestamp |Date that the row was
+created on.
+|===
+
+== R_Coupling_Type
+
+*Table Name: r_coupling_type*
+
+REFERENCE COUPLING TYPE: A short length of pipe used to connect two
+joints of casing. A casing coupling has internal threads (female thread
+form) machined to match the external threads (male thread form) of the
+long joints of casing. The two joints of casing are threaded into
+opposite ends of the casing coupling. Synonyms: casing collar
+(Schlumberger Oilfield Glossary).
+
+[width="100%",cols="18%,13%,18%,51%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_COUPLIN G_TYPE_ID |Coupling Type ID |integer |COUPLING TYPE ID: The
+identifier to as the primary key for this row.
+
+|COUPLING_ TYPE |Coupling Type |character varying(40) |COUPLING TYPE: A
+short length of pipe used to connect two joints of casing. A casing
+coupling has internal threads (female thread form) machined to match the
+external threads (male thread form) of the long joints of casing. The
+two joints of casing are threaded into opposite ends of the casing
+coupling. Synonyms: casing collar (Schlumberger Oilfield Glossary)
+
+|IS_ACTIVE |Is Active |boolean |ACTIVE INDICATOR: A Y/N flag indicating
+whether this row of data is currently either active / valid (Y) or
+inactive / invalid (N).
+
+|LONG_NAM E |Long Name |character varying(255) |LONG NAME: The commonly
+used long name of the coupling type.
+
+|SHORT_NA ME |Short Name |character varying(100) |SHORT NAME: The
+commonly used short name of the coupling type.
+
+|ROW_CHA NGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHA NGED_DAT E |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREA TED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREA TED_DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Downtime_Type
+
+*Table Name: r_downtime_type*
+
+REFERENCE WELL DOWNTIME TYPE: The type of downtime experienced during a
+well operation or event. Downtime types may include downtime,
+constrained production, deferred production. Added to allow some
+granularity of describing downtime events without having to overload the
+event type table.
+
+[width="100%",cols="17%,13%,19%,51%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_DOWNTIME_TYPE_ID |Downtime Type ID |integer |R DOWNTIME TYPE ID: The
+identifier to as the primary key for this row.
+
+|DOWNTIME_TYPE |Downtime Type |character varying(40) |DOWNTIME TYPE: The
+type of downtime experienced during a well operation or event.
+
+|IS_ACTIVE |Is Active |Boolean |ACTIVE INDICATOR: A Y/N flag indicating
+whether this row of data is currently either active / valid (TRUE) or
+inactive / invalid (FALSE).
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Equip_Install_Loc
+
+*Table Name: r_equip_install_loc*
+
+REFERENCE EQUIPMENT INSTALLATION TYPE: Indicates where this type of
+equipment would normally be used, such as on the drilling assembly, in
+the well bore, on well site, on rig, in processing facility.
+
+[width="100%",cols="21%,19%,16%,44%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_EQUIPMENT_INS TALL_LOC_ID |Equipment Install Loc ID |integer |TYPICAL
+EQUIPMENT INSTALLATION TYPE IDENTIFIER: Unique identifier for the row.
+
+|EQUIPMENT_INSTA LL_LOC_TYPE |Equipment Install Loc Type |character
+varying(255) |TYPICAL EQUIPMENT INSTALLATION TYPE: Indicates where this
+type of equipment would normally be used, such as on the drilling
+assembly, in the well bore, on well site, on rig, in processing
+facility.
+
+|ABBREVIATION |Abbreviation |character varying(12) |ABBREVIATION:
+Abbreviation used for reference type or code.
+
+|ACTIVE_IND |Is Active |boolean |ACTIVE INDICATOR: A Y/N flag indicating
+whether this row of data is currently either active / valid (Y) or
+inactive / invalid (N).
+
+|EFFECTIVE_DATE |Effective Date |timestamp |EFFECTIVE DATE: The date
+that the data in this row first came into effect.
+
+|EXPIRY_DATE |Expiry Date |timestamp |EXPIRY DATE: The date that the
+data in this row was no longer active or in effect.
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|ROW_CHANGED_B Y |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_D ATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DA TE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Equipment_Catalogue
+
+*Table Name: r_equipment_catalog*
+
+REFERENCE EQUIPMENT CATALOGUE: Use this table to list and describe the
+kinds of equipment that you need.
+
+[width="100%",cols="20%,16%,18%,46%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Description
+|R_EQUIPMENT_CATALOGUE_ID |Equipment Catalogue ID |integer |EQUIPMENT
+CATALOGUE IDENTIFIER: Number uniquely identifying the equipment
+catalogue.
+
+|EQUIPMENT_CATALOGUE |Equipment Catalogue |character varying(40)
+|EQUIPMENT CATALOGUE: Describe the kinds of equipment.
+
+|IS_ACTIVE |Is Active |boolean |ACTIVE INDICATOR: A Y or N flag
+indicating whether this row of data is currently either active/valid
+(TRUE) or inactive/invalid (FALSE).
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Equipment_Type
+
+*Table Name: r_equipment_type*
+
+REFERENCE EQUIPMENT TYPE: Use this table to list the types of equipment.
+
+[width="100%",cols="20%,17%,18%,45%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Description
+|R_EQUIPMENT_TYPE_ID |Equipment Type ID |integer |EQUIPMENT TYPE
+IDENTIFIER: Number uniquely identifying the equipment type.
+
+|EQUIPMENT_TYPE |Equipment Type |character varying(40) |EQUIPMENT TYPE:
+Describe the types of equipment.
+
+|R_EQUIPMENT_CATALOGUE_ID |Equipment Catalogue ID |integer |EQUIPMENT
+CATALOGUE IDENTIFIER: Number uniquely identifying the equipment
+catalogue.
+
+|EQUIPMENT_CATALOGUE |Equipment Catalogue |character varying(40)
+|EQUIPMENT CATALOGUE: Describe the kinds of equipment.
+
+|IS_ACTIVE |Is Active |boolean |ACTIVE INDICATOR: A Y or N flag
+indicating whether this row of data is currently either active/valid
+(TRUE) or inactive/invalid (FALSE).
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Equipment_Sub_Type
+
+*Table Name: r_equipment_sub_type*
+
+REFERENCE EQUIPMENT SUB TYPE: Use this table to list the sub types of
+equipment
+
+[width="100%",cols="20%,16%,18%,46%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Description
+|R_EQUIPMENT_SUB_TYPE_ID |Equipment Sub Type ID |integer |EQUIPMENT SUB
+TYPE IDENTIFIER: Number uniquely identifying the equipment sub type.
+
+|EQUIPMENT_SUB_TYPE |Equipment Sub Type |character varying(40)
+|EQUIPMENT SUB TYPE: Describe the sub type of equipment.
+
+|IS_ACTIVE |Is Active |boolean |ACTIVE INDICATOR: A Y or N flag
+indicating whether this row of data is currently either active/valid
+(TRUE) or inactive/invalid (FALSE).
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Equipment_Spec
+
+*Table Name: r_equipment_spec*
+
+REFERENCE EQUIPMENT SPECIFICATION: Use this table to record all the
+specifications measured for equipment.
+
+[width="100%",cols="16%,20%,18%,46%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Description
+|R_EQUIPMENT_SPEC_ID |Equipment Specification ID |integer |EQUIPMENT
+SPECIFICATION IDENTIFIER: Number uniquely identifying the equipment
+specification.
+
+|EQUIPMENT_SPEC |Equipment Specification |character varying(40)
+|EQUIPMENT SPECIFICATION: Describe the specifications measured for
+equipment.
+
+|R_DATA_TYPE_ID |Data Type ID |integer |DATA TYPE IDENTIFIER: The
+identifer of the data type.
+
+|DATA_TYPE |Data Type |character varying(40) |DATA TYPE: The data type
+for this row of specification
+
+|UNIT |Unit |character varying(40) |UNIT: The unit for this row of
+specification.
+
+|IS_ACTIVE |Is Active |boolean |ACTIVE INDICATOR: A Y or N flag
+indicating whether this row of data is currently either active/valid
+(TRUE) or inactive/invalid (FALSE).
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Equipment_Measurement
+
+*Table Name: r_equipment_measurement*
+
+R_EQUIPMENT_MEASUREMENT: This table is used to record the equipment
+measurement parameters.
+
+[width="100%",cols="21%,16%,15%,7%,41%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Ref_Table |Description
+|R_EQUIPMENT_MEASUREMENT_ID |Equipment Measurement ID |integer |
+|R_EQUIPMENT_MEASUREMENT_ID:is the primary key of this table, which is
+automatic generated by PDM application.
+
+|EQUIPMENT_MEASUREMENT |Equipment Measurement |character varying(50) |
+|EQUIPMENT MEASUREMENT, is the tag name from OPC server or PDM
+connector. It is unique constraint of this table.
+
+|IS_REAL_TIME |Is Real Time |boolean | |IS_REAL_TIME: Once it is true,
+it will be in the time series measurement and can be matched with tags.
+
+|R_DATA_TYPE_ID |Data Type ID |integer |R DATA TYPE |DATA TYPE
+IDENTIFIER: The identifer of the data type.
+
+|DATA_TYPE |Data Type |character varying(40) |R DATA TYPE |DATA TYPE:
+The data type for this row of specification
+
+|UNIT |Unit |character varying(40) | |UNIT: The unit for this row of
+specification.
+
+|IS_ACTIVE |Is Active |boolean | |ACTIVE INDICATOR: A Y/N flag
+indicating whether this row of data is currently either active / valid
+(TRUE) or inactive / invalid (FALSE).
+
+|REMARK |Remark |character varying(2000) | |REMARK: Narrative remarks
+about this row of data.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) | |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CREATED_BY |Created By |character varying(100) | |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DATE |Created Date |timestamp | |ROW CREATED DATE: Date
+that the row was created on.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp | |ROW CHANGED DATE: System
+date of the last time the row was changed.
+|===
+
+== R_Data_Type
+
+*Table Name: r_data_type*
+
+REFERENCE DATA TYPE: Use this table to record data type that PDM
+application supports.
+
+[width="100%",cols="15%,11%,21%,53%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Description
+|R_DATA_TYPE_ID |Data Type ID |integer |DATA TYPE IDENTIFIER: Number
+uniquely identifying the data type.
+
+|DATA_TYPE |Data Type |character varying(40) |DATA TYPE: The data type
+supported of PDM application. Such as numerical(,), varchar().
+
+|IS_ACTIVE |Is Active |boolean |ACTIVE INDICATOR: A Y or N flag
+indicating whether this row of data is currently either active/valid
+(TRUE) or inactive/invalid (FALSE).
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Event_Category
+
+*Table Name: r_event_category*
+
+REFERENCE EVENT CATEGORY: Indicates where this type of event category
+would normally be used, such as acid, fracture, Change pump, well
+maintenance, etc. And if there are sub type needed, such as acid
+fracture, which belongs to fracture, the r_event_sub_category table can
+be used.
+
+[width="100%",cols="17%,14%,19%,50%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_EVENT_CATEG ORY_ID |Event Category ID |integer |R EVENT CATEGORY ID:
+The identifier of the category for the well activity or event.
+
+|EVENT_CATEGOR Y |Event Category |character varying(40) |EVENT CATEGORY:
+The category of the well activity or event.
+
+|IS_ACTIVE |Is Active |Boolean |ACTIVE INDICATOR: A Y/N flag indicating
+whether this row of data is currently either active / valid (TRUE) or
+inactive / invalid (FALSE).
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|ROW_CHANGED_ BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_ DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_B Y |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_ DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Event_Sub_Category
+
+*Table Name: R_Event_Sub_Category*
+
+REFERENCE EVENT SUB CATEGORY: Indicates where this type of sub event
+category would normally be used, such as acid fracture, which belongs to
+fracture.
+
+[width="100%",cols="21%,16%,17%,46%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_EVENT_SUB_CAT EGORY_ID |Event Sub Category ID |integer |R EVENT SUB
+CATEGORY ID: The identifier to as the primary key for this row.
+
+|EVENT_SUB_CATEG ORY |Event Sub Category |character varying(40) |ENVENT
+SUB CATEGORY: The sub category of the well activity or event.
+
+|IS_ACTIVE |Is Active |boolean |ACTIVE INDICATOR: A Y/N flag indicating
+whether this row of data is currently either active / valid (TRUE) or
+inactive / invalid (FALSE).
+
+|R_EVENT_CATEGOR Y_ID |Event Category ID |integer |R EVENT CATEGORY ID:
+The identifier of the category for the well activity or event.
+
+|EVENT_CATEGORY |Event Category |character varying(40) |EVENT CATEGORY:
+The category of the well activity or event.
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DA TE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DA TE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Facility_Type
+
+*Table Name: r_facility_type*
+
+REFERENCE FACILITY TYPE: A reference table identifying the codes
+classifying the facility according to its physical equipment or
+principal service performed. The facility type should be unique in this
+table.
+
+[width="100%",cols="16%,15%,19%,50%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_FACILITY_TYPE_ID |Facility Type |integer |FACILITY TYPE IDENTIFIER:
+An auto generated database id for facility_type.
+
+|FACILITY_TYPE |Facility Type Name |character varying(100) |FACILITY
+TYPE: A reference table identifying the codes classifying the facility
+according to its physical equipment or principal service performed. The
+facility type should be unique in this table.
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|IS_ACTIVE |Is Active |boolean |ACITIVE INDICATOR: A TRUE/FALSE flag
+indicating whether this row of data is currently either active / valid
+(TRUE) or inactive / invalid (FALSE).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DAT E |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DAT E |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Field_Type
+
+*Table Name: r_field_type*
+
+REFERENCE FIELD TYPE: A reference table identifying the type of field.
+For example regulatory or locally assigned.
+
+[width="100%",cols="15%,13%,20%,52%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_FIELD_TYPE_ID |Field Type ID |integer |FIELD TYPE ID: The identifier
+to as the primary key for this row.
+
+|DISPLAY_NAME |Display Name |character varying(100) |DISPLAY NAME:
+Display name given to reference type or code.
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|ABBREVIATION |Abbreviation |character varying(15) |ABBREVIATION:
+Abbreviation used for reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|IS_ACTIVE |Is Active |boolean |ACTIVE INDICATOR: A Y or N flag
+indicating whether this row of data is currently either active/valid (Y)
+or inactive/invalid (N).
+
+|EFFECTIVE_DATE |Effective Date |timestamp |EFFECTIVE DATE: The date
+that the data in this row first came into effect.
+
+|EXPIRY_DATE |Expiry Date |timestamp |EXPIRY DATE: The date that the
+data in this row was no longer active or in effect.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+
+|SOURCE_NAME |Source |character varying(50) |SOURCE NAME: The
+individual, company, state, or government agency designated as the
+source of information for this row.
+
+|FIELD_TYPE_NAME |Field Type |character varying(50) |FIELD TYPE NAME: A
+reference table identifying the codes classifying the facility according
+to its physical equipment or principal service performed.
+|===
+
+== R_Asset_Type
+
+*Table Name: r_asset_type*
+
+[width="100%",cols="15%,11%,21%,53%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Description
+|R_ASSET_TYPE_ID |Asset Type ID |integer |ASSET TYPE ID: The identifier
+to as the primary key for this row.
+
+|ASSET_TYPE |Asset Type |character varying(50) |ASSET TYPE NAME: A
+reference table identifying the codes classifying the asset type.
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |System user who
+created this row of data.
+
+|ROW_CREATED_DATE |Created Date |timestamp |Date that the row was
+created on.
+|===
+
+== R_Fluid_Type
+
+*Table Name: r_fluid_type*
+
+REFERENCE FLUID TYPE: A reference table identifying the type of fluids
+or substances produced by a well or used for various operations. For
+example oil, gas, mud or water.
+
+[width="100%",cols="15%,11%,21%,53%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Description
+|R_FLUID_TYPE_ID |Fluid Type ID |integer |FLUID TYPE IDENTIFIER: Unique
+identifier for the row.
+
+|FLUID_TYPE |Fluid Type |character varying(50) |FLUID TYPE: A reference
+table identifying the type of fluids or substances produced by a well or
+used for various operations. For example oil, gas, mud or water.
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |boolean |: A Y/N flag indicating whether this row
+of data is currently either active / valid (Y) or inactive / invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |System user who
+created this row of data.
+
+|ROW_CREATED_DATE |Created Date |timestamp |Date that the row was
+created on.
+|===
+
+== R_Node_Type
+
+*Table Name: r_node_type*
+
+REFERENCE NODE TYPE: The node types. And the node type should be unique
+in this table.
+
+[width="100%",cols="15%,13%,20%,52%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_NODE_TYPE_ID |Node Type ID |integer |NODE TYPE IDENTIFIER: An auto
+generated database id for node type.
+
+|NODE_TYPE |Node Type |character varying(40) |NODE TYPE: The node types.
+And the node type should be unique in this table.
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|IS_ACTIVE |Is Active |boolean |ACITIVE INDICATOR: A TRUE/FALSE flag
+indicating whether this row of data is currently either active / valid
+(TRUE) or inactive / invalid (FALSE).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_North
+
+*Table Name: r_north*
+
+REFERENCE NORTH TYPE: The North reference used to define AZIMUTH angular
+measurement values stored in WELL_DIR_SRVY_STATION for this Directional
+Survey (UWI, SURVEY_ID, SOURCE). For example, True North, Grid North,
+Magnetic North, etc.
+
+[width="100%",cols="17%,13%,19%,51%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_NORTH_ID |North Type ID |integer |R NORTH IDENTIFIER: Number uniquely
+identifying the north type.
+
+|NORTH_TYPE |North Type |character varying(40) |NORTH TYPE: The North
+reference used to define AZIMUTH angular measurement values stored in
+WELL_DIR_SRVY_STATION for this Directional Survey (UWI, SURVEY_ID,
+SOURCE). For example, True North, Grid North, Magnetic North, etc.
+
+|IS_ACTIVE |Is Active |boolean |ACTIVE INDICATOR: A Y or N flag
+indicating whether this row of data is currently either active/valid
+(TRUE) or inactive/invalid (FALSE).
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAM E |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|ROW_CHAN GED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHAN GED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREAT ED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREAT ED_DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Scenario_Type
+
+*Table Name: r_scenario_type*
+
+SCENARIO TYPE REFERENCE: The type that is used to describe the type.
+Such as Base Scenario, Alternate Scenario.
+
+[width="100%",cols="17%,13%,20%,50%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Description
+|R_SCENARIO_TYPE_ID |Scenario Type ID |integer |SCENARIO TYPE REFERENCE
+ID: Number or code uniquely identifying the scenario type.
+
+|SCENARIO_TYPE |Scenario Type |character varying(40) |SCENARIO TYPE: The
+scenario type, for example, base scenario, alternate scenario
+
+|IS_ACTIVE |Is Active |boolean |ACTIVE INDICATOR: A Y/N flag indicating
+whether this row of data is currently either active / valid (Y) or
+inactive / invalid (N).
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: The commonly
+used long name of the completion type.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: The
+commonly used short name of the completion type.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_ORG_Unit_Category
+
+*Table Name: r_org_unit_category*
+
+R_ORG_UNIT_CATEGORY: The reference type of category unit. For example:
+geography.
+
+[width="100%",cols="19%,17%,18%,46%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_ORG_UNIT_CATEGORY_ID |R ORG Unit Category ID |INTEGER |R ORG UNIT
+CATEGORY ID: The identifier to as the primary key for this row.
+
+|ORG_UNIT_CATEGORY |ORG Unit Category |CHARACTER VARYING |ORG UNIT
+CATEGORY: The category information of org unit, such as geographical
+area, business unit.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(30) |Application login id
+of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(30) |Date that the row
+was created on.
+|===
+
+== R_ORG_Unit_Type
+
+*Table Name: r_org_unit_type*
+
+R_ORG_UNIT_TYPE: The reference type of organization unit. For example:
+Area, Field, Business Associate.
+
+[width="100%",cols="15%,15%,20%,50%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_ORG_UNIT_TYPE_ID |R ORG Unit Type ID |INTEGER |R ORG UNIT TYPE ID:
+The identifier to as the primary key for this row.
+
+|ORG_UNIT_TYPE |ORG Unit Type |CHARACTER VARYING |ORG UNIT TYPE:
+Organization type, for example: Area, Field, etc.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Pipeline_Material
+
+*Table Name: r_pipeline_material*
+
+REFERENCE PIPELINE MATERIAL: The material that a pipeline is constructed
+from, such as 24 pound steel, etc.
+
+[width="100%",cols="20%,15%,18%,47%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_PIPELINE_MATE RIAL_ID |Pipeline Material ID |integer |PIPELINE
+MATERIAL IDENTIFIER: An auto generated database id for pipeline
+material.
+
+|PIPELINE_MATERIA L |Pipeline Material |character varying(100) |PIPELINE
+MATERIAL: The material that a pipeline is constructed from, such as 24
+pound steel etc.
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|IS_ACTIVE |Is Active |boolean |ACITIVE INDICATOR: A TRUE/FALSE flag
+indicating whether this row of data is currently either active / valid
+(TRUE) or inactive / invalid (FALSE).
+
+|ROW_CHANGED_B Y |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_D ATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_D ATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Pipeline_Segment_Type
+
+*Table Name: r_pipeline_segment_type*
+
+REFERENCE PIPELINE SEGMENT TYPE: The type of the pipe in this section.
+The types can be Line Pipe, Choke, Coated, Flexible, Fitting etc.
+
+[width="100%",cols="20%,13%,18%,49%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_PIPELINE_SEG_T YPE_ID |Segment Type ID |integer |R PIPELINE SEGMENT
+TYPE IDENTIFIER: An auto generated database id for segment type.
+
+|SEGMENT_TYPE |Segment Type |character varying(100) |SEGMENT TYPE: The
+type of the pipe in this section. The types can be Line Pipe, Choke,
+Coated, Flexible, Fitting etc.
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|IS_ACTIVE |Is Active |boolean |ACITIVE INDICATOR: A TRUE/FALSE flag
+indicating whether this row of data is currently either active / valid
+(TRUE) or inactive / invalid (FALSE).
+
+|ROW_CHANGED_B Y |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_D ATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_D ATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Pipeline_Type
+
+*Table Name: r_pipeline_type*
+
+REFERENCE PIPELINE TYPE: A reference table identifying the codes
+classifying the pipeline. The pipeline type should be unique in this
+table.
+
+[width="100%",cols="18%,13%,19%,50%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_PIPELINE_TYP E_ID |Pipeline Type ID |integer |PIPELINE TYPE
+IDENTIFIER: An auto generated database id for pipeline type.
+
+|PIPELINE_TYPE |Pipeline Type |character varying(100) |PIPELINE TYPE: A
+reference table identifying the codes classifying the pipeline. The
+pipeline type should be unique in this table.
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remarks |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|IS_ACTIVE |Is Active |boolean |ACITIVE INDICATOR: A TRUE/FALSE flag
+indicating whether this row of data is currently either active / valid
+(TRUE) or inactive / invalid (FALSE).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_ BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_ DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Pool_Status
+
+*Table Name: r_pool_status*
+
+REFERENCE POOL STATUS: A reference table identifying the operational or
+legal status of the pool.
+
+[width="100%",cols="15%,20%,11%,54%",options="header",]
+|===
+|*Column Name* |*Data Type* |*Ref_Table* |*Description*
+|Pool Status ID |integer | |POOL STATUS IDENTIFIER: Unique identifier
+for the pool.
+
+|Pool Status |character varying(40) | |POOL STATUS: The operational or
+legal status of the pool.
+
+|Changed By |character varying(100) | |ROW CHANGED BY: Application login
+id of the user who last changed the row.
+
+|Changed Date |timestamp | |ROW CHANGED DATE: System date of the last
+time the row was changed.
+
+|Created By |character varying(100) | |ROW CREATED BY: System user who
+created this row of data.
+
+|Created Date |timestamp | |ROW CREATED DATE: Date that the row was
+created on.
+|===
+
+== R_Pool_Type
+
+*Table Name: r_pool_type*
+
+REFERENCE POOL TYPE: A reference table identifying the type of pool.
+
+[width="100%",cols="15%,19%,12%,54%",options="header",]
+|===
+|*Column Name* |*Data Type* |*Ref_Table * |*Description*
+|Pool Type ID |integer | |POOL TYPE ID: the identifier of the pool type.
+
+|Pool Type |character varying(40) | |POOL TYPE: The type of hydrocarbon
+pool described, such as conventional or oil sands deposit.
+
+|Changed By |character varying(100) | |ROW CHANGED BY: Application login
+id of the user who last changed the row.
+
+|Changed Date |timestamp | |ROW CHANGED DATE: System date of the last
+time the row was changed.
+
+|Created By |character varying(100) | |ROW CREATED BY: System user who
+created this row of data.
+
+|Created Date |timestamp | |ROW CREATED DATE: Date that the row was
+created on.
+|===
+
+== R_Production_Method
+
+*Table Name: R_Production_Method*
+
+REFERENCE PRODUCTION METHOD: This reference table identifies the method
+of production. For example swabbing, flowing, pumping or gas lift.
+
+[width="100%",cols="19%,16%,17%,48%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_PRODUCTION_METHOD_ID |Production Method ID |integer |PRODUCTION
+METHOD IDENTIFIER: the unique number assigned to production method.
+
+|PRODUCTION_METHOD |Production Method |character varying(40)
+|PRODUCTION_METHOD: REFERENCE PRODUCTION METHOD: The method of product
+ion. For example swabbing, flowing, pumping or gas lift.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Timezone
+
+*Table Name: R_Timezone*
+
+REFERENCE TIMEZONE: a valid list of time zones.
+
+[width="100%",cols="15%,13%,20%,52%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_TIMEZONE_ID |Timezone ID |integer |TIMEZONE ID: The identifier to as
+the primary key for this row.
+
+|TIMEZONE |Timezone |character varying(40) |TIMEZONE: a valid list of
+time zones.
+
+|ACTIVE_IND |Is Active |boolean |ACTIVE INDICATOR: A Y or N flag
+indicating whether this row of data is currently either active/valid
+(TRUE) or inactive/invalid (FALSE).
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: Common
+short name.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Tubular_Type
+
+*Table Name: R_Tubular_Type*
+
+REFERENCE TUBULAR TYPE: The particular type of tubular. For example,
+Conductor, Surface Casing, Intermediate Casing, Production Casing,
+Tubing, Liner, etc.
+
+[width="100%",cols="18%,13%,18%,51%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_TUBULAR_TYP E_ID |Tubular Type ID |integer |TUBULAR TYPE ID: The
+identifier to as the primary key for this row.
+
+|TUBULAR_TYPE |Tubular Type |character varying(40) |TUBULAR TYPE: The
+particular type of tubular. For example, Conductor, Surface Casing,
+Intermediate Casing, Production Casing, Tubing, Liner etc.
+
+|IS_ACTIVE |Is Active |boolean |ACTIVE INDICATOR: A Y/N flag indicating
+whether this row of data is currently either active / valid (Y) or
+inactive / invalid (N).
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: The commonly
+used long name of the tubular type.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: The
+commonly used short name of the tubular type.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_ BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_ DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Well_Class
+
+*Table Name: R_Well_Class*
+
+REFERENCE WELL CLASS: This reference table describes the classification
+of a well. This may include, but is not restricted to the Lahee
+classification scheme. For example development, new field wildcat or
+outpost.
+
+[width="100%",cols="15%,13%,20%,52%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_WELL_CLASS_ID |Well Class ID |integer |WELL CLASS IDENTIFER: The
+identifier of the well class.
+
+|WELL_CLASS |Well Class |character varying(40) |WELL CLASSIFICATION: A
+reference table identifying the classification of a well commonly based
+on the Lahee system. For example New Field Wildcat, Deeper Pool Test,
+Outpost or Development
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100)) |System user who
+created this row of data.
+
+|ROW_CREATED_DATE |Created Date |timestamp |Date that the row was
+created on.
+|===
+
+== R_Well_Datum_Type
+
+*Table Name: R_Well_Datum_Type*
+
+REFERENCE WELL DATUM TYPE: A reference table identifying the type of
+point or horizontal surface used as an elevation reference for
+measurements in a well. Examples: Kelly bushing, ground, sea level.
+
+[width="100%",cols="18%,19%,11%,52%",options="header",]
+|===
+|*Column Name* |*Data Type* |*Ref_Table* |*Description*
+|WELL_DATUM_TYPE_I D |integer | |WELL DATUM TYPE ID: An auto generated
+database id and is the primary key for this row.
+
+|WELL_DATUM_TYPE |character varying(50) | |WELL DATUM TYPE: The type of
+point or horizontal surface used as an elevation reference for
+measurements in a well. For example: Kelly bushing, ground, sea level.
+
+|ABBREVIATION |character varying(50) | |ABBREVIATION: Abbreviation used
+for reference type or code
+
+|LONG_NAME |character varying(50) | |LONG NAME: Common long name given
+to reference type or code.
+
+|SHORT_NAME |character varying(50) | |SHORT NAME: Common short name
+given to reference type or code.
+
+|ROW_CHANGED_BY |character varying(30) | |Application login id of the
+user who last changed the row.
+
+|ROW_CHANGED_DATE |timestamp | |System date of the last time the row was
+changed.
+
+|ROW_CREATED_ BY |character varying(100) | |ROW CREATED BY: System user
+who created this row of data.
+
+|ROW_CREATED_ DATE |timestamp | |ROW CREATED DATE: Date that the row was
+created on.
+|===
+
+== R_Well_Level_Type
+
+*Table Name: R_Well_Level_Type*
+
+REFERENCE WELL LEVEL TYPE: Indicates which well component this row
+describes, as outlined in
+http://www.WhatIsAWell.org[www.WhatIsAWell.org]. Values may include
+WELL, WELL ORIGIN, WELLBORE, WELLBORE SEGMENT, WELLBORE COMPLETION or
+WELLBORE CONTACT INTERVAL.
+
+[width="100%",cols="19%,17%,18%,46%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_WELL_LEVEL_TYPE_ID |Well Level Type ID |integer |WELL LEVEL TYPE ID:
+The identifier to as the primary key for this row.
+
+|DISPLAY_NAME |Name |character varying(30) |DISPLAY NAME: Display name
+given to reference type or code.
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(30) |SHORT NAME: Common short
+name given to reference type or code.
+
+|ABBREVIATION |Abbreviation |character varying(15) |ABBREVIATION:
+Abbreviation used for reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|EFFECTIVE_DATE |Effective Date |timestamp |The date that the data in
+this row first came into effect.
+
+|EXPIRY_DATE |Expiry Date |timestamp |The date that the data in this row
+was no longer active or in effect.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+
+|SOURCE_NAME |Source |character varying(50) |SOURCE NAME: The
+individual, company, state, or government agency designated as the
+source of information for this row.
+
+|R_WELL_LEVEL_TYPE_NAME |R Well Level Type Name |character varying(50)
+|WELL LEVEL TYPE NAME: Indicates which well component this row
+describes, as outlined in
+http://www.WhatIsAWell.org[www.WhatIsAWell.org]. Values may include
+WELL, WELL ORIGIN, WELLBORE, WELLBORE SEGMENT, WELLBORE COMPLETION or
+WELLBORE CONTACT INTERVAL.
+|===
+
+== R_Well_Status
+
+*Table Name: R_Well_Status*
+
+REFERENCE WELL STATUS: This reference table defines the status of the
+well.
+
+[width="100%",cols="14%,12%,14%,25%,35%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |Reference Table
+|*Description*
+|R_WELL_STATUS_ID |R Well Status ID |INTEGER | |R_WELL_STATUS_ID:The
+identifier to as the primary key for this row.
+
+|WELL_STATUS |Well Status |CHARACTER VARYING | |WELL_STATUS:The type of
+status reported for the well. Can include construction status, operating
+status, producing status, abandonment status etc.
+
+|R_WELL_STATUS_TYPE_ID |R Well Status Type ID |INTEGER
+|link:/#r_well_status_type[R_WELL_STATUS_TYPE]
+|R_WELL_STATUS_TYPE_ID:The type of status reported for the well. These
+should include the facet values from Well Status
+http://www.ppdm.org/standards/wellstatus. Each facet type is one row in
+this table. As needed, statuses that are reported fromvarious agencies
+may also be included.
+
+|R_SOURCE_ID |R Source ID |INTEGER |link:/#r_source[R_SOURCE]
+|R_SOURCE_ID:The individual, company, state, or government agency
+designated as the source of information for this row.
+
+|REMARKS |Remarks |character varying(2000) | |Narrative remarks about
+this row of data.
+
+|IS_ACTIVE |Is Active |Boolean | |: A Y or N flag indicating whether
+this row of data is currently either active/valid (Y) or
+inactive/invalid (N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) | |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp | |System date of the last
+time the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp | |System user who created
+this row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) | |Date that the row
+was created on.
+|===
+
+== R_Well_Status_Type
+
+*Table Name: R_Well_Status_Type*
+
+REFERENCE WELL STATUS TYPE: The type of status reported for the well.
+These should include the facet values from Well Status
+
+[width="99%",cols="18%,16%,19%,47%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_WELL_STATUS_TYPE_ID |R Well Status Type ID |INTEGER
+|R_WELL_STATUS_TYPE_ID: The identifier to as the primary key for this
+row.
+
+|WELL_STATUS_TYPE |Well Status Type |CHARACTER VARYING
+|WELL_STATUS_TYPE: The type of status reported for the well. These
+should include the facet values from Well Status
+http://www.ppdm.org/standards/wellstatus. Each facet type is one row in
+this table. As needed, statuses that are reported fromvarious agencies
+may also be included.
+
+|R_SOURCE_ID |R Source ID |INTEGER |R_SOURCE_ID: The individual,
+company, state, or government agency designated as the source of
+information for this row.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Well_Test_Type
+
+*Table Name: R_Well_Test_Type*
+
+REFERENCE WELL TEST TYPE: Identifies the general type of test used to
+evaluate the potential of the well. For example, Flow Test, Drill Stem
+Tests(DST), Repeat Formation Tests (RFT), Initial Potential(IP).
+
+[width="100%",cols="18%,13%,19%,50%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_WELL_TES T_TYPE_ID |Test Type ID |integer |WELL TEST TYPE IDENTIFIER:
+Number uniquely identifying the test type.
+
+|WELL_TEST_ TYPE |Test Type |character varying(40) |WELL TEST TYPE:
+Identifies the general type of test used to evaluate the potential of
+the well. For example,Flow Test, Drill Stem Tests (DST), Repeat
+Formation Tests (RFT), Initial Potential(IP).
+
+|IS_ACTIVE |Is Active |boolean |ACTIVE INDICATOR: A Y or N flag
+indicating whether this row of data is currently either active/valid
+(TRUE) or inactive/invalid (FALSE).
+
+|LONG_NAM E |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NA ME |Short Name |character varying(100) |SHORT NAME: Common
+short name given to reference type or code.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|ROW_CHAN GED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHAN GED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREAT ED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREAT ED_DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Allocation_Type
+
+*Table Name: r_allocation_type*
+
+R_ALLOCATION _TYPE： A reference table identifying the t ype of
+allocation factor that is used in calculations to attribute (allocate) a
+measured movement of fluid to a number of production entities.
+
+[width="100%",cols="17%,16%,19%,48%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_ALLOCATION_TYPE_ID |R Allocation Type ID |INTEGER |ALLOCATION TYPE
+ID: Row Identifier Primary key
+
+|ALLOCATION_TYPE |Allocation Type |CHARACTER VARYING |ALLOCATION FACTOR
+TYPE: The type of allocation factor that is used in calculations to
+attribute (allocate) a measured movement of fluid to a number of
+production entities.
+
+|LONG_NAME |Long Name |CHARACTER VARYING |LONG NAME: Common long name
+given to reference type or code.
+
+|SHORT_NAME |Short Name |CHARACTER VARYING |SHORT NAME: Common short
+name given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Amend_Reason
+
+*Table Name: r_amend_reason*
+
+R_AMEND_REASON： AMENDMENT REASON REFERENCE: The reason why a production
+amendment was posted, such as instrument calibration, calculation error
+or volume balancing.
+
+[width="100%",cols="16%,14%,20%,50%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_AMEND_REASON_ID |R Amend Reason ID |INTEGER |Primary key
+
+|AMEND_REASON |Amend Reason |CHARACTER VARYING |The reason why a
+production amendment was posted, such as instrument calibration,
+calculation error or volume balancing.
+
+|LONG_NAME |Long Name |CHARACTER VARYING |LONG NAME: Common long name
+given to reference type or code.
+
+|SHORT_NAME |Short Name |CHARACTER VARYING |SHORT NAME: Common short
+name given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Disposition_Category
+
+*Table Name: r_disposition_category*
+
+R_DISPOSITION_CATEGORY： Disposition categories define how each
+disposition behaves regarding theoretical and allocated production
+calculation and recalculation.
+
+[width="100%",cols="20%,19%,17%,44%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_DISPOSITON_CATEGORY_ID |R Disposition Category ID |INTEGER |R
+DISPOSTION CATEGORY ID: Identifier of this Row.
+
+|DISPOSITON_CATEGORY |Disposition Category |CHARACTER VARYING
+|DISPOSITION CATEGORY: It is used to define how each dispoisition
+behaves regarding theoretical and allocated production calculation and
+recalculation. The category include subtracting(negative category),
+adding(positive category) or remaining neutral towards production.
+
+|LONG_NAME |Long Name |CHARACTER VARYING |LONG NAME: Common long name
+given to reference type or code.
+
+|SHORT_NAME |Short Name |CHARACTER VARYING |SHORT NAME: Common short
+name given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Period_Kind
+
+*Table Name: r_period_kind*
+
+R_PERIOD_KIND： Specifies the periods of volume for reporting Entities.
+Such as Month, Day,Year to Date etc.
+
+[width="100%",cols="16%,13%,20%,51%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_PERIOD_KIND_ID |R Period Kind ID |INTEGER |R Period Kind ID:
+Identifier of this Row.
+
+|PERIOD_KIND |Period Kind |CHARACTER VARYING |PERIOD KIND: Identifies
+the periods of time for Volume reporting. Possible values include DAY,
+MONTH, YEAR
+
+|LONG_NAME |Long Name |CHARACTER VARYING |LONG NAME: Common long name
+given to reference type or code.
+
+|SHORT_NAME |Short Name |CHARACTER VARYING |SHORT NAME: Common short
+name given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Product_Category
+
+*Table Name: r_product_category*
+
+R_PRODUCT_CATEGORY: This is reference table for R_REPORTING_PRODUCT and
+it will store Product categories like Product Fluid , Service Fluid.
+
+[width="99%",cols="18%,16%,19%,47%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_PRODUCT_CATEGORY_ID |R Product Category ID |INTEGER |R PRODUCT
+CATEGORY ID: Row Identifier
+
+|PRODUCT_CATEGORY |Product Category |CHARACTER VARYING |PRODUCT
+CATEGORY: Specifies the product category .Product is service fluid or
+Product Fluid.
+
+|LONG_NAME |Long Name |CHARACTER VARYING |LONG NAME: Common long name
+given to reference type or code.
+
+|SHORT_NAME |Short Name |CHARACTER VARYING |SHORT NAME: Common short
+name given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Quantity_Method
+
+*Table Name: r_quantity_method*
+
+R_QUANTITY_METHOD: Specifies the available methods for deriving a
+quantity or volume. Ex. Allocated, Allowed, Estimated, Target, Measured,
+Budget, Forecast Etc.
+
+[width="100%",cols="17%,16%,19%,48%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_QUANTITY_METHOD_ID |R Quantity Method ID |INTEGER |R QUANTITY METHOD
+ID: Row Identifier
+
+|QUANTITY_METHOD |Quantity Method |CHARACTER VARYING |QUANTITY METHOD:
+Specifies the available methods for deriving a quantity or volume. Ex.
+Allocated, Allowed, Estimated, Target, Measured, Budget, Forecast Etc.
+
+|LONG_NAME |Long Name |CHARACTER VARYING |R QUANTITY METHOD ID: Row
+Identifier
+
+|SHORT_NAME |Short Name |CHARACTER VARYING |QUANTITY METHOD: Specifies
+the available methods for deriving a quantity or volume. Ex. Allocated,
+Allowed, Estimated, Target, Measured, Budget, Forecast Etc.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Reporting_Entity_Kind
+
+*Table Name: r_reporting_entity_kind*
+
+R_REPORTING_ENTITY_KIND：
+
+[width="100%",cols="20%,19%,17%,44%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_REPORTING_ENTITY_KIND_ID |R Reporting Entity Kind ID |INTEGER
+|REPORTING ENTITY KIND ID: Identifier of this Row. Primary key of R
+REPORTING ENTITY KIND
+
+|REPORTING_ENTITY_KIND |Reporting Entity Kind |CHARACTER VARYING
+|REPRORTING ENTITY KIND: Identifies the reporting Entity Kind Ex. Well,
+Facility, Field, Completion
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Reporting_Flow
+
+*Table Name: r_reporting_flow*
+
+R_REPORTING_FLOW: This table is used to store information for the types
+of volumes flow . Ex. Open Inventory , Closing
+Inventory,Production,Injection Disposition.
+
+[width="100%",cols="19%,18%,18%,45%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_REPORTING_FLOW_ID |R Reporting Flow ID |INTEGER |R REPORTING FLOW ID:
+Identifier of this Row.
+
+|REPORTING_FLOW |Reporting Flow |CHARACTER VARYING |REPORTING FLOW
+Specifies the types of flow for volume reports. Ex. consume, consume -
+black start, consume - emitted, disposal, Export Etc.
+
+|PARENT_FLOW_KIND_ID |Parent Flow Kind ID |INTEGER |PARENT FLOW KIND ID
+is reference if and specifies the Parent Reporting flow category Ex.
+Open Inventory,Closing Inventory, Production,Injection etc.
+
+|R_DISPOSITON_CATEGORY_ID |R Disposition Category ID |INTEGER
+|DISPOSITION CATEGORY: It is used to define how each disposition behaves
+regarding theoretical and allocated production calculation and
+recalculation. The category include subtracting(negative category),
+adding(positive category) or remaining neutral towards production.
+
+|LONG_NAME |Long Name |CHARACTER VARYING |LONG NAME: Common long name
+given to reference type or code.
+
+|SHORT_NAME |Short Name |CHARACTER VARYING |SHORT NAME: Common short
+name given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Reporting_Product
+
+*Table Name: r_reporting_product*
+
+R_REPORTING_PRODUCT: This tables is reference table and will store
+reporting product types Ex. Oil , Water,Gas. The product kinds stored in
+this table will be linked with PRODUCT_VOLUME_SUMMARY table .
+
+[width="100%",cols="19%,17%,18%,46%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_REPORTING_PRODUCT_ID |R Reporting Product ID |INTEGER |R REPORTING
+PRODUCT ID: Row Identifier
+
+|PRODUCT |Product |CHARACTER VARYING |REPORTING PRODUCT: Specifies
+Reporting Product Names Ex. OIL , Water, Gas
+
+|R_PRODUCT_CATEGORY_ID |R Product Category ID |INTEGER |REPORTING
+PRODUCT CATEGORY: Specifies the product is service fluid or Product
+Fluid
+
+|LONG_NAME |Long Name |CHARACTER VARYING |LONG NAME: Common long name
+given to reference type or code.
+
+|SHORT_NAME |Short Name |CHARACTER VARYING |SHORT NAME: Common short
+name given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Direction_Type
+
+*Table Name: r_direction_type*
+
+R_DIRECTION_TYPE: Specifies the types of product flow ports.
+
+[width="100%",cols="17%,15%,19%,49%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_DIRECTION_TYPE_ID |R Direction Type ID |INTEGER |Primary Key
+
+|DIRECTION_TYPE |Direction Type |CHARACTER VARYING |Specifies the types
+of product flow ports. i.e. inlet, outlet and unknown
+
+|LONG_NAME |Long Name |CHARACTER VARYING |LONG NAME: Common long name
+given to reference type or code.
+
+|SHORT_NAME |Short Name |CHARACTER VARYING |SHORT NAME: Common short
+name given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Endpoint_Qualifier
+
+*Table Name: r_endpoint_qualifier*
+
+R_ENDPOINT_QUALIFIER: Specifies values for the endpoint for min/max
+query parameters on growing objects.
+
+[width="100%",cols="19%,17%,18%,46%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_ENDPOINT_QUALIFIER_ID |R Endpoint Qualified ID |INTEGER |Primary Key
+
+|ENDPOINT_QUALIFIER |Endpoint Qualifier |CHARACTER VARYING |Values for
+the endpoint for min/max query parameters on growing objects. exclusive:
+The value is excluded. extensive: The endpoint of the range may be
+extended to the first encountered value if an exact value match is not
+found.That is, if a node index value does not match the specified range
+value then the next smaller value (on minimum end) or larger value (on
+maximum end) in the index series should be used as the endpoint.
+Basically, this concept is designed to support interpolation across an
+undefined point. inclusive: The value is included. overlap extensive:
+The endpoint of the range may be extended to the first encountered value
+if the interval is overlapped with the index interval. That is, if a
+node index value does not match the specified range value then the next
+smaller value (on minimum end) or larger value (on maximum end) in the
+index series should be used as the endpoint. This concept is designed to
+select ALL nodes whose index interval overlap with the query range.
+
+|LONG_NAME |Long Name |CHARACTER VARYING |LONG NAME: Common long name
+given to reference type or code.
+
+|SHORT_NAME |Short Name |CHARACTER VARYING |SHORT NAME: Common short
+name given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Facility_Parameter
+
+*Table Name: r_facility_parameter*
+
+R_FACILITY_PARAMETER: Specifies the kinds of facility parameters.
+
+[width="100%",cols="19%,17%,18%,46%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_FACILITY_PARAMETER_ID |R Facility Parameter ID |INTEGER |Primary Key
+
+|FACILITY_PARAMETER |Facility Parameter |CHARACTER VARYING |Specifies
+the kinds of facility parameters. i.e. [absorbed dose class,acceleration
+linear clas, etc.]
+
+|LONG_NAME |Long Name |CHARACTER VARYING |LONG NAME: Common long name
+given to reference type or code.
+
+|SHORT_NAME |Short Name |CHARACTER VARYING |SHORT NAME: Common short
+name given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Flow_Qualifier
+
+*Table Name: r_flow_qualifier*
+
+R_FLOW_QUALIFIER: Specifies qualifiers for the type of flow.
+
+[width="100%",cols="17%,15%,19%,49%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_FLOW_QUALIFIER_ID |R Flow Qualified ID |R_FLOW_QUALIFIER_ID |Primary
+Key
+
+|FLOW_QUALIFIER |Flow Qualifier |FLOW_QUALIFIER |Specifies qualifiers
+for the type of flow. i.e. allocated, budget, etc.
+
+|LONG_NAME |Long Name |CHARACTER VARYING |LONG NAME: Common long name
+given to reference type or code.
+
+|SHORT_NAME |Short Name |CHARACTER VARYING |SHORT NAME: Common short
+name given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Reporting_Facility_Kind
+
+*Table Name: r_reporting_facility_kind*
+
+R_REPORTING_FACILITY_KIND: Specifies the kinds of facilities (usage of
+well or facility) that can be reported on.
+
+[width="100%",cols="22%,17%,17%,44%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_REPORTING_FACILITY_KIND_ID |R Reporting Facility ID |INTEGER |Primary
+Key
+
+|REPORTING_FACILITY_KIND |Reporting Facility Kind |CHARACTER VARYING
+|Specifies the kinds of facilities (usage of equipment or material) that
+can be reported on. i.e. [block valve, bottomhole, etc.]
+
+|LONG_NAME |Long Name |CHARACTER VARYING |LONG NAME: Common long name
+given to reference type or code.
+
+|SHORT_NAME |Short Name |CHARACTER VARYING |SHORT NAME: Common short
+name given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Scenario_Type
+
+*Table Name: r_scenario_type*
+
+SCENARIO TYPE REFERENCE: The type that is used to describe the type.
+Such as Base Scenario, Alternate Scenario.
+
+[width="100%",cols="17%,13%,20%,50%",options="header",]
+|===
+|Column Name |Display Name |Data Type |Description
+|R_SCENARIO_TYPE_ID |Scenario Type ID |integer |SCENARIO TYPE REFERENCE
+ID: Number or code uniquely identifying the scenario type.
+
+|SCENARIO_TYPE |Scenario Type |character varying(40) |SCENARIO TYPE: The
+scenario type, for example, base scenario, alternate scenario
+
+|IS_ACTIVE |Is Active |boolean |ACTIVE INDICATOR: A Y/N flag indicating
+whether this row of data is currently either active / valid (Y) or
+inactive / invalid (N).
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: The commonly
+used long name of the completion type.
+
+|SHORT_NAME |Short Name |character varying(100) |SHORT NAME: The
+commonly used short name of the completion type.
+
+|REMARK |Remark |character varying(2000) |REMARK: Narrative remarks
+about this row of data.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |ROW CHANGED BY:
+Application login id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |ROW CHANGED DATE: System
+date of the last time the row was changed.
+
+|ROW_CREATED_BY |Created By |character varying(100) |ROW CREATED BY:
+System user who created this row of data.
+
+|ROW_CREATED_DATE |Created Date |timestamp |ROW CREATED DATE: Date that
+the row was created on.
+|===
+
+== R_Measurement
+
+*Table Name: r_measurement*
+
+R_MEASUREMENT: This reference table describes the various measurement
+that used for well tests, and routine daily or periodically measure job.
+
+[width="100%",cols="17%,16%,19%,48%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_MEASUREMENT_ID |R Measurement ID |INTEGER |R MEASUREMENT ID: Primary
+key Row identifier for current row.
+
+|MEASUREMENT |Measurement |CHARACTER VARYING |MEASUREMENT: To describe
+the various measurement that used for well tests, and routine daily or
+periodically measure job.
+
+|INCLUDE_ON_WELL_TEST |Include On Well Test |BOOLEAN |INCLUDE ON WELL
+TEST: A label to identify if it is commonly used in well test job.
+
+|LONG_NAME |Long Name |CHARACTER VARYING |LONG NAME: Common long name
+given to reference type or code.
+
+|SHORT_NAME |Short Name |CHARACTER VARYING |SHORT NAME: Common short
+name given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Test_Product
+
+*Table Name: r_test_product*
+
+R_TEST_PRODUCT: Specifies the product kinds , such as oil, water, gas,
+condensate, sediment and water, and sand, which are commonly tested in
+well test.
+
+[width="100%",cols="16%,14%,20%,50%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_TEST_PRODUCT_ID |R Test Product ID |INTEGER |R TEST PRODUCT ID:
+Primary key Row identifier for current row.
+
+|TEST_PRODUCT |Test Product |CHARACTER VARYING |TEST PRODUCT: Specifies
+the product kinds , such as oil, water, gas, condensate, sediment and
+water, and sand, which are commonly tested in well test.
+
+|LONG_NAME |Long Name |CHARACTER VARYING |LONG NAME: Common long name
+given to reference type or code.
+
+|SHORT_NAME |Short Name |CHARACTER VARYING |SHORT NAME: Common short
+name given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Validate_Result
+
+*Table Name: r_validate_result*
+
+R_VALIDATE_RESULT: This table is used to Specify well test validation
+results, such as failed, passed, passed with changes, or unknown.
+
+[width="100%",cols="17%,16%,19%,48%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_VALIDATE_RESULT_ID |R Validate Result ID |INTEGER |R VALIDATE RESULT
+ID: Primary key Row identifier for current row.
+
+|VALIDATE_RESULT |Validate Result |CHARACTER VARYING |VALIDATE RESULT:
+To Specify well test validation results, such as failed, passed, passed
+with changes, or unknown.
+
+|LONG_NAME |Long Name |CHARACTER VARYING |LONG NAME: Common long name
+given to reference type or code.
+
+|SHORT_NAME |Short Name |CHARACTER VARYING |SHORT NAME: Common short
+name given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Decline_Curve_Type
+
+*Table Name: r_decline_curve_type*
+
+R DECLINE CURVE TYPE: The type of decline curve that is used in decline
+curve forecast calculations such as exponential, harmonic, hyperbolic,
+linear, etc.
+
+[width="100%",cols="19%,14%,19%,48%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_DECLINE_CURVE_TYPE_ID |Decline Curve Type |Integer |Primary key row
+identifier
+
+|DECLINE_CURVE_TYPE |Decline Curve Type |character varying(40) |The type
+of decline curve that is used in decline curve forecast calculations
+such as exponential, harmonic, hyperbolic, linear, etc.
+
+|LONG_NAME |Long Name |character varying(255) |Common long name given to
+reference type or code.
+
+|SHORT_NAME |Short Name |character varying(30) |Common short name given
+to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Decline_Method
+
+*Table Name: r_decline_method*
+
+R DECLINE METHOD: The method of decline curve analysis that is used in
+decline curve forecast. Such as Arps, Duong, SEPD, Power Law, Modified
+Arps, Customized.
+
+[width="100%",cols="17%,15%,19%,49%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_DECLINE_METHOD_ID |R Decline Method Id |integer |Primary key
+
+|DECLINE_METHOD |Decline Method |character varying(40) |The method of
+decline curve analysis that is used in decline curve forecast. Such as
+Arps, Duong, SEPD, Power Law, Modified Arps, Customized.
+
+|LONG_NAME |Long Name |character varying(255) |Common long name given to
+reference type or code.
+
+|SHORT_NAME |Short Name |character varying(30) |Common short name given
+to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Decline_Parm
+
+*Table Name: r_decline_parm*
+
+R DECLINE PARM: Use this table to capture the parameters for any decline
+analysis method. This table may list a variety of parameter settings for
+each method, an actual analysis study method will use multiple
+parameters.
+
+[width="100%",cols="16%,14%,20%,50%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_DECLINE_PARM_ID |R Decline Parm Id |integer |Primary key
+
+|DECLINE_PARM |Decline Parm |character varying(40) |List a variety of
+parameter settings for each method, an actual analysis study method will
+use multiple parameters.
+
+|DESCRIPTION |Description |character varying(60) |The information
+described for this row of parameter.
+
+|LONG_NAME |Long Name |character varying(255) |Common long name given to
+reference type or code.
+
+|SHORT_NAME |Short Name |character varying(30) |Common short name given
+to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Decline_Type
+
+*Table Name: r_decline_type*
+
+R DECLINE TYPE: The type of decline that is used in decline curve
+forecast calculations such as nominal or effective percentage.
+
+[width="100%",cols="16%,14%,20%,50%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_DECLINE_TYPE_ID |R Decline Type Id |integer |Primary key
+
+|DECLINE_TYPE |Decline Type |character varying(40) |The type of decline
+that is used in decline curve forecast calculations such as nominal or
+effective percentage.
+
+|LONG_NAME |Long Name |character varying(255) |Common long name given to
+reference type or code.
+
+|SHORT_NAME |Short Name |character varying(30) |Common short name given
+to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Forecast_Class
+
+*Table Name: r_forecast_class*
+
+R FORECAST CLASS: These classes may define the lifecycles states of the
+forecast(proposed, current, deprecated), the authorized state of the
+forecast(official, unofficial), the intent of the forecast (2005 budget,
+project proposal etc.) as well as other classification schemes.
+
+[width="100%",cols="15%,13%,13%,26%,33%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |Ref Table |*Description*
+|R_FORECAST_CLASS_ID |R Forecast Class Id |integer | |Primary key
+
+|FORECAST_CLASS |Forecast Class |character varying(40) | |These classes
+may define the lifecycles states of the forecast(proposed, current,
+deprecated), the authorized state of the forecast(official, unofficial),
+the intent of the forecast (2005 budget, project proposal etc.) as well
+as
+
+|R_FORECAST_CLASS_TYPE_ID |R Forecast Class Type Id |integer
+|link:#r_forecast_class_type[R FORECAST CLASS TYPE] |The class type that
+defined for production forecast
+
+|LONG_NAME |Long Name |character varying(255) | |Common long name given
+to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(30) | |Common short name
+given to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) | |Narrative remarks about
+this row of data.
+
+|IS_ACTIVE |Is Active |Boolean | |A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) | |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp | |System date of the last
+time the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp | |System user who created
+this row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) | |Date that the row
+was created on.
+|===
+
+== R_Forecast_Class_Type
+
+*Table Name: r_forecast_class_type*
+
+R FORECAST CLASS TYPE: This table defines the classification schemes
+that can be defined for and applied to forecasts.
+
+[width="100%",cols="20%,16%,18%,46%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_FORECAST_CLASS_TYPE_ID |R Forecast Class Type |integer |Primary key
+
+|R_FORECAST_CLASS_TYPE_ID |Forecast Class Type |character varying(40)
+|The class type that defined for production forecast
+
+|LONG_NAME |Long Name |character varying(255) |Common long name given to
+reference type or code.
+
+|SHORT_NAME |Short Name |character varying(30) |Common short name given
+to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===
+
+== R_Ratio_Curve_Type
+
+*Table Name: r_ratio_curve_type*
+
+R RATIO CURVE TYPE: The type of ratio curve that is used in decline
+curve forecast calculations such as linear, semi-log, log-log, etc.
+
+[width="99%",cols="18%,16%,19%,47%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_RATIO_CURVE_TYPE_ID |R Ratio Curve Type Id |integer |Primary key
+
+|RATIO_CURVE_TYPE |Ratio Curve Type |character varying(40) |The type of
+ratio curve that is used in decline curve forecast calculations such as
+linear, semi-log, log-log, etc.
+
+|LONG_NAME |Long Name |character varying(255) |Common long name given to
+reference type or code.
+
+|SHORT_NAME |Short Name |character varying(30) |Common short name given
+to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created o
+|===
+
+== R_Ratio_Fluid_Type
+
+*Table Name: r_ratio_fluid_type*
+
+R RATIO FLUID TYPE: The type of ratio fluid that is used in decline
+curve forecast calculations for GOR, YIELD, etc.
+
+[width="99%",cols="18%,16%,19%,47%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_RATIO_FLUID_TYPE_ID |R Ratio Fluid Type Id |integer |Primary key
+
+|RATIO_FLUID_TYPE |Ratio Fluid Type |character varying(40) |The type of
+ratio fluid that is used in decline curve forecast calculations for GOR,
+YIELD, etc.
+
+|LONG_NAME |Long Name |character varying(255) |Common long name given to
+reference type or code.
+
+|SHORT_NAME |Short Name |character varying(30) |Common short name given
+to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created o
+|===
+
+== R_Scenario_Source
+
+*Table Name: r_scenario_source*
+
+R SCENARIO SOURCE: This table is used to Specify well test validation
+results, such as failed, passed, passed with changes, or unknown.
+
+[width="100%",cols="17%,16%,19%,48%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_SCENARIO_SOURCE_ID |R Scenario Source Id |integer |Primary key
+
+|SCENARIO_SOURCE |Scenario Source |character varying(40) |To Specify
+well test validation results, such as failed, passed, passed with
+changes, or unknown.
+
+|LONG_NAME |Long Name |character varying(255) |Common long name given to
+reference type or code.
+
+|SHORT_NAME |Short Name |character varying(30) |Common short name given
+to reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created o
+|===
+
+== R_Source
+
+*Table Name: r_source*
+
+R_SOURCE: A reference table identifying the individual, company, state
+or government agency that provided information. For example Digitech,
+Dwights, PetroData, Petroleum Information or API.
+
+[width="100%",cols="16%,13%,20%,51%",options="header",]
+|===
+|*Column Name* |*Display Name* |*Data Type* |*Description*
+|R_SOURCE_ID |Source ID |integer |SOURCE ID: The identifier to as the
+primary key for this row.
+
+|DISPLAY_NAME |Name |character varying(30) |DISPLAY NAME: Display name
+given to reference type or code.
+
+|LONG_NAME |Long Name |character varying(255) |LONG NAME: Common long
+name given to reference type or code.
+
+|SHORT_NAME |Short Name |character varying(30) |SHORT NAME: Common short
+name given to reference type or code.
+
+|ABBREVIATION |Abbreviation |character varying(15) |ABBREVIATION:
+Abbreviation used for reference type or code.
+
+|REMARKS |Remarks |character varying(2000) |Narrative remarks about this
+row of data.
+
+|IS_ACTIVE |Is Active |Boolean |: A Y or N flag indicating whether this
+row of data is currently either active/valid (Y) or inactive/invalid
+(N).
+
+|EFFECTIVE_DATE |Effective Date |timestamp |The date that the data in
+this row first came into effect.
+
+|EXPIRY_DATE |Expiry Date |timestamp |The date that the data in this row
+was no longer active or in effect.
+
+|ROW_CHANGED_BY |Changed By |character varying(100) |Application login
+id of the user who last changed the row.
+
+|ROW_CHANGED_DATE |Changed Date |timestamp |System date of the last time
+the row was changed.
+
+|ROW_CREATED_DATE |Created Date |timestamp |System user who created this
+row of data.
+
+|ROW_CREATED_BY |Created By |character varying(100) |Date that the row
+was created on.
+|===

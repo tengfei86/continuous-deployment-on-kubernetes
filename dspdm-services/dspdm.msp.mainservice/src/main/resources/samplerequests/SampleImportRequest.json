@@ -1,0 +1,16 @@
+{
+  "WELL": {
+    "language": "en",
+    "timezone": "GMT+08:00",
+    "readBack": true,
+    "offset": 100,
+    "limit": 10
+  },
+  "WELLBORE": {
+    "language": "en",
+    "timezone": "GMT+08:00",
+    "readBack": true,
+    "offset": 100,
+    "limit": 10
+  }
+}

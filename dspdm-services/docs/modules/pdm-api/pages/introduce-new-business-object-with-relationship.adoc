@@ -1,0 +1,333 @@
+= Introduce New Business Object with Relationship
+
+You can easily introduce entirely a new business object in the system by sending a post request as below. This will create a physical table in the database and it will also create its metadata as per its structure.
+
+Following are the conditions which should be met to introduce a new business object along with its relationships.
+
+[arabic]
+. As you are going to introduce a new business object in the system therefore the main request will be of type BUSINESS OBJECT.
+. In the children section of the business object you must have data to define BUS OBJ RELATIONSHIP.
+. Either you want to add a simple relationship or a composite relationship the request will be same. In case of composite relationship the relationship name will be same for more than once instances of the relationship business object.
+. In relationship definition the child bo name will be the current bo name which is going to be defined.
+. In relationship definition the child bo attr name will be the current business object attribute which you want it to be involved in the relationship as a foreign key.
+. In relationship definition the parent bo name will be the name of an existing business object with which you want to relate the current business object being defined.
+. The parent business object can also be the part of same json request but it should come first in the request so it will be defined first before the child business object and then once the child business object is created then you can use this parent in its relationship.
+. Parent business object can also be same as the current child business object but in this case both child and parent attributes involved in the relationship must be different.
+. In relationship definition the parent bo attr name will be the name of the attribute in the existing parent business object with which you want to relate the current business object being defined.
+. The data type of the parent bo attr name and the child bo attr name should be same.
+. If the database is MS SQL Server then the database collation of the parent bo attr name and the child bo attr name should be same.
+. Parent business object attribute should be defined as primary key or at least unique attribute in its business object definition.
+. If it is a composite relationship then all the parent business object attributes involved in this relationship definition should be combined unique in the parent business object. In other words there must exist a unique constraint on the parent business object which exactly involves these parent business object attributes in combination.
+. For simple relationships, relationship name is optional but for composite relationships relationship name is mandatory.
+. You can give a relationship name but if you do not provide then system will generate the relationship name with the pattern of FK__ and all instances involved in relationship will be considered as simple relationships.
+. IS_PRIMARY_KEY_RELATIONSHIP value true or false will automatically be set by the system by looking whether that the provided parent business object attribute is defined as a primary key attribute in parent business object or not.
+. Parent Business Object must meet the following criteria.
+[loweralpha]
+.. Parent business object should already be defined in the system and metadata should be refreshed.
+.. If parent business object is not defined already then it should be same as child for the recursive relationship (self-join) case. In this case parent business object attribute name and child business object attribute names must be different.
+.. If parent business object is not already defined and it is not the same as child business object then the last option is, it is part of the same request and defined above in the request so that parent business object will be defined first and then child business object will be defined and both are in same request. In this case parent business object must exist before child business object in the request body.
+. Once a relationship is added on a child attribute then it also updates the child attribute metadata and it adds reference data in the attribute metadata reference columns. Following attributes will be updated for the child attribute metadata in the business object business_object_attr metadata table. This reference metadata is used on the front-end UI to generate the proper combo boxes.
+[loweralpha]
+.. reference_bo_name: It will have the value of parent business object name.
+.. reference_bo_attr_value: It will have the primary key column name of the parent business object.
+.. reference_bo_attr_label: It will have the current parent business object attribute name only in case it is not a primary key relationship. If it is a primary key relationship then it will have the unique column name from the defined unique constraints for the parent business object. If the parent business object does not have a simple unique constraint them it will have a comma separated business object attribute names from the parent business object best found unique constraint.
+.. is_reference_ind: It will be set to true as it is reference column
+.. Control_type: If it is a non-primary key relationship then the control type will be updated to auto complete combo box otherwise it will not be updated and it will remain same as before.
+
+== 1. Request URL
+
+/{PDM Server domain}/metadata/write/introduceNewBusinessObjects
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Response Type
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|responseType |blob
+|===
+
+== 4. Request body
+
+[source,json]
+----
+Introduce New Business Object With Simple Relationship.
+
+{
+    "BUSINESS OBJECT": {
+        "language": "en",
+        "readBack": false,
+        "timezone": "GMT+08:00",
+        "showSQLStats": true,
+        "data": [
+            {
+                "BO_NAME": "{{boName}}",
+                "BO_DISPLAY_NAME": "{{boName}}",
+                "ENTITY": "{{boName}}",
+                "BO_DESC": "{{boName}}",
+                "KEY_SEQ_NAME": "SEQ_{{boName}}",
+                "IS_MASTER_DATA": true,
+                "IS_OPERATIONAL_TABLE": false,
+                "IS_RESULT_TABLE": false,
+                "IS_METADATA_TABLE": false,
+                "IS_REFERENCE_TABLE": false,
+                "IS_ACTIVE": true,
+                "children": {
+                    "BUSINESS OBJECT ATTR": {
+                        "language": "en",
+                        "readBack": false,
+                        "timezone": "GMT+08:00",
+                        "data": [
+                            {
+                                "BO_ATTR_NAME": "{{boName}}_ID",
+                                "ATTRIBUTE": "{{boName}}_ID",
+                                "ATTRIBUTE_DISPLAYNAME": "{{boName}} ID",
+                                "ATTRIBUTE_DATATYPE": "integer",
+                                "SEQUENCE_NUM": 1,
+                                "IS_MANDATORY": true,
+                                "IS_PARTITIONED": false,
+                                "IS_UPLOAD_NEEDED": false,
+                                "IS_HIDDEN": true,
+                                "IS_REFERENCE_IND": false,
+                                "IS_UNIQUE": true,
+                                "IS_PRIMARY_KEY": true,
+                                "IS_ACTIVE": true,
+                                "IS_SORTABLE": true,
+                                "IS_INTERNAL": true
+                            },
+                            {
+                                "BO_ATTR_NAME": "{{boName}}_NAME",
+                                "ATTRIBUTE": "{{boName}}_NAME",
+                                "ATTRIBUTE_DISPLAYNAME": "{{boName}} Name",
+                                "ATTRIBUTE_DATATYPE": "Character Varying(50)",
+                                "SEQUENCE_NUM": 2,
+                                "IS_MANDATORY": true,
+                                "IS_PARTITIONED": false,
+                                "IS_UPLOAD_NEEDED": true,
+                                "IS_HIDDEN": false,
+                                "IS_REFERENCE_IND": false,
+                                "IS_UNIQUE": true,
+                                "IS_PRIMARY_KEY": false,
+                                "IS_ACTIVE": true,
+                                "IS_SORTABLE": true,
+                                "IS_INTERNAL": false
+                            }
+                        ]
+                    },
+                    "BUS OBJ RELATIONSHIP": {
+                        "language": "en",
+                        "readBack": false,
+                        "timezone": "GMT+08:00",
+                        "data": [
+                            {
+                                "PARENT_BO_NAME": "AREA",
+                                "PARENT_BO_ATTR_NAME": "DISPLAY_NAME",
+                                "CHILD_BO_NAME": "{{boName}}",
+                                "CHILD_BO_ATTR_NAME": "{{boName}}_NAME",
+                                "BUS_OBJ_RELATIONSHIP_NAME": "FK_{{boName}}_{{boName}}_NAME"
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}
+----
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/introduce-new-business-object-with-relationship/api-introduce-new-business-object-with-simple-relationship.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+[source,json]
+----
+Introduce New Business Object With Composite Relationship.
+
+{
+    "BUSINESS OBJECT": {
+        "language": "en",
+        "readBack": true,
+        "timezone": "GMT+08:00",
+        "showSQLStats": true,
+        "data": [
+            {
+                "BO_NAME": "{{boName}}",
+                "BO_DISPLAY_NAME": "{{boName}}",
+                "ENTITY": "{{boName}}",
+                "BO_DESC": "{{boName}}",
+                "KEY_SEQ_NAME": "SEQ_{{boName}}",
+                "IS_MASTER_DATA": true,
+                "IS_OPERATIONAL_TABLE": false,
+                "IS_RESULT_TABLE": false,
+                "IS_METADATA_TABLE": false,
+                "IS_REFERENCE_TABLE": false,
+                "IS_ACTIVE": true,
+                "children": {
+                    "BUSINESS OBJECT ATTR": {
+                        "language": "en",
+                        "readBack": false,
+                        "timezone": "GMT+08:00",
+                        "data": [
+                            {
+                                "BO_ATTR_NAME": "{{boName}}_ID",
+                                "ATTRIBUTE": "{{boName}}_ID",
+                                "ATTRIBUTE_DISPLAYNAME": "{{boName}} ID",
+                                "ATTRIBUTE_DATATYPE": "integer",
+                                "SEQUENCE_NUM": 1,
+                                "IS_MANDATORY": true,
+                                "IS_PARTITIONED": false,
+                                "IS_UPLOAD_NEEDED": false,
+                                "IS_HIDDEN": true,
+                                "IS_REFERENCE_IND": false,
+                                "IS_UNIQUE": true,
+                                "IS_PRIMARY_KEY": true,
+                                "IS_ACTIVE": true,
+                                "IS_SORTABLE": true,
+                                "IS_INTERNAL": true
+                            },
+                            {
+                                "BO_ATTR_NAME": "{{boName}}_NAME",
+                                "ATTRIBUTE": "{{boName}}_NAME",
+                                "ATTRIBUTE_DISPLAYNAME": "{{boName}} Name",
+                                "ATTRIBUTE_DATATYPE": "Character Varying(50)",
+                                "SEQUENCE_NUM": 2,
+                                "IS_MANDATORY": true,
+                                "IS_PARTITIONED": false,
+                                "IS_UPLOAD_NEEDED": true,
+                                "IS_HIDDEN": false,
+                                "IS_REFERENCE_IND": false,
+                                "IS_UNIQUE": true,
+                                "IS_PRIMARY_KEY": false,
+                                "IS_ACTIVE": true,
+                                "IS_SORTABLE": true,
+                                "IS_INTERNAL": false,
+                                "RELATED_BO_ATTR_NAME": "{{boName}}_ID"
+                            },
+                            {
+                                "BO_ATTR_NAME": "WELL_TEST_ID",
+                                "ATTRIBUTE": "WELL_TEST_ID",
+                                "ATTRIBUTE_DISPLAYNAME": "WELL TEST ID",
+                                "ATTRIBUTE_DATATYPE": "integer",
+                                "SEQUENCE_NUM": 3,
+                                "IS_MANDATORY": true,
+                                "IS_PARTITIONED": false,
+                                "IS_UPLOAD_NEEDED": false,
+                                "IS_HIDDEN": true,
+                                "IS_REFERENCE_IND": false,
+                                "IS_UNIQUE": false,
+                                "IS_PRIMARY_KEY": false,
+                                "IS_ACTIVE": true,
+                                "IS_SORTABLE": true,
+                                "IS_INTERNAL": true,
+                                "ATTRIBUTE_DESC": "Foreign key well test id"
+                            },
+                            {
+                                "BO_ATTR_NAME": "UWI",
+                                "BO_DISPLAY_NAME": "Well Test",
+                                "ATTRIBUTE": "UWI",
+                                "ATTRIBUTE_DISPLAYNAME": "UWI",
+                                "ATTRIBUTE_DATATYPE": "character varying(50)",
+                                "CONTROL_TYPE": "autoComplete",
+                                "SEQUENCE_NUM": 4,
+                                "IS_MANDATORY": true,
+                                "IS_PARTITIONED": false,
+                                "IS_UPLOAD_NEEDED": true,
+                                "IS_HIDDEN": false,
+                                "IS_REFERENCE_IND": false,
+                                "IS_UNIQUE": true,
+                                "IS_PRIMARY_KEY": false,
+                                "IS_ACTIVE": true,
+                                "ATTRIBUTE_FONTSIZE": 0,
+                                "IS_SORTABLE": true,
+                                "ATTRIBUTE_DESC": "UNIQUE WELL IDENTIFIER: A unique name, code or number designated.",
+                                "IS_INTERNAL": false,
+                                "IS_READ_ONLY": false,
+                                "IS_CUSTOM_ATTRIBUTE": false,
+                                "HAS_UNIT": false,
+                                "IS_UNIT_ATTRIBUTE": false,
+                                "IS_NOT_NULL": true
+                            },
+                            {
+                                "BO_ATTR_NAME": "START_TIME",
+                                "BO_DISPLAY_NAME": "Well Test",
+                                "ATTRIBUTE": "START_TIME",
+                                "ATTRIBUTE_DISPLAYNAME": "Start Time",
+                                "ATTRIBUTE_DATATYPE": "datetime",
+                                "CONTROL_TYPE": "calenderWithDateTime",
+                                "SEQUENCE_NUM": 5,
+                                "IS_MANDATORY": true,
+                                "IS_PARTITIONED": false,
+                                "IS_UPLOAD_NEEDED": true,
+                                "IS_HIDDEN": false,
+                                "IS_REFERENCE_IND": false,
+                                "IS_UNIQUE": true,
+                                "IS_PRIMARY_KEY": false,
+                                "IS_ACTIVE": true,
+                                "ATTRIBUTE_FONTSIZE": 0,
+                                "IS_SORTABLE": true,
+                                "ATTRIBUTE_DESC": "START TIME: The start time of the stable flow of  this well test.",
+                                "IS_INTERNAL": false,
+                                "IS_READ_ONLY": false,
+                                "IS_CUSTOM_ATTRIBUTE": false,
+                                "HAS_UNIT": false,
+                                "IS_UNIT_ATTRIBUTE": false,
+                                "IS_NOT_NULL": true
+                            }
+                        ]
+                    },
+                    "BUS OBJ RELATIONSHIP": {
+                        "language": "en",
+                        "readBack": true,
+                        "timezone": "GMT+08:00",
+                        "showSQLStats": true,
+                        "data": [
+                            {
+                                "BUS_OBJ_RELATIONSHIP_NAME": "FK_{{boName}}_UWI_START_TIME1",
+                                "CHILD_BO_NAME": "{{boName}}",
+                                "CHILD_BO_ATTR_NAME": "UWI",
+                                "PARENT_BO_NAME": "WELL TEST",
+                                "PARENT_BO_ATTR_NAME": "UWI"
+                            },
+                            {
+                                "BUS_OBJ_RELATIONSHIP_NAME": "FK_{{boName}}_UWI_START_TIME1",
+                                "CHILD_BO_NAME": "{{boName}}",
+                                "CHILD_BO_ATTR_NAME": "START_TIME",
+                                "PARENT_BO_NAME": "WELL TEST",
+                                "PARENT_BO_ATTR_NAME": "START_TIME"
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/introduce-new-business-object-with-relationship/api-introduce-new-business-object-with-composite-relationship.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+== 5. Responses
+
+When response.status = 200, It will response a `application/octet-stream' excel file.
+
+Otherwise, it will response json file, Please see xref:responses.adoc[Responses]

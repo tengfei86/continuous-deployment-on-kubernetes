@@ -1,0 +1,66 @@
+= Delete Custom Attributes
+
+You can delete any custom attribute by providing business object name and attribute name.
+
+== 1. Request URL
+
+/{PDM Server domain}/metadata/write/deleteCustomAttributes
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Response Type
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|responseType |blob
+|===
+
+== 4. Request body
+
+[source,json]
+----
+{
+    "BUSINESS OBJECT ATTR": {
+        "language": "en",
+        "readBack": false,
+        "timezone": "GMT+08:00",
+        "showSQLStats": true,
+        "data": [
+            {
+                "BO_NAME": {{BO_NAME1}},
+                "BO_ATTR_NAME": {{BO_ATTR_NAME1}}
+            },
+            {
+                "BO_NAME": {{BO_NAME2}},
+                "BO_ATTR_NAME": {{BO_ATTR_NAME2}}
+            }
+            ...
+        ]
+    }
+}
+----
+
++
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/delete-custom-attributes/api-delete-custom-attributes-to-existing-business-object.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+== 5. Responses
+
+When response.status = 200, It will response a `application/octet-stream' excel file.
+
+Otherwise, it will response json file, Please see xref:responses.adoc[Responses]

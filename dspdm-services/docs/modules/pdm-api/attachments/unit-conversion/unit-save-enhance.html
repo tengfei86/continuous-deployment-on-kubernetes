@@ -1,0 +1,35 @@
+<html>
+<head>
+</head>
+<body style="margin: 0 0 0 0;">
+    <iframe src="../resources/api.html" id="unitTSaveEnhance" width="100%" height="100%" frameborder="0">
+    </iframe>
+    <script>
+        window.onload = function () {
+            let body =
+				{
+				    "WELL": {
+				        "language": "en",
+				        "readBack": true,
+				        "timezone": "GMT+08:00",
+				        "data": [
+				            {
+				                "well_id": 12808,
+				                "WELL_NAME": "Solrr",
+				                "UWI": "Solrr",
+				                "IS_ACTIVE": true,
+				                "OFFSHORE_IND": true,
+				                "DEEPEST_DEPTH": "11"
+				            }
+				        ],
+				        "dspdmUnits": [
+				            {"boAttrName": "DEEPEST_DEPTH", "sourceUnit": "m"}
+				        ]
+				    }
+				}
+            document.getElementById("unitTSaveEnhance").contentWindow.setUnitTSaveEnhance(JSON.stringify(body, null, "    "));
+        }
+    </script>
+</body>
+
+</html>

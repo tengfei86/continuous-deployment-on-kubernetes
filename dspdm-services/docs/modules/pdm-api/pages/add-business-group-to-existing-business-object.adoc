@@ -1,0 +1,60 @@
+= Add Business Group To Existing Business Object
+
+You can add business object to a group by sending the following request.
+
+== 1. Request URL
+
+/{PDM Server domain}/metadata/write/addBusinessObjectGroups
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Response Type
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|responseType |blob
+|===
+
+== 4. Request body
+
+Add business group for existing Business Object.
+
+[source,json]
+----
+{
+    "BUSINESS OBJECT GROUP": {
+        "language": "en",
+        "timezone": "GMT+08:00",
+        "data": [
+            {
+                "Group_CATEGORY_NAME": "ASSET",
+                "BO_NAME": "{{boName}}"
+            }
+        ]
+    }
+}
+----
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachments/add-business-group-to-existing-business-object/add-business-group-to-existing-business-object.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+
+== 5. Responses
+
+When response.status = 200, It will response a `application/octet-stream' excel file.
+
+Otherwise, it will response json file, Please see xref:responses.adoc[Responses]

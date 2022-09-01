@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>dspdm-services</artifactId>
+		<groupId>com.lgc.dspdm</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>dspdm-common</artifactId>
+	<packaging>jar</packaging>
+	<name>DSPDM Common Classes to be used across layers</name>
+	<properties>
+		<top.basedir>${project.basedir}/..</top.basedir>
+		<config.dir>${top.basedir}/src/main/resources</config.dir>
+	</properties>
+	<build>
+		<resources>
+			<resource>
+				<directory>${config.dir}/${build.profile.id}</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>config.properties</include>
+					<include>connection.properties</include>
+					<include>log4j2.xml</include>
+					<include>wafbypassrules.properties</include>
+					<include>security-server.properties</include>
+				</includes>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>${config.dir}/${build.profile.id}</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>config.properties</include>
+					<include>connection.properties</include>
+					<include>log4j2.xml</include>
+					<include>wafbypassrules.properties</include>
+					<include>security-server.properties</include>
+				</includes>
+			</testResource>
+		</testResources>
+		<plugins>
+			<plugin>
+				<!-- Build an executable JAR -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>com.lgc.dspdm.core.common.util.AESSecurityUtils</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

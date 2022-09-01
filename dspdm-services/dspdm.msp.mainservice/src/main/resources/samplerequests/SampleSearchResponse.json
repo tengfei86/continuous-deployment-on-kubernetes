@@ -1,0 +1,33 @@
+{
+  "boName": "WELL",
+  "language": "en",
+  "timezone": "GMT+05:00",
+  "criteriaFilters": [
+    {
+      "boAttrName": "SEARCH_JSONB",
+      "operator": "JSONB_FIND_LIKE",
+      "values": [
+        "ting li", "flower city"
+      ]
+    },
+    {
+      "boAttrName": "UWI",
+      "operator": "LIKE",
+      "values": [
+        "%PDM%"
+      ]
+    }
+  ],
+  "orderBy": [
+    {
+      "boAttrName": "UWI",
+      "order": "ASC"
+    }
+  ],
+  "pagination": {
+    "recordsPerPage": 2,
+    "pages": [
+      100
+    ]
+  }
+}

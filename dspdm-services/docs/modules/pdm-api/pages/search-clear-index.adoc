@@ -1,0 +1,64 @@
+= Delete all Search Index
+
+You can delete all data of `bo_search` table in Search database by sending the following request with DELETE method.
+
+== 1. Request URL
+
+/{PDM Server domain}/search/indexAll
+
+*Method：* Delete
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Request body
+
+N/A
+
+'''
+
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it my self </font>
+</summary>
+<iframe src="./_attachments/search-clear-index/api-search-clear-index.html" width="600px" height="620px"> </iframe>
+</details>
+++++
+
+== 4. Responses
+
+.Response
+[example]
+====
+[source,json]
+----
+{
+    "status": {
+        "statusCode": 1,
+        "statusLabel": "Success"
+    },
+    "messages": [
+        {
+            "message": "10000 search indexes deleted successfully.",
+            "status": {
+                "statusCode": 1,
+                "statusLabel": "Success"
+            }
+        }
+    ],
+    "exception": {},
+    "data": {},
+    "version": "0.0.0.0A",
+    "threadName": "**system_49243",
+    "requestTime": "2021-05-17 14:52:27.033 +08:00",
+    "responseTime": "2021-05-17 14:52:38.298 +08:00"
+}
+----
+====
+
+Please see xref:responses.adoc[Responses]

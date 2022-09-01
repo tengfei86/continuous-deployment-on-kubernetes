@@ -1,0 +1,60 @@
+= Delete
+
+You can delete a single record or multiple records by using the delete service with business object name and their id(s).
+
+== 1. Request URL
+
+/{PDM Server domain}/delete
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Response Type
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|responseType |blob
+|===
+
+== 4. Request body
+
+[source,json]
+----
+{
+    "WELL": {
+        "language": "en",
+        "timezone": "GMT+08:00",
+        "data": [
+            {
+                "WELL_ID": [id1]
+            },
+            {
+                "WELL_ID": [id2]
+            }
+        ]
+    }
+}
+----
+'''
+// ++++
+// <details>
+// <summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+// </summary>
+// <iframe src="_attachments/delete/api-delete-multiple-records.html" width="600px" height="620px">
+// </iframe>
+// </details>
+// ++++
+
+== 5. Responses
+
+When response.status = 200, It will response a `application/octet-stream' excel file.
+
+Otherwise, it will response json file, Please see xref:responses.adoc[Responses]

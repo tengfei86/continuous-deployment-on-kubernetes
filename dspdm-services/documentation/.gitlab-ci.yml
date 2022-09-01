@@ -1,0 +1,24 @@
+image: node:12.18-buster
+
+stages:
+  - deploy
+
+before_script:
+  - cd antora
+  - npm install
+
+pages:
+  stage: deploy
+  tags:
+  - Pages
+  script:
+   - ls -l /home/gitlab-runner/builds/YTUz2bUf/0/dspdm/pdm-public-doc/antora/node_modules/.bin/
+   - chmod +x /home/gitlab-runner/builds/YTUz2bUf/0/dspdm/pdm-public-doc/antora/node_modules/.bin/dotenv
+   - npm run build:remote -- --stacktrace
+   - mv ./build/site ../public/
+  artifacts:
+    paths:
+    - public
+  only:
+    - v13.x
+    - release/osdu1.0.00

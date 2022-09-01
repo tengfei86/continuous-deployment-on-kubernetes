@@ -1,0 +1,126 @@
+= Introduce New Business Object with Group
+
+You can easily introduce entirely a new business object in the system by sending a post request as below. This will create a physical table in the database and it will also create its metadata as per its structure.
+
+Following are the conditions which should be met to introduce a new business object along with its group.
+
+== 1. Request URL
+
+/{PDM Server domain}/metadata/write/introduceNewBusinessObjects
+
+*Method：* POST
+
+== 2. Request headers
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|Content-Type |application/json
+|===
+
+== 3. Response Type
+
+[cols=",",options="header",]
+|===
+|Name |Value
+|responseType |blob
+|===
+
+== 4. Request body
+
+Introduce New Business Object With Group.
+
+[source,json]
+----
+{
+    "BUSINESS OBJECT": {
+        "language": "en",
+        "readBack": false,
+        "timezone": "GMT+08:00",
+        "showSQLStats": true,
+        "data": [
+            {
+                "BO_NAME": "{{boName}}",
+                "BO_DISPLAY_NAME": "{{boName}}",
+                "ENTITY": "{{boName}}",
+                "BO_DESC": "{{boName}}",
+                "KEY_SEQ_NAME": "SEQ_{{boName}}",
+                "IS_MASTER_DATA": true,
+                "IS_OPERATIONAL_TABLE": false,
+                "IS_RESULT_TABLE": false,
+                "IS_METADATA_TABLE": false,
+                "IS_REFERENCE_TABLE": false,
+                "IS_ACTIVE": true,
+                "children": {
+                    "BUSINESS OBJECT ATTR": {
+                        "language": "en",
+                        "readBack": false,
+                        "timezone": "GMT+08:00",
+                        "data": [
+                            {
+                                "BO_ATTR_NAME": "{{boName}}_ID",
+                                "ATTRIBUTE": "{{boName}}_ID",
+                                "ATTRIBUTE_DISPLAYNAME": "{{boName}} ID",
+                                "ATTRIBUTE_DATATYPE": "integer",
+                                "SEQUENCE_NUM": 1,
+                                "IS_MANDATORY": true,
+                                "IS_PARTITIONED": false,
+                                "IS_UPLOAD_NEEDED": false,
+                                "IS_HIDDEN": true,
+                                "IS_REFERENCE_IND": false,
+                                "IS_UNIQUE": true,
+                                "IS_PRIMARY_KEY": true,
+                                "IS_ACTIVE": true,
+                                "IS_SORTABLE": true,
+                                "IS_INTERNAL": true
+                            },
+                            {
+                                "BO_ATTR_NAME": "{{boName}}_NAME",
+                                "ATTRIBUTE": "{{boName}}_NAME",
+                                "ATTRIBUTE_DISPLAYNAME": "{{boName}} Name",
+                                "ATTRIBUTE_DATATYPE": "Character Varying(50)",
+                                "SEQUENCE_NUM": 2,
+                                "IS_MANDATORY": true,
+                                "IS_PARTITIONED": false,
+                                "IS_UPLOAD_NEEDED": true,
+                                "IS_HIDDEN": false,
+                                "IS_REFERENCE_IND": false,
+                                "IS_UNIQUE": true,
+                                "IS_PRIMARY_KEY": false,
+                                "IS_ACTIVE": true,
+                                "IS_SORTABLE": true,
+                                "IS_INTERNAL": false
+                            }
+                        ]
+                    },
+                    "BUSINESS OBJECT GROUP": {
+                        "language": "en",
+                        "readBack": true,
+                        "timezone": "GMT+08:00",
+                        "data": [
+                            {
+                                "GROUP_CATEGORY_NAME": "ASSET",
+                                "BO_NAME": "{{boName}}"
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}
+----
+'''
+++++
+<details>
+<summary><font style="color: blue; cursor: pointer; text-decoration:underline; background-color: 	#F0F8FF">Try it myself</font>
+</summary>
+<iframe src="./_attachment/introduce-new-business-object-with-group/introduce-new-business-object-with-group.html" width="600px" height="620px">
+</iframe>
+</details>
+++++
+== 5. Responses
+
+When response.status = 200, It will response a `application/octet-stream' excel file.
+
+Otherwise, it will response json file, Please see xref:responses.adoc[Responses]

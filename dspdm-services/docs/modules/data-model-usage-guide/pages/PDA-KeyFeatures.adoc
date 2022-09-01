@@ -1,0 +1,8 @@
+= Key Features
+
+The data storage in PDM will hold the entire decline forecast scenario and the segment information associated with decline analysis.
+
+* Be able to track the forecasting volume of scenarios and save in PROD_VOLUME_SUMMARY table.
+* Be able to obtain the parameter settings for information tracking.
+* Support different methods data information storage that is used in decline analysis.
+* Support multiple segments forecast if there is workover or intervene job is planned.

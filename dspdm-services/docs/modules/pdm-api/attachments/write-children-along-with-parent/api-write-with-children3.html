@@ -1,0 +1,58 @@
+<html>
+
+<head>
+
+</head>
+
+<body style="margin: 0 0 0 0;">
+    <iframe src="../resources/api.html" id="saveAPI" width="100%" height="100%" frameborder="0">
+    </iframe>
+    <script>
+        window.onload = function () {
+            let body =
+  {
+    "WELLBORE": {
+        "language": "en",
+        "timezone": "GMT+05:00",
+        "readBack": true,
+        "data": [
+            {
+                "type": "WELLBORE",
+                "id": 10587,
+                "WELLBORE_ID": 10587,
+                "WELL_ID": 11673,
+                "WELL_UWI": "HAL-0929-test",
+                "WELLBORE_UWI": "WELLBORE09100",
+                "WELLBORE_NAME": "WELLBORE_NAME_0990",
+                "WELLBORE_NUMBER": "0",
+                "X_COORDINATE": -89.948900000,
+                "Y_COORDINATE": 44.469200000,
+                "children": {
+                    "WELL COMPLETION": {
+                        "language": "en",
+                        "timezone": "GMT+05:00",
+                        "readBack": true,
+                        "data": [
+                            {
+                                "type": "WELL COMPLETION",
+                                "id": null,
+                                "WELL_COMPLETION_ID": null,
+                                "WELLBORE_ID": 10587,
+                                "WELLBORE_UWI": "WELLBORE09100",
+                                "COMPLETION_DATE": "2020-09-30",
+                                "COMPLETION_OBS_NO": 6,
+                                "IS_ACTIVE": true
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}
+            document.getElementById("saveAPI").contentWindow.setSaveParams(JSON.stringify(body, null, "    "));
+        }
+    </script>
+</body>
+
+</html>

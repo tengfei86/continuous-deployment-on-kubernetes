@@ -1,0 +1,4 @@
+mspImage=${msp-image}
+mspVersion=${msp.version}
+appImage=${docker.imageName}
+appVersion=${project.version}

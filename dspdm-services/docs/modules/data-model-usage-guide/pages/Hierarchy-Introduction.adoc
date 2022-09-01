@@ -1,0 +1,10 @@
+= Hierarchy Introduction
+
+A clear hierarchy can help to organize the structure of the entities, clear understanding the relationships. A friendly view can be easy to get the information such as how many fields belongs to a company. How many and what wells are producing for one field.
+
+There are different benefits of a hierarchy as follows:
+
+* Friendly and clear relation of the structure
+* Easy to filter the key entities
+* Be able to quickly navigate to the needed entities.
+* A foundation of aggregation from bottom to the top.
