@@ -48,9 +48,8 @@ spec:
       steps {
         container('maven') {
           sh """
+            ls . -l
             ln -s `pwd`/dspdm-services /java/src/dspdm-services
-            echo "list outer folder"
-            ls . -l 
             cd /java/src/dspdm-services
             mvn clean package -Dmaven.test.skip=true 
             ls . -l
