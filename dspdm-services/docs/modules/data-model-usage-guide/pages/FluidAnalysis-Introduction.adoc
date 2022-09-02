@@ -1,7 +1,0 @@
-= Introduction
-
-To maximize hydrocarbon recovery in the minimum amount of time, we need to know the volumetric and phase behavior of produced hydrocarbons as they travel from the reservoir, up the tubing, through surface separators, and finally into pipelines. As the reservoir pressure declines with production, hydrocarbon composition, viscosity, density, compressibility – all these properties change with pressure and temperature.
-
-The fluid analysis will help to analyze and predict what takes place in the reservoir and surface during the production.
-
-PDM refers to the book ``Fluid Sampling & Laboratory Data, Curtis H. Whiston'' , the article ``PVT Analysis for Oil Reservoirs, Henri Freyss, Paul Guieze, A. Khakoo'', PPDM, ProdML fluid analysis standards.

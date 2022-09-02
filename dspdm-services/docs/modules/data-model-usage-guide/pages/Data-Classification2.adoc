@@ -1,9 +1,0 @@
-= Classification by Use Cases
-
-The data is ingested by different roles when user utilize these data to analyze the production trend, evaluate the performance and find potential problems.
-
-From petroleum engineer’s perspective, we can classify the data into *entities*, *hierarchy*, *flow model*, *product volume*, *well test*, *production decline analysis*, *down time event*, *well status* and *fluid analysis* nine parts.
-
-The data model is designed based on these production analysis use cases, aims to provide users a completed and unified production data model.
-
-We also aim to provide an easy, clear, extensible, and professional data model for user, and help them to optimize the production and reduce the cost, find opportunities, and avoid problems.

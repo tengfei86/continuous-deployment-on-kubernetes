@@ -1,9 +1,0 @@
-= PAD Forecast Segment
-
-Production Decline Analysis table contains the information of an entire forecast. Such as what entity is analyzed, it can be a well, wellbore, completion, reservoir, or production zone, and depends on the use case. What scenario of this forecast belonging to, the method used.
-
-The forecast itself may be made up of one or more segments. Generally, a segment covers a portion of the decline forecast based on a single set of decline curve parameters, such as initial rate, decline rate. Where the forecast shifts abruptly due to planned changes in operating condition, a second decline segment is used.
-
-image::Segment.png[title="PAD Forecast Segment", author="PPDM"]
-
-​ (The image is from PPDM)

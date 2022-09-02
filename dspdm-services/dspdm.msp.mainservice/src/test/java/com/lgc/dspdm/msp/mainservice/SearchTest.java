@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SearchTest extends BaseServiceTest {
-    private static DSPDMLogger logger = new DSPDMLogger(SearchTest.class);
+/*    private static DSPDMLogger logger = new DSPDMLogger(SearchTest.class);
 
     @Test
     public void testSimpleSearch() throws Throwable {
@@ -140,5 +140,5 @@ public class SearchTest extends BaseServiceTest {
             logger.info("testSearchCriteriaJoins failed.");
             throw response.getException();
         }
-    }
+    }*/
 }

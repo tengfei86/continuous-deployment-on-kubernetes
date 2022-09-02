@@ -9,8 +9,8 @@ import com.lgc.dspdm.msp.mainservice.model.DSPDMResponse;
 import com.lgc.dspdm.msp.mainservice.utils.security.AuthTokenUtils;
 import com.lgc.dspdm.msp.mainservice.utils.security.AuthTokenInfo;
 
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.Response;
 import java.util.Locale;
 import java.util.TimeZone;
 

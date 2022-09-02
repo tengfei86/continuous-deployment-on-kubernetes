@@ -14,7 +14,7 @@ import java.util.*;
 
 
 public class ImportParseTest extends BaseServiceTest {
-    private static final DSPDMLogger logger = new DSPDMLogger(ImportParseTest.class);
+    /*private static final DSPDMLogger logger = new DSPDMLogger(ImportParseTest.class);
     private static final String FILE_NAME = "localhost/test_parseimport/WELL.xlsx";
     private static final String WELL_JOINED_WELLBORE = "localhost/test_parseimport/WELL_JOINED_WELLBORE.xlsx";
     private static final String SHEET_NAMES_FILE_NAME = "localhost/test_sheetnames/ReadSheetNames.xlsx";
@@ -210,5 +210,5 @@ public class ImportParseTest extends BaseServiceTest {
             logger.error(e.getMessage(), e);
             throw e;
         }
-    }
+    }*/
 }

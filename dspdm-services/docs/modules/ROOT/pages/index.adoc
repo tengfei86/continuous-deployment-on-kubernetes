@@ -1,5 +1,0 @@
-= Overview
-
-____
-Welcome to Production Data Management Documentation
-____

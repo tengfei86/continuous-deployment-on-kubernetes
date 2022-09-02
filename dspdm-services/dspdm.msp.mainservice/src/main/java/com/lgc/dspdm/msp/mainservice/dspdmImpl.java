@@ -11,14 +11,16 @@ import com.lgc.dspdm.msp.mainservice.model.join.JoiningCondition;
 import com.lgc.dspdm.msp.mainservice.model.join.SimpleJoinClause;
 import com.lgc.dspdm.msp.mainservice.utils.BusinessObjectBuilder;
 import com.lgc.dspdm.service.common.dynamic.read.DynamicReadService;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.Response;
 
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.Response;
 import java.util.*;
 import java.util.regex.Pattern;
 
 public class dspdmImpl extends mainserviceImpl {
+	// implementation moved to mainservicImpl.java
 
+/*
 	protected Response businessObjects(String language, Float timezoneOffset, String businessObjectType, String boName,
 			Boolean readAttributes, Boolean readConstraints, Boolean readRelationships, Boolean readGroups,
 			String select, String filter, String orderby, Boolean readUnique, Boolean readFirst, Boolean readMetadata,
@@ -142,7 +144,7 @@ public class dspdmImpl extends mainserviceImpl {
 		return response;
 	}
 
-	/**
+	*//**
 	 * initialize the BOQuery from language,timezoneOffset,page and size
 	 *
 	 * @param language
@@ -158,7 +160,7 @@ public class dspdmImpl extends mainserviceImpl {
 	 *
 	 * @author Qinghua Ma
 	 * @since 14-Sep-2020
-	 */
+	 *//*
 	private BOQuery initBoQuery(String language, Float timezoneOffset, Integer page, Integer size) {
 		// SET BOQUERY
 		BOQuery entity = new BOQuery();
@@ -184,7 +186,7 @@ public class dspdmImpl extends mainserviceImpl {
 		return entity;
 	}
 
-	/**
+	*//**
 	 * converts select from String type to String List
 	 *
 	 * @param strSelect
@@ -193,7 +195,7 @@ public class dspdmImpl extends mainserviceImpl {
 	 *
 	 * @author Qinghua Ma
 	 * @since 16-Sep-2020
-	 */
+	 *//*
 	private List<String> parseSelect(String strSelect) {
 		String[] selects = strSelect.split(Character.toString(DSPDMConstants.COMMA));
 		List<String> strSelects = new ArrayList<String>();
@@ -203,7 +205,7 @@ public class dspdmImpl extends mainserviceImpl {
 		return strSelects;
 	}
 
-	/**
+	*//**
 	 * converts filter criteria from String type to CriterialFilter List
 	 *
 	 * @param strFilter
@@ -212,7 +214,7 @@ public class dspdmImpl extends mainserviceImpl {
 	 *
 	 * @author Qinghua Ma
 	 * @since 14-Sep-2020
-	 */
+	 *//*
 	private List<CriteriaFilter> parseFilter(String strFilter) {
 		String[] filters = strFilter.split(DSPDMConstants.AND);
 		List<CriteriaFilter> criteriaFilters = new ArrayList<CriteriaFilter>();
@@ -229,14 +231,14 @@ public class dspdmImpl extends mainserviceImpl {
 		return criteriaFilters;
 	}
 
-	/**
+	*//**
 	 * converts order by from String type to OrderBy List
 	 *
 	 * @param strOrderby string of order by
 	 * @return list of OrderBy
 	 * @author Qinghua Ma
 	 * @since 14-Sep-2020
-	 */
+	 *//*
 	private List<OrderBy> parseOrderBy(String strOrderby) {
 		String[] orderBys = strOrderby.split(Character.toString(DSPDMConstants.COMMA));
 		List<OrderBy> orderByLst = new ArrayList<OrderBy>();
@@ -250,7 +252,7 @@ public class dspdmImpl extends mainserviceImpl {
 		return orderByLst;
 	}
 
-	/**
+	*//**
 	 * compose the SimpleJoinClause
 	 *
 	 * @param entity
@@ -271,7 +273,7 @@ public class dspdmImpl extends mainserviceImpl {
 	 *
 	 * @author Qinghua Ma
 	 * @since 14-Sep-2020
-	 */
+	 *//*
 	private SimpleJoinClause parserSimpleJoin(BOQuery entity, String boNameLeft, String joinType, String boNameRight,
 			String boAttrNameLeft, Operator operator, String boAttrNameRight) {
 		String leftJoinAlias = boNameLeft.replace(" ", DSPDMConstants.UNDERSCORE);
@@ -293,5 +295,5 @@ public class dspdmImpl extends mainserviceImpl {
 		joiningCondition.setRightSide(rightSide);
 		simpleJoinClause.setJoiningConditions(Arrays.asList(joiningCondition));
 		return simpleJoinClause;
-	}
+	}*/
 }

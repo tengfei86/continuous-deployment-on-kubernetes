@@ -19,7 +19,7 @@ import java.util.*;
 //test order by test method name 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SaveDeleteTest extends BaseServiceTest {
-    private static DSPDMLogger logger = new DSPDMLogger(SaveDeleteTest.class);
+/*    private static DSPDMLogger logger = new DSPDMLogger(SaveDeleteTest.class);
 
     private static Integer wellID = null;
     private static Integer wellboreID = null;
@@ -421,5 +421,5 @@ public class SaveDeleteTest extends BaseServiceTest {
                 throw ex;
             }
         }
-    }
+    }*/
 }

@@ -9,7 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class DataTypeTest extends BaseServiceTest {
-	private static final DSPDMLogger logger = new DSPDMLogger(DataTypeTest.class);
+	/*private static final DSPDMLogger logger = new DSPDMLogger(DataTypeTest.class);
 
 	@Test
 	public void testRevealSupportedDataTypes() {
@@ -21,6 +21,6 @@ public class DataTypeTest extends BaseServiceTest {
 			logger.error(e.getMessage(), e);
 			throw e;
 		}
-	}
+	}*/
 
 }

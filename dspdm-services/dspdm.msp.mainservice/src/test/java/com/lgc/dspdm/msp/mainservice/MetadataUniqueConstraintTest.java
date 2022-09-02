@@ -11,7 +11,7 @@ import org.junit.Test;
 import java.util.Locale;
 
 public class MetadataUniqueConstraintTest extends BaseServiceTest {
-    private static DSPDMLogger logger = new DSPDMLogger(MetadataUniqueConstraintTest.class);
+/*    private static DSPDMLogger logger = new DSPDMLogger(MetadataUniqueConstraintTest.class);
 
     private void dropBusinessObjects(String newBoName, boolean fullDrop) {
         try {
@@ -444,5 +444,5 @@ public class MetadataUniqueConstraintTest extends BaseServiceTest {
             logger.error(e.getMessage(), e);
             DSPDMException.throwException(e, Locale.ENGLISH);
         }
-    }
+    }*/
 }

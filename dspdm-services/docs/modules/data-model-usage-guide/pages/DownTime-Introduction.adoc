@@ -1,9 +1,0 @@
-= Introduction
-
-A downtime event is an event that spans a discrete period that negatively affects the production or processing of hydrocarbon products (e.g. produced oil, processed diesel, etc.)
-
-From the ``Unplanned Downtime in the Gulf of Mexico: A Significant Production Loss Management Opportunity for Producers'' article ( https://jpt.spe.org/unplanned-downtime-gulf-mexico-significant-production-loss-management-opportunity-producers ), “An analysis of 190 US Gulf of Mexico (GOM) producing assets in Ziff Energy’s field level operations database reveals significant opportunities for improving operating efficiency by reducing downtime. Total (planned and unplanned) production efficiency (PE) of these assets was found to be 88%.
-
-Of the 12% production loss relative to potential (no downtime) production, 8% was a result of unplanned downtime, while 4% was either planned (i.e., accounted for in the company’s annual budgets) or a result of external causes, such as weather.”
-
-The lost production caused by down event is an important element that be evaluated in the production analysis.

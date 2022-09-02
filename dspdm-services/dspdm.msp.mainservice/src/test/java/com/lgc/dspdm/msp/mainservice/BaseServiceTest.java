@@ -2,8 +2,8 @@ package com.lgc.dspdm.msp.mainservice;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lgc.dist.core.msp.service.ServiceUtils;
-import com.lgc.dist.core.msp.test.ServerTestRule;
+/*import com.lgc.dist.core.msp.service.ServiceUtils;
+import com.lgc.dist.core.msp.test.ServerTestRule;*/
 import com.lgc.dspdm.config.AppConfigInit;
 import com.lgc.dspdm.config.security.SecurityServerTokenUtils;
 import com.lgc.dspdm.core.common.config.ConfigProperties;
@@ -26,10 +26,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.client.Invocation;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -37,7 +37,7 @@ import java.util.*;
 import java.util.function.Supplier;
 
 public class BaseServiceTest {
-    @ClassRule
+    /*@ClassRule
     public static ServerTestRule<com.lgc.dspdm.msp.mainservice.client.mainservice> rule = new ServerTestRule<mainservice>(mainservice.class);
     @Mock
     static mainservice mainservice;
@@ -80,7 +80,7 @@ public class BaseServiceTest {
      * @author Rao.Ali khan
      * @since 10-Jul-2020
      */
-    protected String getTestUserToken() {
+   /* protected String getTestUserToken() {
         String token = null;
         if (ConfigProperties.getInstance().is_security_enabled.getBooleanValue()) {
             token = SecurityServerTokenUtils.getBearerTokenFromSecurityServer(ExecutionContext.getTestUserExecutionContext());
@@ -115,12 +115,12 @@ public class BaseServiceTest {
         return HttpFileUtil.upload(url, fileParam, uploadFileList, paramMap, getHeadersMap());
     }
 
-    /*
+    *//*
     protected DSPDMResponse customPost(BOQuery boQuery) {
         Invocation.Builder requestBuilder = getBaseRequestBuilder("/secure/custom", MediaType.APPLICATION_JSON_TYPE, MediaType.APPLICATION_JSON);
         Entity<BOQuery> entity = Entity.entity(boQuery, MediaType.APPLICATION_JSON_TYPE);
         return invokePostRequest(requestBuilder, entity);
-    }*/
+    }*//*
 
     protected DSPDMResponse customPostBoe(BOQuery boQuery) {
         Invocation.Builder requestBuilder = getBaseRequestBuilder("/secure/custom/boe", MediaType.APPLICATION_JSON_TYPE, MediaType.APPLICATION_JSON);
@@ -464,5 +464,5 @@ public class BaseServiceTest {
         return invokeBaseHttpRequestEx(() -> {
             return requestBuilder.buildDelete();
         });
-    }
+    }*/
 }

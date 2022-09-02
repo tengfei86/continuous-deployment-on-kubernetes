@@ -9,9 +9,10 @@ import com.lgc.dspdm.core.common.logging.DSPDMLogger;
 import com.lgc.dspdm.core.common.util.ExecutionContext;
 import com.lgc.dspdm.core.common.util.StringUtils;
 import com.lgc.dspdm.msp.mainservice.utils.HttpUtil;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.Response;
 
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.Response;
+
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Locale;

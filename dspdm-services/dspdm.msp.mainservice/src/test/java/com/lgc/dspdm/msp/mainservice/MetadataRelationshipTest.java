@@ -19,12 +19,12 @@ import org.junit.Test;
 import java.util.*;
 
 public class MetadataRelationshipTest extends BaseServiceTest {
-    private static DSPDMLogger logger = new DSPDMLogger(MetadataRelationshipTest.class);
+   /* private static DSPDMLogger logger = new DSPDMLogger(MetadataRelationshipTest.class);
 
-    /**
+    *//**
      * Main unit test method to introduce a new business object by cloning the metadata of an existing business object
      * by using its bo name and creates new business object with provided new business object name
-     */
+     *//*
     @Test
     public void testIntroduceDropNewBusinessObjects_WithRelationship() {
         String oldBoName = "WELL TEST";
@@ -98,11 +98,11 @@ public class MetadataRelationshipTest extends BaseServiceTest {
         }
     }
 
-    /**
+    *//**
      * reads and retuns all the relationships names for the given child business object name
      *
      * @return
-     */
+     *//*
     private List<DynamicDTO> readRelationshipNamesForChildBusinessObject(String childBoName) {
         List<DynamicDTO> relationships = null;
         BOQuery boAttrEntity = new BOQuery();
@@ -164,14 +164,14 @@ public class MetadataRelationshipTest extends BaseServiceTest {
         }
     }
 
-    /**
+    *//**
      * Returns and prepares all the columns details for the table to create newly.
      *
      * @param oldBoName
      * @param newBoName
      * @param executionContext
      * @return
-     */
+     *//*
     private Map<String, Object> prepareAttributeRelationshipChildrenMap(String oldBoName, String newBoName, ExecutionContext executionContext) {
         // prepare children map
         Map<String, Object> childrenMap = new LinkedHashMap<>(1);
@@ -190,7 +190,7 @@ public class MetadataRelationshipTest extends BaseServiceTest {
         return childrenMap;
     }
 
-    /**
+    *//**
      * Returns a business object metadata dynamic dto.
      * First it reads the old existing business object dynamic dto by using provided first parameter
      * Then it changes the values in the dynamic dto after reading and returns
@@ -198,7 +198,7 @@ public class MetadataRelationshipTest extends BaseServiceTest {
      * @param boNameToReadMetadata
      * @param newBoName
      * @return
-     */
+     *//*
     private DynamicDTO cloneBOMetadataWithNewBoName(String boNameToReadMetadata, String newBoName, ExecutionContext executionContext) {
         DynamicDTO dynamicDTO = readExistingBOMetadataForIntroduceNewBusinessObjects(boNameToReadMetadata, executionContext);
         dynamicDTO = new DynamicDTO(dynamicDTO, executionContext);
@@ -212,7 +212,7 @@ public class MetadataRelationshipTest extends BaseServiceTest {
         return dynamicDTO;
     }
 
-    /**
+    *//**
      * Returns a list of business object attributes metadata list for the given boName.
      * The list will not have primary key attribute in their objects
      * First it reads the old existing business object attr dynamic dto list by using provided first parameter
@@ -222,7 +222,7 @@ public class MetadataRelationshipTest extends BaseServiceTest {
      * @param newBoName
      * @param executionContext
      * @return
-     */
+     *//*
     private List<DynamicDTO> cloneAttributeMetadataWithNewBoName(String boNameToReadMetadata, String newBoName, ExecutionContext executionContext) {
         PagedList<DynamicDTO> pagedList = readExistingBOAttributeMetadataForIntroduceNewBusinessObjects(boNameToReadMetadata, executionContext);
         String newEntityName = (newBoName.contains(" ")) ? newBoName.replaceAll(" ", "_") : newBoName;
@@ -272,11 +272,11 @@ public class MetadataRelationshipTest extends BaseServiceTest {
         return list;
     }
 
-    /**
+    *//**
      * reads and returns the existing metadata business object for the given bo name. It will be used to clone new business object definition
      *
      * @return
-     */
+     *//*
     private DynamicDTO readExistingBOMetadataForIntroduceNewBusinessObjects(String boNameToReadMetadata, ExecutionContext executionContext) {
         DynamicDTO dynamicDTO = null;
         BOQuery boAttrEntity = new BOQuery();
@@ -306,11 +306,11 @@ public class MetadataRelationshipTest extends BaseServiceTest {
         return dynamicDTO;
     }
 
-    /**
+    *//**
      * reads and returns the existing metadata business object attributes for the given bo name. These attributes will be used to clone new business object attributes  definition
      *
      * @return
-     */
+     *//*
     private PagedList<DynamicDTO> readExistingBOAttributeMetadataForIntroduceNewBusinessObjects(String boNameToReadMetadata, ExecutionContext executionContext) {
         PagedList<DynamicDTO> pagedList = null;
         BOQuery boAttrEntity = new BOQuery();
@@ -360,14 +360,14 @@ public class MetadataRelationshipTest extends BaseServiceTest {
         return pagedList;
     }
 
-    /**
+    *//**
      * reads and returns all the existing metadata business object attribute names for the given bo name excluding primary key.
      * These attribute names will be used to read the attributes definition to use attribute details to clone new business object attributes
      *
      * @param boName
      * @param executionContext
      * @return
-     */
+     *//*
     private List<String> readAllMetadataAttributeNamesForIntroduceNewBusinessObjects(String boName, ExecutionContext executionContext) {
         List<String> attributeNames = null;
         BOQuery boAttrEntity = new BOQuery();
@@ -1064,5 +1064,5 @@ public class MetadataRelationshipTest extends BaseServiceTest {
             logger.error(e.getMessage(), e);
             DSPDMException.throwException(e, Locale.ENGLISH);
         }
-    }
+    }*/
 }

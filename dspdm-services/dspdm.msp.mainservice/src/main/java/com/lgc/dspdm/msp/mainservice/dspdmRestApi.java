@@ -7,18 +7,18 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.annotation.security.PermitAll;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.Response;
 
-import javax.annotation.security.PermitAll;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.Response;
 
-@Path("secure")
-@PermitAll
+//@Path("secure")
+//@PermitAll
 public class dspdmRestApi extends dspdmImpl {
-
-	@GET
+// Implementation moved to MetadataChangeRestServiceImpl.java
+	/*@GET
 	@Path("/metadata")
 	@Produces("application/json")
 	@Operation(summary = "Get list of metadata business object", responses = {
@@ -93,5 +93,5 @@ public class dspdmRestApi extends dspdmImpl {
 				readConstraints, readRelationships, readGroups, select, filter, sort, readUnique, readFirst,
 				readMetadata, readMetadataConstraints, readReferenceData, readReferenceDataForFilters, readReferenceDataConstraints,
 				readRecordsCount, readWithDistinct, readAllRecords, isUploadNeeded, page, size, httpHeaders);
-	}
+	}*/
 }

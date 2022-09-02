@@ -1,17 +1,17 @@
 package com.lgc.dspdm.msp.mainservice.client;
 
-import com.lgc.dist.core.msp.service.ServiceAnnotation.ServiceProxy;
+
 import com.lgc.dspdm.core.common.data.dto.dynamic.DynamicDTO;
 import com.lgc.dspdm.msp.mainservice.model.BOQuery;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
-import javax.annotation.security.PermitAll;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.annotation.security.PermitAll;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +25,7 @@ import java.util.Map;
  */
 @Path("/secure")
 @PermitAll
-@ServiceProxy
+//@ServiceProxy
 public interface mainservice {
 
     //controller: read===============================

@@ -1,6 +1,0 @@
-= Key Features
-
-* User be able to describe the well status from different facets.
-* The status of each facet will be mutually exclusive with other facets.
-* The status is expandable as different name criteria of organizations.
-* The status is able to change by date.

@@ -24,7 +24,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class BusinessObjectGroupTest extends BaseServiceTest {
-    private static DSPDMLogger logger = new DSPDMLogger(BusinessObjectGroupTest.class);
+/*    private static DSPDMLogger logger = new DSPDMLogger(BusinessObjectGroupTest.class);
     private static int R_GROUP_CATEGORY_ID=3;
     private static String GROUP_CATEGORY_NAME="ASSET";
     private static int BUSINESS_OBJECT_ID;
@@ -286,5 +286,5 @@ public class BusinessObjectGroupTest extends BaseServiceTest {
             logger.error(e.getMessage(), e);
             DSPDMException.throwException(e, Locale.ENGLISH);
         }
-    }
+    }*/
 }

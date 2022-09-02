@@ -16,7 +16,7 @@ import java.net.URISyntaxException;
 import java.util.*;
 
 public class CommonTest extends BaseServiceTest {
-    private static DSPDMLogger logger = new DSPDMLogger(CommonTest.class);
+/*    private static DSPDMLogger logger = new DSPDMLogger(CommonTest.class);
 
     @Test
     public void testCommonGet() {
@@ -998,5 +998,5 @@ public class CommonTest extends BaseServiceTest {
             }
             logger.info("testNOTLIKE passed.");
         }
-    }
+    }*/
 }

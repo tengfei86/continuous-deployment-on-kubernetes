@@ -9,8 +9,9 @@ import com.lgc.dspdm.core.common.util.ExecutionContext;
 import com.lgc.dspdm.msp.mainservice.utils.DSPDMResponseDeserializer;
 import com.lgc.dspdm.msp.mainservice.utils.DSPDMResponseSerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.ws.rs.core.Response;
 
-import javax.ws.rs.core.Response;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

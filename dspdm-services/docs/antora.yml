@@ -1,7 +1,0 @@
-name: PDM
-version: '1.0'
-prerelease: false
-title: OSDU
-nav:
-- modules/data-model-usage-guide/nav.adoc
-- modules/pdm-api/nav.adoc

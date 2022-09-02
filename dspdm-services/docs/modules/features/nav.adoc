@@ -1,5 +1,0 @@
-* PDM Features
-** xref:pdm-introduction.adoc[PDM Introduction]
-** xref:well-details.adoc[Well Details]
-** xref:grid-view.adoc[Grid View]
-** xref:exploring-data-with-jupyter-notebook.adoc[Exploring Data With Jupyter Notebook]

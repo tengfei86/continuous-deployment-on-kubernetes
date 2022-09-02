@@ -2,7 +2,7 @@ package com.lgc.dspdm.msp.mainservice.model;
 
 //import org.jboss.resteasy.annotations.providers.multipart.PartType;
 
-import javax.ws.rs.FormParam;
+import jakarta.ws.rs.FormParam;
 import java.util.Map;
 
 public class UploadEntity {

@@ -13,7 +13,7 @@ import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserPermissionCacheTest extends BaseServiceTest {
-    private DSPDMLogger logger = new DSPDMLogger(UserPermissionCacheTest.class);
+    /*private DSPDMLogger logger = new DSPDMLogger(UserPermissionCacheTest.class);
 
     @Test
     public void test001RefreshAuthorizationCacheForUser() {
@@ -45,5 +45,5 @@ public class UserPermissionCacheTest extends BaseServiceTest {
             userId = executionContext.getExecutorName();
         }
         return userId;
-    }
+    }*/
 }

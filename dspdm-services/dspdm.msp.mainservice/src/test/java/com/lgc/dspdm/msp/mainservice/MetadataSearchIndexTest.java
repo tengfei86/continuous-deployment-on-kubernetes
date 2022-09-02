@@ -11,7 +11,7 @@ import org.junit.Test;
 import java.util.Locale;
 
 public class MetadataSearchIndexTest extends BaseServiceTest {
-    private static DSPDMLogger logger = new DSPDMLogger(MetadataSearchIndexTest.class);
+/*    private static DSPDMLogger logger = new DSPDMLogger(MetadataSearchIndexTest.class);
 
     private void dropBusinessObjects(String newBoName, boolean fullDrop) {
         try {
@@ -444,5 +444,5 @@ public class MetadataSearchIndexTest extends BaseServiceTest {
             logger.error(e.getMessage(), e);
             DSPDMException.throwException(e, Locale.ENGLISH);
         }
-    }
+    }*/
 }

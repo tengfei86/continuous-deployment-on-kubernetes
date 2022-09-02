@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 public class mainserviceTest extends BaseServiceTest {
-    private DSPDMLogger logger = new DSPDMLogger(mainserviceTest.class);
+    /*private DSPDMLogger logger = new DSPDMLogger(mainserviceTest.class);
 
     @Test
     public void testReadWithPostForBusinessObjectAttr() {
@@ -201,5 +201,5 @@ public class mainserviceTest extends BaseServiceTest {
             Assert.assertEquals(boName, data.keySet().iterator().next());
             logger.info("Custom BOE read initial test passed.");
         }
-    }
+    }*/
 }
