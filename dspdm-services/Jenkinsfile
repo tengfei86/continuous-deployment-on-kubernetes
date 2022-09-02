@@ -52,6 +52,7 @@ spec:
             ls . -l
             ln -s `pwd`/dspdm-services /java/src/dspdm-services
             cd /java/src/dspdm-services
+            sed -i "s~iIx8d3B6tjz3MUTHxsmB6w==~pmjdECSFG1cEJaPr7I2rew==~g;s~localhost~postgres-devops.plat-system~g" ./src/main/resources/tiger4/localhost/connection.properties
             mvn clean package -Dmaven.test.skip=true 
             ls . -l
           """
