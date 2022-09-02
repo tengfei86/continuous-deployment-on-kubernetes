@@ -48,6 +48,7 @@ spec:
       steps {
         container('maven') {
           sh """
+            mkdir -p /java/src
             ls . -l
             ln -s `pwd`/dspdm-services /java/src/dspdm-services
             cd /java/src/dspdm-services
