@@ -2,7 +2,7 @@ pipeline {
 
   environment {
     PROJECT = "osdu-upstream"
-    APP_NAME = "gceme"
+    APP_NAME = "dspdm"
     FE_SVC_NAME = "${APP_NAME}-frontend"
     CLUSTER = "cluster-1"
     CLUSTER_ZONE = "asia-south1-a"
@@ -52,7 +52,7 @@ spec:
             echo "list outer folder"
             ls . -l 
             cd /java/src/dspdm-services
-            mvn clean package 
+            mvn clean package -Dmaven.test.skip=true 
             ls . -l
           """
         }

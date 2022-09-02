@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 FROM openjdk:11
-COPY . /usr/src/dspdm
-WORKDIR /usr/src/dspdm
-RUN javac Main.java
-CMD ["java", "Main"]
+COPY ./dspdm-services/dspdm.msp.mainservice/target/docker/javarun /javarun
+WORKDIR /javarun
+CMD ["java", "-DSERVICE_ROOT_EXT=msp","-DpathToConfigRootDir=/javarun/config","-agentlib:jdwp=transport=dt_socket,address=127.0.0.1:8888,server=y,suspend=n","-Xms2048m","-Xmx2048m","-cp","/javarun/*","com.lgc.dspdm.msp.mainservice.GrizzlyServer","-p","8080"]
