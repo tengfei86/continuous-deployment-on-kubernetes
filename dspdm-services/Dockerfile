@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 FROM openjdk:11
-RUN ls -l ./dspdm.msp.mainservice/target/docker/javarun 
+RUN ls -l dspdm.msp.mainservice/target/docker/javarun 
 COPY ./dspdm.msp.mainservice/target/docker/javarun/ /javarun
 COPY ./src/main/resources/tiger4/localhost/ /javarun/config
 WORKDIR /javarun
