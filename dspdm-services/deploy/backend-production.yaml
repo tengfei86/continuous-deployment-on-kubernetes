@@ -27,7 +27,7 @@ spec:
     metadata:
       name: dspdmservice
       labels:
-        app: dspamservice
+        app: dspdmservice
         role: backend
         env: production
     spec:
