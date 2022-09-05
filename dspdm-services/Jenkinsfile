@@ -69,6 +69,7 @@ spec:
 			            sh """
 				       ls . -l
 				       cd dspdm-services
+                                       ls -l ./dspdm.msp.mainservice/target/docker/*
 				       PYTHONUNBUFFERED=1 gcloud builds submit -t ${IMAGE_TAG} . 
 			            """
 
