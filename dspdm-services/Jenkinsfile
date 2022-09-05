@@ -68,7 +68,7 @@ spec:
 		                    sh("gcloud container clusters get-credentials cluster-1 --zone asia-south1-a --project ${PROJECT}")
 			            sh """
 				       ls . -l
-				       cd /java/src/dspdm-services
+				       cd dspdm-services
 				       PYTHONUNBUFFERED=1 gcloud builds submit -t ${IMAGE_TAG} . 
 			            """
 
