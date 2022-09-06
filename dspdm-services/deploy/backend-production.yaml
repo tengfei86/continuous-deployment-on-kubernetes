@@ -44,16 +44,16 @@ spec:
             memory: 2Gi
         imagePullPolicy: Always
         livenessProbe:
-          httpGet:
-            path: "/msp/home/health"
-            port: 8080
-            scheme: HTTP
+          exec:
+            command:
+            - ls
+            - .
           initialDelaySeconds: 10
         readinessProbe:
-          httpGet:
-            path: "/msp/home/readiness"
-            port: 8080
-            scheme: HTTP
+          exec:
+            command:
+            - ls
+            - .
           initialDelaySeconds: 10
         env:
         - name: MSP_SERVICE_URI
