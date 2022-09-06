@@ -14,7 +14,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 class GrizzlyServer {
     protected static DSPDMLogger logger = new DSPDMLogger(GrizzlyServer.class);
 
-    public static final String HOST = "http://localhost:";
+    public static final String HOST = "http://0.0.0.0:";
     public static String DEFAULT_PORT = "8086";
     public static final String ROOT_PATH = "/msp";
 
