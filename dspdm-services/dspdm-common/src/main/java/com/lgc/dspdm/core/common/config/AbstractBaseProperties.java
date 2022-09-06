@@ -33,6 +33,7 @@ public abstract class AbstractBaseProperties {
                     break;
                 case FILE:
                     try {
+                        logger.error(propertyFileName);
                         loadPropertiesFromFile(propertyFileName, executionContext);
                     } catch (FileNotFoundException e) {
                         logger.info("Unable to load properties from file : " + e.getMessage());
