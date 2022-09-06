@@ -2434,7 +2434,7 @@ public class mainserviceImpl extends BaseController implements mainservice {
             List<DSPDMMessage> messages = new ArrayList<>();
             messages.add(new DSPDMMessage(DSPDMConstants.Status.SUCCESS, "validate successuflly"));
             // CREATE SUCCESS RESPONSE
-            response = new DSPDMResponse(DSPDMConstants.Status.SUCCESS, messages, new TreeMap<>(resultList),
+            response = new DSPDMResponse(DSPDMConstants.Status.SUCCESS, messages, new TreeMap<>(),
                     executionContext).getResponse();
         } catch (Throwable e) {
             logger.error(e.getMessage(), e);
