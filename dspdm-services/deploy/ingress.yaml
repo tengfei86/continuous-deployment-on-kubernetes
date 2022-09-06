@@ -15,3 +15,10 @@ spec:
             name: dspdmservice
             port:
               number: 60000
+      - path: /jenkins
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: dspdmservice
+            port:
+              number: 60000

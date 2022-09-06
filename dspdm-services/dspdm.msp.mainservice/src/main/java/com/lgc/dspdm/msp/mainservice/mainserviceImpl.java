@@ -2411,6 +2411,38 @@ public class mainserviceImpl extends BaseController implements mainservice {
         return response;
     }
 
+    @GET
+    @Path("/")
+    @Produces("application/json")
+    //@GZIP
+    @Operation(
+            summary = "validate probe just test",
+            responses = {
+                    @ApiResponse(responseCode = "200",
+                            description = "Success",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = DSPDMResponse.class))),
+                    @ApiResponse(responseCode = "401", description = "not authorized!"),
+                    @ApiResponse(responseCode = "403", description = "forbidden!!!"),
+                    @ApiResponse(responseCode = "404", description = "not found!!!")
+            }
+    )
+    public Response validate() {
+        ExecutionContext executionContext = ExecutionContext.getSystemUserExecutionContext();
+        Response response = null;
+        try {
+            List<DSPDMMessage> messages = new ArrayList<>();
+            messages.add(new DSPDMMessage(DSPDMConstants.Status.SUCCESS, "validate successuflly"));
+            // CREATE SUCCESS RESPONSE
+            response = new DSPDMResponse(DSPDMConstants.Status.SUCCESS, messages, new TreeMap<>(resultList),
+                    executionContext).getResponse();
+        } catch (Throwable e) {
+            logger.error(e.getMessage(), e);
+            response = new DSPDMResponse(e, executionContext).getResponse();
+        }
+        return response;
+    }
+
     /**
      * initialize the BOQuery from language,timezoneOffset,page and size
      *
