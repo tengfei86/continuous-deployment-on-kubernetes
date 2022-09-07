@@ -45,19 +45,17 @@ spec:
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
-            path: /
+            path: /msp
             port: 8080 
           initialDelaySeconds: 10
         readinessProbe:
           httpGet:
-            path: /
+            path: /msp
             port: 8080
           initialDelaySeconds: 10
         env:
         - name: MSDP_JAVA_OPTIONS
           value: -Xms2048m -Xmx2048m
-        - name: SERVICE_ROOT_EXT
-          value: /
         - name: APP_HOME
           value: /
         ports:
