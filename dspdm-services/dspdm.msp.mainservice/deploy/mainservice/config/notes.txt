@@ -1,2 +1,0 @@
-This folder is to hold config files required for a pod.
-Copy the required config files in /config folder and this notes.txt can be deleted
