@@ -8,17 +8,17 @@ spec:
   rules:
   - http:
       paths:
-      - path: /*
+      - path: /pdm/*
         pathType: ImplementationSpecific
         backend:
           service:
             name: dspdmservice
             port:
               number: 60000
-      - path: /jenkins
+      - path: /jenkins/*
         pathType: ImplementationSpecific
         backend:
           service:
-            name: dspdmservice
+            name: cd-jenkins
             port:
-              number: 60000
+              number: 8080
