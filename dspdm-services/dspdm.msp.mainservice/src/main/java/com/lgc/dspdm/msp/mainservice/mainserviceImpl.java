@@ -2416,7 +2416,7 @@ public class mainserviceImpl extends BaseController implements mainservice {
     @Produces("application/json")
     //@GZIP
     @Operation(
-            summary = "validate probe just test",
+            summary = "validate probe just for temporary",
             responses = {
                     @ApiResponse(responseCode = "200",
                             description = "Success",

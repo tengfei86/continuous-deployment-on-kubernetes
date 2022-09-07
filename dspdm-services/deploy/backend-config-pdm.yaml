@@ -1,0 +1,15 @@
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: pdm-backendconfig
+spec:
+  logging:
+    enable: true
+    sampleRate: 0.5
+  healthCheck:
+    checkIntervalSec: 10
+    timeoutSec: 5
+    healthyThreshold: 1
+    type: HTTP
+    requestPath: /msp
+    port: 60000
