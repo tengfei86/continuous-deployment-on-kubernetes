@@ -54,9 +54,9 @@ spec:
        }
 
     stage('Build') {
-      when { 
-        environment name: 'NAME', value: 'this' 
-      }
+     // when { 
+     //   environment name: 'NAME', value: 'this' 
+     // }
       steps {
         container('maven') {
           sh """
@@ -73,9 +73,9 @@ spec:
       }
     }
     stage('Build and push image with Container Builder') {
-	    when { 
-	            environment name: 'NAME', value: 'this' 
-	    }
+	   // when { 
+	   //         environment name: 'NAME', value: 'this' 
+	   // }
 	    steps {
 		    container('gcloud') {
 			    withCredentials([file(credentialsId: 'jenkins-sa', variable: 'GC_KEY')]) {
