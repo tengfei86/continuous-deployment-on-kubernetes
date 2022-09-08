@@ -45,12 +45,12 @@ spec:
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
-            path: /msp
+            path: /
             port: 8080 
           initialDelaySeconds: 10
         readinessProbe:
           httpGet:
-            path: /msp
+            path: /
             port: 8080
           initialDelaySeconds: 10
         env:
