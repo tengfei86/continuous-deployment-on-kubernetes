@@ -1,24 +1,24 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: my-ingress
-  annotations:
-    kubernetes.io/ingress.class: "gce"
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /pdm/*
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: dspdmservice
-            port:
-              number: 60000
-      - path: /jenkins/*
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: cd-jenkins
-            port:
-              number: 8080
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: my-ingress
+#  annotations:
+#    kubernetes.io/ingress.class: "gce"
+#spec:
+#  rules:
+#  - http:
+#      paths:
+#      - path: /pdm/*
+#        pathType: ImplementationSpecific
+#        backend:
+#          service:
+#            name: dspdmservice
+#            port:
+#              number: 60000
+#      - path: /jenkins/*
+#        pathType: ImplementationSpecific
+#        backend:
+#          service:
+#            name: cd-jenkins
+#            port:
+#              number: 8080
