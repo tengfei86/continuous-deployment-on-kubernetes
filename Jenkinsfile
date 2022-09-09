@@ -48,7 +48,7 @@ spec:
     stage("check out dspdm opengroup  project code") {
            steps {
              dir("dspdm-services") {
-               git branch: 'osdu-1.0.01', credentialsId: 'tong_opengroup', url: 'https://community.opengroup.org/osdu/platform/domain-data-mgmt-services/production/core/dspdm-services.git'
+               git branch: 'main', credentialsId: 'tong_opengroup', url: 'https://community.opengroup.org/osdu/platform/domain-data-mgmt-services/production/core/dspdm-services.git'
              }
            }
        }
