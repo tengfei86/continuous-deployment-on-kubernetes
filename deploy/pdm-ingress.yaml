@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: www.example.com
+    - host: osdu.hal-pdm
       http:
         paths:
           - pathType: Prefix
