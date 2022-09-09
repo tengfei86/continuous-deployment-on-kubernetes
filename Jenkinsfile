@@ -89,7 +89,7 @@ spec:
       steps{
         container('kubectl') {
           sh("sed -i 's#{IMAGE_TAG}#${IMAGE_TAG}#' deploy/*.yaml")
-          sh("cat deploy/*.yaml"
+          sh("cat deploy/*.yaml")
           sh("kubectl delete -f ./deploy/backend-production.yaml -n jenkins")
           sh("kubectl apply -f deploy -n jenkins")
         }
