@@ -6,8 +6,8 @@ pipeline {
     FE_SVC_NAME = "${APP_NAME}-frontend"
     CLUSTER = "cluster-1"
     CLUSTER_ZONE = "asia-south1-a"
-    //IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:${env.BUILD_NUMBER}"
-    IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:48"
+    IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:${env.BUILD_NUMBER}"
+    //IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:48"
     JENKINS_CRED = "${PROJECT}"
     BRANCH_NAME = "production"
   }
@@ -54,9 +54,6 @@ spec:
        }
 
     stage('Build') {
-      when { 
-        environment name: 'NAME', value: 'this' 
-      }
       steps {
         container('maven') {
           sh """
@@ -73,9 +70,6 @@ spec:
       }
     }
     stage('Build and push image with Container Builder') {
-	    when { 
-	            environment name: 'NAME', value: 'this' 
-	    }
 	    steps {
 		    container('gcloud') {
 			    withCredentials([file(credentialsId: 'jenkins-sa', variable: 'GC_KEY')]) {
@@ -92,12 +86,12 @@ spec:
 	    }
     }
     stage('Deploy Production') {
-      // Production branch
       steps{
         container('kubectl') {
           sh("sed -i 's#{IMAGE_TAG}#${IMAGE_TAG}#' deploy/*.yaml")
-          sh("cat deploy/*.yaml")
-          sh("kubectl apply -f deploy")
+          sh("cat deploy/*.yaml"
+          sh("kubectl delete -f ./deploy/backend-production.yaml -n jenkins")
+          sh("kubectl apply -f deploy -n jenkins")
         }
       }
     }
