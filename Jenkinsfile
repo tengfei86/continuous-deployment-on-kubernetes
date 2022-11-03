@@ -90,7 +90,7 @@ spec:
         container('kubectl') {
           sh("sed -i 's#{IMAGE_TAG}#${IMAGE_TAG}#' deploy/*.yaml")
           sh("cat deploy/*.yaml")
-          sh("kubectl delete -f ./deploy/backend-production.yaml -n plat-system")
+          sh("kubectl delete -f ./deploy/backend-production.yaml -n plat-system || true")
           sh("kubectl apply -f deploy -n plat-system")
         }
       }
