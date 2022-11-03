@@ -4,8 +4,8 @@ pipeline {
     PROJECT = "osdu-upstream"
     APP_NAME = "dspdm"
     FE_SVC_NAME = "${APP_NAME}-frontend"
-    CLUSTER = "cluster-1"
-    CLUSTER_ZONE = "asia-south1-a"
+    CLUSTER = "cluster-2"
+    CLUSTER_ZONE = "us-central1-c"
     IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:${env.BUILD_NUMBER}"
     //IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:48"
     JENKINS_CRED = "${PROJECT}"
@@ -74,7 +74,7 @@ spec:
 		    container('gcloud') {
 			    withCredentials([file(credentialsId: 'jenkins-sa', variable: 'GC_KEY')]) {
 				    sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
-		                    sh("gcloud container clusters get-credentials cluster-1 --zone asia-south1-a --project ${PROJECT}")
+		                    sh("gcloud container clusters get-credentials cluster-2 --zone us-central1-c --project ${PROJECT}")
 			            sh """
 				       ls . -l
                                        rm -rf .gitignore
