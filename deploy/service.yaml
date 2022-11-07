@@ -3,13 +3,13 @@ kind: Service
 metadata:
   name: dspdmservice
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: dspdmservice
     role: backend
     env: production
   ports:
   - protocol: TCP
-    port: 60000
+    port: 80
     targetPort: 8080
     nodePort: 32703
