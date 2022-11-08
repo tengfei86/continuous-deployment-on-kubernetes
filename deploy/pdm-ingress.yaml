@@ -15,5 +15,5 @@ spec:
               service:
                 name: dspdmservice
                 port:
-                  number: 60000
+                  number: 80
             path: /pdm(/|$)(.*) 
