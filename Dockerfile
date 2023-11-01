@@ -11,9 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-FROM openjdk:11
-COPY dspdm-services/dspdm.msp.mainservice/target/docker/javarun/ /javarun
-COPY dspdm-services/src/main/resources/tiger4/localhost/ /javarun/config
-RUN cat /javarun/config/*
-WORKDIR /javarun
-CMD ["java", "-DpathToConfigRootDir=/javarun","-agentlib:jdwp=transport=dt_socket,address=127.0.0.1:8888,server=y,suspend=n","-Xms2048m","-Xmx2048m","-cp","/javarun/*","com.lgc.dspdm.msp.mainservice.GrizzlyServer","-p","8080"]
+FROM adoptopenjdk/openjdk11:jre-11.0.11_9
+EXPOSE 8080 8443
+WORKDIR /app
+COPY ./dspdm.msp.mainservice/target/docker/javarun/*.jar ./
+COPY ./logging.properties ./
+RUN mkdir config
+COPY ./src/main/resources/tiger/demo/* ./config/
+
+ENV CLASSPATH /app/*
+ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m"
+
+ENTRYPOINT ["java","-DpathToConfigRootDir=/app/","com.lgc.dspdm.msp.mainservice.GrizzlyServer"]
+CMD ["-cp", "${CLASSPATH}", "${JAVA_OPTIONS}", "-p", "8080"]

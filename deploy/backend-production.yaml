@@ -54,7 +54,7 @@ spec:
             port: 8080
           initialDelaySeconds: 10
         env:
-        - name: MSDP_JAVA_OPTIONS
+        - name: JAVA_OPTIONS
           value: -Xms2048m -Xmx2048m
         - name: APP_HOME
           value: /

@@ -63,7 +63,7 @@ spec:
             ln -s `pwd`/dspdm-services /java/src/dspdm-services
             cd /java/src/dspdm-services
             sed -i "s~localhost~postgres-devops.plat-system~g" ./src/main/resources/tiger4/localhost/connection.properties
-            mvn clean package -Dmaven.test.skip=true 
+            mvn clean package -Dmaven.test.skip=true -Denunciate.include.pattern=com.lgc.dspdm.msp.mainservice.**
             ls . -l
           """
         }
