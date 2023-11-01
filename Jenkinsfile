@@ -19,6 +19,9 @@ pipeline {
       yaml """
 apiVersion: v1
 kind: Pod
+metadata:
+  name: test
+  namespace: plat-system
 labels:
   component: ci
 spec:
