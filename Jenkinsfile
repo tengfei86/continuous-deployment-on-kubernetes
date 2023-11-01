@@ -19,8 +19,6 @@ pipeline {
       yaml """
 apiVersion: v1
 kind: Pod
-metadata:
-  name: debug
 labels:
   component: ci
 spec:
